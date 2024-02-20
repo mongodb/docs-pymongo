@@ -111,24 +111,11 @@ install these tools by running the following command in your terminal:
 
 The following list describes the installation requirements for older versions of OSX:
 
-- **Snow Leopard (10.6)**: Xcode 3 with "UNIX Development Support". The Python versions
-   that shipped with OSX 10.6.x
-   are universal binaries. They support i386, PPC, and x86_64 architectures. Xcode 4 removed
-   support for PPC, causing the ``distutils`` version shipped with Apple's builds of
-   Python to fail to build the C extensions if you have Xcode 4 installed. There
-   is a workaround:
-
-   .. code-block:: python
-
-   # For some Python builds from python.org
-   $ env ARCHFLAGS='-arch i386 -arch x86_64' python -m easy_install pymongo
-
-   See `http://bugs.python.org/issue11623 <http://bugs.python.org/issue11623>`__
-   for a more detailed explanation.
-
 - **Lion (10.7) and newer**: PyMongo's C extensions can be built against
   versions of Python 3.7+ downloaded from python.org. In all cases, you must install Xcode
-  with "UNIX Development Support". Starting with Xcode version 5.1, ``clang``
+  with "UNIX Development Support". 
+  
+  Starting with Xcode version 5.1, ``clang``
   throws an error when it encounters compiler flags that it doesn't recognize.
   This may cause C extension builds to fail with an error similar to the following:
 
@@ -151,6 +138,22 @@ The following list describes the installation requirements for older versions of
      $ CFLAGS=-Qunused-arguments easy_install pymongo
      # or pip
      $ CFLAGS=-Qunused-arguments pip install pymongo
+
+- **Snow Leopard (10.6)**: Xcode 3 with "UNIX Development Support".
+
+  The Python versions that shipped with OSX 10.6.x
+  are universal binaries. They support i386, PPC, and x86_64 architectures. Xcode 4 removed
+  support for PPC, causing the ``distutils`` version shipped with Apple's builds of
+  Python to fail to build the C extensions if you have Xcode 4 installed. There
+  is a workaround:
+
+  .. code-block:: python
+
+     # For some Python builds from python.org
+     $ env ARCHFLAGS='-arch i386 -arch x86_64' python -m easy_install pymongo
+
+  See `http://bugs.python.org/issue11623 <http://bugs.python.org/issue11623>`__
+  for a more detailed explanation.
 
 Installing from Source on Windows
 `````````````````````````````````
