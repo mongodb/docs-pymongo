@@ -83,7 +83,7 @@ To build the optional C extensions on Linux or another non-macOS Unix, you must
 have the GNU C compiler (``gcc``) installed. Depending on your flavor of Unix
 (or Linux distribution), you may also need a Python development package that
 provides the necessary header files for your version of Python. The package
-name might vary from distro to distro.
+name might vary among distrubutions.
 
 If you're using Debian or Ubuntu, run the following command:
 
