@@ -11,6 +11,13 @@ Quick Start
    :depth: 2
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :keywords: pypi, pip, xcode
+
 This tutorial is intended as an introduction to working with
 **MongoDB** and **PyMongo**.
 
@@ -116,7 +123,7 @@ The following list describes the installation requirements for older versions of
    # For some Python builds from python.org
    $ env ARCHFLAGS='-arch i386 -arch x86_64' python -m easy_install pymongo
 
-   See `http://bugs.python.org/issue11623 <http://bugs.python.org/issue11623>`_
+   See `http://bugs.python.org/issue11623 <http://bugs.python.org/issue11623>`__
    for a more detailed explanation.
 
 - **Lion (10.7) and newer**: PyMongo's C extensions can be built against
