@@ -1,5 +1,7 @@
 .. uses high-availability.rst
 
+.. _pymongo-connection-options:
+
 ==================
 Connection Options
 ==================
