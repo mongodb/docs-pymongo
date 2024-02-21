@@ -1,7 +1,7 @@
-.. _pymongo-upgrade:
-
 .. uses compatibility-policy.rst
 .. uses migrate-to-pymongo4.rst
+
+.. _pymongo-upgrade:
 
 =======================
 Upgrade Driver Versions
