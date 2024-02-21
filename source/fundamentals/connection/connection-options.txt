@@ -48,7 +48,7 @@ using the ``secondary`` read preference.
 Health Monitoring
 -----------------
 
-When you initialize a MongoClient, it launches background threads to
+When you initialize a ``MongoClient``, it launches background threads to
 monitor the replica set for the following changes:
 
 - Health: Detect when a member goes down or comes up, or if a different member
@@ -92,7 +92,7 @@ operations equally. For example, consider the following three ``mongos`` servers
 By default, the ``localThresholdMS`` is 15 ms, so PyMongo uses "host1" and "host2"
 evenly. It uses "host1" because its network latency to the driver is shortest. It
 uses "host2" because its latency is within 15 ms of the server with the lowest latency.
-PyMongo excuses "host3" because its latency is 20 ms beyond the server with the
+PyMongo doesn't use "host3" because its latency is 20 ms beyond the server with the
 lowest latency.
 
 To ensure that all servers are within the threshold, set ``localThresholdMS`` to 30
