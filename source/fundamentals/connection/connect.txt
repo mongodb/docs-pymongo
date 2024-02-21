@@ -1,7 +1,29 @@
 .. uses high-availability.rst, tutorial.rst
 
+.. _pymongo-connect:
+
+==================
 Connect to MongoDB
-------------------
+==================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: connect, nodes, replica set
+
+In this guide, you can learn how to connect to a MongoDB client and replica set using the
+{+driver-short+} driver.
+
+Connecting to MongoDB
+---------------------
 Create a ``~pymongo.mongo_client.MongoClient`` to the run your **mongod**
 instance by using the following code to connect on the default host and port:
 
