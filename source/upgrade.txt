@@ -208,13 +208,13 @@ replaced, as noted in the Migration Notes column.
      - Migration Notes
    * - ``ssl_pem_passphrase``
      - ``tlsCertificateKeyFilePassword``
-     - -
+     - N/A
    * - ``ssl_ca_certs``
      - ``tlsCAFile``
-     - -
+     - N/A 
    * - ``ssl_crlfile``
      - ``tlsCRLFile``
-     - -
+     - N/A 
    * - ``ssl_match_hostname``
      - ``tlsAllowInvalidHostnames``
      - ``ssl_match_hostname=True`` is equivalent to ``tlsAllowInvalidHostnames=False`` and vice-versa.
@@ -230,10 +230,10 @@ replaced, as noted in the Migration Notes column.
        | containing both the client certificate and the private key.
    * - ``j``
      - ``journal`` 
-     - -
+     - N/A
    * - ``wtimeout``
      - ``wTimeoutMS`` 
-     - -
+     - N/A
 
 MongoClient.fsync Is Removed
 ````````````````````````````
@@ -258,7 +258,6 @@ instead. For example:
 
    client.admin.command('fsyncUnlock')
 
-
 MongoClient.is_locked Is Removed
 ````````````````````````````````
 
@@ -269,7 +268,6 @@ instead. For example:
 .. code-block:: python
 
    is_locked = client.admin.command('currentOp').get('fsyncLock')
-
 
 MongoClient.database_names Is Removed
 `````````````````````````````````````
@@ -300,7 +298,6 @@ example:
    max_message_size = doc['maxMessageSizeBytes']
    max_write_batch_size = doc['maxWriteBatchSize']
 
-
 MongoClient.event_listeners and Other Configuration Option Helpers Are Removed
 ``````````````````````````````````````````````````````````````````````````````
 
@@ -318,8 +315,8 @@ The following client configuration option helpers are removed:
   instead.
 - ``pymongo.mongo_client.MongoClient.server_selection_timeout``. Use ``client.options.server_selection_timeout``
   instead.
-- ``pymongo.mongo_client.MongoClient.retry_writes``
-- ``pymongo.mongo_client.MongoClient.retry_reads``
+- ``pymongo.mongo_client.MongoClient.retry_writes``.
+- ``pymongo.mongo_client.MongoClient.retry_reads``.
 
 .. _tz_aware_default_change:
 
@@ -450,7 +447,7 @@ Database.remove_user Is Removed
 ```````````````````````````````
 
 Removed the ``pymongo.database.Database.remove_user`` method, which was deprecated in
-PyMongo 3.6. Use the `dropUser command <https://mongodb.com/docs/manual/reference/command/createUser/>`__
+PyMongo 3.6. Use the `dropUser command <https://mongodb.com/docs/manual/reference/command/dropUser/>`__
 instead:
 
 .. code-block:: python
@@ -683,8 +680,8 @@ with the ``~pymongo.database.Database.command`` method instead.
 
 For more guidance on this migration, see the following documentation:
 
-- https://mongodb.com/docs/manual/reference/map-reduce-to-aggregation-pipeline/
-- https://mongodb.com/docs/manual/reference/aggregation-commands-comparison/
+- :manual:`</reference/map-reduce-to-aggregation-pipeline/>`
+- :manual:`</reference/aggregation-commands-comparison/>`
 
 Collection.ensure_index Is Removed
 ``````````````````````````````````
@@ -711,12 +708,16 @@ Collection.reindex Is Removed
 `````````````````````````````
 
 Removed the ``pymongo.collection.Collection.reindex`` method. Run the
-`reIndex command <https://mongodb.com/docs/manual/reference/command/mapReduce/>`__
+`reIndex command <https://mongodb.com/docs/manual/reference/command/reindex/>`__
 directly instead, as shown in the following example:
 
 .. code-block:: python
 
    >>> result = database.command('reIndex', 'my_collection')
+
+.. note::
+
+   The ``reIndex`` is deprecated as of MongoDB v6.0.
 
 The modifiers Parameter Is Removed
 ``````````````````````````````````
@@ -963,10 +964,7 @@ Name Is a Required Argument for pymongo.driver_info.DriverInfo
 DBRef BSON/JSON Decoding Behavior
 `````````````````````````````````
 
-Changed the BSON and JSON decoding behavior of ``~bson.dbref.DBRef``
-to match the behavior outlined in the `DBRef specification <https://github.com/mongodb/specifications/blob/5a8c8d7/source/dbref.rst>`__
-version 1.0.
-Specifically, PyMongo now decodes a subdocument into a
+PyMongo now decodes a subdocument into a
 ``~bson.dbref.DBRef`` if and only if it contains both ``$ref`` and
 ``$id`` fields and the ``$ref``, ``$id``, and ``$db`` fields are of the
 correct type. Otherwise, the document is returned as normal. Previously, any
