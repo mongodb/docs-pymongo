@@ -41,7 +41,7 @@ the read preference as shown in the following example:
    SecondaryPreferred(tag_sets=None)
 
 Now the ``MongoClient`` sends all queries to the secondary members of the replica set. If there are
-no secondary members the client uses the primary member as a fallback. If you have
+no secondary members, the client uses the primary member as a fallback. If you have
 queries you would prefer to never send to the primary, you can specify that
 using the ``secondary`` read preference.
 
@@ -59,7 +59,7 @@ monitor the replica set for the following changes:
   in members' tags.
 - Latency: Track a moving average of each member's ping time.
 
-Replica set monitoring ensures that queries are continually routed to the proper
+Replica-set monitoring ensures that queries are continually routed to the proper
 members as the state of the replica set changes.
 
 .. _mongos-load-balancing:
