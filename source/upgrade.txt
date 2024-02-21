@@ -3,7 +3,7 @@
 
 .. _pymongo-upgrade:
 
-Compatibility Policy
+Upgrade Driver Versions
 ====================
 
 Semantic Versioning
