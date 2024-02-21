@@ -1,6 +1,8 @@
 .. uses compatibility-policy.rst
 .. uses migrate-to-pymongo4.rst
 
+.. _pymongo-upgrade:
+
 Compatibility Policy
 ====================
 
