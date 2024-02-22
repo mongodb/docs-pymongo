@@ -1,5 +1,3 @@
-.. uses tools.rst
-
 .. _pymongo-tools:
 
 =====
@@ -87,7 +85,7 @@ various Python frameworks and libraries.
   Django with MongoDB as the database backend. With Djongo, you can use the Django Admin
   GUI to add and modify documents in MongoDB.
   The `Djongo source code <https://github.com/doableware/djongo>`__ is hosted on GitHub,
-  and the `Djongo package <https://pypi.python.org/pypi/djongo>`__ is on pypi.
+  and the `Djongo package <https://pypi.python.org/pypi/djongo>`__ is on PyPI.
 
 - `Flask-MongoAlchemy <http://github.com/cobrateam/flask-mongoalchemy/>`__ adds
   Flask support for MongoDB with MongoAlchemy.
@@ -95,8 +93,7 @@ various Python frameworks and libraries.
 - `Flask-MongoKit <http://github.com/jarus/flask-mongokit/>`__ is a Flask extension
   to better integrate MongoKit into Flask.
 
-_ `Flask-PyMongo <http://github.com/dcrosta/flask-pymongo/>`__ bridges
-  Flask and PyMongo.
+- `Flask-PyMongo <http://github.com/dcrosta/flask-pymongo/>`__ bridges Flask and PyMongo.
 
 - `Log4Mongo <https://github.com/log4mongo/log4mongo-python>`__ is a flexible
   Python logging handler that can store logs in MongoDB by using normal and capped
@@ -235,7 +232,7 @@ daemon in the global application group:
    Python sub-interpreters. These difficulties are explained in the documentation for
    `Py_NewInterpreter <https://docs.python.org/3/c-api/init.html#c.Py_NewInterpreter>`__
    and in the `Multiple Python Sub Interpreters <https://modwsgi.readthedocs.io/en/master/user-guides/application-issues.html#multiple-python-sub-interpreters>`__
-   section of the ``mod_wsgi`` documentation.
+   section of the mod_wsgi documentation.
 
 Alternative Drivers
 -------------------
