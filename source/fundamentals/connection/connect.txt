@@ -24,7 +24,7 @@ In this guide, you can learn how to connect to a MongoDB client and replica set 
 
 Connecting to MongoDB
 ---------------------
-Create a ``~pymongo.mongo_client.MongoClient`` to the run your **mongod**
+To connect to  MongoDB, create a ``~pymongo.mongo_client.MongoClient`` to the run your **mongod**
 instance by using the following code to connect on the default host and port:
 
 .. code-block:: python
@@ -61,7 +61,7 @@ Starting a Replica Set
    only recommended for testing and development.
 
 In the terminal, start three ``mongod`` processes with the replica set name "foo", each on a
-different port and with a different ``dbpath`` by using the following commands:
+different port and with a different ``dbpath``, by using the following commands:
 
 .. code-block:: bash
 
@@ -93,9 +93,10 @@ initiate command using the ``directConnection`` option:
    >>> from pymongo import MongoClient
    >>> c = MongoClient('localhost', 27017, directConnection=True)
 
-.. note:: You can connect to any of the node you created,
-   but only the node you initiate (in this case, the node running on port 27017) from is allowed to contain
-   initial data.
+.. note:: 
+   You can connect through any of the nodes you created, but only the node you
+   connect through is allowed to contain initial data. In the previous example, only
+   the node running on port 27017 can contain data.
 
 After connecting to a single node, run the initiate command on all nodes:
 
@@ -114,7 +115,7 @@ Connecting to an Existing Replica Set
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can connect to an existing replica set by using the
-the ``~pymongo.mongo_client.MongoClient`` method constructor. Specify
+the ``~pymongo.mongo_client.MongoClient`` constructor. Specify
 one or more members of the set and, optionally, the replica set name.
 Each of the following connects to the replica set created in the previous section:
 
@@ -186,10 +187,10 @@ By checking the host and port, you can see that you're connected to the primary 
    ('localhost', 27017)
 
 Take the node offline and attempt another operation:
-.. I think there's a line of code missing - how are we taking the node offline?
 
 .. code-block:: python
 
+   >>> rs.remove("localhost:27017")
    >>> db.test.find_one()
    Traceback (most recent call last):
    pymongo.errors.AutoReconnect: ...
