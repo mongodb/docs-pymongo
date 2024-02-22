@@ -1,5 +1,7 @@
 .. uses gevent.rst
 
+.. _pymongo-gevent:
+
 Gevent
 ======
 
