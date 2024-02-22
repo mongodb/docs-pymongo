@@ -29,14 +29,14 @@ When one attempts to connect to a <=3.4 version server, PyMongo will throw the f
   ...
   pymongo.errors.ConfigurationError: Server at localhost:27017 reports wire version 5, but this version of PyMongo requires at least 6 (MongoDB 3.6).
 
-This occurs when the driver is too new for the server it is connecting to.
+This occurs when the driver version is too new for the server it is connecting to.
 To resolve this issue, either upgrade your database to version >= 3.6 or downgrade to
 PyMongo 3.x which, supports MongoDB >= 2.6.
 
 'Cursor' Object Has No Attribute '_Cursor__killed'
 --------------------------------------------------
 
-On versions of PyMongo <3.9, if you supply invalid arguments to the ``Cursor`` constructor,
+On versions of PyMongo < 3.9, if you supply invalid arguments to the ``Cursor`` constructor,
 the driver will raise a ``TypeError`` and an ``AttributeError`` printed to ``stderr``.
 The ``AttributeError`` is not relevant, but the ``TypeError`` contains debugging
 information:
