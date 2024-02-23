@@ -26,9 +26,9 @@ over the network. By default, {+driver-short+} doesn't use any compression.
 
 The driver supports the following algorithms:
 
-- `snappy <https://pypi.org/project/python-snappy>`__ available in MongoDB 3.4 and later.
+- `snappy <https://pypi.org/project/python-snappy>`__, available in MongoDB 3.4 and later.
 - ``zlib`` available in MongoDB 3.6 and later.
-- `zstandard <https://pypi.org/project/zstandard/>`__ available in MongoDB 4.2 and later.
+- `zstandard <https://pypi.org/project/zstandard/>`__, available in MongoDB 4.2 and later.
 
 Wire protocol compression with snappy requires `python-snappy
 <https://pypi.org/project/python-snappy>`__:
@@ -48,7 +48,7 @@ Specify Compression Algorithms
 ------------------------------
 
 You can enable wire protocol compression when you're instantiating a
-``MongoClient()`` by specifying the algorithm name in
+``MongoClient`` by specifying the algorithm name in
 the ``compressors`` option. For example:
 
 .. code-block:: python
