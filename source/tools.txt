@@ -47,8 +47,8 @@ ORM-like (object-relational-mapping-like) layers add features like models and va
 - `MincePy <https://mincepy.readthedocs.io/en/latest/>`__ is an
   object-document mapper (ODM) designed to make any Python object storable
   and queryable in a MongoDB database. It was designed with machine learning
-  and big-data computational and experimental science applications in mind,
-  but is entirely general and can be useful to anyone looking to organize,
+  and big-data computational and experimental science applications in mind.
+  However, it is entirely general and can be useful to anyone looking to organize,
   share, or process large amounts of data with as little change to their current
   workflow as possible.
 
@@ -119,7 +119,7 @@ various Python frameworks and libraries.
   MongoDB instance from within a Python app.
 
 - `mongodb_beaker <http://pypi.python.org/pypi/mongodb_beaker>`__ enables you to use MongoDB
-  as a backend for `beaker's <https://beaker.readthedocs.io/en/latest/>`__
+  as a backend for `Beaker's <https://beaker.readthedocs.io/en/latest/>`__
   caching and session system.
   The source is on `GitHub <http://github.com/bwmcadams/mongodb_beaker>`__.
 
@@ -196,7 +196,7 @@ web applications on top of the Apache web server.
 To run your {+driver-short+} application under mod_wsgi, follow these guidelines:
 
 - Use the ``WSGIDaemonProcess`` directive to run mod_wsgi in daemon mode. If your
-  mod_wsgi`` configuration includes only the ``WSGIScriptAlias`` directive,
+  mod_wsgi configuration includes only the ``WSGIScriptAlias`` directive,
   it will run in embedded mode.
 
 - Use the ``WSGIApplicationGroup %{GLOBAL}`` directive to ensure your application runs
@@ -247,7 +247,7 @@ daemon in the global application group:
    and in the `Multiple Python Sub Interpreters <https://modwsgi.readthedocs.io/en/master/user-guides/application-issues.html#multiple-python-sub-interpreters>`__
    section of the mod_wsgi documentation.
 
-Alternative Drivers
+Alternative Python Drivers
 -------------------
 
 This section lists alternatives to {+driver-short+}.
