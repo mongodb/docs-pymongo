@@ -50,7 +50,7 @@ application.
 In addition to comparing the hostname with ``localhost``, the server selector
 function accounts for the edge case when no servers are running on
 ``localhost``. In this case, the default server selection logic
-prevails by passing through the received server description list unchanged.
+prevails by returning the received server description list unchanged.
 Failure to do this renders the client unable to communicate with MongoDB
 if no servers are running on ``localhost``.
 
@@ -81,20 +81,20 @@ This section describes the server selection process for reads and
 writes. For writes, the driver performs the following operations, in order,
 during the selection process:
 
-- Select all writeable servers from the list of known hosts. For a replica set,
-  the writeable server is the primary. For a sharded cluster, the
-  writeable servers are all the known ``mongos`` servers.
+1. Select all writeable servers from the list of known hosts. For a replica set,
+   the writeable server is the primary. For a sharded cluster, the
+   writeable servers are all the known ``mongos`` servers.
 
-- Apply the user-defined server selector function. The custom server
-  selector is **not** called if there are no servers left from the previous
-  filtering stage.
+#. Apply the user-defined server selector function. The custom server
+   selector is **not** called if there are no servers left from the previous
+   filtering stage.
 
-- Apply the ``localThresholdMS`` setting to the list of remaining hosts. This
-  whittles the host list down to contain only servers whose latency is at most
-  ``localThresholdMS`` milliseconds higher than the lowest observed latency.
+#. Apply the ``localThresholdMS`` setting to the list of remaining hosts. This
+   whittles the host list down to contain only servers whose latency is at most
+   ``localThresholdMS`` milliseconds higher than the lowest observed latency.
 
-- Select a server at random from the remaining host list. The appropriate
-  operation is then performed against the selected server.
+#. Select a server at random from the remaining host list. The appropriate
+   operation is then performed against the selected server.
 
 For reads, the process is identical, except for the first step.
 Instead of selecting all writeable servers, the driver selects all servers from the
