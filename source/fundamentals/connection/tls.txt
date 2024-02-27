@@ -199,13 +199,13 @@ OCSP
 
 Starting with {+driver-short+} 3.11, if {+driver-short+} was installed with the
 "ocsp" extra, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
-Status Protocol) </Online_Certificate_Status_Protocol>`:
+Status Protocol) <Online_Certificate_Status_Protocol>`:
 
 .. code-block:: python
 
    python -m pip install pymongo[ocsp]
 
-MongoDB 4.4+ :wikipedia:`staples OCSP responses </OCSP_stapling>`
+MongoDB 4.4+ :wikipedia:`staples OCSP responses <OCSP_stapling>`
 to the TLS handshake, which {+driver-short+} verifies. The TLS handshake fails if
 the stapled OCSP response is invalid, or indicates that the peer certificate is
 revoked.
