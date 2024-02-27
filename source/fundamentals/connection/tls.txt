@@ -198,7 +198,7 @@ OCSP
 ----
 
 Starting with {+driver-short+} 3.11, if {+driver-short+} was installed with the
-"ocsp" option, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
+``ocsp`` option, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
 Status Protocol) <Online_Certificate_Status_Protocol>`:
 
 .. code-block:: python
