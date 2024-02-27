@@ -144,10 +144,12 @@ contains two key-value pairs: ``name``, a string key with a string value, and
    >>> assert result is not None
    >>> assert result["year"] == 1993
 
-This same typing scheme works for all of the insert methods
- - ``~pymongo.collection.Collection.insert_one()``
- - ``~pymongo.collection.Collection.insert_many()``
- - ``~pymongo.collection.Collection.bulk_write()``
+This same typing scheme works for all of the insert methods:
+
+- ``~pymongo.collection.Collection.insert_one()``
+- ``~pymongo.collection.Collection.insert_many()``
+- ``~pymongo.collection.Collection.bulk_write()``
+
 For ``bulk_write()``, both the ``~pymongo.operations.InsertOne()`` and
 ``~pymongo.operations.ReplaceOne()`` operators are generic.
 
@@ -180,9 +182,6 @@ field in your custom ``TypedDict`` class.
 If you don't specify the ``_id`` field, {+driver-short+} automatically inserts it.
 You can retrieve the value of the field at runtime, but you'll see a type error
 at compile time, as shown in the following example:
-
-If your code refers to the _id field, and your ``TypedDict`` doesn't
-contain this field, you will see a type error, as shown in the following example:
 
 .. code-block:: python
    :emphasize-lines: 12-13
