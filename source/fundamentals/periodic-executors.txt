@@ -3,6 +3,19 @@
 Periodic Executors
 ==================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: sleep, timeout, wake
+
 PyMongo implements a ``~periodic_executor.PeriodicExecutor`` for two
 purposes: as the background thread for ``~monitor.Monitor``, and to
 regularly check if there are ``OP_KILL_CURSORS`` messages that must be sent to the server.
