@@ -198,7 +198,7 @@ OCSP
 ----
 
 Starting with {+driver-short+} 3.11, if {+driver-short+} was installed with the
-"ocsp" extra, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
+"ocsp" option, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
 Status Protocol) <Online_Certificate_Status_Protocol>`:
 
 .. code-block:: python
@@ -250,7 +250,7 @@ root certificates:
 Users of older PyPy portable versions may have to `set an environment
 variable <https://github.com/squeaky-pl/portable-pypy/issues/15>`__ to tell
 OpenSSL where to find root certificates. Do this by using the `certifi
-module <https://pypi.org/project/certifi/>`__ from pypi:
+module <https://pypi.org/project/certifi/>`__ from PyPi:
 
 .. code-block:: python
 
@@ -299,4 +299,4 @@ The MongoDB server logs might show the following error:
    2021-06-30T21:22:44.917+0100 E NETWORK  [conn16] SSL: error:1408A0C1:SSL routines:ssl3_get_client_hello:no shared cipher
 
 To resolve this issue, use Python <=3.10, upgrade to MongoDB 4.2+, or install
-pymongo with the :ref:`OCSP` extra, which relies on PyOpenSSL.
+{+driver-short+} with the :ref:`OCSP` extra, which relies on PyOpenSSL.
