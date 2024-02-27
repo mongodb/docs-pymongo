@@ -35,7 +35,7 @@ For a larger set of examples that use types, see the PyMongo
 
    If you are using Mypy and would like to opt out of using the provided types, add the
    following lines to your
-   `Mypy configurationa file <https://mypy.readthedocs.io/en/stable/config_file.html>`__:
+   `Mypy configuration file <https://mypy.readthedocs.io/en/stable/config_file.html>`__:
 
    .. code-block:: python
 
@@ -326,7 +326,7 @@ are also supported document types. Use the following syntax for ``~typing.TypedD
 
 .. code-block:: python
   
-   ``options: CodecOptions[MyTypedDict] = CodecOptions(...)``.
+   options: CodecOptions[MyTypedDict] = CodecOptions(...)
 
 Typed BSON Decoding
 -------------------
@@ -354,7 +354,7 @@ types. Use the following syntax for ``~typing.TypedDict``:
 
 .. code-block:: python
   
-   ``options: CodecOptions[MyTypedDict] = CodecOptions(...)``.
+   options: CodecOptions[MyTypedDict] = CodecOptions(...)
 
 Troubleshooting
 ---------------
