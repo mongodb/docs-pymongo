@@ -186,11 +186,10 @@ By checking the host and port, you can see that you're connected to the primary 
    >>> db.client.address
    ('localhost', 27017)
 
-Take the node offline and attempt another operation:
+`Take the node offline <https://www.mongodb.com/docs/manual/tutorial/remove-replica-set-member/#remove-members-from-replica-set>`__ and attempt another operation:
 
 .. code-block:: python
 
-   >>> rs.remove("localhost:27017")
    >>> db.test.find_one()
    Traceback (most recent call last):
    pymongo.errors.AutoReconnect: ...
