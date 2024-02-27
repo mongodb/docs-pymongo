@@ -3,6 +3,19 @@
 Type Hints
 ==========
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :keywords: mypy, type safety, compile time, type check, static
+
 If your IDE is configured to use `type hints <https://docs.python.org/3/library/typing.html>`__,
 it can suggest more appropriate completions and highlight errors in your code.
 
