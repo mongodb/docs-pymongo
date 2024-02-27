@@ -19,6 +19,9 @@ Count
 To see how many documents are in a collection, use the
 ``~pymongo.collection.Collection.count_documents`` method.
 
+Count All Documents
+-------------------
+
 To return a count off all documents in the collection, pass an empty object to
 the ``count_documents()`` method, as shown in the following example:
 
@@ -26,6 +29,9 @@ the ``count_documents()`` method, as shown in the following example:
 
    >> posts.count_documents({})
    3
+
+Count Specific Documents
+------------------------
 
 To return a count of documents that match a specific search criteria, specify a
 query in the ``count_documents()`` method, as shown in the following example:
