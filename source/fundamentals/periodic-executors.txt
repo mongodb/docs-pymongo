@@ -99,7 +99,7 @@ assumed that checking a flag and going back to sleep 10 times a second was
 cheap on modern machines.
 
 Starting in Python 3.2, the built-in C implementation of the ``lock.acquire()`` method
-takes a ``timeout`` parameter, so Python 3.2+ Condition variables sleep simply by calling
+takes a ``timeout`` parameter, so Python 3.2+ condition variables sleep simply by calling
 ``lock.acquire()``. They are implemented as efficiently as expected.
 
 But in Python 2, the ``lock.acquire()`` method has no timeout. To wait with a timeout, a Python
