@@ -25,7 +25,7 @@ Overview
 {+driver-short+} supports connecting to MongoDB over TLS/SSL. This guide covers the
 configuration options supported by {+driver-short+}. To learn how to configure
 MongoDB for TLS/SSL, see :manual:`the TLS/SSL configuration guide
-<http://mongodb.com/docs/manual/tutorial/configure-ssl/>` in the Server manual.
+</tutorial/configure-ssl/>` in the Server manual.
 
 .. warning:: 
 
@@ -137,7 +137,7 @@ as a keyword parameter:
    ...                              tls=True,
    ...                              tlsCRLFile='/path/to/crl.pem')
 
-Or, in the URI:
+Or, in the connection URI:
 
 .. code-block:: python
 
@@ -198,14 +198,14 @@ OCSP
 ----
 
 Starting with {+driver-short+} 3.11, if {+driver-short+} was installed with the
-"ocsp" extra, certificate revocation checking is enabled by way of `OCSP (Online Certification
-Status Protocol) <https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol>`_:
+"ocsp" extra, certificate revocation checking is enabled by way of :wikipedia:`OCSP (Online Certification
+Status Protocol) </Online_Certificate_Status_Protocol>`:
 
 .. code-block:: python
 
    python -m pip install pymongo[ocsp]
 
-MongoDB 4.4+ `staples OCSP responses <https://en.wikipedia.org/wiki/OCSP_stapling>`__
+MongoDB 4.4+ :wikipedia:`staples OCSP responses </OCSP_stapling>`
 to the TLS handshake, which {+driver-short+} verifies. The TLS handshake fails if
 the stapled OCSP response is invalid, or indicates that the peer certificate is
 revoked.
