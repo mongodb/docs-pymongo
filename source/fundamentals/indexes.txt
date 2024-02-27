@@ -3,6 +3,19 @@
 Indexes
 =======
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :keywords: query, location 
+
 Overview
 --------
 
@@ -11,10 +24,10 @@ functionality to querying and storing documents.
 
 Unique Indexes
 --------------
-This section
-demonstrates how to create a `unique index
-<http://mongodb.com/docs/manual/core/index-unique/>`__ on a key that rejects
-documents whose value for that key already exists in the index.
+
+This section demonstrates how to create a
+`unique index <http://mongodb.com/docs/manual/core/index-unique/>`__ on a key that
+rejects documents whose value for that key already exists in the index.
 
 .. tip::
   
@@ -57,7 +70,6 @@ Geospatial Indexes
 
 This section shows how to create and use a ``~pymongo.GEO2D``
 index in PyMongo.
-
 
 The following code example shows how to create a geospatial index:
 
