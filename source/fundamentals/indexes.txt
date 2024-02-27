@@ -11,7 +11,7 @@ Indexes
 
 .. facet::
    :name: genre
-   :values: tutorial
+   :values: reference
  
 .. meta::
    :keywords: query, location 
@@ -26,7 +26,7 @@ Unique Indexes
 --------------
 
 This section demonstrates how to create a
-`unique index <http://mongodb.com/docs/manual/core/index-unique/>`__ on a key that
+:manual:`unique index </core/index-unique/>` on a key that
 rejects documents whose value for that key already exists in the index.
 
 .. tip::
