@@ -3,6 +3,19 @@
 Dates and Times
 ===============
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: convert, span, central, mountain, pacific, eastern, calendar 
+
 These examples show how to handle Python ``datetime.datetime`` objects
 correctly in PyMongo.
 
