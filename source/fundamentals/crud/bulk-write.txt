@@ -168,8 +168,8 @@ and fourth operations succeed.
 Write Concern
 -------------
 
-{+driver-short+} runs bulk operations using the
-``write_concern`` of the collection in which the operations are running. The
+When {+driver-short+} runs a bulk operation, it uses the``write_concern`` of the
+collection in which the operation is running. The
 driver reports all write concern errors, such as ``wtimeout``,
 after attempting all of the operations, regardless of execution order.
 
