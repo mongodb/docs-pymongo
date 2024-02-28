@@ -17,6 +17,7 @@ Fundamentals
    /fundamentals/type-hints
 
 - :ref:`pymongo-indexes`
-- :ref:`pymongo-in-use-encryption`
+.. - :ref:`pymongo-in-use-encryption`
+
 - :ref:`pymongo-periodic-executors`
 - :ref:`pymongo-type-hints`
