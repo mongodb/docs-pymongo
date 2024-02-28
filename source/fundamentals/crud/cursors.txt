@@ -51,7 +51,7 @@ of a replica-set member:
            for doc in cursor:
                ts = doc['ts']
                print(doc)
-           # You end up here if the find() returned no documents, or if the
+           # You end up here if the find() method returns no documents, or if the
            # tailable cursor times out (no new documents are added to the
            # collection for more than 1 second).
            time.sleep(1)
