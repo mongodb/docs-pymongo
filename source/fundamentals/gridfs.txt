@@ -16,13 +16,13 @@ GridFS
 .. meta::
    :keywords: binary large object, blob, file, storage
 
-This guide shows how to use GridFS to store and retrieve large
+This guide shows how to use GridFS to store and retrieve large files
 in MongoDB.
 
 Setup
 -----
 
-Each GridFS instance operates on a specific MongoDB database.
+Each ``GridFS`` instance operates on a specific MongoDB database.
 To create a ``GridFS`` instance, call the ``GridFS()``
 constructor and pass in a MongoDB database:
 
@@ -57,7 +57,7 @@ value to retrieve the contents of the file:
 
 The ``~gridfs.GridFS.get()`` method returns a file-like object. To read the
 file's contents, call the ``~gridfs.grid_file.GridOut.read()`` method. You can store
-any object with a ``read()`` method in GridFS.
+any object that has a ``read()`` method in GridFS.
 
 The following code example shows how to add additional attributes to a file.
 To add an attribute, pass it as a named argument to the ``~gridfs.GridFS.put()`` method.
