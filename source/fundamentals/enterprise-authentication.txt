@@ -39,7 +39,7 @@ After installing the module, run the ``kinit`` command, as shown in the followin
 
 .. _kerberos:
 
-.. code-block:: bash
+.. code-block:: python
 
    $ kinit mongodbuser@EXAMPLE.COM
    mongodbuser@EXAMPLE.COM's Password:
