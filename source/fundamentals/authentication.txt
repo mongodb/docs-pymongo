@@ -17,7 +17,7 @@ Authentication Mechanisms
    :keywords: authorize, boto
 
 MongoDB supports several different authentication mechanisms. This guide
-discusses all authentication methods currently supported by PyMongo.
+discusses all authentication methods currently supported by {+driver-short+}.
 
 .. tip:: Percent-Escaping
 
@@ -100,7 +100,7 @@ MONGODB-CR
 Before MongoDB 3.0, the default authentication mechanism was the "MongoDB
 Challenge-Response" protocol (MONGODB-CR). As with the preceding authentication
 mechanisms, you can pass the username, password, database, and authentication mechanism
-to the ``MongoClient()`` constructor or include them in your MongoDB URI:
+to the ``MongoClient()`` constructor, or include them in your MongoDB URI:
 
 .. code-block:: python
 
@@ -116,8 +116,8 @@ to the ``MongoClient()`` constructor or include them in your MongoDB URI:
 Default Authentication Mechanism
 --------------------------------
 
-If you don't specify an authentication mechanism, PyMongo defaults to SCRAM-SHA-1 when
-connected to MongoDB 3.6. When connected to MongoDB 4.0+, PyMongo negotiates the mechanism
+If you don't specify an authentication mechanism, {+driver-short+} defaults to SCRAM-SHA-1 when
+connected to MongoDB 3.6. When connected to MongoDB 4.0+, {+driver-short+} negotiates the mechanism
 to use (SCRAM-SHA-1 or SCRAM-SHA-256).
 
 Default Database and "authSource"
@@ -131,7 +131,7 @@ URI:
    >>> uri = "mongodb://user:password@example.com/default_db?authSource=admin"
    >>> client = MongoClient(uri)
 
-PyMongo will authenticate against the ``admin`` database, but the default database
+{+driver-short+} will authenticate against the ``admin`` database, but the default database
 will be ``default_db``:
 
 .. code-block:: python
@@ -159,7 +159,7 @@ the use of TLS/SSL connections with certificate validation:
    ...                      tlsCertificateKeyFile='/path/to/client.pem',
    ...                      tlsCAFile='/path/to/ca.pem')
 
-MONGODB-X509 authenticates against the ``l$external`` virtual database, so you
+MONGODB-X509 authenticates against the ``$external`` virtual database, so you
 do not have to specify a database in the URI:
 
 .. code-block:: python
@@ -178,7 +178,7 @@ MONGODB-AWS
 
 The MONGODB-AWS authentication mechanism is available in MongoDB 4.4+ and
 requires extra {+driver-short+} dependencies. To use MONGODB-AWS authentication,
-install the ``aws`` extra when you install the ``pymongo`` package:
+install the ``aws`` option when you install the ``pymongo`` package:
 
 .. code-block:: python
 
@@ -316,7 +316,7 @@ container:
   
    When using an ECS container for authentication, don't include the username, password,
    or session token in the URI.
-   PyMongo queries the ECS container endpoint to obtain these credentials.
+   {+driver-short+} queries the ECS container endpoint to obtain these credentials.
 
 EC2 Instance
 ~~~~~~~~~~~~
@@ -333,6 +333,6 @@ machine:
 
 .. note::
   
-   When using an ECS instance for authentication, don't include the username, password,
+   When using an EC2 instance for authentication, don't include the username, password,
    or session token in the URI.
-   PyMongo queries the ECS container endpoint to obtain these credentials.
+   {+driver-short+} queries the ECS container endpoint to obtain these credentials.
