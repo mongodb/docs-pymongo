@@ -47,7 +47,7 @@ To write data to GridFS, use the ``~gridfs.GridFS.put()`` method:
    >>> a = fs.put("hello world")
 
 The ``~gridfs.GridFS.put()`` method creates a new file in GridFS, and returns
-the value of the file document's ``_id`` key. You can use the file's returned ``_id``
+the value of the file's ``_id`` key. You can use the file's returned ``_id``
 value to retrieve the contents of the file:
 
 .. code-block:: python
