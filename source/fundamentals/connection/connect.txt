@@ -194,7 +194,7 @@ By checking the host and port, you can see that you're connected to the primary 
    Traceback (most recent call last):
    pymongo.errors.AutoReconnect: ...
 
-You get an ``~pymongo.errors.AutoReconnect`` exception. This means
+You get an ``AutoReconnect`` exception. This means
 that the driver was not able to connect to the primary, but that it will attempt to
 automatically reconnect on subsequent operations. When this exception
 is raised, the application code needs to decide whether to retry the
