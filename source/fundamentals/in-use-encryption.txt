@@ -18,7 +18,7 @@ In-Use Encryption
    :values: reference
  
 .. meta::
-   :keywords: qe, csfle
+   :keywords: qe, csfle, field level encryption
 
 Overview
 --------
