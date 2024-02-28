@@ -15,7 +15,7 @@ Tailable Cursors
    :values: reference
 
 .. meta::
-   :keywords: 
+   :keywords: oplog
 
 Overview
 --------
