@@ -59,7 +59,7 @@ of a replica-set member:
 For a capped collection, ``CursorType.TAILABLE_AWAIT`` is the
 only option required to create a tailable cursor. When querying the
 oplog, the ``oplog_replay`` option enables an optimization to quickly
-find the 'ts' value. You can use the ``oplog_replay`` option
+find the ``ts`` value. You can use the ``oplog_replay`` option
 only when querying the oplog. Starting in MongoDB 4.4
 the server ignores this option, because the MongoDB query engine automatically
 optimizes queries against the oplog.
