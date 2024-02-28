@@ -11,10 +11,12 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
+   /fundamentals/enterprise-authentication
    /fundamentals/indexes
    /fundamentals/periodic-executors
    /fundamentals/type-hints
 
+- :ref:`pymongo-enterprise-auth`
 - :ref:`pymongo-indexes`
 - :ref:`pymongo-periodic-executors`
 - :ref:`pymongo-type-hints`
