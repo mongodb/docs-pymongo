@@ -11,6 +11,7 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
+   /fundamentals/aggregation
    /fundamentals/authentication
    /fundamentals/csot
    /fundamentals/collations
@@ -23,6 +24,7 @@ Fundamentals
    /fundamentals/periodic-executors
    /fundamentals/type-hints
 
+- :ref:`pymongo-aggregation`
 - :ref:`pymongo-auth`
 - :ref:`pymongo-csot`
 - :ref:`pymongo-collations`
