@@ -159,10 +159,10 @@ to inadvertently change the ``~bson.binary.Binary`` subtype, and in some
 cases, the bytes of the ``bson.binary.Binary`` field itself when
 round-tripping documents containing UUIDs.
 
-Consider the following situation::
+Consider the following situation:
 
 .. code-block:: python
-
+   
    from bson.codec_options import CodecOptions, DEFAULT_CODEC_OPTIONS
    from bson.binary import Binary, UuidRepresentation
    from uuid import uuid4
