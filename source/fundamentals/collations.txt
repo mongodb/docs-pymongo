@@ -109,7 +109,7 @@ Specify a Collation for a Query
 
 A query can specify a collation to use when sorting
 results. The following example demonstrates a query that runs on the
-``contacts`` collection in database ``test``. It matches on
+``contacts`` collection in the ``test`` database. It matches on
 documents that contain ``New York`` in the ``city`` field,
 and sorts on the ``name`` field with the ``fr_CA`` collation.
 
