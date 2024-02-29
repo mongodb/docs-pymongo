@@ -19,7 +19,7 @@ Aggregation
 Overview
 --------
 
-This guide describes how to perform aggregation with the {+driver-short+}.
+This guide describes how to perform aggregation with {+driver-short+}.
 
 Sample Documents
 ----------------
