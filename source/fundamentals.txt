@@ -11,6 +11,7 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
+   /fundamentals/aggregation
    /fundamentals/authentication
    /fundamentals/databases-and-collections
    /fundamentals/dates-and-times
@@ -21,6 +22,7 @@ Fundamentals
    /fundamentals/periodic-executors
    /fundamentals/type-hints
 
+- :ref:`pymongo-aggregation`
 - :ref:`pymongo-auth`
 - :ref:`pymongo-databases-collections`
 - :ref:`pymongo-dates-times`
