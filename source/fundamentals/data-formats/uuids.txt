@@ -1,0 +1,569 @@
+.. _pymongo-uuids:
+
+UUIDs 
+=====
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: compatibility, id, legacy
+
+{+driver-short+} includes support for dealing with UUID types.
+The followingn example shows how to store native ``uuid.UUID`` objects
+to MongoDB and retrieve them as native ``uuid.UUID`` objects:
+
+.. code-block:: python
+
+   from pymongo import MongoClient
+   from bson.binary import UuidRepresentation
+   from uuid import uuid4
+
+   # use the 'standard' representation for cross-language compatibility.
+   client = MongoClient(uuidRepresentation='standard')
+   collection = client.get_database('uuid_db').get_collection('uuid_coll')
+
+   # remove all documents from collection
+   collection.delete_many({})
+
+   # create a native uuid object
+   uuid_obj = uuid4()
+
+   # save the native uuid object to MongoDB
+   collection.insert_one({'uuid': uuid_obj})
+
+   # retrieve the stored uuid object from MongoDB
+   document = collection.find_one({})
+
+   # check that the retrieved UUID matches the inserted UUID
+   assert document['uuid'] == uuid_obj
+
+You can also use native ``uuid.UUID`` objects in MongoDB queries:
+
+.. code-block:: python
+
+   document = collection.find({'uuid': uuid_obj})
+   assert document['uuid'] == uuid_obj
+
+The preceding examples illustrate use cases in which the
+UUID is used in the same application that generated it. However,
+other MongoDB drivers, such as the drivers for Java and .NET/C#,
+have historically encoded UUIDs using a byte order that is different
+from the one used by {+driver-short+}. Applications that require interoperability across
+these drivers must specify the appropriate
+``~bson.binary.UuidRepresentation``.
+
+The following sections describe how drivers have historically differed
+in their encoding of UUIDs, and how applications can use the
+``~bson.binary.UuidRepresentation`` configuration option to maintain
+cross-language compatibility.
+
+.. important::
+   
+   If you're creating a new application that doesn't share a MongoDB deployment with
+   any other application and has never stored UUIDs in MongoDB,
+   use the ``standard`` UUID representation for cross-language
+   compatibility. See :ref:`configuring-uuid-representation` for details
+   about how to configure the ``~bson.binary.UuidRepresentation``.
+
+.. _example-legacy-uuid:
+
+Legacy Handling of UUID Data
+----------------------------
+
+Historically, MongoDB drivers have used different byte ordering
+when serializing UUID types to ``~bson.binary.Binary``.
+Consider a UUID with the following canonical textual
+representation:
+
+.. code-block:: none
+
+   00112233-4455-6677-8899-aabbccddeeff
+
+Historically, {+driver-short+} serialized this UUID as follows:
+
+.. code-block:: python
+
+   00112233-4455-6677-8899-aabbccddeeff
+
+The .NET/C# driver serialized this same UUID as follows:
+
+.. code-block:: python
+
+   33221100-5544-7766-8899-aabbccddeeff
+
+Finally, the Java driver serialized this same UUID as follows:
+
+.. code-block:: python
+
+   77665544-3322-1100-ffee-ddccbbaa9988
+
+This difference in the byte order of UUIDs encoded by different drivers can
+result in highly unintuitive behavior in some scenarios. The following section
+details two of these scenarios.
+
+Scenario 1: Applications Share a MongoDB Deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Consider the following situation:
+
+* Application "C", written in C#, generates a UUID and uses it as the ``_id`` value
+  of a document that it inserts into the ``uuid_test`` collection of
+  the ``example_db`` database. Assume that the canonical textual
+  representation of the generated UUID is as follows:
+
+.. code-block:: python
+
+   00112233-4455-6677-8899-aabbccddeeff
+
+* Application "P", written in Python, uses the following code to try to ``find`` the
+  document written by application "C":
+
+.. code-block:: python
+
+   from uuid import UUID
+   collection = client.example_db.uuid_test
+   result = collection.find_one({'_id': UUID('00112233-4455-6677-8899-aabbccddeeff')})
+
+In this case, the document found by application "P", ``result``, isn't the document that
+application "C" inserted in the previous step. This is because
+the .NET/C# driver uses a different byte order when representing UUIDs as
+BSON.
+
+The following query successfully finds the document inserted by application "P":
+
+.. code-block:: python
+
+   result = collection.find_one({'_id': UUID('33221100-5544-7766-8899-aabbccddeeff')})
+
+This example demonstrates how the differing byte order used by different
+drivers can hinder interoperability. To work around this problem,
+configure your ``MongoClient`` with the appropriate
+``~bson.binary.UuidRepresentation``. In this scenario, ``client`` in application
+"P" can be configured to use the ``~bson.binary.UuidRepresentation.CSHARP_LEGACY``
+representation to avoid the unintuitive behavior.
+
+Scenario 2: Round-Tripping UUIDs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following examples show how using a misconfigured
+``~bson.binary.UuidRepresentation`` can cause an application
+to inadvertently change the ``~bson.binary.Binary`` subtype, and in some
+cases, the bytes of the ``bson.binary.Binary`` field itself when
+round-tripping documents containing UUIDs.
+
+Consider the following situation::
+
+.. code-block:: python
+
+   from bson.codec_options import CodecOptions, DEFAULT_CODEC_OPTIONS
+   from bson.binary import Binary, UuidRepresentation
+   from uuid import uuid4
+
+   # Using UuidRepresentation.PYTHON_LEGACY stores a Binary subtype-3 UUID
+   python_opts = CodecOptions(uuid_representation=UuidRepresentation.PYTHON_LEGACY)
+   input_uuid = uuid4()
+   collection = client.testdb.get_collection('test', codec_options=python_opts)
+   collection.insert_one({'_id': 'foo', 'uuid': input_uuid})
+   assert collection.find_one({'uuid': Binary(input_uuid.bytes, 3)})['_id'] == 'foo'
+
+   # Retrieving this document using UuidRepresentation.STANDARD returns a Binary instance
+   std_opts = CodecOptions(uuid_representation=UuidRepresentation.STANDARD)
+   std_collection = client.testdb.get_collection('test', codec_options=std_opts)
+   doc = std_collection.find_one({'_id': 'foo'})
+   assert isinstance(doc['uuid'], Binary)
+
+   # Round-tripping the retrieved document yields the exact same document
+   std_collection.replace_one({'_id': 'foo'}, doc)
+   round_tripped_doc = collection.find_one({'uuid': Binary(input_uuid.bytes, 3)})
+   assert doc == round_tripped_doc
+
+In the preceding example, round-tripping the document using the incorrect
+``~bson.binary.UuidRepresentation`` (``STANDARD`` instead of
+``PYTHON_LEGACY``) changes the ``~bson.binary.Binary`` subtype as a
+side effect. This can also happen  when the original document is written using the
+``STANDARD`` representation and then round-tripped using the ``PYTHON_LEGACY``
+representation.
+
+The next example shows the consequences of incorrectly using a
+representation that modifies byte order (``CSHARP_LEGACY`` or ``JAVA_LEGACY``)
+when round-tripping documents:
+
+.. code-block:: python
+
+   from bson.codec_options import CodecOptions, DEFAULT_CODEC_OPTIONS
+   from bson.binary import Binary, UuidRepresentation
+   from uuid import uuid4
+
+   # Using UuidRepresentation.STANDARD stores a Binary subtype-4 UUID
+   std_opts = CodecOptions(uuid_representation=UuidRepresentation.STANDARD)
+   input_uuid = uuid4()
+   collection = client.testdb.get_collection('test', codec_options=std_opts)
+   collection.insert_one({'_id': 'baz', 'uuid': input_uuid})
+   assert collection.find_one({'uuid': Binary(input_uuid.bytes, 4)})['_id'] == 'baz'
+
+   # Retrieving this document using UuidRepresentation.JAVA_LEGACY returns a native UUID
+   # without modifying the UUID byte-order
+   java_opts = CodecOptions(uuid_representation=UuidRepresentation.JAVA_LEGACY)
+   java_collection = client.testdb.get_collection('test', codec_options=java_opts)
+   doc = java_collection.find_one({'_id': 'baz'})
+   assert doc['uuid'] == input_uuid
+
+   # Round-tripping the retrieved document silently changes the Binary bytes and subtype
+   java_collection.replace_one({'_id': 'baz'}, doc)
+   assert collection.find_one({'uuid': Binary(input_uuid.bytes, 3)}) is None
+   assert collection.find_one({'uuid': Binary(input_uuid.bytes, 4)}) is None
+   round_tripped_doc = collection.find_one({'_id': 'baz'})
+   assert round_tripped_doc['uuid'] == Binary(input_uuid.bytes, 3).as_uuid(UuidRepresentation.JAVA_LEGACY)
+
+In the preceding example, using the incorrect ``~bson.binary.UuidRepresentation``
+(``JAVA_LEGACY`` instead of ``STANDARD``) changes the
+``~bson.binary.Binary`` bytes and subtype as a side effect.
+This happens when any representation that
+manipulates byte order (``CSHARP_LEGACY`` or ``JAVA_LEGACY``) is incorrectly
+used to round-trip UUIDs written with the ``STANDARD`` representation.
+When the original document is written using the ``CSHARP_LEGACY``
+or ``JAVA_LEGACY`` representation and then round-tripped using the ``STANDARD``
+representation, only the ``~bson.binary.Binary`` subtype is changed.
+
+.. note::
+   
+   In {+driver-short+} 4.0+,
+   the ``STANDARD`` representation will decode binary subtype 3 fields as
+   ``~bson.binary.Binary`` objects of subtype 3 (instead of
+   ``uuid.UUID``), and each of the ``LEGACY_*`` representations will
+   decode binary subtype 4 fields to ``~bson.binary.Binary`` objects of
+   subtype 4 (instead of ``uuid.UUID``). This change resolves many of the preceding
+   issues.
+
+.. _configuring-uuid-representation:
+
+Configuring a UUID Representation
+---------------------------------
+
+Users can work around the problems described above by configuring their
+applications with the appropriate ``~bson.binary.UuidRepresentation``.
+Configuring the representation modifies {+driver-short+}'s behavior while
+encoding ``uuid.UUID`` objects to BSON and decoding
+binary subtype 3 and 4 fields from BSON.
+
+You can set the UUID representation for your application in the following ways:
+
+#. At the ``MongoClient`` level, by using the ``uuidRepresentation`` URI option:
+
+.. code-block:: python
+
+   client = MongoClient("mongodb://a:27107/?uuidRepresentation=standard")
+
+The following table describes the available values for the ``uuidRepresentation`` option:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Value
+     - UUID Representation
+
+   * - ``unspecified``
+     - :ref:`unspecified-representation-details`
+
+   * - ``standard``
+     - :ref:`standard-representation-details`
+
+   * - ``pythonLegacy``
+     - :ref:`python-legacy-representation-details`
+
+   * - ``javaLegacy``
+     - :ref:`java-legacy-representation-details`
+
+   * - ``csharpLegacy``
+     - :ref:`csharp-legacy-representation-details`
+
+#. At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
+   option:
+
+.. code-block:: python
+
+   from bson.binary import UuidRepresentation
+   client = MongoClient(uuidRepresentation=UuidRepresentation.STANDARD)
+
+#. At the database or collection level, by supplying a suitable
+   ``~bson.codec_options.CodecOptions`` instance:
+
+.. code-block:: python
+
+   from bson.codec_options import CodecOptions
+   csharp_opts = CodecOptions(uuid_representation=UuidRepresentation.CSHARP_LEGACY)
+   java_opts = CodecOptions(uuid_representation=UuidRepresentation.JAVA_LEGACY)
+
+   # Get database/collection from client with csharpLegacy UUID representation
+   csharp_database = client.get_database('csharp_db', codec_options=csharp_opts)
+   csharp_collection = client.testdb.get_collection('csharp_coll', codec_options=csharp_opts)
+
+   # Get database/collection from existing database/collection with javaLegacy UUID representation
+   java_database = csharp_database.with_options(codec_options=java_opts)
+   java_collection = csharp_collection.with_options(codec_options=java_opts)
+
+Supported UUID Representations
+------------------------------
+
+The following table describes the differences between the available UUID representations:
+
+.. list-table::
+   :header-rows: 1
+
+   * - UUID Representation
+     - Default?
+     - Encode ``uuid.UUID`` to
+     - Decode ``~bson.binary.Binary`` subtype 4 to
+     - Decode ``~bson.binary.Binary`` subtype 3 to
+
+   * - :ref:`standard-representation-details`
+     - No
+     - ``~bson.binary.Binary`` subtype 4
+     - ``uuid.UUID``
+     - ``~bson.binary.Binary`` subtype 3
+
+   * - :ref:`unspecified-representation-details`
+     - Yes, in {+driver-short+} >= 4
+     - Raise ``ValueError``
+     - ``~bson.binary.Binary`` subtype 4
+     - ``~bson.binary.Binary`` subtype 3
+
+   * - :ref:`python-legacy-representation-details`
+     - No
+     - ``~bson.binary.Binary`` subtype 3 with standard byte order
+     - ``~bson.binary.Binary`` subtype 4
+     - ``uuid.UUID``
+
+   * - :ref:`java-legacy-representation-details`
+     - No
+     - ``~bson.binary.Binary`` subtype 3 with Java legacy byte order
+     - ``~bson.binary.Binary`` subtype 4
+     - ``uuid.UUID``
+
+   * - :ref:`csharp-legacy-representation-details`
+     - No
+     - ``~bson.binary.Binary`` subtype 3 with C# legacy byte order
+     - ``~bson.binary.Binary`` subtype 4
+     - ``uuid.UUID``
+
+The following sections detail the behavior and use case for each supported UUID
+representation.
+
+.. _unspecified-representation-details:
+
+UNSPECIFIED
+~~~~~~~~~~~
+
+The ``~bson.binary.UuidRepresentation.UNSPECIFIED`` representation
+prevents the incorrect interpretation of UUID bytes by stopping short of
+automatically converting UUID fields in BSON to native UUID types. Decoding
+a UUID when using this representation returns a ``~bson.binary.Binary``
+object instead. If required, you can coerce the decoded
+``~bson.binary.Binary`` objects into native UUIDs by using the
+``~bson.binary.Binary.as_uuid()`` method and specifying the appropriate
+representation format.
+
+The following example shows what this might look like for a UUID stored by the .NET/C#
+driver:
+
+.. code-block:: python
+
+   from bson.codec_options import CodecOptions, DEFAULT_CODEC_OPTIONS
+   from bson.binary import Binary, UuidRepresentation
+   from uuid import uuid4
+
+   # Using UuidRepresentation.CSHARP_LEGACY
+   csharp_opts = CodecOptions(uuid_representation=UuidRepresentation.CSHARP_LEGACY)
+
+   # Store a legacy C#-formatted UUID
+   input_uuid = uuid4()
+   collection = client.testdb.get_collection('test', codec_options=csharp_opts)
+   collection.insert_one({'_id': 'foo', 'uuid': input_uuid})
+
+   # Using UuidRepresentation.UNSPECIFIED
+   unspec_opts = CodecOptions(uuid_representation=UuidRepresentation.UNSPECIFIED)
+   unspec_collection = client.testdb.get_collection('test', codec_options=unspec_opts)
+
+   # UUID fields are decoded as Binary when UuidRepresentation.UNSPECIFIED is configured
+   document = unspec_collection.find_one({'_id': 'foo'})
+   decoded_field = document['uuid']
+   assert isinstance(decoded_field, Binary)
+
+   # Binary.as_uuid() can be used to coerce the decoded value to a native UUID
+   decoded_uuid = decoded_field.as_uuid(UuidRepresentation.CSHARP_LEGACY)
+   assert decoded_uuid == input_uuid
+
+When the UUID representation is ``UNSPECIFIED``, you can't encode native ``uuid.UUID``
+objects directly to ``~bson.binary.Binary``. If you try, {+driver-short+} raises an
+exception:
+
+.. code-block:: python
+
+   unspec_collection.insert_one({'_id': 'bar', 'uuid': uuid4()})
+   Traceback (most recent call last):
+   ...
+   ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED. UUIDs can be manually converted to bson.Binary instances using bson.Binary.from_uuid() or a different UuidRepresentation can be configured. See the documentation for UuidRepresentation for more information.
+
+Instead, applications using ``~bson.binary.UuidRepresentation.UNSPECIFIED``
+must explicitly coerce a native UUID by using the
+``~bson.binary.Binary.from_uuid()`` method:
+
+.. code-block:: python
+
+   explicit_binary = Binary.from_uuid(uuid4(), UuidRepresentation.STANDARD)
+   unspec_collection.insert_one({'_id': 'bar', 'uuid': explicit_binary})
+
+.. note::
+  
+   ``~bson.binary.UuidRepresentation.UNSPECIFIED`` is the default
+   UUID representation in {+driver-short+}.
+
+.. _standard-representation-details:
+
+STANDARD
+~~~~~~~~
+
+The ``~bson.binary.UuidRepresentation.STANDARD`` representation
+enables cross-language compatibility by ensuring the same byte order
+when encoding UUIDs from all drivers. A UUID written in this representation
+will be handled correctly by any driver configured with the ``STANDARD``
+representation.
+
+The ``STANDARD`` representation encodes native ``uuid.UUID`` objects to
+``~bson.binary.Binary`` subtype 4 objects.
+
+.. important::
+  
+   Use this UUID representation for new applications or
+   applications that are encoding or decoding UUIDs in MongoDB for the
+   first time.
+
+.. _python-legacy-representation-details:
+
+PYTHON_LEGACY
+~~~~~~~~~~~~~
+
+The ``~bson.binary.UuidRepresentation.PYTHON_LEGACY`` UUID representation was the default
+UUID representation in {+driver-short+} 3.
+This representation conforms to
+`RFC 4122 Section 4.1.2 <https://tools.ietf.org/html/rfc4122#section-4.1.2>`__.
+
+The following example illustrates the use of this representation:
+
+.. code-block:: python
+
+   from bson.codec_options import CodecOptions, DEFAULT_CODEC_OPTIONS
+   from bson.binary import Binary, UuidRepresentation
+
+   # No configured UUID representation
+   collection = client.python_legacy.get_collection('test', codec_options=DEFAULT_CODEC_OPTIONS)
+
+   # Using UuidRepresentation.PYTHON_LEGACY
+   pylegacy_opts = CodecOptions(uuid_representation=UuidRepresentation.PYTHON_LEGACY)
+   pylegacy_collection = client.python_legacy.get_collection('test', codec_options=pylegacy_opts)
+
+   # UUIDs written by PyMongo 3 with no UuidRepresentation configured
+   # (or PyMongo 4.0 with PYTHON_LEGACY) can be queried using PYTHON_LEGACY
+   uuid_1 = uuid4()
+   pylegacy_collection.insert_one({'uuid': uuid_1})
+   document = pylegacy_collection.find_one({'uuid': uuid_1})
+
+The ``PYTHON_LEGACY`` representation encodes native ``uuid.UUID`` objects to
+``~bson.binary.Binary`` subtype 3 objects, preserving the same
+byte order as ``~uuid.UUID.bytes``:
+
+.. code-block:: python
+
+   from bson.binary import Binary
+
+   document = collection.find_one({'uuid': Binary(uuid_2.bytes, subtype=3)})
+   assert document['uuid'] == uuid_2
+
+.. important::
+  
+   Use the ``~bson.binary.UuidRepresentation.PYTHON_LEGACY`` representation when reading
+   UUIDs generated by existing applications that use the Python driver
+   but don't explicitly set a UUID representation.
+
+.. _java-legacy-representation-details:
+
+JAVA_LEGACY
+~~~~~~~~~~~
+
+The ``~bson.binary.UuidRepresentation.JAVA_LEGACY`` representation
+corresponds to the legacy representation of UUIDs used by the MongoDB Java
+Driver. This representation reverses the order of bytes 0-7 and bytes 8-15.
+
+As an example, consider the same UUID described in :ref:`example-legacy-uuid`.
+Imagine that an application used the Java driver without an explicitly
+specified UUID representation to insert the example UUID
+``00112233-4455-6677-8899-aabbccddeeff`` into MongoDB. If you try to read this
+value while using the ``PYTHON_LEGACY`` representation,
+you see a different UUID:
+
+.. code-block:: python
+
+   UUID('77665544-3322-1100-ffee-ddccbbaa9988')
+
+However, if you explicitly set the representation to
+``~bson.binary.UuidRepresentation.JAVA_LEGACY``, you get the correct result:
+
+.. code-block:: python
+
+   UUID('00112233-4455-6677-8899-aabbccddeeff')
+
+{+driver-short+} uses the specified UUID representation to reorder the BSON bytes and
+load them correctly. ``JAVA_LEGACY`` encodes native ``uuid.UUID`` objects
+to ``~bson.binary.Binary`` subtype 3 objects, while performing the same
+byte reordering as the legacy Java driver's UUID-to-BSON encoder.
+
+.. important::
+  
+   Use this UUID representation when reading UUIDs
+   written to MongoDB by a legacy Java application (one that used the Java driver
+   without the ``STANDARD`` representation configured).
+
+.. _csharp-legacy-representation-details:
+
+CSHARP_LEGACY
+~~~~~~~~~~~~~
+
+The ``~bson.binary.UuidRepresentation.CSHARP_LEGACY`` representation
+corresponds to the legacy representation of UUIDs used by the MongoDB .NET/C#
+driver. This representation reverses the order of bytes 0-3, bytes 4-5, and bytes 6-7.
+
+As an example, consider the same UUID described in :ref:`example-legacy-uuid`.
+Imagine that an application used the .NET/C# driver without an explicitly
+specified UUID representation to insert the example UUID
+``00112233-4455-6677-8899-aabbccddeeff`` into MongoDB. If you try to read this
+value while using the ``PYTHON_LEGACY`` representation, you see a different UUID:
+
+.. code-block:: python
+
+   UUID('33221100-5544-7766-8899-aabbccddeeff')
+
+However, if you explicitly set the representation to
+``~bson.binary.UuidRepresentation.CSHARP_LEGACY``, you get the correct result:
+
+.. code-block:: python
+
+   UUID('00112233-4455-6677-8899-aabbccddeeff')
+
+{+driver-short+} uses the specified UUID representation to reorder the BSON bytes and
+load them correctly. ``CSHARP_LEGACY`` encodes native ``uuid.UUID`` objects
+to ``~bson.binary.Binary`` subtype 3 objects, while performing the same
+byte reordering as the legacy .NET/C# driver's UUID-to-BSON encoder.
+
+.. important::
+  
+   Use this UUID representation when reading UUIDs
+   written to MongoDB by a legacy .NET application (one that used the .NET/C# driver
+   without the ``STANDARD`` representation configured).
