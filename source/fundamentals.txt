@@ -11,8 +11,8 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
-   /fundamentals/authentication
    /fundamentals/data-formats
+   /fundamentals/authentication
    /fundamentals/csot
    /fundamentals/collations
    /fundamentals/databases-and-collections
@@ -36,4 +36,3 @@ Fundamentals
 - :ref:`pymongo-in-use-encryption`
 - :ref:`pymongo-periodic-executors`
 - :ref:`pymongo-type-hints`
-- :ref:`pymongo-uuids`

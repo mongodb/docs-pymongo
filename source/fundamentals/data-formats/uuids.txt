@@ -89,19 +89,19 @@ representation:
 
 Historically, {+driver-short+} serialized this UUID as follows:
 
-.. code-block:: python
+.. code-block:: none
 
    00112233-4455-6677-8899-aabbccddeeff
 
 The .NET/C# driver serialized this same UUID as follows:
 
-.. code-block:: python
+.. code-block:: none
 
    33221100-5544-7766-8899-aabbccddeeff
 
 Finally, the Java driver serialized this same UUID as follows:
 
-.. code-block:: python
+.. code-block:: none
 
    77665544-3322-1100-ffee-ddccbbaa9988
 
@@ -119,14 +119,14 @@ Consider the following situation:
   the ``example_db`` database. Assume that the canonical textual
   representation of the generated UUID is as follows:
 
-.. code-block:: python
+.. code-block:: none
 
    00112233-4455-6677-8899-aabbccddeeff
 
 * Application "P", written in Python, uses the following code to try to ``find`` the
   document written by application "C":
 
-.. code-block:: python
+.. code-block:: none
 
    from uuid import UUID
    collection = client.example_db.uuid_test
@@ -509,14 +509,14 @@ specified UUID representation to insert the example UUID
 value while using the ``PYTHON_LEGACY`` representation,
 you see a different UUID:
 
-.. code-block:: python
+.. code-block:: none
 
    UUID('77665544-3322-1100-ffee-ddccbbaa9988')
 
 However, if you explicitly set the representation to
 ``~bson.binary.UuidRepresentation.JAVA_LEGACY``, you get the correct result:
 
-.. code-block:: python
+.. code-block:: none
 
    UUID('00112233-4455-6677-8899-aabbccddeeff')
 
@@ -546,14 +546,14 @@ specified UUID representation to insert the example UUID
 ``00112233-4455-6677-8899-aabbccddeeff`` into MongoDB. If you try to read this
 value while using the ``PYTHON_LEGACY`` representation, you see a different UUID:
 
-.. code-block:: python
+.. code-block:: none
 
    UUID('33221100-5544-7766-8899-aabbccddeeff')
 
 However, if you explicitly set the representation to
 ``~bson.binary.UuidRepresentation.CSHARP_LEGACY``, you get the correct result:
 
-.. code-block:: python
+.. code-block:: none
 
    UUID('00112233-4455-6677-8899-aabbccddeeff')
 
