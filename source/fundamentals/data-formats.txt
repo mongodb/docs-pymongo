@@ -1,0 +1,12 @@
+.. _pymongo-data-formats:
+
+Data Formats
+============
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   /fundamentals/data-formats/uuids
+
+- :ref:`pymongo-uuids`
