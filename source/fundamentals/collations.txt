@@ -1,4 +1,4 @@
-.. uses collations.rst
+.. _pymongo-collations:
 
 Collations
 ==========
