@@ -12,6 +12,7 @@ Fundamentals
    :maxdepth: 1
 
    /fundamentals/data-formats
+   /fundamentals/aggregation
    /fundamentals/authentication
    /fundamentals/csot
    /fundamentals/collations
@@ -25,6 +26,7 @@ Fundamentals
    /fundamentals/type-hints
    /fundamentals/data-formats/uuids
 
+- :ref:`pymongo-aggregation`
 - :ref:`pymongo-auth`
 - :ref:`pymongo-csot`
 - :ref:`pymongo-collations`
