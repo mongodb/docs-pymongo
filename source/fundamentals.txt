@@ -13,6 +13,7 @@ Fundamentals
 
    /fundamentals/authentication
    /fundamentals/csot
+   /fundamentals/databases-and-collections
    /fundamentals/dates-and-times
    /fundamentals/enterprise-authentication
    /fundamentals/gridfs
@@ -23,6 +24,7 @@ Fundamentals
 
 - :ref:`pymongo-auth`
 - :ref:`pymongo-csot`
+- :ref:`pymongo-databases-collections`
 - :ref:`pymongo-dates-times`
 - :ref:`pymongo-enterprise-auth`
 - :ref:`pymongo-gridfs`
