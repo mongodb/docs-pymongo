@@ -54,8 +54,8 @@ If you nest calls to the ``~pymongo.timeout()`` method, the deadline of the inne
 call is capped by the deadline of the outer method call. The deadline can only be
 shortened, not extended.
 
-When execution enters a nested ``timeout`` block the outer ``timeout`` deadline is paused.
-When executes exits the nested ``timeout`` block, the previous ``timeout`` deadline resumes.
+When execution enters a nested ``timeout`` block, the outer ``timeout`` deadline is paused.
+When execution exits the nested ``timeout`` block, the previous ``timeout`` deadline resumes.
 The following example shows how nested calls to the ``timeout()`` method interact:
 
 .. code-block:: python
