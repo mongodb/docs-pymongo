@@ -84,9 +84,10 @@ blog post:
 
 .. todo link to table of Python <-> BSON types
 
-
 Configure Read Operations
 -------------------------
+
+This section describes how to configure read operations against MongoDB replica sets.
 
 Read Preferences
 ~~~~~~~~~~~~~~~~
