@@ -13,6 +13,7 @@ Fundamentals
 
    /fundamentals/authentication
    /fundamentals/databases-and-collections
+   /fundamentals/dates-and-times
    /fundamentals/enterprise-authentication
    /fundamentals/gridfs
    /fundamentals/indexes
@@ -22,6 +23,7 @@ Fundamentals
 
 - :ref:`pymongo-auth`
 - :ref:`pymongo-databases-collections`
+- :ref:`pymongo-dates-times`
 - :ref:`pymongo-enterprise-auth`
 - :ref:`pymongo-gridfs`
 - :ref:`pymongo-indexes`
