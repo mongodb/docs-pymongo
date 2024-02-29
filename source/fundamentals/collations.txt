@@ -3,6 +3,19 @@
 Collations
 ==========
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: order, sort, translation, accent, diacritic, compare
+
 Collations provide a set of rules
 to use when comparing strings that comply with the conventions of a particular
 language, such as Spanish or German. If no collation is specified, the server
