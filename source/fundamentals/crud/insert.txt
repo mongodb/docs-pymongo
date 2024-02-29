@@ -24,7 +24,7 @@ Insert One
 ----------
 
 To insert a document into a collection, use the
-the ``~pymongo.collection.Collection.insert_one()`` method:
+``~pymongo.collection.Collection.insert_one()`` method:
 
 .. code-block:: python
 
@@ -33,14 +33,14 @@ the ``~pymongo.collection.Collection.insert_one()`` method:
    >>> post_id
    ObjectId('...')
 
-When you insert a document, the driver automatically adds an ``_id`` field if
+When you insert a document, the driver automatically adds an ``_id`` field, if
 the document doesn't already contain one. The value
 of ``_id`` must be unique across the collection. The
 ``insert_one()`` method returns an instance of
 ``~pymongo.results.InsertOneResult``.
 
-When you insert the first document, the ``posts`` collection is
-automatically created on the server. You can verify this by listing all
+When you insert the first document, MongoDB automatically creates the
+``posts`` collection on the server. You can verify this by listing all
 of the collections in the database:
 
 .. code-block:: python
@@ -52,7 +52,7 @@ Bulk Inserts
 ------------
 
 In addition to inserting a single document, you can
-also perform *bulk insert* operations, by passing a list as the
+also perform bulk insert operations by passing a list as the
 first argument to the ``~pymongo.collection.Collection.insert_many()`` method.
 This sends a single command to the server to insert each document in the list.
 
