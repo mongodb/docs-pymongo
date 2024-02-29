@@ -56,8 +56,7 @@ The following example retrieves a document with a value of "Mike" in the
     'tags': ['mongodb', 'python', 'pymongo'],
     'text': 'My first blog post!'}
 
-The ``find_one()`` method does not return a result if your search query doesn't
-find a matching document:
+If the search query doesn't find a matching document, the ``find_one()`` method returns nothing:
 
 .. code-block:: python
 
@@ -87,7 +86,7 @@ The following example retrieves a document based on the ``_id``, which is an
 
 .. note::
   
-   An ``ObjectId`` is not the same as its string representation
+   An ``ObjectId`` is not the same as its string representation.
 
    .. code-block:: python
 
@@ -118,7 +117,7 @@ the ``~pymongo.collection.Collection.find()`` method. The
 ``find()`` method returns a ``~pymongo.cursor.Cursor`` instance, which allows you to iterate
 over all matching documents. 
 
-The following example, retrieves and iterates over every document in the
+The following example retrieves and iterates over every document in the
 ``posts`` collection:
 
 .. code-block:: python
