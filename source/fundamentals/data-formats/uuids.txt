@@ -254,24 +254,46 @@ Configuring the representation modifies {+driver-short+}'s behavior while
 encoding ``uuid.UUID`` objects to BSON and decoding
 binary subtype 3 and 4 fields from BSON.
 
-You can set the UUID representation for your application in the following ways:
+The following sections describe the ways in which you can set the UUID representation for
+your application.
 
-- At the ``MongoClient`` level, by using the ``uuidRepresentation`` URI option:
+uuidRepresentation URI Option
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. code-block:: python
+You can use the ``uuidRepresentation`` URI option to set the UUID representation at the
+``MongoClient`` level, as shown by the following code example:
 
-     client = MongoClient("mongodb://a:27017/?uuidRepresentation=standard")
+.. code-block:: python
 
-  The ``uuidRepresentation`` URI option supports the following values:
+   client = MongoClient("mongodb://a:27017/?uuidRepresentation=standard")
 
-  - ``unspecified``: :ref:`unspecified-representation-details` representation
-  - ``standard``: :ref:`standard-representation-details` representation
-  - ``pythonLegacy``: :ref:`python-legacy-representation-details` representation
-  - ``javaLegacy``: :ref:`java-legacy-representation-details` representation
-  - ``csharpLegacy``: :ref:`csharp-legacy-representation-details` representation
+The following table lists the supported values for the ``uuidRepresentation`` URI option:
+  
+.. list-table::
+   :header-rows: 1
+
+   * - Value
+     - UUID Representation
+
+   * - ``unspecified``
+     - :ref:`unspecified-representation-details`
+
+   * - ``standard``
+     - :ref:`standard-representation-details`
+
+   * - ``pythonLegacy``
+     - :ref:`python-legacy-representation-details`
+
+   * - ``javaLegacy``
+     - :ref:`java-legacy-representation-details`
+
+   * - ``csharpLegacy``
+     - :ref:`csharp-legacy-representation-details`
 
 - At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
    option:
+
+  Like in the following code:
 
   .. code-block:: python
 
