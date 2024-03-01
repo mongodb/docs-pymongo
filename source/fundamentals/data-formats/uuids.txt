@@ -260,30 +260,32 @@ You can set the UUID representation for your application in the following ways:
 
   .. code-block:: python
 
-     client = MongoClient("mongodb://a:27107/?uuidRepresentation=standard")
+     client = MongoClient("mongodb://a:27017/?uuidRepresentation=standard")
 
-The following table describes the available values for the ``uuidRepresentation`` option:
+.. tip::
+   
+   The following table describes the available values for the ``uuidRepresentation`` option:
 
-.. list-table::
-     :header-rows: 1
+   .. list-table::
+      :header-rows: 1
 
-     * - Value
-       - UUID Representation
+      * - Value
+        - UUID Representation
 
-     * - ``unspecified``
-       - :ref:`unspecified-representation-details`
+      * - ``unspecified``
+        - :ref:`unspecified-representation-details`
 
-     * - ``standard``
-       - :ref:`standard-representation-details`
+      * - ``standard``
+        - :ref:`standard-representation-details`
 
-     * - ``pythonLegacy``
-       - :ref:`python-legacy-representation-details`
+      * - ``pythonLegacy``
+        - :ref:`python-legacy-representation-details`
 
-     * - ``javaLegacy``
-       - :ref:`java-legacy-representation-details`
+      * - ``javaLegacy``
+        - :ref:`java-legacy-representation-details`
 
-     * - ``csharpLegacy``
-       - :ref:`csharp-legacy-representation-details`
+      * - ``csharpLegacy``
+        - :ref:`csharp-legacy-representation-details`
 
 - At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
    option:
@@ -317,6 +319,7 @@ The following table describes the differences between the available UUID represe
 
 .. list-table::
    :header-rows: 1
+   :widths: 30 10 20 20 20
 
    * - UUID Representation
      - Default?
