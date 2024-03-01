@@ -60,7 +60,7 @@ to save an instance of ``Decimal`` with PyMongo results in a
 .. _custom-type-type-codec:
 
 The ``~bson.codec_options.TypeCodec`` Class
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 3.8
 
@@ -108,7 +108,7 @@ Use the ``TypeCodec`` base class to define your codec:
 .. _custom-type-type-registry:
 
 The ``~bson.codec_options.TypeRegistry`` Class
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. versionadded:: 3.8
 
@@ -163,7 +163,7 @@ the database:
    {'_id': ObjectId('...'), 'num': Decimal128('45.321')}
 
 Encoding Subtypes
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~
 
 {+driver-short+} can also encode a type that subclasses
 ``Decimal``. It does this automatically for types that inherit from
@@ -228,7 +228,7 @@ these values being decoded as ``Decimal`` (and not ``DecimalInt``).
 .. _decoding-binary-types:
 
 Decoding ``~bson.binary.Binary`` Types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The decoding treatment of ``~bson.binary.Binary`` types having
 ``subtype = 0`` by the ``bson`` module varies slightly depending on the
@@ -321,7 +321,7 @@ You can now encode instances of ``~decimal.Decimal``:
    the type encoder prevails.
 
 Encoding Unknown Types
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 This example describes how to use a fallback encoder to save
 arbitrary objects to the database. It uses the standard library's
