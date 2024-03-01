@@ -41,11 +41,11 @@ First, create a new database:
    >>> db = client.custom_type_example
 
 
-This example uses the ``~decimal.Decimal`` type from Python's standard library. Since the
-BSON library's ``~bson.decimal128.Decimal128`` type--that implements
-the ``IEEE 754 decimal128 decimal-based floating-point`` numbering format--is
-distinct from Python's built-in ``~decimal.Decimal`` type, attempting
-to save an instance of ``Decimal`` with PyMongo, results in a
+This example uses the ``~decimal.Decimal`` type from Python's standard library. The
+BSON library's ``~bson.decimal128.Decimal128`` type, which implements
+the IEEE 754 decimal128 decimal-based floating-point numbering format, is
+distinct from Python's built-in ``~decimal.Decimal`` type. Trying
+to save an instance of ``Decimal`` with PyMongo results in a
 ``~bson.errors.InvalidDocument`` exception.
 
 .. code-block:: python
@@ -228,7 +228,7 @@ these values being decoded as ``Decimal`` (and not ``DecimalInt``).
 .. _decoding-binary-types:
 
 Decoding ``~bson.binary.Binary`` Types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The decoding treatment of ``~bson.binary.Binary`` types having
 ``subtype = 0`` by the ``bson`` module varies slightly depending on the
@@ -261,7 +261,7 @@ instance:
    bson.binary.Binary
 
 As a consequence of this disparity, you must set the ``bson_type`` attribute
-on you ``~bson.codec_options.TypeDecoder`` classes differently,
+on your ``~bson.codec_options.TypeDecoder`` classes differently,
 depending on the python version in use.
 
 .. note::
@@ -314,7 +314,7 @@ You can now encode instances of ``~decimal.Decimal``:
 
 .. note::
 
-   Invoke fallback encoders *after* attempts to encode the particular value
+   {+driver-short+} invokes fallback encoders *after* attempts to encode the particular value
    with standard BSON encoders and any configured type encoders have failed.
    Therefore, in a type registry configured with a type encoder and fallback
    encoder that both target the same custom type, the behavior specified in
@@ -326,7 +326,7 @@ Encoding Unknown Types
 This example describes how to use a fallback encoder to save
 arbitrary objects to the database. It uses the standard library's
 ``pickle`` module to serialize the unknown types, and works only for types that
-are pickleable.
+are picklable.
 
 First, define some arbitrary custom types:
 
@@ -386,7 +386,7 @@ Finally, create a ``CodecOptions`` instance:
        )
    )
 
-You can now round trip your custom objects to MongoDB:
+You can now round-trip your custom objects to MongoDB:
 
 .. code-block:: python
 
@@ -417,4 +417,4 @@ limitations:
 - The ``~pymongo.database.Database.command`` method does not apply the
   user's TypeDecoders while decoding the command response document.
 - ``gridfs`` does not apply custom type encoding or decoding to any
-  documents received from, or returned to the user.
+  documents received from, or returned to, the user.
