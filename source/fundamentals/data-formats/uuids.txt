@@ -114,19 +114,19 @@ Scenario 1: Applications Share a MongoDB Deployment
 
 Consider the following situation:
 
-* Application "C", written in C#, generates a UUID and uses it as the ``_id`` value
+- Application "C", written in C#, generates a UUID and uses it as the ``_id`` value
   of a document that it inserts into the ``uuid_test`` collection of
   the ``example_db`` database. Assume that the canonical textual
   representation of the generated UUID is as follows:
 
-.. code-block:: none
+  .. code-block:: none
 
    00112233-4455-6677-8899-aabbccddeeff
 
-* Application "P", written in Python, uses the following code to try to ``find`` the
+- Application "P", written in Python, uses the following code to try to ``find`` the
   document written by application "C":
 
-.. code-block:: python
+  .. code-block:: python
 
    from uuid import UUID
    collection = client.example_db.uuid_test
@@ -262,9 +262,9 @@ You can set the UUID representation for your application in the following ways:
 
      client = MongoClient("mongodb://a:27107/?uuidRepresentation=standard")
 
-  The following table describes the available values for the ``uuidRepresentation`` option:
+The following table describes the available values for the ``uuidRepresentation`` option:
 
-  .. list-table::
+.. list-table::
      :header-rows: 1
 
      * - Value
