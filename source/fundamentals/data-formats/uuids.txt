@@ -291,7 +291,7 @@ The following table lists the supported values for the ``uuidRepresentation`` UR
      - :ref:`csharp-legacy-representation-details`
 
 - At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
-   option:
+  option:
 
   Like in the following code:
 
@@ -301,7 +301,7 @@ The following table lists the supported values for the ``uuidRepresentation`` UR
      client = MongoClient(uuidRepresentation=UuidRepresentation.STANDARD)
 
 - At the database or collection level, by supplying a suitable
-   ``~bson.codec_options.CodecOptions`` instance:
+  ``~bson.codec_options.CodecOptions`` instance:
 
   .. code-block:: python
 
