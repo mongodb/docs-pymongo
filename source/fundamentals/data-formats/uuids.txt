@@ -17,7 +17,7 @@ UUIDs
    :keywords: compatibility, id, legacy
 
 {+driver-short+} includes support for dealing with UUID types.
-The followingn example shows how to store native ``uuid.UUID`` objects
+The following example shows how to store native ``uuid.UUID`` objects
 to MongoDB and retrieve them as native ``uuid.UUID`` objects:
 
 .. code-block:: python
@@ -126,7 +126,7 @@ Consider the following situation:
 * Application "P", written in Python, uses the following code to try to ``find`` the
   document written by application "C":
 
-.. code-block:: none
+.. code-block:: python
 
    from uuid import UUID
    collection = client.example_db.uuid_test
@@ -248,7 +248,7 @@ representation, only the ``~bson.binary.Binary`` subtype is changed.
 Configuring a UUID Representation
 ---------------------------------
 
-Users can work around the problems described above by configuring their
+You can work around the problems described above by configuring your
 applications with the appropriate ``~bson.binary.UuidRepresentation``.
 Configuring the representation modifies {+driver-short+}'s behavior while
 encoding ``uuid.UUID`` objects to BSON and decoding
@@ -256,11 +256,11 @@ binary subtype 3 and 4 fields from BSON.
 
 You can set the UUID representation for your application in the following ways:
 
-#. At the ``MongoClient`` level, by using the ``uuidRepresentation`` URI option:
+- At the ``MongoClient`` level, by using the ``uuidRepresentation`` URI option:
 
 .. code-block:: python
 
-   client = MongoClient("mongodb://a:27107/?uuidRepresentation=standard")
+     client = MongoClient("mongodb://a:27107/?uuidRepresentation=standard")
 
 The following table describes the available values for the ``uuidRepresentation`` option:
 
@@ -285,18 +285,18 @@ The following table describes the available values for the ``uuidRepresentation`
    * - ``csharpLegacy``
      - :ref:`csharp-legacy-representation-details`
 
-#. At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
+- At the ``MongoClient`` level, by using the ``uuidRepresentation`` kwarg
    option:
 
-.. code-block:: python
+  .. code-block:: python
 
-   from bson.binary import UuidRepresentation
-   client = MongoClient(uuidRepresentation=UuidRepresentation.STANDARD)
+     from bson.binary import UuidRepresentation
+     client = MongoClient(uuidRepresentation=UuidRepresentation.STANDARD)
 
-#. At the database or collection level, by supplying a suitable
+- At the database or collection level, by supplying a suitable
    ``~bson.codec_options.CodecOptions`` instance:
 
-.. code-block:: python
+  .. code-block:: python
 
    from bson.codec_options import CodecOptions
    csharp_opts = CodecOptions(uuid_representation=UuidRepresentation.CSHARP_LEGACY)
