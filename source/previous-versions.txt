@@ -1,5 +1,6 @@
 .. _pymongo-previous-versions:
 
+=================
 Previous Versions
 =================
 
