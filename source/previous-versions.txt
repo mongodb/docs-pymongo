@@ -3,6 +3,13 @@
 Previous Versions
 =================
 
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: old, backwards, downgrade, upgrade
+
 The following links direct you to documentation for previous versions of {+driver-short+}.
 
 - `Version 4.6 <https://pymongo.readthedocs.io/en/4.6.1/>`__
