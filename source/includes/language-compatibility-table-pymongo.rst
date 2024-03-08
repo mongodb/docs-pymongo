@@ -257,6 +257,4 @@ Python 2
 
 .. note::
 
-   Jython 2.5 is a Python 2.5-compatible alternative interpreter.
-   
    PyPy is a Python 2.7-compatible alternative interpreter.
