@@ -198,5 +198,5 @@ Python 3
 Python 2
 ~~~~~~~~
 
-{+driver-short+} versions 3.7-3.12 are compatible with Python 2.7 and PyPy, a Python 2.7-
+{+driver-short+} versions 3.7 through 3.12 are compatible with Python 2.7 and PyPy, a Python 2.7-
 compatible alternative interpreter.
