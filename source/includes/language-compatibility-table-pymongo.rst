@@ -397,6 +397,7 @@ Python 2
    :header-rows: 1
    :stub-columns: 1
    :class: compatibility-large
+   :widths: 20 20 20 20 20
 
    * - PyMongo Driver Version
      - Python 2.7, PyPy
