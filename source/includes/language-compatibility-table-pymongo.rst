@@ -186,18 +186,6 @@ Python 3
      - ✓
      - ✓
 
-   * - 3.6
-     -
-     -
-     -
-     -
-     -
-     -
-     - ✓
-     - ✓
-     - ✓
-     - ✓
-
 .. [#ssl-4.0-issue] Versions of Python 3.10 and later are not compatible with
    TLS/SSL for versions of MongoDB 4.0 and earlier. For more information, see the
    :ref:`TLS guide <pymongo-python-3.10-tls>`.
@@ -210,51 +198,5 @@ Python 3
 Python 2
 ~~~~~~~~
 
-.. list-table::
-   :header-rows: 1
-   :stub-columns: 1
-   :class: compatibility-large
-
-   * - PyMongo Driver Version
-     - Python 2.7, PyPy
-     - Python 2.6
-
-   * - 4.0 [#python-2-compat]_
-     -
-     -
-
-   * - 3.12
-     - ✓
-     -
-
-   * - 3.11
-     - ✓
-     -
-
-   * - 3.10
-     - ✓
-     -
-
-   * - 3.9
-     - ✓
-     -
-
-   * - 3.8
-     - ✓
-     -
-
-   * - 3.7
-     - ✓
-     - ✓
-
-
-   * - 3.6
-     - ✓
-     - ✓
-
-.. [#python-2-compat] Versions of PyMongo 4.0 and later are not compatible
-   with Python 2
-
-.. note::
-
-   PyPy is a Python 2.7-compatible alternative interpreter.
+{+driver-short+} versions 3.7-3.12 are compatible with Python 2.7 and PyPy, a Python 2.7-
+compatible alternative interpreter.
