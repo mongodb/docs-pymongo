@@ -399,11 +399,13 @@ Python 2
    :class: compatibility-large
 
    * - PyMongo Driver Version
-     - Python 2.7,
-       PyPy
+     - | Python 2.7,
+       |
+       | PyPy
      - Python 2.6
-     - Python 2.5,
-       Jython 2.5
+     - | Python 2.5,
+       | 
+       | Jython 2.5
      - Python 2.4
 
    * - 4.0 [#python-2-compat]_
