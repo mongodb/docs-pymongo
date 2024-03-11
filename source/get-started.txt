@@ -1,0 +1,28 @@
+.. _pymongo-get-started:
+
+===========
+Get Started
+===========
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :description: Learn how to create an app to connect to MongoDB deployment by using the PyMongo driver.
+   :keywords: quick start, tutorial
+
+**This is the landing page for getting started with PyMongo.**
+
+This guide walks you through the following steps:
+
+- Setting up an application and downloading and installing {+driver-short+} and its dependencies
+- Creating a MongoDB deployment
+- Connecting to your MongoDB deployment with you application
+- Running a query with {+driver-short+}
