@@ -4,7 +4,20 @@
 Issues & Help
 =============
 
-We have a vibrant community of {+driver-short+}
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: suggestion, github, python
+
+We're glad to have such a vibrant community of {+driver-short+}
 users. We recommend seeking support for general
 questions through the `MongoDB Community Forums
 <https://www.mongodb.com/community/forums>`__.
