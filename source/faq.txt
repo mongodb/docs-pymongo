@@ -151,8 +151,8 @@ sockets only when the process completes.
 For more information, see the :manual:`<administration/connection-pool-overview/>`
 in the MongoDB Server documentation.
 
-Why Does {+driver-short+} Add an _id Field to All of My Documents?
----------------------------------------------------------
+Why Does {+driver-short+} Add an _id Field to All My Documents?
+------------------------------------------------------
 
 When you use the ``Collection.insert_one()`` method,
 ``Collection.insert_many()`` method, or
@@ -176,10 +176,10 @@ value is an instance of ``ObjectId``.
 {+driver-short+} adds an ``_id`` field in this manner for a few reasons:
 
 - All MongoDB documents must have an ``_id`` field.
-- If {+driver-short+} inserted a document without an ``_id`` field, MongoDB would add one
-  itself, but it wouldn't report the value back to {+driver-short+} for your application
+- If {+driver-short+} inserts a document without an ``_id`` field, MongoDB adds one
+  itself, but doesn't report the value back to {+driver-short+} for your application
   to use.
-- Copying the document before adding the ``_id`` field would be
+- Copying the document before adding the ``_id`` field is
   prohibitively expensive for most high-write-volume applications.
 
 .. tip::
@@ -278,7 +278,7 @@ module, a tool for using Python's ``json`` module with BSON documents and
 BSON-to-MongoDB-Extended-JSON converter, built on top of
 `libbson <https://github.com/mongodb/libbson>`__. python-bsonjs doesn't
 depend on {+driver-short+} and might offer a performance improvement over
-``json_util`` in some cases.
+``json_util`` in certain cases.
 
 .. tip::
    
