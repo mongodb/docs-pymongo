@@ -35,7 +35,7 @@ Sample Data
 
 The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-quickstart>`.
+free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-get-started>`.
 
 .. _pymongo-retrieve-find:
 
@@ -69,7 +69,7 @@ results as a Python dictionary. If no documents match the query filter, the meth
 
 The following examples use the ``find_one()`` method to find the first document where
 the ``"cuisine"`` field has the value ``"Bakery"``. Select the corresponding tab to see
-an example in the Python shell or a ``.py`` file. 
+an example in a ``.py`` file or the Python shell. 
 
 .. tabs::
 
@@ -110,7 +110,7 @@ method that specifies the criteria of the documents you want to retrieve.
 
 The following examples use the ``find()`` method to find all documents where
 the ``"cuisine"`` field has the value ``"Spanish"``. Select the corresponding tab to see
-an example in the Python shell or a ``.py`` file. 
+an example in a ``.py`` file or the Python shell.
 
 .. tabs::
 
@@ -148,6 +148,7 @@ the following examples:
 
          cursor = sample_restaurants.restaurants.find({"cuisine": "Spanish"})
          for restaurant in cursor:
+         ...
 
    .. tab:: Shell
       :tabid: iterate-shell
@@ -156,6 +157,7 @@ the following examples:
          :copyable: true
 
          >>> for restaurant in sample_restaurants.restaurants.find({"cuisine": "Spanish"}):
+         ...
 
 .. TODO: To see a full example of using the ``Find()`` method to find multiple documents,
    see :ref:`pymongo-retrieve-additional-information`.
@@ -202,6 +204,8 @@ named arguments to them. The following table describes the commonly used argumen
    * - ``max_time_ms`` 
      - | The maximum execution time on the server for this operation. If this time is
          exceeded, {+driver-short+} aborts the operation and raises an ``ExecutionTimeout``.
+
+.. TODO: code examples of using these options
 
 For a full list of available arguments, see the
 `API documentation <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.find>`__
