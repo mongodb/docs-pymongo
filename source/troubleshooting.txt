@@ -291,7 +291,7 @@ When you find the preceding subdocument, query results are represented with
 The subdocument's actual storage layout is now visible: "b" is before "a".
 
 Because a Python dictionary's key order is not defined, you cannot predict how it will be
-serialized *to* BSON. But MongoDB considers subdocuments equal only if their
+serialized to BSON. However, MongoDB considers subdocuments equal only if their
 keys have the same order. If you use a Python dictionary to query on a subdocument, it may
 not match:
 
@@ -345,8 +345,8 @@ Why Do I Get OverflowError When Decoding Dates Stored by Another Language's Driv
 {+driver-short+} decodes BSON ``datetime`` values to instances of Python's
 ``datetime.datetime`` class. Instances of ``datetime.datetime`` are
 limited to years between ``datetime.MINYEAR`` (usually 1) and
-``datetime.MAXYEAR`` (usually 9999). Some MongoDB drivers (for example, the PHP
-driver) can store BSON datetimes with year values far outside those supported
+``datetime.MAXYEAR`` (usually 9999). Some MongoDB drivers
+can store BSON datetimes with year values far outside those supported
 by ``datetime.datetime``.
 
 There are a few ways to work around this issue. Starting with {+driver-short+} 4.3,
@@ -380,8 +380,9 @@ objects as before:
    {'_id': ObjectId('...'), 'x': datetime.datetime(1970, 1, 1, 0, 0)}
    {'_id': ObjectId('...'), 'x': DatetimeMS(4611686018427387904)}
 
-For other options, see the
-``~bson.codec_options.DatetimeConversion`` API.
+For other options, see the API documentation for the
+`DatetimeConversion <{+api-root+}bson/codec_options.html#bson.codec_options.DatetimeConversion>`__
+class.
 
 Another option that does not involve setting ``datetime_conversion`` is to
 filter out document values outside of the range supported by
@@ -393,8 +394,7 @@ filter out document values outside of the range supported by
    >>> coll = client.test.dates
    >>> cur = coll.find({'dt': {'$gte': datetime.min, '$lte': datetime.max}})
 
-Another option, assuming you don't need the ``datetime`` field, is to filter out
-just that field:
+If you don't need the value of ``datetime``, you can filter out just that field: 
 
 .. code-block:: python
 

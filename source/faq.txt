@@ -40,7 +40,7 @@ Can I Use {+driver-short+} with Multiprocessing?
 ---------------------------------------
 
 Yes. However, on Unix systems, the multiprocessing module spawns processes by using
-the ``fork()`` method. This carries the same risks described in the previous question.
+the ``fork()`` method. This carries the same risks described in :ref:`<pymongo-fork-safe>`
 
 To use multiprocessing with {+driver-short+}, write code similar to the following example:
 
@@ -62,7 +62,7 @@ To use multiprocessing with {+driver-short+}, write code similar to the followin
 Can {+driver-short+} Load the Results of a Query as a Pandas DataFrame?
 -----------------------------------------------------------------------
 
-You can use the `PyMongoArrow <https://mongo-arrow.readthedocs.io/en/pymongoarrow-0.1.1/>`__
+You can use the `PyMongoArrow <https://www.mongodb.com/docs/languages/python/pymongo-arrow-driver/current/>`__
 library to work with numerical or columnar data. PyMongoArrow lets you 
 load MongoDB query result-sets as
 `Pandas DataFrames <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`__,
@@ -213,33 +213,26 @@ Why Does {+driver-short+} Convert ``9.99`` to ``9.9900000000000002``?
 
 MongoDB represents ``9.99`` as an IEEE floating-point value, which can't
 represent the value precisely. This is also true in some versions of
-Python, as shown in the following example:
-
-.. code-block:: python
-
-   >>> 9.99
-   9.9900000000000002
-
-In this regard, {+driver-short+} behaves the same way as
+Python. In this regard, {+driver-short+} behaves the same way as
 the JavaScript shell, all other MongoDB drivers, and the Python language itself.
 
-Does MongoDB Support Attribute-style Access for Documents?
+Does {+driver-short+} Support Attribute-style Access for Documents?
 ----------------------------------------------------------
 
-No. We've decided not to implement this feature, for the following reasons:
+No. {+driver-short+} doesn't implement this feature, for the following reasons:
 
-1. It would pollute the attribute namespace for documents and could
+1. Adding attributes pollutes the attribute namespace for documents and could
    lead to subtle bugs or confusing errors when using a key with the
    same name as a dictionary method.
 
-#. We use SON objects instead of regular
+#. {+driver-short+} uses SON objects instead of regular
    dictionaries only to maintain key ordering, because the server
    requires this for certain operations. Adding this feature would
    complicate the ``SON`` class and could break backwards compatibility
-   if we ever revert to using dictionaries.
+   if {+driver-short+} ever reverts to using dictionaries.
 
 #. Documents behave just like dictionaries, which makes them relatively simple
-   for new {+driver-short+} users to understand. If we change documents' behavior, it
+   for new {+driver-short+} users to understand. Changing the behavior of documents
    adds a barrier to entry for these users.
 
 For more information, see the relevant
@@ -330,7 +323,7 @@ values with subtype 0. In Python 2, these values are decoded to instances of ``B
 with subtype 0. In Python 3, they're decoded into instances of ``bytes``. 
 
 The following code examples use the ``json_util`` module to decode a JSON binary value
-with subtype 0. the byte string is decoded to ``Binary``.
+with subtype 0. In Python 2, the byte string is decoded to ``Binary``.
 In Python 3, the byte string is decoded back to ``bytes``.
 
 .. tabs::
@@ -380,7 +373,8 @@ unpickle it in Python 3.7:
    ObjectId('4f919ba2fba5225b84000000')
 
 If you pickled an ``ObjectID`` in Python 2, and want to unpickle it in Python 3,
-you must pass the ``protocol <= 2`` option to the ``pickle.dumps()`` method.
+you must pass the ``protocol`` argument with a value of ``2`` or less to the
+``pickle.dumps()`` method.
 The following code example shows how to pickle an ``ObjectId`` in Python 3.7, and then
 unpickle it in Python 2.7:
 

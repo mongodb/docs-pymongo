@@ -202,7 +202,7 @@ example:
 
 .. _pymongo-mod_wsgi:
 
-mod-wsgi
+mod_wsgi
 ~~~~~~~~
 
 The `mod_wsgi <https://github.com/GrahamDumpleton/mod_wsgi/>`__ package provides an
