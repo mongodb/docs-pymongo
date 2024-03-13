@@ -50,7 +50,7 @@ Download and Install
 
          $ python3 -m pip install pymongo=={+patch-version-number+}
 
-After you complete these steps, you have Python3 and pip installed 
+After you complete these steps, you have Python3, pip, dnspython, 
 and a new project directory with the driver dependencies installed.
 
 .. include:: /includes/get-started/quickstart-troubleshoot.rst

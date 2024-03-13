@@ -11,9 +11,9 @@ Connect to MongoDB
       
       Copy and paste the following code into the ``quickstart.py`` file in your application:
       
-      .. code-block:: python
-
-         .. TODO: Get started app
+      .. literalinclude:: /includes/get-started/connect-and-query.py
+         :language: python
+         :copyable:
 
    .. step:: Assign the Connection String
 
