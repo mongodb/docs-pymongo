@@ -17,7 +17,7 @@ Connect to MongoDB
 
    .. step:: Assign the Connection String
 
-      Replace the ``<connection string uri>`` placeholder with the 
+      Replace the ``<connection string URI>`` placeholder with the 
       connection string that you copied from the :ref:`pymongo-get-started-connection-string`
       step of this guide.
 
@@ -25,7 +25,7 @@ Connect to MongoDB
 
       In your shell, run the following command to start this application:
       
-      .. code-block:: none
+      .. code-block:: sh
 
          python3 quickstart.py
 

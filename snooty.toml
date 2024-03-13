@@ -1,6 +1,7 @@
 name = "pymongo"
 title = "PyMongo"
 toc_landing_pages = [
+    "/get-started"
 ]
 
 intersphinx = [
