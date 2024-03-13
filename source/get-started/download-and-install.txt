@@ -12,11 +12,11 @@ Download and Install
       Ensure you have Python3 version 3.7 or later,
       pip, and dnspython installed in your development environment.
 
-      For information on how to install pip, see the
+      For information about how to install pip, see the
       `pip Installation guide <https://pip.pypa.io/en/stable/installation/>`__.
 
       Support for ``mongodb+srv://`` connection URIs requires dnspython.
-      For information on how to install dnspython, see the `dnspython
+      For information about how to install dnspython, see the `dnspython
       PyPi project page <https://pypi.org/project/dnspython/>`__.
 
    .. step:: Create a Project Directory
@@ -33,7 +33,7 @@ Download and Install
 
       .. code-block:: bash
 
-         cd pymongo_quickstart
+         cd pymongo-quickstart
 
       Run the following command to create a file to contain your application:
 

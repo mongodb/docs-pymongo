@@ -34,7 +34,7 @@ This guide shows you how to create an application that uses
 you prefer to connect to MongoDB using a different driver or programming
 language, see our :driver:`list of official drivers <>`.
 
-{+driver-short+} is a library of functions that you can use to connect
+{+driver-short+} is a library that you can use to connect
 to and communicate with MongoDB.
 
 MongoDB Atlas is a fully managed cloud database service that hosts your

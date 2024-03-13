@@ -32,13 +32,13 @@ when applicable, and connection options.
          :alt: The connect button in the clusters section of the Atlas UI
 
       Proceed to the :guilabel:`Connect your application` section and select
-      "Node.js" from the :guilabel:`Driver` selection menu and the version
+      "Python" from the :guilabel:`Driver` selection menu and the version
       that best matches the version you installed from the :guilabel:`Version`
       selection menu.
 
       Select the :guilabel:`Password (SCRAM)` authentication mechanism.
       
-      Deselect the :guilabel:`Include full driver code example` to view
+      Deselect the :guilabel:`Include full driver code example` option to view
       the connection string.
 
    .. step:: Copy your Connection String
