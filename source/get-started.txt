@@ -29,20 +29,20 @@ Get Started
 Overview
 --------
 
-This guide shows you how to create an application that uses
-{+driver-short+} to connect to a MongoDB cluster hosted on MongoDB Atlas. If
-you prefer to connect to MongoDB using a different driver or programming
-language, see our :driver:`list of official drivers <>`.
+{+driver-short+} is a package that you can use to connect
+to and communicate with MongoDB. This guide shows you how to create an
+application that uses {+driver-short+} to connect to a MongoDB cluster hosted on
+MongoDB Atlas.
 
-{+driver-short+} is a library that you can use to connect
-to and communicate with MongoDB.
+.. tip:: 
 
-MongoDB Atlas is a fully managed cloud database service that hosts your
-MongoDB deployments. You can create your own free (no credit card
-required) MongoDB Atlas deployment by following the steps in this guide.
+   MongoDB Atlas is a fully managed cloud database service that hosts your MongoDB
+   deployments. You can create your own free (no credit card required) MongoDB Atlas 
+   deployment by following the steps in this guide.
 
-Follow the steps in this guide to connect a sample Python application to
-a MongoDB Atlas deployment.
+Follow this guide to connect a sample Python application to a MongoDB Atlas
+deployment. If you prefer to connect to MongoDB using a different driver or
+programming language, see our :driver:`list of official drivers <>`.
 
 .. button:: Next: Download and Install
    :uri: /get-started/download-and-install/

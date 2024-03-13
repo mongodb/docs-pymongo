@@ -9,15 +9,17 @@ Download and Install
 
    .. step:: Install Dependencies
 
-      Ensure you have Python3 version 3.7 or later,
-      pip, and dnspython installed in your development environment.
-
-      For information about how to install pip, see the
-      `pip Installation guide <https://pip.pypa.io/en/stable/installation/>`__.
-
-      Support for ``mongodb+srv://`` connection URIs requires dnspython.
-      For information about how to install dnspython, see the `dnspython
-      PyPi project page <https://pypi.org/project/dnspython/>`__.
+      Ensure you have the following dependencies installed
+      in your development environment:
+      
+      - **Python3 version 3.7 or later.** To learn more about installing Python, see
+        `Download Python. <https://www.python.org/downloads/>`__
+      - **pip.** For information about how to install pip, see
+        `Installation <https://pip.pypa.io/en/stable/installation/>`__ in the pip
+        documentation.
+      - **dnspython.** Support for ``mongodb+srv://`` connection URIs requires dnspython.
+        For information about how to install dnspython, see the `dnspython 
+        <https://pypi.org/project/dnspython/>`__ PyPi page.
 
    .. step:: Create a Project Directory
 
@@ -50,8 +52,8 @@ Download and Install
 
          $ python3 -m pip install pymongo=={+patch-version-number+}
 
-After you complete these steps, you have Python3, pip, dnspython, 
-and a new project directory with the driver dependencies installed.
+After you complete these steps, you have a new project directory
+and the driver dependencies installed.
 
 .. include:: /includes/get-started/quickstart-troubleshoot.rst
 
