@@ -22,12 +22,12 @@ Overview
 
 In this guide, you can learn how to use {+driver-long+} to retrieve
 data from a MongoDB collection by using read operations. You can call the
-``find()`` method to retrieve documents that match a set of criteria.
+``find()`` or ``find_one()`` method to retrieve documents that match a set of criteria.
 
 .. TODO: .. tip:: Interactive Lab
    You can complete a short interactive lesson that demonstrates how to
    retrieve data by using the ``Find()`` method in an in-browser coding
-   experience. To learn more, see the :ref:`csharp-retrieve-instruqt-lab`
+   experience. To learn more, see the :ref:`pymongo-retrieve-instruqt-lab`
    section of this guide.
 
 Sample Data
@@ -61,21 +61,17 @@ If more than one document matches the query
 filter, this method returns the *first* matching document from the retrieved
 results as a Python dictionary. If no documents match the query filter, the method returns
 ``None``.
-It is useful when you know there is only one matching document, or are only interested in the first match.  
+
+.. tip::
+   
+   The ``find_one()`` method is useful when you know there's only one matching document,
+   or you're only interested in the first match.  
 
 The following examples use the ``find_one()`` method to find the first document where
 the ``"cuisine"`` field has the value ``"Bakery"``. Select the corresponding tab to see
 an example in the Python shell or a ``.py`` file. 
 
 .. tabs::
-
-   .. tab:: Shell
-      :tabid: find-one-shell
-
-      .. code-block:: python
-         :copyable: true
-
-         >>> sample_restaurants.restaurants.find_one({"cuisine": "Bakery"})
 
    .. tab:: File
       :tabid: find-one-file
@@ -85,6 +81,14 @@ an example in the Python shell or a ``.py`` file.
 
          restaurant = sample_restaurants.restaurants.find_one({"cuisine": "Bakery"})
 
+   .. tab:: Shell
+      :tabid: find-one-shell
+
+      .. code-block:: python
+         :copyable: true
+
+         >>> sample_restaurants.restaurants.find_one({"cuisine": "Bakery"})
+   
 .. tip:: Sort Order
 
    The ``find_one()`` method returns the first document in 
@@ -104,16 +108,19 @@ Find Multiple Documents
 To find multiple documents in a collection, pass a query filter to the ``find()``
 method that specifies the criteria of the documents you want to retrieve.
 
-You can use a **cursor** to iterate over the documents returned by the ``find()``
-method. A cursor is a mechanism that allows an application to iterate over database 
-results while holding only a subset of them in memory at a given time. Cursors
-are useful when your ``find()`` method returns a large amount of documents.
-
 The following examples use the ``find()`` method to find all documents where
 the ``"cuisine"`` field has the value ``"Spanish"``. Select the corresponding tab to see
 an example in the Python shell or a ``.py`` file. 
 
 .. tabs::
+
+   .. tab:: File
+      :tabid: find-multiple-file
+
+      .. code-block:: python
+         :copyable: true
+
+         cursor = sample_restaurants.restaurants.find({"cuisine": "Spanish"})
 
    .. tab:: Shell
       :tabid: find-multiple-shell
@@ -123,18 +130,24 @@ an example in the Python shell or a ``.py`` file.
 
          >>> sample_restaurants.restaurants.find({"cuisine": "Spanish"})
 
-   .. tab:: File
-      :tabid: find-multiple-file
-
-      .. code-block:: python
-         :copyable: true
-
-         cursor = sample_restaurants.restaurants.find({"hello": "Spanish"})
+You can use a **cursor** to iterate over the documents returned by the ``find()``
+method. A cursor is a mechanism that allows an application to iterate over database 
+results while holding only a subset of them in memory at a given time. Cursors
+are useful when your ``find()`` method returns a large amount of documents.
 
 You can iterate over the documents in a cursor by using a ``for-in`` loop, as shown in
 the following examples:
 
 .. tabs::
+
+   .. tab:: File
+      :tabid: iterate-file
+
+      .. code-block:: python
+         :copyable: true
+
+         cursor = sample_restaurants.restaurants.find({"cuisine": "Spanish"})
+         for restaurant in cursor:
 
    .. tab:: Shell
       :tabid: iterate-shell
@@ -143,15 +156,6 @@ the following examples:
          :copyable: true
 
          >>> for restaurant in sample_restaurants.restaurants.find({"cuisine": "Spanish"}):
-
-   .. tab:: File
-      :tabid: iterate-file
-
-      .. code-block:: python
-         :copyable: true
-
-         cursor = sample_restaurants.restaurants.find({"hello": "Spanish"})
-         for restaurant in cursor:
 
 .. TODO: To see a full example of using the ``Find()`` method to find multiple documents,
    see :ref:`pymongo-retrieve-additional-information`.
@@ -202,8 +206,6 @@ named arguments to them. The following table describes the commonly used argumen
 For a full list of available arguments, see the
 `API documentation <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.find>`__
 for the  ``find() method``.
-
-.. TODO: .. instruqt lab
 
 .. _pymongo-retrieve-additional-information:
 
