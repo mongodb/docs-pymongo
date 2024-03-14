@@ -60,8 +60,8 @@ MongoDB allows you to manage this field in two ways:
   ``_id`` value for a document, the driver populates the field
   with an ``ObjectId``.
 
-Unless you can guarantee uniqueness, MongoDB recommends
-you let the driver automatically generate ``_id`` values.
+Unless you can guarantee uniqueness, we recommend
+letting the driver automatically generate ``_id`` values.
 
 .. note::
 
@@ -70,18 +70,18 @@ you let the driver automatically generate ``_id`` values.
    ``insert_one()`` or a ``BulkWriteError`` from ``insert_many()``.
 
 To learn more about the ``_id`` field, see the
-:manual:`Unique Indexes </core/index-unique/>` guide in the Server manual.
+:manual:`Unique Indexes </core/index-unique/>` guide in the MongoDB Server manual.
 
 To learn more about document structure and rules, see the
-:manual:`Documents </core/document>` guide in the Server manual.
+:manual:`Documents </core/document>` guide in the MongoDB Server manual.
 
 Insert One Document
 -------------------
 
-To add a single document to a MongoDB collection, use the ``insert_one()``
+To add a single document to a MongoDB collection, call the ``insert_one()``
 method and pass the document you want to add.
 
-The following example inserts a document into the restaurants collection:
+The following example inserts a document into the ``restaurants`` collection:
 
 .. code-block:: python
    :copyable: true
@@ -94,10 +94,10 @@ The following example inserts a document into the restaurants collection:
 Insert Multiple Documents
 -------------------------
 
-To add multiple documents to a MongoDB collection, use the ``insert_many()``
+To add multiple documents to a MongoDB collection, call the ``insert_many()``
 method and pass a list of documents you want to add.
 
-The following example inserts a list of documents into the restaurants collection:
+The following example inserts a list of documents into the ``restaurants`` collection:
 
 .. code-block:: python
    :copyable: true
@@ -115,12 +115,10 @@ The following example inserts a list of documents into the restaurants collectio
 Modify Insert Behavior
 ----------------------
 
-The ``InsertOne()`` method optionally accepts additional parameters
+The ``insert_one()`` method optionally accepts additional parameters
 which represent options you can use to configure the insert operation.
 If you don't specify any additional parameters, the driver does
 not customize the insert.
-
-The ``insert_one`` type accepts the following optional parameters:
 
 .. list-table::
    :widths: 30 70
@@ -130,23 +128,22 @@ The ``insert_one`` type accepts the following optional parameters:
      - Description
 
    * - ``bypass_document_validation``
-     - | If set to ``True``, allows the write to opt-out of
-         :manual:`document level validation </core/schema-validation>`. 
+     - | If set to ``True``, allows the write to opt out of
+         :manual:`document-level validation </core/schema-validation>`. 
        | Defaults to ``False``.
 
    * - ``session``
      - | An instance of ``ClientSession``.
 
    * - ``comment``
-     - | A comment to attach to the operation. See :manual:`the insert command
-         fields </reference/command/insert/#command-fields>` guide in the Server manual
-         for more information.
+     - | A comment to attach to the operation. For more information, see the :manual:`insert command
+         fields </reference/command/insert/#command-fields>` guide in the
+         MongoDB Server manual for more information.
 
 .. TODO: To learn more about ``ClientSession``, see ...
 
-The ``InsertMany()`` method optionally takes additional parameters,
-including the preceding properties and an
-additional ``ordered`` property:
+The ``InsertMany()`` method accepts the preceding optional parameters,
+as well as the optional ``ordered`` property:
 
 .. list-table::
    :widths: 30 70
@@ -167,7 +164,9 @@ Example
 ~~~~~~~
 
 The following code uses the ``insert_many()`` method to insert three new
-documents into a collection with ``bypass_document_validation`` set to ``True``:
+documents into a collection. Because the second method argument is
+``bypass_document_validation = True``, this insert operation bypasses 
+document-level validation.
 
 .. code-block:: python
 
@@ -193,6 +192,7 @@ guide, see the following API Documentation:
 
 - `insert_one() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.insert_one>`__
 - `insert_many() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.insert_many>`__
+- `ClientSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__
 
 .. .. instruqt:: 
 ..    :title: insert_one() Lesson
