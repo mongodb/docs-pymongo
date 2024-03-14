@@ -12,14 +12,9 @@ Download and Install
       Ensure you have the following dependencies installed
       in your development environment:
       
-      - **Python3 version 3.7 or later.** To learn more about installing Python, see
-        `Download Python. <https://www.python.org/downloads/>`__
-      - **pip.** For information about how to install pip, see
-        `Installation <https://pip.pypa.io/en/stable/installation/>`__ in the pip
-        documentation.
-      - **dnspython.** Support for ``mongodb+srv://`` connection URIs requires dnspython.
-        For information about how to install dnspython, see the `dnspython 
-        <https://pypi.org/project/dnspython/>`__ PyPi page.
+      - `Python3 version 3.7 or later <https://www.python.org/downloads/>`__
+      - `pip <https://pip.pypa.io/en/stable/installation/>`__
+      - `dnspython <https://pypi.org/project/dnspython/>`__
 
    .. step:: Create a Project Directory
 
