@@ -94,7 +94,7 @@ The following example inserts a document into the restaurants collection:
 Insert Multiple Documents
 -------------------------
 
-To add multiple documenss to a MongoDB collection, use the ``insert_many()``
+To add multiple documents to a MongoDB collection, use the ``insert_many()``
 method and pass a list of documents you want to add.
 
 The following example inserts a list of documents into the restaurants collection:
@@ -136,7 +136,7 @@ The ``insert_one`` type accepts the following optional parameters:
 
    * - ``session``
      - | An instance of ``ClientSession``.
-.. TODO: To learn more about ``ClientSession``, see ...
+         .. TODO: To learn more about ``ClientSession``, see ...
 
    * - ``comment``
      - | A comment to attach to the operation. See :manual:`the insert command
@@ -159,7 +159,8 @@ additional ``ordered`` property:
          server in the order provided. If an error occurs, the driver
          and server cancel all remaining insert operations.
        | Defaults to ``True``. 
-.. TODO: To learn more, see ...`.
+       
+.. TODO: To learn more, see ...
 
 Example
 ~~~~~~~
