@@ -1,0 +1,300 @@
+.. _pymongo-tls:
+
+=============
+Configure TLS 
+=============
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: security, authentication, transport layer security, encrypt
+
+Overview
+--------
+
+In this guide, you can learn how to use the :wikipedia:`TLS <Transport_Layer_Security>`
+protocol to secure your connection to a MongoDB deployment.
+
+When you enable TLS for a connection, {+driver-short+} uses TLS to connect to the
+MongoDB deployment, verifies the deployment's certificate, and ensures that the certificate
+certifies the deployment {+driver-short+} is connecting to.
+
+Some MongoDB deployments are configured to require TLS.
+
+To learn how to configure your MongoDB deployment for TLS, see the
+:manual:`TLS configuration guide </tutorial/configure-ssl/>` in the
+MongoDB Server manual.
+
+.. important::
+
+   A full description of TLS/SSL, PKI (Public Key Infrastructure) certificates, and
+   Certificate Authorities (CAs) is beyond the scope of this document. This page assumes prior
+   knowledge of TLS/SSL as well as access to valid certificates.
+
+.. _pymongo-enable-tls:
+
+Enable TLS
+----------
+
+To enable TLS for the connection to your MongoDB instance, set the ``tls`` connection
+option to ``True``. You can do this in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>", tls=True)
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname>:<port>?tls=true")
+
+.. tip::
+   
+   If your connection string includes the ``+srv`` modification, which specifies the
+   SRV connection format, TLS is enabled on your connection by default.
+
+   To learn more about the SRV connection format, see
+   :manual:`<https://www.mongodb.com/docs/manual/reference/connection-string/#srv-connection-format>`
+   in the MongoDB Server documentation.
+
+Specify a CA File
+------------------
+
+During the TLS handshake, the MongoDB deployment presents a certificate key file to your
+application to establish its identity. In most cases, the deployment's certificate has been
+signed by a well-known CA, and your application relies on this CA to validate the certificate.
+
+During testing, however, you might want to act as your own CA.
+In this case, you must instruct {+driver-short+} to
+use your CA certificates instead of ones signed by another CA.
+
+To do so, use the ``tlsCAFile`` connection option to specify the path to a ``.pem`` file
+containing the root certificate chain.
+You can do this in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                      tls=True,
+                                      tlsCAFile="/path/to/ca.pem")
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://example.com/?tls=true&tlsCAFile=/path/to/ca.pem"
+         client = pymongo.MongoClient(uri)
+
+Allow Insecure TLS
+------------------
+
+When TLS is enabled, {+driver-short+} automatically verifies the certificate that
+the server presents. When testing your code, you can disable this verification.
+This is known as *insecure TLS.*
+
+When insecure TLS is enabled, {+driver-short+} requires only that the server present an
+X.509 certificate. The driver accepts a certificate even if any of the following are
+true: 
+
+- The hostname of the server and the subject name (or subject alternative name) 
+  on the certificate don't match.
+- The certificate is expired or not yet valid. 
+- The certificate doesn't have a trusted root certificate in the chain. 
+- The certificate purpose isn't valid for server identification.
+
+.. note::
+
+   Even when insecure TLS is enabled, communication between the client and server
+   is encrypted with TLS.
+
+To enable insecure TLS, set the ``tlsInsecure`` connection
+option to ``True``. You can do this in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                      tls=True,
+                                      tlsInsecure=True)
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsInsecure=true"
+         client = pymongo.MongoClient(uri)
+
+To disable only certificate validation, set the ``tlsAllowInvalidCertificates`` option to
+``True``, and set the ``tlsInsecure`` option to ``False`` or omit it:
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                      tls=True,
+                                      tlsAllowInvalidCertificates=True)
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsAllowInvalidCertificates=true"
+         client = pymongo.MongoClient(uri)
+
+To disable only hostname verification, set the ``tlsAllowInvalidHostnames`` option to
+``True``, and set the ``tlsInsecure`` option to ``False`` or omit it:
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                      tls=True,
+                                      tlsAllowInvalidHostnames=True)
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsAllowInvalidHostnames=true"
+         client = pymongo.MongoClient(uri)
+
+.. warning:: Don't Use in Production
+
+   Always set the ``tlsInsecure``, ``tlsAllowInvalidCertificates``, and
+   ``tlsAllowInvalidHostnames`` options to ``False`` in production.
+   
+   Setting any of these options to ``True`` in a production environment makes
+   your application insecure and potentially
+   vulnerable to expired certificates and to foreign processes posing
+   as valid client instances.
+
+.. _troubleshooting-tls:
+
+Troubleshooting TLS
+-------------------
+
+TLS errors often fall into three categories: 
+
+- certificate verification failure
+- protocol version mismatch 
+- certificate revocation checking failure. 
+
+An error message similar to the following means that OpenSSL was not able to verify the
+server's certificate:
+
+.. code-block:: python
+
+   [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed
+
+This often occurs because OpenSSL lacks access to the system's
+root certificates, or the certificates are out of date. Linux users should
+ensure that they have the latest root certificate updates installed from
+their Linux vendor. MacOS users using Python 3.7 or newer downloaded
+from python.org `may have to run a script included with python
+<https://bugs.python.org/issue29065#msg283984>`__ to install
+root certificates:
+
+.. code-block:: python
+
+   open "/Applications/Python <YOUR PYTHON VERSION>/Install Certificates.command"
+
+Users of older PyPy portable versions may have to `set an environment
+variable <https://github.com/squeaky-pl/portable-pypy/issues/15>`__ to tell
+OpenSSL where to find root certificates. Do this by using the `certifi
+module <https://pypi.org/project/certifi/>`__ from PyPi:
+
+.. code-block:: python
+
+   $ pypy -m pip install certifi
+   $ export SSL_CERT_FILE=$(pypy -c "import certifi; print(certifi.where())")
+
+An error message similar to the following message means that the OpenSSL
+version used by Python does not support a new enough TLS protocol to connect
+to the server:
+
+.. code-block:: python
+
+   [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version
+
+Industry best practices recommend, and some regulations require, that older
+TLS protocols be disabled in some MongoDB deployments. Some deployments may
+disable TLS 1.0, others may disable TLS 1.0 and TLS 1.1. See the warning
+earlier in this document for troubleshooting steps and solutions.
+
+An error message similar to the following message means that certificate
+revocation checking failed:
+
+.. code-block:: python
+
+   [('SSL routines', 'tls_process_initial_server_flight', 'invalid status response')]
+
+See :ref:`OCSP` for more details.
+
+.. _pymongo-python-3.10-tls:
+
+Python 3.10+ Incompatibilities with TLS/SSL on MongoDB <= 4.0
+-------------------------------------------------------------
+
+Note that `changes made to the ssl module in Python 3.10+
+<https://docs.python.org/3/whatsnew/3.10.html#ssl>`__ might cause incompatibilities
+with MongoDB <= 4.0. The following are some example errors that might occur with this
+combination:
+
+.. code-block:: python
+
+   SSL handshake failed: localhost:27017: [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:997)
+   SSL handshake failed: localhost:27017: EOF occurred in violation of protocol (_ssl.c:997)
+
+The MongoDB server logs might show the following error:
+
+.. code-block:: python
+
+   2021-06-30T21:22:44.917+0100 E NETWORK  [conn16] SSL: error:1408A0C1:SSL routines:ssl3_get_client_hello:no shared cipher
+
+To resolve this issue, use Python <=3.10, upgrade to MongoDB 4.2+, or install
+{+driver-short+} with the :ref:`OCSP` extra, which relies on PyOpenSSL.
+
+API Documentation
+-----------------
+
+To learn more about any of the connection options discussed in this
+guide, see the following API documentation:
