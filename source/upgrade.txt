@@ -34,17 +34,15 @@ Before you upgrade, perform the following actions:
 - Ensure the new {+driver-short+} version is compatible with the MongoDB Server versions
   your application connects to and the Python version your
   application runs on. See the
-  :ref:`{+driver-short+} Compatibility <pymongo-compatibility-tables>`
+  :ref:`{+driver-short+} Compatibility <pymongo-compatibility>`
   page for this information.
 - Address any breaking changes between the current version of the driver
   your application is using and your planned upgrade version in the
-  :ref:`Breaking Changes <pymongo-breaking-changes>` section. To learn
-  more about the MongoDB Server release compatibility changes, see the
-  :ref:`<pymongo-server-release-changes>` section.
+  :ref:`Breaking Changes <pymongo-breaking-changes>` section.
 
+.. TODO: Stable API page
 .. tip::
-
-   To minimize the number of changes your application may require when
+   To minimize the number of changes your application requires when
    upgrading driver versions in the future, use the
    :ref:`{+stable-api+} <pymongo-stable-api>`.
 
