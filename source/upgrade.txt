@@ -25,7 +25,7 @@ when you upgrade to a new version of {+driver-short+}.
 
 .. important:: 
   
-   This guide includes breaking changes only to {+driver-short+} versions after v4.0.
+   This guide includes breaking changes to only {+driver-short+} versions after v4.0.
    If you're upgrading from {+driver-short+} v2 or v3, see the
    `{+driver-short+} 4 Migration Guide. <https://pymongo.readthedocs.io/en/latest/migrate-to-pymongo4.html>`__
 
@@ -33,10 +33,10 @@ Before you upgrade, perform the following actions:
 
 - Ensure the new {+driver-short+} version is compatible with the MongoDB Server versions
   your application connects to and the Python version your
-  application runs on. See the
+  application runs on. For version compatibility information, see the
   :ref:`{+driver-short+} Compatibility <pymongo-compatibility>`
-  page for this information.
-- Address any breaking changes between the current version of the driver
+  page.
+- Address any breaking changes between the driver version
   your application is using and your planned upgrade version in the
   :ref:`Breaking Changes <pymongo-breaking-changes>` section.
 
@@ -154,7 +154,7 @@ Version 4.2 Breaking Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - To improve support for the `Pyright <https://github.com/microsoft/pyright>`__ tool,
-  the ``ClientSession`` class no longer uses generic typing, 
+  the ``ClientSession`` class no longer uses generic typing.
 - pymongocrypt v1.3.0 or later is required for Client-Side Field Level Encryption (CSFLE).
 - The bson, pymongo, and gridfs packages now use the ``__all__`` variable to declare their
   public APIs. If your application contains a ``from bson import *`` statement, ensure
