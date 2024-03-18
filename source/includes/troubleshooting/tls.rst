@@ -98,8 +98,6 @@ revocation checking failed:
 
 For more details, see the :ref:`OCSP <pymongo-ocsp>` section of this guide.
 
-.. _pymongo-tls-version-error:
-
 SSLV3_ALERT_HANDSHAKE_FAILURE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
