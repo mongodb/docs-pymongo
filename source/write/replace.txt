@@ -137,6 +137,21 @@ the replace operation.
          fields </reference/command/insert/#command-fields>` guide in the
          MongoDB Server manual for more information.
 
+Example
+~~~~~~~
+
+The following code uses the ``replace_one()`` method to find the first document where the 
+``name`` field has the value "Food Town", then replaces this document 
+with a new document named "Food World". Because the ``upsert`` option is 
+set to ``True``, the driver inserts a new document if the query filter doesn't 
+match any existing documents.
+
+.. literalinclude:: /includes/write/replace.py
+   :start-after: start-replace-options
+   :end-before: end-replace-options
+   :language: python
+   :copyable:
+
 Return Value
 ~~~~~~~~~~~~
 
@@ -166,21 +181,6 @@ object. The ``UpdateResult`` type contains the following properties:
      - | The ID of the document that was upserted in the database, if the driver
          performed an upsert. Otherwise ``None``.
 
-Example
-~~~~~~~
-
-The following code uses the ``replace_one()`` method to find the first document where the 
-``name`` field has the value "Food Town", then replaces this document 
-with a new document named "Food World". Because the ``upsert`` option is 
-set to ``True``, the driver inserts a new document if the query filter doesn't 
-match any existing documents.
-
-.. literalinclude:: /includes/write/replace.py
-   :start-after: start-replace-options
-   :end-before: end-replace-options
-   :language: python
-   :copyable:
-
 Additional Information 
 ----------------------
 
@@ -192,7 +192,5 @@ API Documentation
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
 
-* `ReplaceOne() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOne.html>`__
-* `ReplaceOneAsync() <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.IMongoCollection-1.ReplaceOneAsync.html>`__
-* `ReplaceOptions <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOptions.html>`__
-* `ReplaceOneResult <{+new-api-root+}/MongoDB.Driver/MongoDB.Driver.ReplaceOneResult.html>`__
+- `replace_one() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.replace_one>`__
+- `UpdateResult <{+api-root+}pymongo/results.html#pymongo.results.UpdateResult>`__
