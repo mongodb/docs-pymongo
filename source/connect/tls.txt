@@ -175,11 +175,6 @@ You can do this in two ways: by passing an argument to the
 Certificate Revocation List
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To do so, use the ``tlsCAFile`` connection option to specify the path to a ``.pem`` file
-containing the root certificate chain.
-You can do this in two ways: by passing an argument to the
-``MongoClient`` constructor or through a parameter in your connection string.
-
 Instead of using OCSP, you can instruct {+driver-short+} to check the server's certificate
 against a Certificate Revocation List (CRL) published by the CA.
 To do so, use the ``tlsCRLFile`` connection option to specify the path to a ``.pem``
