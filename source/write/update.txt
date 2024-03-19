@@ -45,7 +45,7 @@ free MongoDB Atlas cluster and load the sample datasets, see the
 Update Operations
 -----------------
 
-You can perform update operations in MongoDB with the following methods:
+You can perform update operations in MongoDB by using the following methods:
 
 - ``update_one()``, which updates *the first document* that matches the search criteria
 - ``update_many()``, which updates *all documents* that match the search criteria
@@ -66,7 +66,7 @@ Update One Document
 ~~~~~~~~~~~~~~~~~~~
 
 The following example uses the ``update_one()`` method to update the ``name`` value of a
-document named "Bagels N Buns" in the ``restaurants`` collection:
+document named ``"Bagels N Buns"`` in the ``restaurants`` collection:
 
 .. literalinclude:: /includes/write/update.py
    :start-after: start-update-one
@@ -78,8 +78,8 @@ Update Many Documents
 ~~~~~~~~~~~~~~~~~~~~~
 
 The following example uses the ``update_many()`` method to update all documents
-with a ``cuisine`` value of "Pizza". After the update, the documents have a
-``cuisine`` value of "Pasta".
+with a ``cuisine`` value of ``"Pizza"``. After the update, the documents have a
+``cuisine`` value of ``"Pasta"``.
 
 .. literalinclude:: /includes/write/update.py
    :start-after: start-update-many
@@ -104,30 +104,32 @@ the update operation.
 
    * - ``upsert``
      - | Specifies whether the update operation performs an upsert operation if no 
-         documents match the query filter.
+         documents match the query filter. For more information, see the :manual:`upsert
+         statement </reference/command/update/#std-label-update-command-upsert>`
+         in the MongoDB Server manual.
        | Defaults to ``False``
 
    * - ``bypass_document_validation``
      - | Specifies whether the update operation bypasses document validation. This lets you 
          update documents that don't meet the schema validation requirements, if any 
          exist. For more information about schema validation, see :manual:`Schema
-         Validation </core/schema-validation/#schema-validation>` on the MongoDB
+         Validation </core/schema-validation/#schema-validation>` in the MongoDB
          Server manual.
        | Defaults to ``False``.
 
    * - ``collation``
      - | Specifies the kind of language collation to use when sorting
          results. For more information, see :manual:`Collation </reference/collation/#std-label-collation>`
-         on the MongoDB Server manual.
+         in the MongoDB Server manual.
 
    * - ``array_filters``
      - | A list of filters that specifies which array elements an update applies
          to.
 
    * - ``hint``
-     - | Gets or sets the index to use to scan for documents. 
+     - | Gets or sets the index to scan for documents. 
          For more information, see the :manual:`hint statement </reference/command/update/#std-label-update-command-hint>`
-         on the MongoDB Server manual.
+         in the MongoDB Server manual.
 
    * - ``session``
      - | An instance of ``ClientSession``.
@@ -145,8 +147,8 @@ the update operation.
          MongoDB Server manual for more information.
 
 The following code uses the ``update_many()`` method to find all documents where the 
-``borough`` field has the value "Manhattan". It then updates the ``borough``
-value in these documents to "Manhattan (north)". Because the ``upsert`` option is
+``borough`` field has the value ``"Manhattan"``. It then updates the ``borough``
+value in these documents to ``"Manhattan (north)"``. Because the ``upsert`` option is
 set to ``True``, {+driver-short+} inserts a new document if the query filter doesn't 
 match any existing documents.
 

@@ -50,7 +50,7 @@ free MongoDB Atlas cluster and load the sample datasets, see the
 Replace Operation
 -----------------
 
-You can perform a replace operation in MongoDB with the ``replace_one()`` method. 
+You can perform a replace operation in MongoDB by using the ``replace_one()`` method. 
 This method removes all fields except the ``_id`` field from the first document that
 matches the search criteria. It then inserts the fields and values you specify into the 
 document.
@@ -71,7 +71,7 @@ Replace One
 -----------
 
 The following example uses the ``replace_one()`` method to replace the fields and values of a
-document with a ``name`` field value of "Pizza Town":
+document with a ``name`` field value of ``"Pizza Town"``:
 
 .. literalinclude:: /includes/write/replace.py
    :start-after: start-replace-one
@@ -101,26 +101,28 @@ the replace operation.
 
    * - ``upsert``
      - | Specifies whether the replace operation performs an upsert operation if no 
-         documents match the query filter.
+         documents match the query filter. For more information, see the :manual:`upsert
+         statement </reference/command/update/#std-label-update-command-upsert>`
+         in the MongoDB Server manual.
        | Defaults to ``False``
 
    * - ``bypass_document_validation``
      - | Specifies whether the replace operation bypasses document validation. This lets you 
          replace documents that don't meet the schema validation requirements, if any 
          exist. For more information about schema validation, see :manual:`Schema
-         Validation </core/schema-validation/#schema-validation>` on the MongoDB
+         Validation </core/schema-validation/#schema-validation>` in the MongoDB
          Server manual.
        | Defaults to ``False``.
 
    * - ``collation``
      - | Specifies the kind of language collation to use when sorting
          results. For more information, see :manual:`Collation </reference/collation/#std-label-collation>`
-         on the MongoDB Server manual.
+         in the MongoDB Server manual.
 
    * - ``hint``
-     - | Gets or sets the index to use to scan for documents. 
+     - | Gets or sets the index to scan for documents. 
          For more information, see the :manual:`hint statement </reference/command/update/#std-label-update-command-hint>`
-         on the MongoDB Server manual.
+         in the MongoDB Server manual.
 
    * - ``session``
      - | An instance of ``ClientSession``.
@@ -135,11 +137,11 @@ the replace operation.
    * - ``comment``
      - | A comment to attach to the operation. For more information, see the :manual:`insert command
          fields </reference/command/insert/#command-fields>` guide in the
-         MongoDB Server manual for more information.
+         MongoDB Server manual.
 
 The following code uses the ``replace_one()`` method to find the first document where the 
-``name`` field has the value "Food Town", then replaces this document 
-with a new document named "Food World". Because the ``upsert`` option is
+``name`` field has the value ``"Food Town"``, then replaces this document 
+with a new document named ``"Food World"``. Because the ``upsert`` option is
 set to ``True``, the driver inserts a new document if the query filter doesn't 
 match any existing documents.
 
