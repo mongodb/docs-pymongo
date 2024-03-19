@@ -23,9 +23,11 @@ Overview
 In this guide, you can learn how to use the :wikipedia:`TLS <Transport_Layer_Security>`
 protocol to secure your connection to a MongoDB deployment.
 
-When you enable TLS for a connection, {+driver-short+} uses TLS to connect to the
-MongoDB deployment, verifies the deployment's certificate, and ensures that the certificate
-certifies the deployment {+driver-short+} is connecting to.
+When you enable TLS for a connection, {+driver-short+} performs the following actions:
+
+- Uses TLS to connect to the MongoDB deployment
+- Verifies the deployment's certificate
+- Ensures that the certificate certifies the deployment
 
 To learn more about the connection options in this guide,
 see the
