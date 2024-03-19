@@ -231,7 +231,9 @@ You can do this in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsCertificateKeyFile=path/to/client.pem"
+         uri = ("mongodb://<username>:<password>@<hostname@:<port>/?"
+                "tls=true"
+                "&tlsCertificateKeyFile=path/to/client.pem")
          client = pymongo.MongoClient(uri)
 
 .. important::
@@ -271,7 +273,10 @@ You can do this in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsCertificateKeyFile=path/to/client.pem&tlsCertificateKeyFilePassword=<passphrase>"
+         uri = ("mongodb://<username>:<password>@<hostname@:<port>/?"
+                "tls=true"
+                "&tlsCertificateKeyFile=path/to/client.pem"
+                "&tlsCertificateKeyFilePassword=<passphrase>")
          client = pymongo.MongoClient(uri)
 
 Allow Insecure TLS
@@ -316,7 +321,9 @@ option to ``True``. You can do this in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsInsecure=true"
+         uri = ("mongodb://<username>:<password>@<hostname@:<port>/?"
+                "tls=true"
+                "&tlsInsecure=true")
          client = pymongo.MongoClient(uri)
 
 To disable only certificate validation, set the ``tlsAllowInvalidCertificates`` option to
@@ -338,7 +345,9 @@ To disable only certificate validation, set the ``tlsAllowInvalidCertificates`` 
 
       .. code-block:: python
 
-         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsAllowInvalidCertificates=true"
+         uri = ("mongodb://<username>:<password>@<hostname@:<port>/?"
+                "tls=true"
+                "&tlsAllowInvalidCertificates=true")
          client = pymongo.MongoClient(uri)
 
 To disable only hostname verification, set the ``tlsAllowInvalidHostnames`` option to
@@ -360,7 +369,9 @@ To disable only hostname verification, set the ``tlsAllowInvalidHostnames`` opti
 
       .. code-block:: python
 
-         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsAllowInvalidHostnames=true"
+         uri = ("mongodb://<username>:<password>@<hostname@:<port>/?"
+                "tls=true"
+                "&tlsAllowInvalidHostnames=true")
          client = pymongo.MongoClient(uri)
 
 .. warning:: Don't Use in Production
