@@ -1,6 +1,6 @@
 name = "pymongo"
 title = "PyMongo"
-toc_landing_pages = ["/read"]
+toc_landing_pages = ["/read", "/connect"]
 
 intersphinx = [
     "https://www.mongodb.com/docs/manual/objects.inv",
