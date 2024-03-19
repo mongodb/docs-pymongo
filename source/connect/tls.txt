@@ -71,7 +71,7 @@ option to ``True``. You can do this in two ways: by passing an argument to the
    SRV connection format, TLS is enabled on your connection by default.
 
    To learn more about the SRV connection format, see
-   :manual:`</reference/connection-string/#srv-connection-format>`
+   :manual:`SRV Connection Format </reference/connection-string/#srv-connection-format>`
    in the MongoDB Server documentation.
 
 Specify a CA File
@@ -137,7 +137,7 @@ connecting to:
 - **MongoDB v4.4 or later:** The server staples a
   time-stamped OCSP response to its certificate. {+driver-short+} validates the certificate
   against the OCSP response. If the CA has revoked the certificate, or if the OCSP response
-  is otherwise invalid, the TLs handshake fails.
+  is otherwise invalid, the TLS handshake fails.
 - **MongoDB v4.3 or earlier:** The server supplies an OCSP endpoint, which {+driver-short+}
   contacts directly. {+driver-short+} then validates the certificate against the OCSP
   response. If the CA hasn't revoked the certificate, the TLS handshake continues--even if
@@ -204,6 +204,75 @@ You can do this in two ways: by passing an argument to the
 .. note:: 
   
    You can't use both a CRL and :ref:`OCSP <pymongo-ocsp>` in the same TLS handshake.
+
+Present a Client Certificate
+----------------------------
+
+Some MongoDB deployments require every connecting application to present a client certificate
+that proves its identity. To specify the client certificate for {+driver-short+} to present,
+set the ``tlsCertificateKeyFile`` option to the file path of the ``.pem`` file that
+contains your certificate and private key.
+You can do this in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                      tls=True,
+                                      tlsCertificateKeyFile='/path/to/client.pem')
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsCertificateKeyFile=path/to/client.pem"
+         client = pymongo.MongoClient(uri)
+
+.. important::
+   
+   Your client certificate and private key must be in the same ``.pem`` file. If they
+   are stored in different files, you must concatenate them. The following example
+   shows how to concatenate a key file and a certificate file into a third file called
+   ``combined.pem`` on a Unix system: 
+
+   .. code-block:: sh
+
+      $ cat key.pem cert.pem > combined.pem
+
+Provide a Key Password
+~~~~~~~~~~~~~~~~~~~~~~
+
+If the private key in your certificate file is encrypted, you must provide a password. To
+do so, use the ``tlsCertificateKeyFile`` connection option to specify the password or
+passphrase for the encrypted private key. 
+You can do this in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
+                                tls=True,
+                                tlsCertificateKeyFile='/path/to/client.pem',
+                                tlsCertificateKeyFilePassword=<passphrase>)
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<username>:<password>@<hostname@:<port>/?tls=true&tlsCertificateKeyFile=path/to/client.pem&tlsCertificateKeyFilePassword=<passphrase>"
+         client = pymongo.MongoClient(uri)
 
 Allow Insecure TLS
 ------------------

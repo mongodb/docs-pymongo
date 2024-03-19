@@ -117,10 +117,8 @@ The MongoDB Server logs might also show the following error:
 
 `Changes made to the ssl module in Python v3.10
 <https://docs.python.org/3/whatsnew/3.10.html#ssl>`__ might cause incompatibilities
-with MongoDB versions earlier than v4.0.
-The following are some example errors that might occur with this combination:
-
-To resolve this issue, try one or more of the following steps:
+with MongoDB versions earlier than v4.0. To resolve this issue, try one or more of the
+following steps:
 
 - Downgrade Python to v3.9 or earlier
 - Upgrade MongoDB Server to v4.2 or later
