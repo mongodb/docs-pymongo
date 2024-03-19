@@ -38,7 +38,7 @@ MongoDB Server manual.
 
    A full description of TLS/SSL, PKI (Public Key Infrastructure) certificates, and
    Certificate Authorities (CAs) is beyond the scope of this document. This page assumes prior
-   knowledge of TLS/SSL as well as access to valid certificates.
+   knowledge of TLS/SSL and access to valid certificates.
 
 .. _pymongo-enable-tls:
 
@@ -78,7 +78,7 @@ Specify a CA File
 ------------------
 
 During the TLS handshake, the MongoDB deployment presents a certificate key file to your
-application to establish its identity. In most cases, the deployment's certificate has been
+application to establish its identity. Usually, a deployment's certificate has been
 signed by a well-known CA, and your application relies on this CA to validate the certificate.
 
 During testing, however, you might want to act as your own CA.

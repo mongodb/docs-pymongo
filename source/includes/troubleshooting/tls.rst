@@ -59,7 +59,7 @@ Industry best practices recommend, and some regulations require, that older
 TLS protocols be disabled in some MongoDB deployments. Some deployments might
 disable TLS 1.0, while others might disable TLS 1.0 and TLS 1.1.
 
-No application changes are required for {+driver-short+} to make use of the newest TLS
+No application changes are required for {+driver-short+} to use the newest TLS
 versions, but some operating system versions might not provide an OpenSSL version new
 enough to support them.
 
