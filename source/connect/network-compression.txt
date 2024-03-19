@@ -43,8 +43,9 @@ first one in the list supported by your MongoDB instance.
 Specify Compression Algorithms
 ------------------------------
 
-To enable compression for the connection to your MongoDB instance,
-specify the algorithms you want to use in one of the following ways: 
+To enable compression for the connection to your MongoDB instance, use the
+``compressors`` connection option and specify the compression algorithms you want to use.
+You can do this in two ways: 
 
 - Pass the algorithms as an argument to the ``MongoClient`` constructor.
 - Specify the algorithms in your connection string.
@@ -109,3 +110,34 @@ The following code example specifies the ``zlib`` compression algorithm and a va
                 "compressors=zlib"
                 "zlibCompressionLevel=1")
          client = pymongo.MongoClient(uri)
+
+Network Compression Connection Options
+--------------------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - ``MongoClient`` Property
+     - Description
+
+   * - **AllowInsecureTls**
+     - | Specifies whether to relax TLS constraints as much as possible. This can include
+       | allowing invalid certificates or hostname mismatches.
+       |
+       | If this property is set to ``true`` and ``SslSettings.CheckCertificateRevocation``
+       | is set to ``false``, the {+driver-short+} will throw an exception.
+       |
+       | **Data Type**: {+bool-data-type+}
+       | **Default**: ``false``
+       | **Connection URI Example**: ``tlsInsecure=true``
+
+   * - **ApplicationName**
+     - | The app name the driver passes to the server in the client metadata as part of
+       | the connection handshake. The server prints this value to the MongoDB logs once
+       | the connection is established. The value is also recorded in the slow query logs
+       | and profile collections.
+       |
+       | **Data Type**: {+string-data-type+}
+       | **Default**: ``null``
+       | **Connection URI Example**: ``appName=yourApp``
