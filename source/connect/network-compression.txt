@@ -15,7 +15,7 @@ Compress Network Traffic
    :values: reference
  
 .. meta::
-   :keywords: zlib, zstandard, snappy
+   :keywords: zlib, zstandard, zstd, snappy
 
 Overview
 --------
@@ -61,7 +61,7 @@ The following code example shows both options:
          :emphasize-lines: 2
 
          client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
-                                      compressors="snappy,zstandard,zlib")
+                                      compressors = "snappy,zstd,zlib")
 
    .. tab:: Connection String
       :tabid: connectionstring
@@ -70,7 +70,7 @@ The following code example shows both options:
          :emphasize-lines: 2
 
          uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
-                "compressors=snappy,zstandard,zlib")
+                "compressors=snappy,zstd,zlib")
          client = pymongo.MongoClient(uri)
 
 Set the zlib Compression Level
@@ -97,7 +97,7 @@ The following code example specifies the ``zlib`` compression algorithm and a va
          :emphasize-lines: 2-3
 
          client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
-                                      compressors="zlib",
+                                      compressors = "zlib",
                                       zlibCompressionLevel=1)
 
    .. tab:: Connection String
@@ -110,34 +110,3 @@ The following code example specifies the ``zlib`` compression algorithm and a va
                 "compressors=zlib"
                 "zlibCompressionLevel=1")
          client = pymongo.MongoClient(uri)
-
-Network Compression Connection Options
---------------------------------------
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-
-   * - ``MongoClient`` Property
-     - Description
-
-   * - **AllowInsecureTls**
-     - | Specifies whether to relax TLS constraints as much as possible. This can include
-       | allowing invalid certificates or hostname mismatches.
-       |
-       | If this property is set to ``true`` and ``SslSettings.CheckCertificateRevocation``
-       | is set to ``false``, the {+driver-short+} will throw an exception.
-       |
-       | **Data Type**: {+bool-data-type+}
-       | **Default**: ``false``
-       | **Connection URI Example**: ``tlsInsecure=true``
-
-   * - **ApplicationName**
-     - | The app name the driver passes to the server in the client metadata as part of
-       | the connection handshake. The server prints this value to the MongoDB logs once
-       | the connection is established. The value is also recorded in the slow query logs
-       | and profile collections.
-       |
-       | **Data Type**: {+string-data-type+}
-       | **Default**: ``null``
-       | **Connection URI Example**: ``appName=yourApp``
