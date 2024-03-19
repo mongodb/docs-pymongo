@@ -40,12 +40,20 @@ Download and Install
 
    .. step:: Install {+driver-short+}
 
-      Run the following command in your shell to install
-      the driver in your project directory:
+      Run the following commands in your shell to create and activate a virtual
+      environment in which to install the driver:
 
       .. code-block:: bash
 
-         $ python3 -m pip install pymongo=={+patch-version-number+}
+         python -m venv venv
+         source venv/bin/activate
+      
+      With the virutal environment activated, run the following command to
+      install the current version of {+driver-short+}:
+      
+      .. code-block:: bash
+
+         python3 -m pip install pymongo
 
 After you complete these steps, you have a new project directory
 and the driver dependencies installed.

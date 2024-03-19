@@ -29,7 +29,7 @@ Get Started
 Overview
 --------
 
-{+driver-short+} is a package that you can use to connect
+{+driver-short+} is a Python package that you can use to connect
 to and communicate with MongoDB. This guide shows you how to create an
 application that uses {+driver-short+} to connect to a MongoDB cluster hosted on
 MongoDB Atlas.

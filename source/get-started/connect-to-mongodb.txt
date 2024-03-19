@@ -42,9 +42,11 @@ Connect to MongoDB
            ...
          }
 
-      If you encounter an error or see no output, check whether you specified the
-      proper connection string, and that you loaded the
-      sample data.
+      .. tip::
+
+         If you encounter an error or see no output, check whether you specified the
+         proper connection string, and that you loaded the
+         sample data.
 
 After you complete these steps, you have a working application that
 uses the driver to connect to your MongoDB deployment, runs a query on
