@@ -84,7 +84,7 @@ instance on port ``27017`` of ``localhost``:
    To learn more, see the :ref:`FAQ <pymongo-faq>` page.
 
 For more information about creating a connection string, see
-:manual:`</reference/connection-string>` in the
+:manual:`Connection Strings </reference/connection-string?tck=docs_driver_python>` in the
 MongoDB Server documentation.
 
 Other Connection Targets
