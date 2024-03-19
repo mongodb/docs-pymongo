@@ -75,7 +75,7 @@ instance on port ``27017`` of ``localhost``:
    :start-after: # start local connection
    :end-before: # end local connection
 
-.. tip:: Reuse Your Client
+.. tip:: Reusing Your Client
 
    Because each ``MongoClient`` object represents a pool of connections to the
    database, most applications require only a single instance of
@@ -107,7 +107,13 @@ Then, pass this connection string to the ``MongoClient`` constructor.
    Follow the :atlas:`Atlas driver connection guide </driver-connection?tck=docs_driver_python>`
    to retrieve your connection string.
 
-The following code shows how to use {+driver-short+} to connect to an Atlas cluster:
+When you connect to Atlas, we recommend using the {+stable-api+} client option to avoid
+breaking changes when Atlas upgrades to a new version of MongoDB Server.
+To learn more about the {+stable-api+} feature, see the :ref:`{+stable-api+} page
+<pymongo-stable-api>`.
+
+The following code shows how to use {+driver-short+} to connect to an Atlas cluster. The
+code also uses the ``server_api`` option to specify a {+stable-api+} version.
 
 .. literalinclude:: /includes/connect/atlas_connection.py
    :language: python
