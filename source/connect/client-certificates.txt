@@ -28,9 +28,8 @@ To learn more about the connection options in this guide,
 see the
 `mongo_client <https://pymongo.readthedocs.io/en/latest/api/pymongo/mongo_client.html>`__
 API documentation. To learn more about configuring MongoDB to require a client
-certificate, see
-:manual:`</tutorial/configure-ssl/#set-up-mongod-and-mongos-with-client-certificate-validation>`
-in the MongoDB Server documentation.
+certificate, see the
+:manual:` MongoDB Server documentation. </tutorial/configure-ssl/#set-up-mongod-and-mongos-with-client-certificate-validation>`
 
 Present a Client Certificate
 ----------------------------

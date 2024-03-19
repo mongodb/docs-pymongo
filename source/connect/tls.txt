@@ -71,7 +71,7 @@ option to ``True``. You can do this in two ways: by passing an argument to the
    SRV connection format, TLS is enabled on your connection by default.
 
    To learn more about the SRV connection format, see
-   :manual:`<https://www.mongodb.com/docs/manual/reference/connection-string/#srv-connection-format>`
+   :manual:`</reference/connection-string/#srv-connection-format>`
    in the MongoDB Server documentation.
 
 Specify a CA File

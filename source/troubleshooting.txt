@@ -119,6 +119,8 @@ tunnel.
 Instead, you can connect directly to a single MongoDB node by using the
 ``directConnection=True`` option with SSH tunneling.
 
+.. _pymongo-troubleshoot-tls:
+
 TLS
 ---
 
