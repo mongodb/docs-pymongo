@@ -49,6 +49,8 @@ specify the algorithms you want to use in one of the following ways:
 - Pass the algorithms as an argument to the ``MongoClient`` constructor.
 - Specify the algorithms in your connection string.
 
+The following code example shows both options:
+
 .. tabs::
 
    .. tab:: MongoClient
