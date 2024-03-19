@@ -31,7 +31,7 @@ Using the Connection URI
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
 connection options in the string as ``<name>=<value>`` pairs. In the following example,
-the connection URI contains the ``connectTimeoutMS`` option with a value of ``60000``
+the connection URI contains the ``connect_timeout`` option with a value of ``60000``
 and the ``tls`` option with a value of ``true``:
 
 .. literalinclude:: /includes/connect/local_connection_config.py
