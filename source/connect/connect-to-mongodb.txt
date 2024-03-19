@@ -17,8 +17,8 @@ Connect to MongoDB
    :depth: 2
    :class: singlecol
 
-This guide shows you how to connect to a MongoDB instance or replica set
-deployment using {+driver-short+}.
+This guide shows you how to use {+driver-short+} to connect to a MongoDB instance or replica set
+deployment.
 
 .. _pymongo_connection_uri:
 
@@ -85,7 +85,7 @@ instance on port ``27017`` of ``localhost``:
 
 For more information about creating a connection string, see
 :manual:`Connection Strings </reference/connection-string?tck=docs_driver_python>` in the
-MongoDB Server documentation.
+MongoDB Server manual.
 
 Other Connection Targets
 ------------------------
