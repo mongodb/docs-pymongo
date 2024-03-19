@@ -172,8 +172,8 @@ You can do this in two ways: by passing an argument to the
    Even if the ``tlsDisableOCSPEndpointCheck`` option is set to ``True``, {+driver-short+}
    still verifies any OCSP response stapled to a server's certificate.
 
-Specify a Certificate Revocation List
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Certificate Revocation List
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To do so, use the ``tlsCAFile`` connection option to specify the path to a ``.pem`` file
 containing the root certificate chain.
