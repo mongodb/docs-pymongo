@@ -103,5 +103,5 @@ Network Compression
        |
        | **Data Type**: {+int-data-type+}
        | **Default**: ``-1``
-       | **MongoClient Example**: ``zlibCompressionLevel = "3``
+       | **MongoClient Example**: ``zlibCompressionLevel = 3``
        | **Connection URI Example**: ``zlibCompressionLevel=3``
