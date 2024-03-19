@@ -4,6 +4,19 @@
 Compress Network Traffic
 ========================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 1
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: zlib, zstandard, snappy
+
 {+driver-short+} provides a connection option to compress messages, which reduces the amount
 of data passed over the network between MongoDB and your application.
 
