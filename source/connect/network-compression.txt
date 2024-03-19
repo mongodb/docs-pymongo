@@ -17,6 +17,9 @@ Compress Network Traffic
 .. meta::
    :keywords: zlib, zstandard, snappy
 
+Overview
+--------
+
 {+driver-short+} provides a connection option to compress messages, which reduces the amount
 of data passed over the network between MongoDB and your application.
 
@@ -43,8 +46,8 @@ Specify Compression Algorithms
 To enable compression for the connection to your MongoDB instance,
 specify the algorithms you want to use in one of the following ways: 
 
-You can do this in two ways: by passing an argument to the
-``MongoClient`` constructor or through a parameter in your connection string.
+- Pass the algorithms as an argument to the ``MongoClient`` constructor.
+- Specify the algorithms in your connection string.
 
 .. tabs::
 
@@ -66,6 +69,9 @@ You can do this in two ways: by passing an argument to the
          uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
                 "compressors=snappy,zstandard,zlib")
          client = pymongo.MongoClient(uri)
+
+Set the zlib Compression Level
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you specify ``zlib`` as one of your compression algorithms, you can also use the
 ``zlibCompressionLevel`` option to specify a compression level. This option accepts
