@@ -54,7 +54,7 @@ You can perform delete operations in MongoDB by using the following methods:
 - ``delete_many()``, which deletes *all documents* that match the search criteria
 
 Each delete method requires a **query filter** document, which specifies the
-search criteria that determines which records to select for removal.
+search criteria that determines which documents to select for removal.
 For more information about query filters, see the 
 :manual:`Query Filter Documents section </core/document/#query-filter-documents>` in
 the MongoDB Server manual.
@@ -124,7 +124,7 @@ the delete operation.
          MongoDB Server manual for more information.
 
 The following code uses the ``delete_many()`` method to delete all documents in
-the ``restaurants`` collection with a name that includes the string ``"Mongo"``.
+the ``restaurants`` collection with a ``name`` value that includes the string ``"Mongo"``.
 It uses the ``comment`` option to add a comment to the operation:
 
 .. literalinclude:: /includes/write/delete.py
@@ -145,9 +145,9 @@ Return Value
 The ``delete_one()`` and ``delete_many()`` methods return a
 ``DeleteResult`` type. This type contains the following properties:
 
-- ``deleted_count``, which indicates the number of documents deleted,
-- ``acknowledged``, which indicates if the server acknowledges the result. 
-- ``raw_result``, which is the raw result returned by the server
+- ``deleted_count``, which indicates the number of documents deleted.
+- ``acknowledged``, which indicates if the server acknowledges the result.
+- ``raw_result``, which is the raw result returned by the server.
 
 .. note::
 
