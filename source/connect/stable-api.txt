@@ -96,7 +96,7 @@ parameters to customize the behavior of the {+stable-api+}.
 The following code example shows how you can use these parameters when constructing a 
 ``ServerApi`` object:
 
-.. literalinclude:: /includes/connection/stable_api.py
+.. literalinclude:: /includes/connect/stable_api.py
    :start-after: # start stable api options
    :end-before: # end stable api options
    :language: python
