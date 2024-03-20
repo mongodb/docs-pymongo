@@ -1,5 +1,5 @@
 # start-update-one
-restaurants = database.get_collection("restaurants")
+restaurants = database["restaurants"]
 
 query_filter = {'name' : 'Bagels N Buns'}
 update_operation = { '$set' : 
@@ -10,7 +10,7 @@ result = restaurants.update_one(query_filter, update_operation)
 # end-update-one
 
 # start-update-many
-restaurants = database.get_collection("restaurants")
+restaurants = database["restaurants"]
 
 query_filter = {'cuisine' : 'Pizza'}
 update_operation = { '$set' : 
@@ -21,7 +21,7 @@ result = restaurants.update_many(query_filter, update_operation)
 # end-update-many
 
 # start-update-options
-restaurants = database.get_collection("restaurants")
+restaurants = database["restaurants"]
 
 query_filter = {'borough' : 'Manhattan'}
 update_operation = { '$set' : 

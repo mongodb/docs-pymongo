@@ -1,5 +1,5 @@
 # start-replace-one
-restaurants = database.get_collection("restaurants")
+restaurants = database["restaurants"]
 
 query_filter = {"name" : "Pizza Town"}
 replace_document = { "name" : "Mongo's Pizza",
@@ -15,7 +15,7 @@ result = restaurants.replace_one(query_filter, replace_document)
 # end-replace-one
 
 # start-replace-options
-restaurants = database.get_collection("restaurants")
+restaurants = database["restaurants"]
 
 query_filter = {"name" : "Food Town"}
 replace_document = { "name" : "Food World",
