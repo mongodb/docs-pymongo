@@ -45,7 +45,7 @@ Download and Install
 
       .. code-block:: bash
 
-         python -m venv venv
+         python3 -m venv venv
          source venv/bin/activate
       
       With the virutal environment activated, run the following command to
