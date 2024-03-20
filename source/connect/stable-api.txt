@@ -21,9 +21,6 @@
 
    The {+stable-api+} feature requires MongoDB Server 5.0 or later.
 
-   You should use the {+stable-api+} feature only if all of the MongoDB
-   deployments you're connecting to support this feature.
-
 Overview
 --------
 
@@ -61,8 +58,7 @@ The following code example shows how to perform this process:
 
 Once you create a ``MongoClient`` instance with
 a specified API version, all commands you run with the client use the specified
-version. 
-If you need to run commands using more than one version of the 
+version. If you need to run commands using more than one version of the 
 {+stable-api+}, create a new ``MongoClient``.
 
 .. _stable-api-options:
@@ -110,7 +106,7 @@ Troubleshooting
 API Documentation
 -----------------
 
-For more information on using the {+stable-api+} with the {+driver-long+}, see the 
+For more information about using the {+stable-api+} with {+driver-short+}, see the 
 following API documentation: 
 
 - `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
