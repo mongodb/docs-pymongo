@@ -1,8 +1,8 @@
 .. _pymongo-tls:
 
-=============
-Configure TLS 
-=============
+========================================
+Configure Transport Layer Security (TLS) 
+========================================
 
 .. contents:: On this page
    :local:
@@ -29,10 +29,7 @@ When you enable TLS for a connection, {+driver-short+} performs the following ac
 - Verifies the deployment's certificate
 - Ensures that the certificate certifies the deployment
 
-To learn more about the connection options in this guide,
-see the
-`mongo_client <https://pymongo.readthedocs.io/en/latest/api/pymongo/mongo_client.html>`__
-API documentation. To learn how to configure your MongoDB deployment for TLS, see the
+To learn how to configure your MongoDB deployment for TLS, see the
 :manual:`TLS configuration guide </tutorial/configure-ssl/>` in the
 MongoDB Server manual. 
 
@@ -116,8 +113,8 @@ You can do this in two ways: by passing an argument to the
 Check Certificate Revocation
 ----------------------------
 
-When an X.509 certificate is no longer trustworthy--for example, if its private key
-has been compromised--the CA revokes the certificate. {+driver-short+} includes two ways
+When an X.509 certificate is no longer trustworthy—for example, if its private key
+has been compromised—the CA revokes the certificate. {+driver-short+} includes two ways
 to check whether a server's certificate has been revoked.
 
 .. _pymongo-ocsp:
@@ -390,3 +387,12 @@ Troubleshoot TLS
 ----------------
 
 .. include:: /includes/troubleshooting/tls.rst
+
+API Documentation
+-----------------
+
+To learn more about configuring TLS for {+driver-short+},
+see the following API documentation:
+
+- `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
+
