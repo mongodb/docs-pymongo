@@ -122,3 +122,12 @@ constructor and pass the ``server_selector`` argument with your function name as
 .. code-block:: python
 
    client = MongoClient(server_selector=prefer_local)
+
+API Documentation
+-----------------
+
+For more information about customizing {+driver-short+}'s server-selection algorithm,
+see the following API documentation:
+
+- `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
+- `ServerDescription <{+api-root+}pymongo/server_description.html#pymongo.server_description.ServerDescription>`__
