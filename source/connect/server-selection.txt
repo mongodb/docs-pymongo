@@ -72,8 +72,8 @@ The server-selection function must meet the following criteria:
 - Returns the list of ``ServerDescription`` objects suitable for the read or write operation
 - Doesn't create or modify any ``ServerDescription`` objects
 
-The following example defines a function named ``prefer_local`` that accepts a list of
-``ServerDescription`` objects and returns a list of ``ServerDescription`` objects:
+The following example defines a function named ``prefer_local`` that accepts and returns a list of
+``ServerDescription`` objects:
 
 .. code-block:: python
    :emphasize-lines: 1,3
