@@ -17,6 +17,7 @@ MongoDB PyMongo Documentation
    /whats-new
    /fundamentals
    /connect
+   /write-operations
    /read
    /tools
    API Documentation <{+api-root+}>
