@@ -136,7 +136,7 @@ Mixed Bulk Write Operations
 ----------------------------
 
 You can perform multiple types of write operations in a single ``bulk_write()``
-method call. To do so, pass a list of write operation class instances to the
+method call. To do so, pass a list of operation class instances to the
 ``bulk_write()`` method. By default, the method runs each operation in the order
 it's provided.
 
@@ -156,10 +156,9 @@ that failed, and details about the exception.
 
 .. note::
 
-   When PyMongo runs a bulk operation, it uses the``write_concern`` of the
+   When PyMongo runs a bulk operation, it uses the ``write_concern`` of the
    collection in which the operation is running. The driver reports all write
-   concern errors, such as wtimeout, after attempting all of the operations,
-   regardless of execution order. 
+   concern errors after attempting all operations, regardless of execution order. 
 
 Customize Bulk Write Operations
 -------------------------------
@@ -181,7 +180,7 @@ the bulk write operation.
          provided. If an error occurs, the remaining operations are not
          attempted. If ``False``, the driver performs the operations in an
          arbitrary order and attempts to perform each operation.
-       | Default to ``True``.
+       | Defaults to ``True``.
 
    * - ``bypass_document_validation``
      - | Specifies whether the operation bypasses document-level validation. For more
@@ -252,7 +251,7 @@ The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
      - | The number of documents matched for an update, if applicable.
 
    * - ``modified_count``
-     - | The number of documents modified, if applicable.
+     - | The number of documents modified, if any.
 
    * - ``upserted_count``
      - | The number of documents upserted, if any.
