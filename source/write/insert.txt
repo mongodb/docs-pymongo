@@ -91,6 +91,8 @@ The following example inserts a document into the ``restaurants`` collection:
 .. TODO: To see a full example of using the ``insert_one()`` method to find a single document, see
    :ref:`pymongo-insert-additional-information`.
 
+.. _pymongo-write-insert-many:
+
 Insert Multiple Documents
 -------------------------
 

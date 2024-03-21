@@ -12,5 +12,7 @@ Write Data to MongoDB
    :maxdepth: 1
 
    /write/insert
+   /write/bulk-write
 
 - :ref:`pymongo-write-insert`
+- :ref:`pymongo-bulk-write`
