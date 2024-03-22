@@ -16,10 +16,13 @@ Authentication Mechanisms
 .. meta::
    :keywords: authorize, boto
 
-MongoDB supports several different authentication mechanisms. This guide
-discusses all authentication methods currently supported by {+driver-short+}.
+Overview
+--------
 
-.. tip:: Percent-Escaping
+This guide describes the mechanisms you can use in {+driver-short+} to authenticate
+users.
+
+.. important:: Percent-Escaping
 
    You must percent-escape a username and password before including them
    in a MongoDB URI. The ``quote_plus()`` method, available in the 
@@ -28,174 +31,178 @@ discusses all authentication methods currently supported by {+driver-short+}.
 
 .. _scram_sha_256:
 
-SCRAM-SHA-256 (RFC 7677)
-------------------------
+SCRAM-SHA-256
+-------------
 
-SCRAM-SHA-256 is the default authentication mechanism on MongoDB deployments
-running MongoDB 4.0 or later. To authenticate, pass the percent-escaped
-username and password to the ``MongoClient()`` constructor.
-By default, MongoDB authenticates against the ``admin`` database. To authenticate against
-a different database, pass the ``authSource`` argument when you call the constructor.
+SCRAM-SHA-256, as defined by `RFC 7677 <https://www.rfc-editor.org/rfc/rfc7677>`__,
+is the default authentication mechanism on MongoDB deployments
+running MongoDB v4.0 or later.
 
-The following code example shows how to pass a username, password, authentication source,
-and authentication mechanism to the ``MongoClient()`` constructor for SCRAM-SHA-256
-authentication:
+To authenticate with this mechanism, set the following connection options:
 
-.. code-block:: python
+- ``username``: The percent-escaped username to authenticate.
+- ``password``: The percent-escaped password.
+- ``authSource``: The MongoDB database to authenticate against. By default,
+  {+driver-short+} authenticates against the ``admin`` database.
+- ``authMechanism``: Set to ``SCRAM-SHA-256``.
 
-   >>> from pymongo import MongoClient
-   >>> client = MongoClient('example.com',
-   ...                      username='user',
-   ...                      password='password',
-   ...                      authSource='the_database',
-   ...                      authMechanism='SCRAM-SHA-256')
+You can set these options in two ways: by passing arguments to the
+``MongoClient`` constructor or through parameters in your connection string.
 
-Instead of passing these options directly to the ``MongoClient()`` constructor, you can
-include them in your MongoDB URI:
+.. tabs::
 
-.. code-block:: python
+   .. tab:: MongoClient
+      :tabid: mongoclient
 
-   >>> uri = "mongodb://user:password@example.com/?authSource=the_database&authMechanism=SCRAM-SHA-256"
-   >>> client = MongoClient(uri)
+      .. code-block:: python
 
-SCRAM-SHA-1 (RFC 5802)
-----------------------
+         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+                                      username="<username>",
+                                      password="<password>",
+                                      authSource="<authentication database>",
+                                      authMechanism="SCRAM-SHA-256")
 
-SCRAM-SHA-1 is the default authentication mechanism on MongoDB deployments
-running MongoDB >= 3.0 and < 4.0. To authenticate, pass the percent-escaped
-username and password to the ``MongoClient()`` constructor.
-By default, MongoDB authenticates against the ``admin`` database. To authenticate against
-a different database, pass the ``authSource`` argument when you call the constructor.
+   .. tab:: Connection String
+      :tabid: connectionstring
 
-.. code-block:: python
+      .. code-block:: python
 
-   >>> from pymongo import MongoClient
-   >>> client = MongoClient('example.com',
-   ...                      username='user',
-   ...                      password='password',
-   ...                      authSource='the_database',
-   ...                      authMechanism='SCRAM-SHA-1')
+         uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
+                "authSource=<authentication database>"
+                "&authMechanism=SCRAM-SHA-256")
+         client = pymongo.MongoClient(uri)
 
-Instead of passing these options directly to the ``MongoClient()`` constructor, you can
-include them in your MongoDB URI:
+SCRAM-SHA-1
+-----------
 
-.. code-block:: python
+SCRAM-SHA-1, as defined by `RFC 5802 <https://www.rfc-editor.org/rfc/rfc5802>`__,
+is the default authentication mechanism on MongoDB deployments
+running MongoDB v3.0 through v3.13.
 
-  >>> uri = "mongodb://user:password@example.com/?authSource=the_database&authMechanism=SCRAM-SHA-1"
-  >>> client = MongoClient(uri)
+To authenticate with this mechanism, set the following connection options:
+
+- ``username``: The percent-escaped username to authenticate.
+- ``password``: The percent-escaped password.
+- ``authSource``: The MongoDB database to authenticate against. By default,
+  {+driver-short+} authenticates against the ``admin`` database.
+- ``authMechanism``: Set to ``SCRAM-SHA-1``.
+
+You can set these options in two ways: by passing arguments to the
+``MongoClient`` constructor or through parameters in your connection string.
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+                                      username="<username>",
+                                      password="<password>",
+                                      authSource="<authentication database>",
+                                      authMechanism="SCRAM-SHA-1")
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
+                "authSource=<authentication database>"
+                "&authMechanism=SCRAM-SHA-1")
+         client = pymongo.MongoClient(uri)
 
 .. tip::
   
    For best performance on Python versions older than 2.7.8, install the
    `backports.pbkdf2 <https://pypi.python.org/pypi/backports.pbkdf2/>`__ package.
 
-MONGODB-CR
-----------
-
-.. warning::
-  
-  MONGODB-CR was deprecated with the release of MongoDB 3.6 and
-  is no longer supported by MongoDB 4.0.
-
-Before MongoDB 3.0, the default authentication mechanism was the "MongoDB
-Challenge-Response" protocol (MONGODB-CR). As with the preceding authentication
-mechanisms, you can pass the username, password, database, and authentication mechanism
-to the ``MongoClient()`` constructor, or include them in your MongoDB URI:
-
-.. code-block:: python
-
-   >>> from pymongo import MongoClient
-   >>> client = MongoClient('example.com',
-   ...                      username='user',
-   ...                      password='password',
-   ...                      authMechanism='MONGODB-CR')
-   >>>
-   >>> uri = "mongodb://user:password@example.com/?authSource=the_database&authMechanism=MONGODB-CR"
-   >>> client = MongoClient(uri)
-
-Default Authentication Mechanism
---------------------------------
-
-If you don't specify an authentication mechanism, {+driver-short+} defaults to SCRAM-SHA-1 when
-connected to MongoDB 3.6. When connected to MongoDB 4.0+, {+driver-short+} negotiates the mechanism
-to use (SCRAM-SHA-1 or SCRAM-SHA-256).
-
-Default Database and "authSource"
----------------------------------
-
-You can specify both a default database and the authentication database in the
-URI:
-
-.. code-block:: python
-
-   >>> uri = "mongodb://user:password@example.com/default_db?authSource=admin"
-   >>> client = MongoClient(uri)
-
-{+driver-short+} will authenticate against the ``admin`` database, but the default database
-will be ``default_db``:
-
-.. code-block:: python
-
-   >>> # get_database with no "name" argument chooses the DB from the URI
-   >>> db = MongoClient(uri).get_database()
-   >>> print(db.name)
-   'default_db'
-
 .. _mongodb_x509:
 
 MONGODB-X509
 ------------
 
-The MONGODB-X509 mechanism authenticates via the X.509 certificate presented
-by the driver during TLS/SSL negotiation. This authentication method requires
-the use of TLS/SSL connections with certificate validation:
+If you enable TLS, during the TLS handshake, {+driver-short+} can present an X.509
+client certificate to MongoDB to prove its identity. The MONGODB-X509 authentication
+mechanism uses this certificate to authenticate the client.
 
-.. code-block:: python
+To authenticate with this mechanism, set the following connection options:
 
-   >>> from pymongo import MongoClient
-   >>> client = MongoClient('example.com',
-   ...                      authMechanism="MONGODB-X509",
-   ...                      tls=True,
-   ...                      tlsCertificateKeyFile='/path/to/client.pem',
-   ...                      tlsCAFile='/path/to/ca.pem')
+- ``tls``: Set to ``True``.
+- ``tlsCertificateKeyFile``: The file path of the ``.pem`` file that contains your
+  client certificate and private key.
+- ``authMechanism``: Set to ``MONGODB-X509``.
 
-MONGODB-X509 authenticates against the ``$external`` virtual database, so you
-do not have to specify a database in the URI:
+You can set these options in two ways: by passing arguments to the
+``MongoClient`` constructor or through parameters in your connection string.
 
-.. code-block:: python
+.. tabs::
 
-   >>> uri = "mongodb://example.com/?authMechanism=MONGODB-X509"
-   >>> client = MongoClient(uri,
-   ...                      tls=True,
-   ...                      tlsCertificateKeyFile='/path/to/client.pem',
-   ...                      tlsCAFile='/path/to/ca.pem')
-   >>>
+   .. tab:: MongoClient
+      :tabid: mongoclient
 
-.. _MONGODB-AWS:
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+                                      tls=True,
+                                      tlsCertificateKeyFile="/path/to/client.pem",
+                                      authMechanism="MONGODB-X509")
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = ("mongodb://<hostname>:<port>/?"
+                "tls=true"
+                "&tlsCertificateKeyFile=path/to/client.pem"
+                "&authMechanism=MONGODB-X509")
+         client = pymongo.MongoClient(uri)
+
+.. note:: Authentication Database
+   
+   You don't have to specify an authentication database because MONGODB-X509 authenticates
+   against the ``$external`` virtual database. 
+
+.. _mongodb-aws:
 
 MONGODB-AWS
 -----------
 
-The MONGODB-AWS authentication mechanism is available in MongoDB 4.4+ and
-requires extra {+driver-short+} dependencies. To use MONGODB-AWS authentication,
-install the ``aws`` option when you install the ``pymongo`` package:
+.. note::
 
-.. code-block:: python
+   The MONGODB-AWS authentication mechanism is available in MongoDB v4.4 and later.
 
-   $ python -m pip install 'pymongo[aws]'
+The MONGODB-AWS authentication mechanism uses AWS IAM (Amazon Web Services Identity and
+Access Management) or AWS Lambda credentials to authenticate.
 
-The MONGODB-AWS mechanism authenticates by using AWS IAM credentials (an access
-key ID and a secret access key),
-`temporary AWS IAM credentials <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`__ obtained
+To use the Online Certificate Status Protocol (OCSP) to validate a server certificate,
+you must install {+driver-short+} with the ``ocsp`` option, as shown in the following
+example:
+
+To use MONGODB-AWS for authentication, you must install {+driver-short+} with the
+``aws`` option, as shown in the following example:
+
+.. code-block:: sh
+
+   python -m pip install pymongo[aws]
+
+- AWS IAM credentials (an access key ID and a secret access key)
+- `Temporary AWS IAM credentials <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`__ obtained
 from an `AWS Security Token Service (STS) <https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html>`__
 `Assume Role <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__
-request,
-AWS Lambda `environment variables <https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime>`__,
-or temporary AWS IAM credentials assigned to an
+request
+- AWS Lambda `environment variables <https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime>`__,
+- Temporary AWS IAM credentials assigned to an
 `EC2 instance <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html>`__
-or ECS task. The use of temporary credentials, in
+or ECS task.
+
+The use of temporary credentials, in
 addition to an access key ID and a secret access key, also requires a
 security (or session) token.
+
+
 
 You can configure credentials by using the MongoDB URI, environment variables,
 or the local EC2 or ECS endpoint. The order in which the client searches for
@@ -235,8 +242,8 @@ respectively, in the MongoDB URI:
    You must percent-escape the ``access_key_id`` and ``secret_access_key`` before including
    them in the URI.
 
-AssumeRole
-~~~~~~~~~~
+Temporary AWS IAM Credentials from AssumeRole
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Applications can authenticate themselves by using temporary credentials returned from an
 ``AssumeRole`` request. These temporary credentials include an access key
