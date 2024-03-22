@@ -6,7 +6,7 @@ Limit Server Execution Time
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 .. facet::
@@ -14,7 +14,7 @@ Limit Server Execution Time
    :values: reference
  
 .. meta::
-   :keywords: error, blocking
+   :keywords: error, blocking, thread, task
 
 Overview
 --------
@@ -214,5 +214,5 @@ To learn more about using timeouts in {+driver-short+},
 see the following API documentation:
 
 - `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__ 
-- `timeout() <pymongo/index.html#pymongo.timeout>`__
-- `PyMongoError <pymongo/errors.html#pymongo.errors.PyMongoError>`__ 
+- `timeout() <{+api-root+}pymongo/index.html#pymongo.timeout>`__
+- `PyMongoError <{+api-root+}pymongo/errors.html#pymongo.errors.PyMongoError>`__ 
