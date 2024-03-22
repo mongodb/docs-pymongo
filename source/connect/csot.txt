@@ -205,7 +205,7 @@ Troubleshooting
 
 The following sections describe errors you might see when using timeouts.
 
-.. include:: /includes/troubleshooting.csot.rst
+.. include:: /includes/troubleshooting/csot.rst
 
 API Documentation
 -----------------
