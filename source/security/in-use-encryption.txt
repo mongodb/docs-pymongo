@@ -1,6 +1,4 @@
 
-.. copied from dbx/encrypt-fields.rst
-
 .. _pymongo-in-use-encryption:
 
 =================
