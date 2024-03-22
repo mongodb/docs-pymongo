@@ -19,7 +19,7 @@ Limit Server Execution Time
 Overview
 --------
 
-With {+driver-short+}, you can specify **client side operation timeout**, a time limit
+With {+driver-short+}, you can specify a **client side operation timeout**, a time limit
 for server operations to run. The timeout applies all steps needed to complete the
 operation, including server selection, connection checkout, serialization, and server-side
 execution. When the timeout expires, {+driver-short+} raises a timeout exception.
