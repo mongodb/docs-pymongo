@@ -20,21 +20,17 @@ Bulk Write Operations
 Overview
 --------
 
-In this guide, you can learn how to use bulk write operations with
-{+driver-short+}. You can perform multiple write operations
-in a single database call by using bulk operations.
-
 Consider a scenario in which you want to insert a document into a collection,
-update multiple other documents, then delete a document. Performing
-these operations by using their individual methods makes a call to the database
-for each method. You can instead use bulk write operations to perform
-these operations in a single database call.
+update multiple other documents, then delete a document. If you use
+individual methods, each operation requires its own database call. This guide
+shows you how to use bulk write operations to perform multiple write operations
+in a single database call. 
 
-Performing Bulk Operations
---------------------------
+Define the Write Operations
+---------------------------
 
-To perform a bulk write operation, you must first create an instance of one of
-the following operation classes for each write operation you want to perform:
+For each write operation you want to perform, create an instance of one of
+the following operation classes:
 
 - ``InsertOne``
 - ``UpdateOne``
@@ -45,15 +41,13 @@ the following operation classes for each write operation you want to perform:
 
 Then, pass a list of these instances to the ``bulk_write()`` method.
 
-The following sections show how to create and use operation classes for
-different write operations.
+The following sections show how to create and use instances of the preceding classes.
 
 Insert Operations
 ~~~~~~~~~~~~~~~~~
 
 To perform an insert operation, create an instance of ``InsertOne`` and specify
-the document you want to insert. To insert multiple documents, you must create
-an instance of ``InsertOne`` for each document.
+the document you want to insert.
 
 The following example creates an instance of ``InsertOne``:
 
@@ -63,16 +57,20 @@ The following example creates an instance of ``InsertOne``:
    :language: python
    :copyable:
 
+To insert multiple documents, create an instance of ``InsertOne`` for each document.
+
 Update Operations
 ~~~~~~~~~~~~~~~~~
 
-To perform a bulk update operation, create an instance of ``UpdateOne`` or
-``UpdateMany`` and pass it a **query filter** and the update operation you want
-to perform. A query filter specifies the criteria used to match documents to
-in your collection.
+To update a document, create an instance of ``UpdateOne`` and pass in
+the following arguments:
+
+- A **query filter** that specifies the criteria used to match documents to in your collection
+- The update operation you want to perform. For more information on update
+  operations, see the :manual:`Field Update Operators
+  </reference/operator/update-field/>` guide in the MongoDB Server manual.
 
 ``UpdateOne`` updates *the first* document that matches your query filter.
-``UpdateMany`` updates *all* documents that match your query filter.
 
 The following example creates an instance of ``UpdateOne``:
 
@@ -81,6 +79,10 @@ The following example creates an instance of ``UpdateOne``:
    :end-before: end-bulk-update-one
    :language: python
    :copyable:
+
+To update multiple documents, create an instance of ``UpdateMany`` and pass in
+the same arguments. ``UpdateMany`` updates *all* documents that match your query
+filter.
 
 The following example creates an instance of ``UpdateMany``:
 
@@ -93,11 +95,10 @@ The following example creates an instance of ``UpdateMany``:
 Replace Operations
 ~~~~~~~~~~~~~~~~~~
 
-Replace operations remove all fields and values of a specified document and
+A replace operation removes all fields and values of a specified document and
 replaces them with new ones. To perform a replace operation, create an instance
 of ``ReplaceOne`` and pass it a query filter and the fields and values you want
-to replace with. To replace multiple documents, you must create
-an instance of ``ReplaceOne`` for each document.
+to store in the matching document.
 
 The following example creates an instance of ``ReplaceOne``:
 
@@ -107,14 +108,14 @@ The following example creates an instance of ``ReplaceOne``:
    :language: python
    :copyable:
 
+To replace multiple documents, you must create an instance of ``ReplaceOne`` for each document.
+
 Delete Operations
 ~~~~~~~~~~~~~~~~~
 
-To perform a delete operation, create an instance of ``DeleteOne`` or ``DeleteMany`` and pass it a
-query filter specifying the documents you want to delete.
-
-``DeleteOne`` removes *the first* document that matches your query filter.
-``DeleteMany`` removes *all* documents that match your query filter.
+To delete a document, create an instance of ``DeleteOne`` and pass in a
+query filter specifying the document you want to delete. ``DeleteOne`` removes
+only *the first* document that matches your query filter.
 
 The following example creates an instance of ``DeleteOne``:
 
@@ -124,6 +125,10 @@ The following example creates an instance of ``DeleteOne``:
    :language: python
    :copyable:
 
+To delete multiple documents, create an instance of ``DeleteMany`` and pass in a
+query filter specifying the document you want to delete. ``DeleteMany`` removes
+*all* documents that match your query filter.
+
 The following example creates an instance of ``DeleteMany``:
 
 .. literalinclude:: /includes/write/bulk-write.py
@@ -132,13 +137,13 @@ The following example creates an instance of ``DeleteMany``:
    :language: python
    :copyable:
 
-Mixed Bulk Write Operations
-----------------------------
+Call the ``bulk_write()`` Method
+--------------------------------
 
-You can perform multiple types of write operations in a single ``bulk_write()``
-method call. To do so, pass a list of operation class instances to the
-``bulk_write()`` method. By default, the method runs each operation in the order
-it's provided.
+After you define a class instance for each operation you want to perform,
+pass a list of these instances to the ``bulk_write()`` method.
+By default, the method runs the operations in the order
+they're defined in the list.
 
 The following example performs multiple write operations by using the
 ``bulk_write()`` method:
@@ -156,7 +161,7 @@ that failed, and details about the exception.
 
 .. note::
 
-   When PyMongo runs a bulk operation, it uses the ``write_concern`` of the
+   When {+driver-short+} runs a bulk operation, it uses the ``write_concern`` of the
    collection in which the operation is running. The driver reports all write
    concern errors after attempting all operations, regardless of execution order. 
 
@@ -178,7 +183,9 @@ the bulk write operation.
    * - ``ordered``
      - | If ``True``, the driver performs the write operations in the order
          provided. If an error occurs, the remaining operations are not
-         attempted. If ``False``, the driver performs the operations in an
+         attempted. 
+       |
+       | If ``False``, the driver performs the operations in an
          arbitrary order and attempts to perform each operation.
        | Defaults to ``True``.
 
@@ -196,7 +203,7 @@ the bulk write operation.
    * - ``comment``
      - | A comment to attach to the operation. For more information, see the :manual:`delete command
          fields </reference/command/delete/#command-fields>` guide in the
-         MongoDB Server manual for more information.
+         MongoDB Server manual.
 
    * - ``let``
      - | A map of parameter names and values. Values must be constant or closed
@@ -205,7 +212,7 @@ the bulk write operation.
          </reference/command/delete/#std-label-delete-let-syntax>` in the
          MongoDB Server manual.
 
-The following example uses the ``bulk_write()`` with the ``ordered`` options set
+The following example uses the ``bulk_write()`` method with the ``ordered`` options set
 to ``False``:
 
 .. literalinclude:: /includes/write/bulk-write.py
@@ -257,7 +264,7 @@ The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
      - | The number of documents upserted, if any.
 
    * - ``upserted_ids``
-     - | A map of operation index to the ``_id`` of the upserted documents, if
+     - | A map of the operation's index to the ``_id`` of the upserted documents, if
          applicable.
 
 Additional Information
