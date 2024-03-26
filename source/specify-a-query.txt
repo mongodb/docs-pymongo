@@ -119,7 +119,6 @@ parameter to the ``find()`` method. The method finds all documents with a
           print(f) 
 
    .. output::
-      :language: json
 
       {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
       {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -161,7 +160,6 @@ parameter to the ``find()`` method. The method finds all documents with a
           print(f)
 
    .. output::
-      :language: json
 
       {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
       {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -198,7 +196,6 @@ parameter to the ``find()`` method. The method finds all documents with a
           print(f)
 
    .. output::
-      :language: json
 
       {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
       {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -227,7 +224,6 @@ parameter to the ``find()`` method. The method finds all documents that have a
           print(f)
 
    .. output::
-      :language: json
 
       {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
       {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -265,7 +261,6 @@ parameter to the ``find()`` method. The method finds all documents with a
           print(f)
 
    .. output::
-      :language: json
 
       {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
       {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
