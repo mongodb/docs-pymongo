@@ -19,6 +19,7 @@ MongoDB PyMongo Documentation
    /connect
    /write-operations
    /read
+   /specify-a-query
    /tools
    API Documentation <{+api-root+}>
    /faq
