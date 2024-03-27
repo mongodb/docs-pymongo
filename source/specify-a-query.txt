@@ -62,10 +62,10 @@ method. The code returns all documents with a ``color`` field value of ``"yellow
 .. io-code-block::
    :copyable: 
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-exact
+      :end-before: end-find-exact
       :language: python
-
-      results = collection.find({ "color": "yellow" })
 
    .. output::
       
@@ -87,7 +87,7 @@ method. The code returns all documents with a ``color`` field value of ``"yellow
 Comparison Operators
 --------------------
 
-Comparison operators analyze the value in a document against the specified value
+Comparison operators evaluate a document field value against a specified value
 in your query filter. The following is a list of common comparison operators:
 
 - ``$gt``: Greater than
@@ -104,13 +104,10 @@ parameter to the ``find()`` method. The code returns all documents with a
 .. io-code-block::
    :copyable: 
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-comparison
+      :end-before: end-find-comparison
       :language: python
-
-      results = collection.find({"rating": {"$gt" : 2}})
-
-      for f in results:
-          print(f) 
 
    .. output::
 
@@ -129,7 +126,7 @@ more sets of expressions. The following is a list of logical operators:
 - ``$nor``, which returns all documents that *do not* match the conditions of any clause
 - ``$not``, which returns all documents that *do not* match the expression
 
-For more information about logical operators, see the :manual:`Logical Query Operators
+To learn more about logical operators, see the :manual:`Logical Query Operators
 </reference/operator/query-logical/>` guide in the MongoDB Server manual.
 
 The following example specifies a logical operator in a query filter as a
@@ -140,18 +137,10 @@ parameter to the ``find()`` method. The code returns all documents with a
 .. io-code-block::
    :copyable:
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-logical
+      :end-before: end-find-logical
       :language: python
-
-      results = collection.find({ 
-          "$or": [
-                { "qty": { "$gt": 5 }},
-                { "color": "yellow" }
-          ]
-      })
-
-      for f in results:
-          print(f)
 
    .. output::
 
@@ -169,7 +158,7 @@ array field. The following is a list of available array operators:
 - ``$elemMatch``, which returns documents if an element in their array field matches all conditions in the query
 - ``$size``, which returns all documents with arrays of a specified size
 
-For more information about array operators, see the :manual:`Array Query Operators
+To learn more about array operators, see the :manual:`Array Query Operators
 </reference/operator/query-array/>` guide in the MongoDB Server manual.
 
 The following example specifies an array operator in a query filter as a
@@ -179,15 +168,10 @@ parameter to the ``find()`` method. The code returns all documents with a
 .. io-code-block::
    :copyable:
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-array
+      :end-before: end-find-array
       :language: python
-
-      results = collection.find({
-          "type" : { "$size": 2 }
-      })
-
-      for f in results:
-          print(f)
 
    .. output::
 
@@ -209,13 +193,10 @@ parameter to the ``find()`` method. The code returns all documents that have a
 .. io-code-block::
    :copyable:
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-element
+      :end-before: end-find-element
       :language: python
-
-      results = collection.find( {"color" : { "$exists": "true" }} )
-
-      for f in results:
-          print(f)
 
    .. output::
 
@@ -246,13 +227,10 @@ parameter to the ``find()`` method. The code returns all documents with a
 .. io-code-block::
    :copyable:
 
-   .. input::
+   .. input:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-evaluation
+      :end-before: end-find-evaluation
       :language: python
-
-      results = collection.find({ "name" : { "$regex" : r"apple" }} )
-
-      for f in results:
-          print(f)
 
    .. output::
 

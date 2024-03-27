@@ -21,6 +21,52 @@ except Exception as e:
     raise Exception("Error inserting documents: ", e)
 # end-sample-data
 
+# start-find-exact
+results = collection.find({ "color": "yellow" })
+# end-find-exact
+
 # start-find-all
 results = collection.find()
 # end-find-all
+
+# start-find-comparison
+results = collection.find({ "rating": { "$gt" : 2 }})
+
+for f in results:
+    print(f) 
+# end-find-comparison
+    
+# start-find-logical
+results = collection.find({ 
+    "$or": [
+        { "qty": { "$gt": 5 }},
+        { "color": "yellow" }
+    ]
+})
+
+for f in results:
+    print(f)
+# end-find-logical
+
+# start-find-array
+results = collection.find({
+    "type" : { "$size": 2 }
+})
+
+for f in results:
+    print(f)
+# end-find-array
+
+# start-find-element
+results = collection.find( { "color" : { "$exists": "true" }} )
+
+for f in results:
+    print(f)
+# end-find-element
+
+# start-find-evaluation
+results = collection.find({ "name" : { "$regex" : r"apple" }} )
+
+for f in results:
+    print(f)
+# end-find-evaluation
