@@ -32,8 +32,8 @@ complex matching criteria.
 Sample Data
 ~~~~~~~~~~~
 
-The examples in this guide use the following documents in a collection called
-``fruits``:
+The examples in this guide run operations on a collection called
+``fruits`` that contains the following documents:
 
 .. code-block:: json
 
@@ -42,31 +42,14 @@ The examples in this guide use the following documents in a collection called
    { "_id": 3, "name": "oranges", "qty": 6, "rating": 2, "type": ["naval", "mandarin"] },
    { "_id": 4, "name": "pineapple", "qty": 3, "rating": 5, "color": "yellow" },
 
-The following code example shows how to create a database and collection, and
+The following code example shows how to create a database and collection, then
 insert the sample documents into your collection:
 
-.. code-block:: python
-
-   from pymongo import MongoClient
-
-   uri = "<Your Connection URI>"
-   client = MongoClient(uri)
-
-   try:
-       database = client["sample_fruit"]
-       collection = database["fruits"]
-
-       collection.insert_many([
-           { "_id": 1, "name": "apples", "qty": 5, "rating": 3, "color": "red", "type": ["fuji", "honeycrisp"] },
-           { "_id": 2, "name": "bananas", "qty": 7, "rating": 4, "color": "yellow", "type": ["cavendish"] },
-           { "_id": 3, "name": "oranges", "qty": 6, "rating": 2, "type": ["naval", "mandarin"] },
-           { "_id": 4, "name": "pineapple", "qty": 3, "rating": 5, "color": "yellow" },
-       ])
-
-       client.close()
-
-   except Exception as e:
-      raise Exception("Unable to insert the documents due to the following error: ", e)
+.. literalinclude:: /includes/specify-query/specify-queries.py
+   :start-after: start-sample-data
+   :end-before: end-sample-data
+   :language: python
+   :copyable:
 
 Exact Match
 -----------
@@ -74,21 +57,32 @@ Exact Match
 Literal value queries return documents with an exact match to your query filter.
 
 The following example specifies a query filter as a parameter to the ``find()``
-method. The method finds all documents with a ``color`` field value of ``"yellow"``:
+method. The code returns all documents with a ``color`` field value of ``"yellow"``:
 
-.. code-block::
-   :copyable:
+.. io-code-block::
+   :copyable: 
 
-   results = collection.find({ "color": "yellow" })
+   .. input::
+      :language: python
+
+      results = collection.find({ "color": "yellow" })
+
+   .. output::
+      
+      {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
+      {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
 
 .. tip:: Find All Documents
 
    To find all documents in a collection, call the ``find()`` method without
-   passing any arguments. The following example finds all documents in a collection:
+   any parameters. The following example finds all documents in a
+   collection:
 
-   .. code-block:: python
-
-      results = collection.find()
+   .. literalinclude:: /includes/specify-query/specify-queries.py
+      :start-after: start-find-all
+      :end-before: end-find-all
+      :language: python
+      :copyable:
 
 Comparison Operators
 --------------------
@@ -96,15 +90,15 @@ Comparison Operators
 Comparison operators analyze the value in a document against the specified value
 in your query filter. The following is a list of common comparison operators:
 
-- Greater than: ``$gt``
-- Less than or Equal: ``$lte``
-- Not equal: ``$ne``
+- ``$gt``: Greater than
+- ``$lte``: Less than or Equal
+- ``$ne``: Not equal
 
-For a full list of comparison operators, see the :manual:`Comparison Query Operators
+To view a full list of comparison operators, see the :manual:`Comparison Query Operators
 </reference/operator/query-comparison/>` guide in the MongoDB Server manual.
 
 The following example specifies a comparison operator in a query filter as a
-parameter to the ``find()`` method. The method finds all documents with a
+parameter to the ``find()`` method. The code returns all documents with a
 ``rating`` field value greater than ``2``:
 
 .. io-code-block::
@@ -127,19 +121,19 @@ parameter to the ``find()`` method. The method finds all documents with a
 Logical Operators
 -----------------
 
-Logical operators match documents using logic applied to the results of two or
+Logical operators match documents by using logic applied to the results of two or
 more sets of expressions. The following is a list of logical operators: 
 
-- ``$and``, which returns all documents that match the conditions of *both* clauses
-- ``$or``, which returns all documents that match the conditions of *either* clause
-- ``$nor``, which returns all documents that *do not* match the conditions of either clause
+- ``$and``, which returns all documents that match the conditions of *all* clauses
+- ``$or``, which returns all documents that match the conditions of *one* clause
+- ``$nor``, which returns all documents that *do not* match the conditions of any clause
 - ``$not``, which returns all documents that *do not* match the expression
 
 For more information about logical operators, see the :manual:`Logical Query Operators
 </reference/operator/query-logical/>` guide in the MongoDB Server manual.
 
 The following example specifies a logical operator in a query filter as a
-parameter to the ``find()`` method. The method finds all documents with a
+parameter to the ``find()`` method. The code returns all documents with a
 ``qty`` field value greater than ``5`` **or** a ``color`` field value of
 ``"yellow"``:
 
@@ -169,7 +163,7 @@ Array Operators
 ---------------
 
 Array operators match documents based on the value or quantity of elements in an
-array field. The following is a list of array operators:
+array field. The following is a list of available array operators:
 
 - ``$all``, which returns documents with arrays that contain all elements in the query
 - ``$elemMatch``, which returns documents if an element in their array field matches all conditions in the query
@@ -179,7 +173,7 @@ For more information about array operators, see the :manual:`Array Query Operato
 </reference/operator/query-array/>` guide in the MongoDB Server manual.
 
 The following example specifies an array operator in a query filter as a
-parameter to the ``find()`` method. The method finds all documents with a
+parameter to the ``find()`` method. The code returns all documents with a
 ``type`` array field containing ``2`` elements:
 
 .. io-code-block::
@@ -209,7 +203,7 @@ To learn more about element operators, see the :manual:`Element Query Operators
 </reference/operator/query-element/>` guide in the MongoDB Server manual.
 
 The following example specifies an element operator in a query filter as a
-parameter to the ``find()`` method. The method finds all documents that have a
+parameter to the ``find()`` method. The code returns all documents that have a
 ``color`` field:
 
 .. io-code-block::
@@ -240,13 +234,13 @@ The following is a list of common evaluation operators:
 - ``$text``, which performs a text search on the documents
 - ``$regex``, which returns documents that match a specified regular expression
 - ``$mod``, which performs a modulo operation on the value of a field and
-  returns documents with a specified result
+  returns documents where the remainder is a specified value
 
-For a full list of evaluation operators, see the :manual:`Evaluation Query Operators
+To view a full list of evaluation operators, see the :manual:`Evaluation Query Operators
 </reference/operator/query-evaluation/>` guide in the MongoDB Server manual.
 
 The following example specifies an evaluation operator in a query filter as a
-parameter to the ``find()`` method. The method finds all documents with a
+parameter to the ``find()`` method. The code returns all documents with a
 ``name`` field that matches the regular expression ``/apple/``:
 
 .. io-code-block::
