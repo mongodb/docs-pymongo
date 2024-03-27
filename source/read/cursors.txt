@@ -27,6 +27,9 @@ A cursor is a mechanism that returns the results of a read operation in iterable
 batches. Because a cursor holds only a subset of documents at any given time,
 cursors reduce both memory consumption and network bandwidth usage.
 
+{+driver-short+} automatically returns documents in a cursor for any read
+operation that returns multiple documents.
+
 Sample Data
 ~~~~~~~~~~~
 
@@ -36,10 +39,10 @@ free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-
 
 .. _pymongo-cursors-iterate:
 
-Iterate Over Cursor Contents
-----------------------------
+Access Cursor Contents Iteratively
+----------------------------------
 
-To iterate over the contents of the cursor, use a ``for`` loop, as shown in the
+To iterate over the contents of a cursor, use a ``for`` loop, as shown in the
 following example:
 
 .. literalinclude:: /includes/cursors/cursors.py
@@ -86,6 +89,7 @@ shown in the following example:
    :end-before: end-cursor-list
    :language: python
    :copyable:
+   :emphasize-lines: 3
 
 Close a Cursor
 --------------
@@ -119,4 +123,4 @@ of a replica-set member:
    :emphasize-lines: 8
 
 To learn more about tailable cursors, see the :manual:`Tailable Cursors guide
-</manual/core/tailable-cursors/>` in the MongoDB Server manual.
+</core/tailable-cursors/>` in the MongoDB Server manual.
