@@ -9,9 +9,9 @@ try:
     collection = database["fruits"]
 
     collection.insert_many([
-        { "_id": 1, "name": "apples", "qty": 5, "rating": 3, "color": "red", "type": ["fuji", "honeycrisp"] },
-        { "_id": 2, "name": "bananas", "qty": 7, "rating": 4, "color": "yellow", "type": ["cavendish"] },
-        { "_id": 3, "name": "oranges", "qty": 6, "rating": 2, "type": ["naval", "mandarin"] },
+        { "_id": 1, "name": "apples", "qty": 5, "rating": 3, "color": "red", "type": [ "fuji", "honeycrisp" ] },
+        { "_id": 2, "name": "bananas", "qty": 7, "rating": 4, "color": "yellow", "type": [ "cavendish" ] },
+        { "_id": 3, "name": "oranges", "qty": 6, "rating": 2, "type": [ "naval", "mandarin" ] },
         { "_id": 4, "name": "pineapple", "qty": 3, "rating": 5, "color": "yellow" },
     ])
 
