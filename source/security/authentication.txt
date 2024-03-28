@@ -14,7 +14,7 @@ Authentication Mechanisms
    :values: reference
  
 .. meta::
-   :keywords: authorize, boto
+   :keywords: authorize, boto, ecs, aws
 
 Overview
 --------
@@ -29,6 +29,8 @@ users.
    `urllib.parse <https://docs.python.org/3/library/urllib.parse.html#urllib.parse.quote_plus>`__
    module, is one way to perform this task.
 
+   Don't percent-escape the username or password when passing them as arguments.
+
 .. _scram_sha_256:
 
 SCRAM-SHA-256
@@ -40,8 +42,10 @@ running MongoDB v4.0 or later.
 
 To authenticate with this mechanism, set the following connection options:
 
-- ``username``: The percent-escaped username to authenticate.
-- ``password``: The percent-escaped password.
+- ``username``: The username to authenticate. Percent-escape this value before including
+  it in a connection URI.
+- ``password``: The password to authenticate. Percent-escape this value before including
+  it in a connection URI.
 - ``authSource``: The MongoDB database to authenticate against. By default,
   {+driver-short+} authenticates against the ``admin`` database.
 - ``authMechanism``: Set to ``SCRAM-SHA-256``.
@@ -67,7 +71,8 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
+         uri = ("mongodb://<percent-escaped username>:<percent-escaped password>"
+                "@<hostname>:<port>/?"
                 "authSource=<authentication database>"
                 "&authMechanism=SCRAM-SHA-256")
          client = pymongo.MongoClient(uri)
@@ -81,11 +86,13 @@ running MongoDB v3.0 through v3.13.
 
 To authenticate with this mechanism, set the following connection options:
 
-- ``username``: The percent-escaped username to authenticate.
-- ``password``: The percent-escaped password.
+- ``username``: The username to authenticate. Percent-escape this value before including
+  it in a connection URI.
+- ``password``: The password to authenticate. Percent-escape this value before including
+  it in a connection URI.
 - ``authSource``: The MongoDB database to authenticate against. By default,
   {+driver-short+} authenticates against the ``admin`` database.
-- ``authMechanism``: Set to ``SCRAM-SHA-1``.
+- ``authMechanism``: Set to ``"SCRAM-SHA-1"``.
 
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
@@ -108,7 +115,8 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
+         uri = ("mongodb://<percent-escaped username>:<percent-escaped password>"
+                "@<hostname>:<port>/?"
                 "authSource=<authentication database>"
                 "&authMechanism=SCRAM-SHA-1")
          client = pymongo.MongoClient(uri)
@@ -132,7 +140,7 @@ To authenticate with this mechanism, set the following connection options:
 - ``tls``: Set to ``True``.
 - ``tlsCertificateKeyFile``: The file path of the ``.pem`` file that contains your
   client certificate and private key.
-- ``authMechanism``: Set to ``MONGODB-X509``.
+- ``authMechanism``: Set to ``"MONGODB-X509"``.
 
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
@@ -172,55 +180,54 @@ MONGODB-AWS
 
 .. note::
 
-   The MONGODB-AWS authentication mechanism is available in MongoDB v4.4 and later.
+   The MONGODB-AWS authentication mechanism requires MongoDB v4.4 or later.
 
 The MONGODB-AWS authentication mechanism uses AWS IAM (Amazon Web Services Identity and
-Access Management) or AWS Lambda credentials to authenticate. To use MONGODB-AWS for
-authentication, you must install {+driver-short+} with the
+Access Management) or AWS Lambda credentials to authenticate your application.
+To use MONGODB-AWS for authentication, you must install {+driver-short+} with the
 ``aws`` option, as shown in the following example:
 
 .. code-block:: sh
 
    python -m pip install pymongo[aws]
 
-{+driver-short+} uses Boto3, the AWS SDK for Python, to handle credentials. For this
-reason, {+driver-short+} uses the same search order as Boto3 when searching for
-AWS credentials:
+{+driver-short+} uses Boto3, the AWS SDK for Python, to handle credentials. Boto3
+tries to retrieve AWS IAM credentials from the following sources, in the order listed,
+until it finds them:
 
-1. AWS IAM credentials passed explicitly to the ``MongoClient`` constructor, either as
-   named arguments or in the connection URI
-#. Environment variables (AWS Lambda)
+1. Named arguments passed to the ``MongoClient`` constructor or parameters in the
+   connection URI
+#. Environment variables
 #. Shared credentials file
 #. AWS config file
-#. Temporary credentials from an AssumeRole provider (AWS Security Token Service (STS)
+#. ``AssumeRole`` request to the AWS Security Token Service (STS)
+#. ``AssumeRoleWithWebIdentity`` request to the AWS STS
 #. Instance metadata service on an Amazon EC2 instance with an IAM role configured
 
-The following sections describe how to use these types of AWS credentials to
-authenticate your application.
-
-.. TODO: Any shared AWS credentials or config
-   file you have will be used by default if AWS auth environment
-   variables are not set.  To override this behavior, set
-   ``AWS_SHARED_CREDENTIALS_FILE=""`` in your shell, or add
-   ``os.environ["AWS_SHARED_CREDENTIALS_FILE"] = ""`` to your script or
-   application.  Alternatively, you can create an AWS profile specifically for
-   your MongoDB credentials and set ``AWS_PROFILE`` to that profile name.
+The following sections describe how to use these credential sources to authenticate
+your application.
 
 .. note:: Authentication Database
    
-   You don't have to specify an authentication database because MONGODB-AWS authenticates
-   against the ``$external`` virtual database. 
+   When using the MONGODB-AWS authentication mechanism, {+driver-short+} authenticates
+   against the ``$external`` virtual database. Therefore, you don't have to specify an
+   authentication database.
 
-Pass AWS IAM Credentials to ``MongoClient``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``MongoClient`` Credentials
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First, {+driver-short+} checks whether you explicitly provided AWS IAM credentials
 when you created your ``MongoClient`` object. To pass credentials to ``MongoClient``,
 set the following connection options:
 
-- ``username``: The percent-escaped AWS IAM access key ID to authenticate.
-- ``password``: The percent-escaped AWS IAM secret access key.
-- ``authMechanism``: Set to ``MONGODB-AWS``.
+- ``username``: The AWS IAM access key ID to authenticate. Percent-escape this value
+  before including it in a connection URI.
+- ``password``: The AWS IAM secret access key. Percent-escape this value before including
+  it in a connection URI.
+- ``authMechanism``: Set to ``"MONGODB-AWS"``.
+
+You can set these options in two ways: by passing arguments to the
+``MongoClient`` constructor or through parameters in your connection string.
 
 .. tabs::
 
@@ -239,7 +246,8 @@ set the following connection options:
 
       .. code-block:: python
 
-         uri = ("mongodb://<AWS IAM access key ID>:<AWS IAM secret access key>@<hostname>:<port>/?"
+         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:<percent-escaped AWS IAM secret access key>"
+                "@<hostname>:<port>/?"
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
 
@@ -253,8 +261,6 @@ environment variables:
 - ``AWS_ACCESS_KEY_ID``
 - ``AWS_SECRET_ACCESS_KEY``
 - ``AWS_SESSION_TOKEN``
-
-This mechanism is commonly used in AWS Lambda environments.
 
 To use these environment variables to authenticate your application, first set them to the
 AWS IAM values needed for authentication, as shown in the following code example:
@@ -270,7 +276,9 @@ AWS IAM values needed for authentication, as shown in the following code example
    Don't percent-escape the values in these environment variables.
 
 After you set the previous environment variables, set the ``authMechanism``
-connection option to ``MONGODB-AWS``.
+connection option to ``"MONGODB-AWS"``.
+You can set this option in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
 
 .. tabs::
 
@@ -290,26 +298,31 @@ connection option to ``MONGODB-AWS``.
          uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
-.. note::
+.. tip:: AWS Lambda
    
-   For more information about using environment variables in an AWS Lambda environment,
-   see `Using Lambda environment variables <https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime>`__
+   AWS Lambda runtimes automatically set these environment variables during
+   initialization. For more information about using environment variables in an AWS Lambda
+   environment, see
+   `Using Lambda environment variables <https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime>`__
    in the AWS documentation.
 
 Shared Credentials File
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If you don't set the preceding environment variables, {+driver-short+}
+If the preceding environment variables don't have values, {+driver-short+}
 tries to retrieve AWS credentials from a shared credentials file.
 
-To use a shared credentials file to authenticate your application, first ensure the
-file exists in your environment. To learn more about the
-default location and format of a shared credentials file, see
+To use a shared credentials file to authenticate your application, ensure that the
+file exists in your environment and is configured correctly. To learn how to create
+a shared credentials file, see
 `Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#shared-credentials-file>`__
-in the Boto3 documentation.
+in the Boto3 documentation and `Configuration <https://docs.aws.amazon.com/sdkref/latest/guide/creds-config-files.html>`__
+in the AWS documentation.
 
 After you create the shared credentials file, set the ``authMechanism``
-connection option to ``MONGODB-AWS``.
+connection option to ``"MONGODB-AWS"``.
+You can set this option in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
 
 .. tabs::
 
@@ -328,6 +341,17 @@ connection option to ``MONGODB-AWS``.
 
          uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
+
+.. tip::
+
+   To prevent {+driver-short+} from using a shared credentials file for authentication,
+   perform one of the following actions:
+   
+   - Set the ``AWS_SHARED_CREDENTIALS_FILE`` environment variable to ``""`` in your terminal.
+   - Add ``os.environ["AWS_SHARED_CREDENTIALS_FILE"] = ""`` to your script or
+     application.
+   - Create an AWS profile specifically for your MongoDB credentials. Set the ``AWS_PROFILE``
+     environment variable to the name of the profile you created.
 
 AWS Config File
 ~~~~~~~~~~~~~~~
@@ -335,14 +359,17 @@ AWS Config File
 If {+driver-short+} doesn't find a shared credentials file, it tries to retrieve
 credentials from an AWS config file.
 
-To use an AWS config file to authenticate your application, first ensure the
-file exists in your environment. To learn more about the
-default location and format of an AWS config file, see
+To use a shared credentials file to authenticate your application, ensure that the
+file exists in your environment and is configured correctly. To learn how to create
+a shared credentials file, see
 `Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#aws-config-file>`__
-in the Boto3 documentation.
+in the Boto3 documentation and `Configuration <https://docs.aws.amazon.com/sdkref/latest/guide/creds-config-files.html>`__
+in the AWS documentation.
 
-After you create the config file, set the ``authMechanism`` connection option to
-``MONGODB-AWS``.
+After you create the config file, set the ``authMechanism``
+connection option to ``"MONGODB-AWS"``.
+You can set this option in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
 
 .. tabs::
 
@@ -365,29 +392,30 @@ After you create the config file, set the ``authMechanism`` connection option to
 AssumeRole Request
 ~~~~~~~~~~~~~~~~~~
 
-Instead of including AWS credentials in your AWS config file, you can use the file to
-instruct Boto3 to assume a role. If you do, Boto3 makes an
-``AssumeRole`` request to an AWS STS (Security Token Service) endpoint, which returns
-the credentials your application needs for authentication.
+Instead of storing AWS credentials in your AWS config file, you can instruct
+Boto3 to make an ``AssumeRole`` request to an AWS STS endpoint. This request returns
+temporary credentials that your application can use for authentication.
 
-To authenticate with temporary AWS IAM credentials returned by an AssumeRole request,
-first ensure your AWS config file
-exists in your environment and is configured correctly.
-To learn more about the
-default location and format of a shared credentials file, see
+To authenticate with temporary AWS IAM credentials returned by an ``AssumeRole`` request,
+ensure that the AWS config file exists in your environment and is configured correctly.
+To learn how to create and configure
+an AWS config file, see
 `Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#assume-role-provider>`__
-in the Boto3 documentation.
+in the Boto3 documentation and `Configuration <https://docs.aws.amazon.com/sdkref/latest/guide/creds-config-files.html>`__
+in the AWS documentation.
 
 After you create the config file, set the following connection options:
 
-- ``username``: The percent-escaped AWS IAM access key ID to authenticate. The
-  AssumeRole request returns this access key ID, but you must percent-escape it.
-- ``password``: The percent-escaped AWS IAM secret access key. The AssumeRole request
-  returns this access key, but you must percent-escape it.
-- ``authMechanismProperties``: Set to ``AWS_SESSION_TOKEN:`` and the percent-escaped
-  AWS session token. The AssumeRole request returns this session token, but you must
-  percent-escape it.
-- ``authMechanism``: Set to ``MONGODB-AWS``.
+- ``username``: The AWS IAM access key ID to authenticate returned by the ``AssumeRole``
+  request. Percent-escape this value before including it in a connection URI.
+- ``password``: The AWS IAM secret access key returned by the ``AssumeRole`` request.
+  Percent-escape this value before including it in a connection URI..
+- ``authMechanismProperties``: Set to ``AWS_SESSION_TOKEN:`` and the
+  AWS session token returned by the ``AssumeRole`` request. Percent-escape this value before including it in a connection URI.
+- ``authMechanism``: Set to ``"MONGODB-AWS"``.
+
+You can set these options in two ways: by passing arguments to the
+``MongoClient`` constructor or through parameters in your connection string.
 
 .. tabs::
 
@@ -407,7 +435,8 @@ After you create the config file, set the following connection options:
 
       .. code-block:: python
 
-         uri = ("mongodb://<AWS IAM access key ID>:<AWS IAM secret access key>@<hostname>:<port>/?"
+         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:<percent-escaped AWS IAM secret access key>"
+                "@<hostname>:<port>/?"
                 "authMechanismProperties=AWS_SESSION_TOKEN:<AWS session token>"
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
@@ -423,44 +452,29 @@ After you create the config file, set the following connection options:
 
 .. _EKS Clusters:
 
-EKS Clusters / AssumeRoleWithWebIdentity
-~~~~~~~~~~~~
+AssumeRoleWithWebIdentity
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
    
    Your application must use ``pymongo_auth_aws`` v1.1.0 or later for EKS support.
 
-If your application
-`authenticates users for your cluster from an OpenID Connect identity provider, <https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html>`__
-you can use the provided credentials by giving the associated IAM User
-`sts:AssumeRoleWithWebIdentity <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html>`__
-permission.
+If your application authenticates users for your EKS cluster from an OpenID Connect (OIDC)
+identity provider, {+driver-short+} can make an ``AssumeRoleWithWebIdentity`` request
+to exchange the OIDC token for temporary AWS credentials for your application. 
 
-To instruct {+driver-short+} to make an ``AssumeRoleWithWebIdentity`` request, 
-set the following environment variables:
+To authenticate with temporary AWS IAM credentials returned by an
+``API_AssumeRoleWithWebIdentity`` request, ensure that the AWS config file exists in your
+environment and is configured correctly. To learn how to create and configure
+an AWS config file, see
+`Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#assume-role-provider>`__
+in the Boto3 documentation and `Configuration <https://docs.aws.amazon.com/sdkref/latest/guide/creds-config-files.html>`__
+in the AWS documentation.
 
-- ``AWS_WEB_IDENTITY_TOKEN_FILE``: The absolute path to the file that contains your OIDC
-  token.
-- ``AWS_ROLE_ARN``: The ARN of the role to assume.
-- ``AWS_ROLE_SESSION_NAME``: Optional. A name for the AWS session. If you don't specify
-  a value for this variable, Boto3 generates one automatically.
-
-The following code example shows how to use the terminal to set the preceding environment
-variables:
-
-.. code-block:: sh
-
-   export AWS_WEB_IDENTITY_TOKEN_FILE=<OIDC file path>
-   export AWS_ROLE_ARN=<role ARN>
-   export AWS_ROLE_SESSION_NAME=<session name>
-
-.. important::
-  
-   Don't percent-escape the values in these environment variables.
-
-After you set the previous environment variables, set the following connection options:
-
-- ``authMechanism``: Set to ``MONGODB-AWS``.
+After you configure your environment for an ``AssumeRoleWithWebIdentity`` request,
+set the ``authMechanism`` connection option to ``"MONGODB-AWS"``.
+You can set this option in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
 
 .. tabs::
 
@@ -480,44 +494,48 @@ After you set the previous environment variables, set the following connection o
          uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
-ECS Container
-~~~~~~~~~~~~~
-
-- Temporary AWS IAM credentials assigned to an
-`EC2 instance <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html>`__
-or ECS task.
-
-Applications can authenticate from an ECS container by using temporary
-credentials assigned to the machine. The following example shows a sample URI on an ECS
-container:
-
-.. code-block:: python
-
-   >>> from pymongo import MongoClient
-   >>> uri = "mongodb+srv://example.mongodb.com/?authMechanism=MONGODB-AWS"
-   >>> client = MongoClient(uri)
-
 .. note::
-  
-   When using an ECS container for authentication, don't include the username, password,
-   or session token in the URI.
-   {+driver-short+} queries the ECS container endpoint to obtain these credentials.
+   
+   For more information about using an ``AssumeRoleWithWebIdentity`` request to
+   authenticate your application, see the following AWS documentation:
 
-EC2 Instance
-~~~~~~~~~~~~
+   - `Authenticating users for your cluster from an OpenID Connect identity provider <https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html>`__
+   - `AssumeRoleWithWebIdentity <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html>`__
 
-Applications can authenticate from an EC2 instance by using temporary
-credentials assigned to the machine. The following example shows a sample URI on an EC2
-machine:
+ECS Container or EC2 Instance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: python
+If your application runs in an Amazon Elastic Cloud Compute (EC2) instance in an 
+Elastic Container Service (ECS) container, {+driver-short+} can automatically retrieve
+temporary AWS credentials from an ECS endpoint.
 
-   >>> from pymongo import MongoClient
-   >>> uri = "mongodb+srv://example.mongodb.com/?authMechanism=MONGODB-AWS"
-   >>> client = MongoClient(uri)
+To use temporary credentials from within an EC2 instance, set the ``authMechanism``
+connection option to ``"MONGODB-AWS"``.
+You can set this option in two ways: by passing an argument to the
+``MongoClient`` constructor or through a parameter in your connection string.
 
-.. note::
-  
-   When using an EC2 instance for authentication, don't include the username, password,
-   or session token in the URI.
-   {+driver-short+} queries the ECS container endpoint to obtain these credentials.
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. code-block:: python
+
+         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+                                      authMechanism="MONGODB-AWS")
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. code-block:: python
+
+         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         client = pymongo.MongoClient(uri)
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about authenticating your application in {+driver-short+},
+see the following API documentation:
+
+- `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
