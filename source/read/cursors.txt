@@ -27,8 +27,8 @@ A cursor is a mechanism that returns the results of a read operation in iterable
 batches. Because a cursor holds only a subset of documents at any given time,
 cursors reduce both memory consumption and network bandwidth usage.
 
-{+driver-short+} automatically returns documents in a cursor for any read
-operation that returns multiple documents.
+Whenever {+driver-short+} performs a read operation that returns multiple
+documents, it automatically returns those documents in a cursor.
 
 Sample Data
 ~~~~~~~~~~~
@@ -57,7 +57,7 @@ Retrieve Documents Individually
 Retrieve documents from a cursor individually by calling the ``next()`` method.
 
 The following example finds all documents in a collection with a ``name`` value
-of ``Dunkin' Donuts``. It then prints the first document in the cursor by calling the
+of ``"Dunkin' Donuts"``. It then prints the first document in the cursor by calling the
 ``next()`` method.
 
 .. io-code-block::
@@ -78,7 +78,7 @@ Retrieve All Documents
 .. warning::
 
    If the number and size of documents returned by your query exceeds available
-   application memory, your program will crash. If you except a large result
+   application memory, your program will crash. If you expect a large result
    set, :ref:`access your cursor iteratively <pymongo-cursors-iterate>`.
 
 To retrieve all documents from a cursor, convert the cursor into a ``list`` as

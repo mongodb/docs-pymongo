@@ -11,6 +11,6 @@ while True:
             ts = doc['ts']
             print(doc)
 
-        # You end up here if the find() method returns no documents, or if the
+        # You end up here if the find() method returns no documents, or if
         # no new documents are added to the collection for more than 1 second.
         time.sleep(1)
