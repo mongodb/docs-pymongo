@@ -15,7 +15,7 @@ Count Documents
    :values: reference
 
 .. meta::
-   :keywords: number, amount, estimation
+   :keywords: number, amount, estimation, code example
 
 Overview
 ---------
@@ -28,7 +28,7 @@ Retrieve an Accurate Count
 
 Use the ``count_documents()`` method to count the number of documents that are in a
 collection. To count the number of documents that match a specific search
-critera, pass dictionary that includes a query filter to the
+critera, pass a dictionary that includes a query filter to the
 ``count_documents()`` method.
 
 To learn more about specifying a query, see :ref:`pymongo-specify-query`.
@@ -129,7 +129,7 @@ The following table describes the options you can set to customize ``estimated_d
          milliseconds.
 
 API Documentation
-~~~~~~~~~~~~~~~~~
+-----------------
 
 To learn more about any of the methods or types discussed in this
 guide, see the following API documentation:
