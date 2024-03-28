@@ -29,7 +29,8 @@ users.
    `urllib.parse <https://docs.python.org/3/library/urllib.parse.html#urllib.parse.quote_plus>`__
    module, is one way to perform this task.
 
-   Don't percent-escape the username or password when passing them as arguments.
+   Don't percent-escape the username or password when passing them as arguments to
+   ``MongoClient``.
 
 .. _scram_sha_256:
 
@@ -47,7 +48,8 @@ To authenticate with this mechanism, set the following connection options:
 - ``password``: The password to authenticate. Percent-escape this value before including
   it in a connection URI.
 - ``authSource``: The MongoDB database to authenticate against. By default,
-  {+driver-short+} authenticates against the ``admin`` database.
+  {+driver-short+} authenticates against the database in the connection
+  URI, if you include one. If you don't, it authenticates against the ``admin`` database.
 - ``authMechanism``: Set to ``SCRAM-SHA-256``.
 
 You can set these options in two ways: by passing arguments to the
@@ -192,8 +194,7 @@ To use MONGODB-AWS for authentication, you must install {+driver-short+} with th
    python -m pip install pymongo[aws]
 
 {+driver-short+} uses Boto3, the AWS SDK for Python, to handle credentials. Boto3
-tries to retrieve AWS IAM credentials from the following sources, in the order listed,
-until it finds them:
+tries to retrieve AWS credentials from the following sources, in the order listed:
 
 1. Named arguments passed to the ``MongoClient`` constructor or parameters in the
    connection URI
@@ -204,8 +205,8 @@ until it finds them:
 #. ``AssumeRoleWithWebIdentity`` request to the AWS STS
 #. Instance metadata service on an Amazon EC2 instance with an IAM role configured
 
-The following sections describe how to use these credential sources to authenticate
-your application.
+The following sections describe how to use {+driver-short+} to retrieve credentials from
+these sources and use them to authenticate your application.
 
 .. note:: Authentication Database
    
@@ -216,8 +217,9 @@ your application.
 ``MongoClient`` Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First, {+driver-short+} checks whether you explicitly provided AWS IAM credentials
-when you created your ``MongoClient`` object. To pass credentials to ``MongoClient``,
+First, {+driver-short+} checks whether you passed AWS credentials
+to the ``MongoClient`` constructor, either as a named argument or as part of the
+connection URI. To pass your credentials to ``MongoClient``,
 set the following connection options:
 
 - ``username``: The AWS IAM access key ID to authenticate. Percent-escape this value
@@ -246,7 +248,8 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:<percent-escaped AWS IAM secret access key>"
+         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:"
+                "<percent-escaped AWS IAM secret access key>"
                 "@<hostname>:<port>/?"
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
@@ -300,7 +303,7 @@ You can set this option in two ways: by passing an argument to the
 
 .. tip:: AWS Lambda
    
-   AWS Lambda runtimes automatically set these environment variables during
+   AWS Lambda runtimes can automatically set these environment variables during
    initialization. For more information about using environment variables in an AWS Lambda
    environment, see
    `Using Lambda environment variables <https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime>`__
@@ -309,8 +312,8 @@ You can set this option in two ways: by passing an argument to the
 Shared Credentials File
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If the preceding environment variables don't have values, {+driver-short+}
-tries to retrieve AWS credentials from a shared credentials file.
+If {+driver-short+} doesn't find AWS credentials in the preceding environment variables,
+it tries to read them from a shared credentials file.
 
 To use a shared credentials file to authenticate your application, ensure that the
 file exists in your environment and is configured correctly. To learn how to create
@@ -356,8 +359,8 @@ You can set this option in two ways: by passing an argument to the
 AWS Config File
 ~~~~~~~~~~~~~~~
 
-If {+driver-short+} doesn't find a shared credentials file, it tries to retrieve
-credentials from an AWS config file.
+If {+driver-short+} doesn't find credentials in the shared credentials file, it tries to read
+them from an AWS config file.
 
 To use a shared credentials file to authenticate your application, ensure that the
 file exists in your environment and is configured correctly. To learn how to create
@@ -393,8 +396,8 @@ AssumeRole Request
 ~~~~~~~~~~~~~~~~~~
 
 Instead of storing AWS credentials in your AWS config file, you can instruct
-Boto3 to make an ``AssumeRole`` request to an AWS STS endpoint. This request returns
-temporary credentials that your application can use for authentication.
+{+driver-short+} to make an ``AssumeRole`` request to an AWS STS endpoint. This request
+returns temporary credentials that your application can use for authentication.
 
 To authenticate with temporary AWS IAM credentials returned by an ``AssumeRole`` request,
 ensure that the AWS config file exists in your environment and is configured correctly.
@@ -435,7 +438,8 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:<percent-escaped AWS IAM secret access key>"
+         uri = ("mongodb://<percent-escaped AWS IAM access key ID>:"
+                "<percent-escaped AWS IAM secret access key>"
                 "@<hostname>:<port>/?"
                 "authMechanismProperties=AWS_SESSION_TOKEN:<AWS session token>"
                 "&authMechanism=MONGODB-AWS")
@@ -447,7 +451,7 @@ You can set these options in two ways: by passing arguments to the
    application, see the following AWS documentation:
    
    - `Temporary AWS IAM credentials <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`__
-   - `AWS Security Token Service (STS) <https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html>`__
+   - `AWS Security Token Service <https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html>`__
    - `Assume Role <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__
 
 .. _EKS Clusters:
@@ -464,7 +468,7 @@ identity provider, {+driver-short+} can make an ``AssumeRoleWithWebIdentity`` re
 to exchange the OIDC token for temporary AWS credentials for your application. 
 
 To authenticate with temporary AWS IAM credentials returned by an
-``API_AssumeRoleWithWebIdentity`` request, ensure that the AWS config file exists in your
+``AssumeRoleWithWebIdentity`` request, ensure that the AWS config file exists in your
 environment and is configured correctly. To learn how to create and configure
 an AWS config file, see
 `Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#assume-role-provider>`__
