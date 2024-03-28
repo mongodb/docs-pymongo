@@ -26,7 +26,7 @@ results = collection.find({ "color": "yellow" })
 # end-find-exact
 
 # start-find-all
-results = collection.find()
+results = collection.find({})
 # end-find-all
 
 # start-find-comparison
@@ -65,7 +65,7 @@ for f in results:
 # end-find-element
 
 # start-find-evaluation
-results = collection.find({ "name" : { "$regex" : r"apple" }} )
+results = collection.find({ "name" : { "$regex" : "p{2,}" }} )
 
 for f in results:
     print(f)

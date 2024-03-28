@@ -74,8 +74,8 @@ method. The code returns all documents with a ``color`` field value of ``"yellow
 
 .. tip:: Find All Documents
 
-   To find all documents in a collection, call the ``find()`` method without
-   any parameters. The following example finds all documents in a
+   To find all documents in a collection, call the ``find()`` method and pass it an
+   empty query filter. The following example finds all documents in a
    collection:
 
    .. literalinclude:: /includes/specify-query/specify-queries.py
@@ -221,8 +221,9 @@ To view a full list of evaluation operators, see the :manual:`Evaluation Query O
 </reference/operator/query-evaluation/>` guide in the MongoDB Server manual.
 
 The following example specifies an evaluation operator in a query filter as a
-parameter to the ``find()`` method. The code returns all documents with a
-``name`` field that matches the regular expression ``/apple/``:
+parameter to the ``find()`` method. The code uses a regular expression to return
+all documents with a ``name`` field value that has at least two consecutive
+``"p"`` characters:
 
 .. io-code-block::
    :copyable:
@@ -236,3 +237,20 @@ parameter to the ``find()`` method. The code returns all documents with a
 
       {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
       {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
+
+Additional Information
+----------------------
+
+To learn more about querying documents, see the :manual:`Query Documents
+</tutorial/query-documents/>` guide in the MongoDB Server manual.
+
+To learn more about retrieving documents with PyMongo, see
+:ref:`pymongo-retrieve`.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API documentation:
+
+- `find() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.find>`__
