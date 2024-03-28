@@ -1,5 +1,3 @@
-.. uses tutorial.rst
-
 .. _pymongo-count:
 
 ===============
@@ -22,16 +20,16 @@ Count Documents
 Overview
 ---------
 
-In this guide, you can learn how to get an accurate and estimated count of the
-number of documents in your collection.
+In this guide, you can learn how to retrieve an accurate and estimated count of the
+number of documents in a collection.
 
-Get an Accurate Count
-----------------------
+Retrieve an Accurate Count
+--------------------------
 
-Use the ``count_documents()`` command to count the number of documents that are in a
+Use the ``count_documents()`` method to count the number of documents that are in a
 collection. To count the number of documents that match a specific search
-critera, pass the ``count_documents()`` method a dictionary that specifies a
-query.
+critera, pass dictionary that includes a query filter to the
+``count_documents()`` method.
 
 To learn more about specifying a query, see :ref:`pymongo-specify-query`.
 
@@ -43,8 +41,6 @@ the ``count_documents()`` method, as shown in the following example:
 
 .. code-block:: python
 
-   collection = database["collection_name"]
-
    collection.count_documents({})
 
 Count Specific Documents
@@ -54,18 +50,17 @@ To return a count of documents that match specific search criteria, specify your
 query in the ``count_documents()`` method, as shown in the following example:
 
 .. code-block:: python
-
-   collection = database["collection_name"]
    
    collection.count_documents({ "author": "Mike" })
 
 Customize Count Behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``count_documents()`` method optionally accepts additional
-parameters, which represent options you can use to configure the count
-operation. If you don't specify any additional options, the driver does not customize
-the count operation.
+The ``count_documents()`` method accepts optional parameters, which represent
+options you can use to configure the count operation. If you don't specify any
+options, the driver does not customize the count operation.
+
+The following table describes the options you can set to customize ``count_documents()``:
 
 .. list-table::
    :widths: 30 70
@@ -96,28 +91,28 @@ the count operation.
    * - ``hint``
      - | Gets or sets the index to scan for documents.
 
-Get an Estimated Count
-----------------------
+Retrieve an Estimated Count
+---------------------------
 
 You can get an estimate of the number of documents in a collection by calling
 the ``estimated_document_count()`` method. The method estimates the amount of
-documents based on collection metadata.
+documents based on collection metadata, which might be faster than performing an 
+accurate count.
 
 The following example estimates the number of documents in a collection:
 
 .. code-block:: python
-
-   collection = database["collection_name"]
    
    collection.estimated_document_count()
 
 Customize Estimated Count Behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``estimated_document_count()`` method optionally accepts additional
-parameters, which represent options you can use to configure the count
-operation. If you don't specify any additional options, the driver does not customize
-the count operation.
+The ``estimated_document_count()`` method accepts optional parameters, which
+represent options you can use to configure the count operation. If you don't
+specify any options, the driver does not customize the count operation.
+
+The following table describes the options you can set to customize ``estimated_document_count()``:
 
 .. list-table::
    :widths: 30 70
