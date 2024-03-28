@@ -138,8 +138,7 @@ Authentication
 
    * - **authMechanism**
      - | The mechanism {+driver-short+} uses to authenticate the application. Valid
-       | options are defined in
-       | `MECHANISMS. <{+api-root+}pymongo/database.html#pymongo.auth.MECHANISMS>`__
+       | options are defined in `MECHANISMS. <{+api-root+}pymongo/database.html#pymongo.auth.MECHANISMS>`__
        |
        | **Data Type**: {+string-data-type+}
        | **Default**: ``"SCRAM-SHA-256"`` when connecting to MongoDB v4.0 or later.
