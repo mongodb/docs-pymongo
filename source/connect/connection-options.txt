@@ -156,7 +156,7 @@ Authentication
        | **MongoClient Example**: ``authMechanismProperties = "AWS_SESSION_TOKEN:12345"``
        | **Connection URI Example**: ``authMechanismProperties=AWS_SESSION_TOKEN:12435``
 
-* - **authSource**
+   * - **authSource**
      - | The database to authenticate against.
        |
        | **Data Type**: {+string-data-type+}
@@ -164,7 +164,7 @@ Authentication
        | **MongoClient Example**: ``authSource = "admin"``
        | **Connection URI Example**: ``authSource=admin``
 
-* - **username**
+   * - **username**
      - | The username for authentication. When this option is included in a connection
        | URI, you must percent-escape it.
        |
@@ -173,7 +173,7 @@ Authentication
        | **MongoClient Example**: ``username = "my user"``
        | **Connection URI Example**: ``username=my+user``
 
-* - **password**
+   * - **password**
      - | The password for authentication. When this option is included in a connection
        | URI, you must percent-escape it.
        |
