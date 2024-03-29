@@ -117,7 +117,7 @@ Timeouts
      - Description
 
    * - **timeoutMS**
-     - | The number of milliseconds each server operation must complete within. If an
+     - | The number of milliseconds each call to the server must complete within. If an
        | operation doesn't finish in the specified time, {+driver-short+} raises a timeout exception.
        | For more information, see :ref:`<pymongo-csot>`.
        |
