@@ -344,8 +344,8 @@ Why Do I Get OverflowError When Decoding Dates Stored by Another Language's Driv
 
 {+driver-short+} decodes BSON ``datetime`` values to instances of Python's
 ``datetime.datetime`` class. Instances of ``datetime.datetime`` are
-limited to years between ``datetime.MINYEAR`` (usually 1) and
-``datetime.MAXYEAR`` (usually 9999). Some MongoDB drivers
+limited to years between ``datetime.MINYEAR`` (1) and
+``datetime.MAXYEAR`` (9999). Some MongoDB drivers
 can store BSON datetimes with year values far outside those supported
 by ``datetime.datetime``.
 
