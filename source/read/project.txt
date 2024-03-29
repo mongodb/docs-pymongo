@@ -22,19 +22,20 @@ Overview
 
 In this guide, you can learn how to specify which fields to return from a read
 operation by using a **projection**. A projection is a document supplied to a 
-query that specifies the fields MongoDB returns.
+query that specifies which fields MongoDB returns.
 
 Sample Data
 ~~~~~~~~~~~
 
 The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-get-started>`.
+free MongoDB Atlas cluster and load the sample datasets, see the
+:ref:`<pymongo-get-started>` guide.
 
 Projection Types
 ----------------
 
-You can use a projection to specify which fields to include in the return
+You can use a projection to specify which fields to include in a return
 document, or to specify which fields to exclude. With the exception of the
 ``_id`` field, you can't combine inclusion and exclusion statements in
 a single projection.
@@ -47,19 +48,19 @@ are implicitly excluded from the return document.
 
 .. note::
     
-   The ``_id`` field is *not* implicitly excluded from the return document, even if
+   The ``_id`` field is *not* implicitly excluded from the return document when
    it isn't included in the projection. To remove the ``_id`` field from the return
-   document, you must explicitly exclude it.
+   document, you must :ref:`explicitly exclude it <pymongo-project-remove-id>`.
 
 Specify fields to include with the following syntax:
 
-.. code-block::
+.. code-block:: json
 
    { "<Field Name>": 1 }
 
 The following example uses the ``find()`` method to find all restaurants with
-the ``name`` field value of ``"Emerald Pub"``. It then uses a projection to only
-return the ``name``, ``cuisine``, and ``borough`` fields in the returned
+the ``name`` field value of ``"Emerald Pub"``. It then uses a projection to
+return only the ``name``, ``cuisine``, and ``borough`` fields in the returned
 documents:
 
 .. io-code-block::
@@ -68,17 +69,20 @@ documents:
       :start-after: start-project-include
       :end-before: end-project-include
       :language: python
+      :emphasize-lines: 1
 
    .. output::
 
       {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
       {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
 
+.. _pymongo-project-remove-id:
+
 Remove the ``_id`` Field
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 When specifying fields to include, you can also exclude the ``_id`` field from
-the return document.
+the returned document.
 
 The following example performs the same query as the preceding example, but uses
 a projection to exclude the ``_id`` field:
@@ -89,6 +93,7 @@ a projection to exclude the ``_id`` field:
       :start-after: start-project-include-without-id
       :end-before: end-project-include-without-id
       :language: python
+      :emphasize-lines: 1
 
    .. output::
 
@@ -103,7 +108,7 @@ any unspecified fields are implicitly included in the return document.
 
 Specify fields to exclude with the following syntax:
 
-.. code-block::
+.. code-block:: json
 
    { "<Field Name>": 0 }
 
@@ -117,6 +122,7 @@ exclude the ``grades`` and ``address`` fields from the returned documents:
       :start-after: start-project-exclude
       :end-before: end-project-exclude
       :language: python
+      :emphasize-lines: 1
 
    .. output:: 
 
