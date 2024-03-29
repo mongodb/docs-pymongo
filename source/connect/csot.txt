@@ -19,8 +19,9 @@ Limit Server Execution Time
 Overview
 --------
 
-With {+driver-short+}, you can specify a **client side operation timeout**, a time limit
-for server operations to run. The timeout applies all steps needed to complete the
+When you use {+driver-short+} to perform a server operation, you can also limit the amount
+of time the server has to finish this operation. To do so, specify a
+**client-side operation timeout**. The timeout applies all steps needed to complete the
 operation, including server selection, connection checkout, serialization, and server-side
 execution. When the timeout expires, {+driver-short+} raises a timeout exception.
 
@@ -30,8 +31,8 @@ the ``timeoutMS`` connection option.
 timeout() Method
 ----------------
 
-To specify a timeout in your code, call the ``timeout()`` method and pass the timeout
-length, in seconds, as an argument. You must call the ``timeout()`` method
+To specify a timeout in your code, call the ``timeout()`` method and pass it the timeout
+length, in seconds. You must call the ``timeout()`` method
 in a ``with`` statement, as shown in the following example:
 
 .. code-block:: python
@@ -40,7 +41,7 @@ in a ``with`` statement, as shown in the following example:
        collection.insert_one({"name": "Yngwie"})
 
 In the preceding example, if the insert operation doesn't finish within 10 seconds,
-{+driver-short+}, raises an error.
+{+driver-short+} raises an error.
 
 The timeout you specify applies to all operations inside the ``with`` block. In the
 following example, the insert and find operations must both finish within a total of
@@ -55,22 +56,45 @@ following example, the insert and find operations must both finish within a tota
 Nested Timeout Blocks
 ~~~~~~~~~~~~~~~~~~~~~
 
-When execution enters a nested ``timeout()`` block, the outer ``timeout()`` deadline is
-paused. When execution exits the nested ``timeout()`` block, the previous ``timeout()``
-deadline resumes.
+When execution enters a nested timeout block, the outer timeout is
+paused. When execution exits the nested timeout block, the previous timeout
+resumes.
 
-The following example shows how nested calls to the ``timeout()`` method interact:
+.. important::
+
+   A nested timeout block can shorten the deadline of an outer timeout block,
+   but it can't extend it.
+
+The following example shows how to use nested calls to the ``timeout()`` method:
 
 .. code-block:: python
+   :linenos:
 
    with pymongo.timeout(5):
-       collection.find_one()  # Uses the 5 second deadline
+       collection.find_one()
        with pymongo.timeout(3):
-           collection.find_one() # Uses the 3 second deadline
-       collection.find_one()  # Uses the original 5 second deadline
+           collection.find_one()
+       collection.find_one()
        with pymongo.timeout(10):
-           collection.find_one()  # Still uses the original 5 second deadline
-       collection.find_one()  # Uses the original 5 second deadline
+           collection.find_one()
+       collection.find_one()
+
+In the preceding example, the code performs the following steps:
+
+- **Line 1**: Creates a five-second timeout block.
+- **Line 2**: Calls the ``find_one()`` method inside the five-second timeout block. The server must
+   complete this operation within the five-second timeout.
+- **Line 3**: Creates a nested three-second timeout block.
+- **Line 4**: Calls the ``find_one()`` method inside the three-second timeout block. The server must
+   complete this operation within three seconds.
+- **Line 5**: Calls the ``find_one()`` method outside the three-second timeout block. The server must
+   complete this operation within the original five-second timeout.
+- **Line 6**: Creates a nested ten-second timeout block.
+- **Line 7**: Calls the ``find_one()`` method inside the ten-second timeout block. A nested timeout
+   block can't extend an outer timeout block, so the server must complete this operation
+   within the original five-second timeout.
+- **Line 8**: Calls the ``find_one()`` method outside the ten-second timeout block. The
+  server must complete this operation within the original five-second timeout. 
 
 Thread and Task Safety
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +113,7 @@ Python driver for asynchronous applications:
 
    import motor.motor_asyncio
    client = motor.motor_asyncio.AsyncIOMotorClient()
-   coll = client.test.test
+   coll = client["test-db"]["test-collection"]
    with pymongo.timeout(10):
        await coll.insert_one({"name": "Yngwie"})
        await coll.find_one({"name": "Yngwie"})
@@ -140,7 +164,7 @@ a timeout of 10 seconds, then call the ``insert_one()`` and
          uri = "mongodb://<username>:<password>@<hostname@:<port>/?timeoutMS=10000"
          client = pymongo.MongoClient(uri)
 
-         coll = client.test.test
+         coll = client["test-db"]["test-collection"]
          coll.insert_one({"name": "Yngwie"})  # Uses a 10-second timeout.
          coll.find_one({"name": "Yngwie"})  # Also uses a 10-second timeout.
 
@@ -150,7 +174,7 @@ a timeout of 10 seconds, then call the ``insert_one()`` and
       .. code-block:: python
 
          client = MongoClient()
-         coll = client.test.test
+         coll = client["test-db"]["test-collection"]
          with pymongo.timeout(10):
             coll.insert_one({"name": "Yngwie"})
          with pymongo.timeout(10):
@@ -165,7 +189,7 @@ a timeout of 10 seconds, then call the ``insert_one()`` and
    .. code-block:: python
 
       client = MongoClient("mongodb://localhost/?timeoutMS=10000")
-      coll = client.test.test
+      coll = client["test-db"]["test-collection"]
       coll.insert_one({"name": "Yngwie"})  # Uses the client's 10-second timeout
       # pymongo.timeout overrides the client's timeoutMS.
       with pymongo.timeout(20):
@@ -177,8 +201,7 @@ Handling Exceptions
 -------------------
 
 When a server operation exceeds the specified timeout, {+driver-short+}
-raises a timeout exception. If the exception is the result of a timeout, the
-``PyMongoError.timeout`` property is ``True``. Otherwise, it's ``False``.
+raises a timeout exception and sets the ``PyMongoError.timeout`` property to ``True``.
 
 The following code example shows one way to handle a timeout exception. Inside the
 ``except`` block, the code checks the ``timeout`` property to determine whether
