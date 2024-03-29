@@ -1,0 +1,131 @@
+.. _pymongo-project:
+
+========================
+Specify Fields To Return
+========================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: read, filter, project, select
+
+Overview
+--------
+
+In this guide, you can learn how to specify which fields to return from a read
+operation by using a **projection**. A projection is a document supplied to a 
+query that specifies the fields MongoDB returns.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``sample_restaurants.restaurants`` collection
+from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
+free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-get-started>`.
+
+Projection Types
+----------------
+
+You can use a projection to specify which fields to include in the return
+document, or to specify which fields to exclude. With the exception of the
+``_id`` field, you can't combine inclusion and exclusion statements in
+a single projection.
+
+Specify Fields to Include
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you use a projection to specify fields to include, any unspecified fields
+are implicitly excluded from the return document. 
+
+.. note::
+    
+   The ``_id`` field is *not* implicitly excluded from the return document, even if
+   it isn't included in the projection. To remove the ``_id`` field from the return
+   document, you must explicitly exclude it.
+
+Specify fields to include with the following syntax:
+
+.. code-block::
+
+   { "<Field Name>": 1 }
+
+The following example uses the ``find()`` method to find all restaurants with
+the ``name`` field value of ``"Emerald Pub"``. It then uses a projection to only
+return the ``name``, ``cuisine``, and ``borough`` fields in the returned
+documents:
+
+.. io-code-block::
+    
+   .. input:: /includes/project/project.py
+      :start-after: start-project-include
+      :end-before: end-project-include
+      :language: python
+
+   .. output::
+
+      {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
+      {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
+
+Remove the ``_id`` Field
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+When specifying fields to include, you can also exclude the ``_id`` field from
+the return document.
+
+The following example performs the same query as the preceding example, but uses
+a projection to exclude the ``_id`` field:
+
+.. io-code-block::
+    
+   .. input:: /includes/project/project.py
+      :start-after: start-project-include-without-id
+      :end-before: end-project-include-without-id
+      :language: python
+
+   .. output::
+
+      {'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
+      {'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
+
+Specify Fields to Exclude
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you use a projection to specify which fields to exclude,
+any unspecified fields are implicitly included in the return document.
+
+Specify fields to exclude with the following syntax:
+
+.. code-block::
+
+   { "<Field Name>": 0 }
+
+The following example uses the ``find()`` method to find all restaurants with
+the ``name`` field value of ``"Emerald Pub"``. It then uses a projection to
+exclude the ``grades`` and ``address`` fields from the returned documents:
+
+.. io-code-block::
+    
+   .. input:: /includes/project/project.py
+      :start-after: start-project-exclude
+      :end-before: end-project-exclude
+      :language: python
+
+   .. output:: 
+
+      {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40367329'}
+      {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40668598'}
+
+Troubleshooting
+---------------
+
+The following sections describe errors you might see when using projections.
+
+.. include:: /includes/troubleshooting/projections.rst

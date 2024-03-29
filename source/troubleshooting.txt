@@ -125,3 +125,8 @@ TLS
 ---
 
 .. include:: /includes/troubleshooting/tls.rst
+
+Projections
+-----------
+
+.. include:: /includes/troubleshooting/projections.rst
