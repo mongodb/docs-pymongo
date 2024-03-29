@@ -171,17 +171,12 @@ You can set these options in two ways: by passing arguments to the
                 "&authMechanism=MONGODB-X509")
          client = pymongo.MongoClient(uri)
 
-.. note:: Authentication Database
-   
-   You don't have to specify an authentication database because MONGODB-X509 authenticates
-   against the ``$external`` virtual database. 
-
 .. _mongodb-aws:
 
 MONGODB-AWS
 -----------
 
-.. note::
+.. important::
 
    The MONGODB-AWS authentication mechanism requires MongoDB v4.4 or later.
 
@@ -208,12 +203,6 @@ tries to retrieve AWS credentials from the following sources, in the order liste
 
 The following sections describe how to use {+driver-short+} to retrieve credentials from
 these sources and use them to authenticate your application.
-
-.. note:: Authentication Database
-   
-   When using the MONGODB-AWS authentication mechanism, {+driver-short+} authenticates
-   against the ``$external`` virtual database. Therefore, you don't have to specify an
-   authentication database.
 
 ``MongoClient`` Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -446,14 +435,12 @@ You can set these options in two ways: by passing arguments to the
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
 
-.. note::
+For more information about using the ``AssumeRole`` request to authenticate your
+application, see the following AWS documentation:
    
-   For more information about using the ``AssumeRole`` request to authenticate your
-   application, see the following AWS documentation:
-   
-   - `Temporary AWS IAM credentials <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`__
-   - `AWS Security Token Service <https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html>`__
-   - `Assume Role <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__
+- `Temporary AWS IAM credentials <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html>`__
+- `AWS Security Token Service <https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html>`__
+- `Assume Role <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html>`__
 
 .. _EKS Clusters:
 
@@ -499,13 +486,11 @@ You can set this option in two ways: by passing an argument to the
          uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
-.. note::
-   
-   For more information about using an ``AssumeRoleWithWebIdentity`` request to
-   authenticate your application, see the following AWS documentation:
+For more information about using an ``AssumeRoleWithWebIdentity`` request to
+authenticate your application, see the following AWS documentation:
 
-   - `Authenticating users for your cluster from an OpenID Connect identity provider <https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html>`__
-   - `AssumeRoleWithWebIdentity <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html>`__
+- `Authenticating users for your cluster from an OpenID Connect identity provider <https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html>`__
+- `AssumeRoleWithWebIdentity <https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html>`__
 
 ECS Container or EC2 Instance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
