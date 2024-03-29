@@ -28,7 +28,7 @@ users.
    you include them in a MongoDB URI. The ``quote_plus()`` method, available in the 
    `urllib.parse <https://docs.python.org/3/library/urllib.parse.html#urllib.parse.quote_plus>`__
    module, is one way to perform this task. For example, calling ``quote_plus("and / or")``
-   returns the string ``"and+%2F+or"``.
+   returns the string ``and+%2F+or``.
 
    Don't percent-encode the username or password when passing them as arguments to
    ``MongoClient``.
@@ -279,7 +279,7 @@ AWS IAM values needed for authentication, as shown in the following code example
   
    Don't percent-encode the values in these environment variables.
 
-After you set the previous environment variables, set the ``authMechanism``
+After you set these environment variables, set the ``authMechanism``
 connection option to ``"MONGODB-AWS"``.
 You can set this option in two ways: by passing an argument to the
 ``MongoClient`` constructor or through a parameter in your connection string.
@@ -363,9 +363,9 @@ AWS Config File
 If {+driver-short+} doesn't find credentials in the shared credentials file, it tries to read
 them from an AWS config file.
 
-To use a shared credentials file to authenticate your application, ensure that the
+To use an AWS config file to authenticate your application, ensure that the
 file exists in your environment and is configured correctly. To learn how to create
-a shared credentials file, see
+an AWS config file, see
 `Credentials <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#aws-config-file>`__
 in the Boto3 documentation and `Configuration <https://docs.aws.amazon.com/sdkref/latest/guide/creds-config-files.html>`__
 in the AWS documentation.
