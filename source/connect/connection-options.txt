@@ -81,7 +81,7 @@ Network Compression
 
    * - Connection Option
      - Description
-
+     
    * - **compressors**
      - | The preferred compression types, in order, for wire-protocol messages sent to
        | or received from the server. The driver uses the first of these compression types
@@ -115,7 +115,7 @@ Timeouts
 
    * - Connection Option
      - Description
-
+     
    * - **timeoutMS**
      - | The number of milliseconds each driver operation must complete within. If an
        | operation doesn't finish in the specified time, {+driver-short+} raises a timeout exception.
@@ -125,6 +125,26 @@ Timeouts
        | **Default**: ``None``
        | **MongoClient Example**: ``timeoutMS = 10000``
        | **Connection URI Example**: ``timeoutMs=10000``
+       
+Server Selection
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Connection Option
+     - Description
+
+   * - **server_selector**
+     - | A user-defined Python function called by {+driver-short+} to choose the server
+       | to run an operation against. For more information, see
+       | :ref:`<pymongo-server-selection>`.
+       |
+       | **Data Type**: ``callable``
+       | **Default**: ``None``
+       | **MongoClient Example**: ``server_selector = your_function``
+       | **Connection URI Example**: N/A
 
 .. _secondary-reads:
 

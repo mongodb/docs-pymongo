@@ -18,7 +18,6 @@ Fundamentals
    /fundamentals/enterprise-authentication
    /fundamentals/gridfs
    /fundamentals/indexes
-   /fundamentals/in-use-encryption
    /fundamentals/type-hints
 
 - :ref:`pymongo-auth`
@@ -28,5 +27,4 @@ Fundamentals
 - :ref:`pymongo-enterprise-auth`
 - :ref:`pymongo-gridfs`
 - :ref:`pymongo-indexes`
-- :ref:`pymongo-in-use-encryption`
 - :ref:`pymongo-type-hints`
