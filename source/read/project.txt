@@ -78,14 +78,14 @@ documents:
 
 .. _pymongo-project-remove-id:
 
-Remove the ``_id`` Field
-~~~~~~~~~~~~~~~~~~~~~~~~
+Exclude the ``_id`` Field
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When specifying fields to include, you can also exclude the ``_id`` field from
 the returned document.
 
-The following example performs the same query as the preceding example, but uses
-a projection to exclude the ``_id`` field:
+The following example performs the same query as the preceding example, but
+excludes the ``_id`` field in the projection:
 
 .. io-code-block::
     
