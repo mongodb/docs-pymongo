@@ -22,7 +22,7 @@ Overview
 This guide describes the mechanisms you can use in {+driver-short+} to authenticate
 users.
 
-.. important:: Percent-Escaping
+.. important:: Percent-Encoding
 
    You must :wikipedia:`percent-encode <Percent-encoding>` a username and password before
    you include them in a MongoDB URI. The ``quote_plus()`` method, available in the 
