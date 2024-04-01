@@ -86,8 +86,8 @@ to use GSSAPI to authenticate.
 
                client = pymongo.MongoClient("mongodb://<hostname>:<port>",
                                             username="mongodbuser@EXAMPLE.COM",
-                                            authMechanism="GSSAPI"
-                                            authMechanismProperties="SERVICE_NAME:<authentication service name>)
+                                            authMechanism="GSSAPI",
+                                            authMechanismProperties="SERVICE_NAME:<authentication service name>")
 
          .. tab:: Connection String
             :tabid: connectionstring
@@ -116,9 +116,9 @@ to use GSSAPI to authenticate.
         use a comma-delimited list.
         - ``SERVICE_NAME:`` By default, MongoDB uses ``mongodb`` as
         the authentication service name. Use this option to specify a different service name.
-      - ``CANONICALIZE_HOST_NAME``: Whether to use the fully qualified domain name (FQDN)
+        - ``CANONICALIZE_HOST_NAME``: Whether to use the fully qualified domain name (FQDN)
         of the MongoDB host for the server principal.
-      - ``SERVICE_REALM``: The service realm. Use this option when the user's
+        - ``SERVICE_REALM``: The service realm. Use this option when the user's
         realm is different from the service's realm.
       
       You can set these options in two ways: by passing arguments to the
@@ -135,7 +135,7 @@ to use GSSAPI to authenticate.
                                             username="mongodbuser@EXAMPLE.COM",
                                             authMechanism="GSSAPI",
                                             password="<user password>",
-                                            authMechanismProperties="SERVICE_NAME:<authentication service name>
+                                            authMechanismProperties="SERVICE_NAME:<authentication service name>,
                                                 CANONICALIZE_HOST_NAME:true,
                                                 SERVICE_REALM:<service realm>")
 
