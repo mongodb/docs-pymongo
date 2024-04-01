@@ -44,7 +44,7 @@ Specify Fields to Include
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you use a projection to specify fields to include in the return
-document, the _id field is also included by default. All other fields are
+document, the ``_id`` field is also included by default. All other fields are
 implicitly excluded.
 
 Use the following syntax to specify the fields to include in the result:
