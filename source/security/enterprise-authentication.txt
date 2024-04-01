@@ -112,14 +112,15 @@ to use GSSAPI to authenticate.
         that owns the application process, set this option to the authenticating user's
         password.
       - ``authMechanismProperties``: Optional. This option includes multiple
-        authentication properties. To specify more than one of these properties,
+        authentication properties. To specify more than one of the following properties,
         use a comma-delimited list.
+        
         - ``SERVICE_NAME:`` By default, MongoDB uses ``mongodb`` as
-        the authentication service name. Use this option to specify a different service name.
+          the authentication service name. Use this option to specify a different service name.
         - ``CANONICALIZE_HOST_NAME``: Whether to use the fully qualified domain name (FQDN)
-        of the MongoDB host for the server principal.
+          of the MongoDB host for the server principal.
         - ``SERVICE_REALM``: The service realm. Use this option when the user's
-        realm is different from the service's realm.
+          realm is different from the service's realm.
       
       You can set these options in two ways: by passing arguments to the
       ``MongoClient`` constructor or through parameters in your connection string.
