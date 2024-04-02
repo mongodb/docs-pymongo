@@ -43,10 +43,6 @@ exclusion statements in a single projection, unless you are excluding the
 Specify Fields to Include
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you use a projection to specify fields to include in the return
-document, the ``_id`` field is also included by default. All other fields are
-implicitly excluded.
-
 Use the following syntax to specify the fields to include in the result:
 
 .. code-block:: json
@@ -71,10 +67,10 @@ documents.
       {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
       {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
 
-.. note::
-    
-   To remove the ``_id`` field from the return
-   document, you must :ref:`explicitly exclude it <pymongo-project-remove-id>`.
+When you use a projection to specify fields to include in the return
+document, the ``_id`` field is also included by default. All other fields are
+implicitly excluded. To remove the ``_id`` field from the return
+document, you must :ref:`explicitly exclude it <pymongo-project-remove-id>`.
 
 .. _pymongo-project-remove-id:
 
@@ -103,9 +99,6 @@ excludes the ``_id`` field from the projection:
 Specify Fields to Exclude
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When you use a projection to specify which fields to exclude,
-any unspecified fields are implicitly included in the return document.
-
 Use the following syntax to specify the fields to exclude from the result:
 
 .. code-block:: json
@@ -127,7 +120,11 @@ exclude the ``grades`` and ``address`` fields from the returned documents:
    .. output:: 
 
       {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40367329'}
-      {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40668598'}
+      {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American',
+      'name': 'Emerald Pub', 'restaurant_id': '40668598'}
+
+When you use a projection to specify which fields to exclude,
+any unspecified fields are implicitly included in the return document.
 
 Troubleshooting
 ---------------
