@@ -65,8 +65,8 @@ Update Operations
 To update a document, create an instance of ``UpdateOne`` and pass in
 the following arguments:
 
-- A **query filter** that specifies the criteria used to match documents to in your collection
-- The update operation you want to perform. For more information on update
+- A **query filter** that specifies the criteria used to match documents in your collection
+- The update operation you want to perform. For more information about update
   operations, see the :manual:`Field Update Operators
   </reference/operator/update-field/>` guide in the MongoDB Server manual.
 
@@ -186,7 +186,7 @@ the bulk write operation.
          attempted. 
        |
        | If ``False``, the driver performs the operations in an
-         arbitrary order and attempts to perform each operation.
+         arbitrary order and attempts to perform all operations.
        | Defaults to ``True``.
 
    * - ``bypass_document_validation``
