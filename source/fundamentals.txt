@@ -12,13 +12,11 @@ Fundamentals
    :maxdepth: 1
 
    /fundamentals/authentication
-   /fundamentals/csot
    /fundamentals/collations
    /fundamentals/databases-and-collections
    /fundamentals/dates-and-times
    /fundamentals/enterprise-authentication
    /fundamentals/gridfs
-   /fundamentals/indexes
    /fundamentals/type-hints
 
 - :ref:`pymongo-auth`
