@@ -20,7 +20,7 @@ Overview
 --------
 
 MongoDB Enterprise Edition includes the following authentication mechanisms that aren't
-available in MongoDB: 
+available in MongoDB Community Edition: 
 
 - :ref:`GSSAPI/Kerberos <pymongo-kerberos>`
 - :ref:`LDAP (Plain) <pymongo-sasl>`
