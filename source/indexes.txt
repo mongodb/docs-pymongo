@@ -126,7 +126,7 @@ Starting with MongoDB 4.2, you can drop all indexes by calling the
 
    collection.drop_indexes()
 
-For prior versions of MongoDB, pass "*" as a parameter to your call to
+For prior versions of MongoDB, pass ``"*"`` as a parameter to your call to
 ``drop_index()`` on your collection:
 
 .. code-block:: java
