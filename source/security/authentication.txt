@@ -85,7 +85,7 @@ SCRAM-SHA-1
 
 SCRAM-SHA-1, as defined by `RFC 5802 <https://www.rfc-editor.org/rfc/rfc5802>`__,
 is the default authentication mechanism on MongoDB deployments
-running MongoDB v3.0 through v3.13.
+running MongoDB v3.6.
 
 To authenticate with this mechanism, set the following connection options:
 
@@ -123,11 +123,6 @@ You can set these options in two ways: by passing arguments to the
                 "authSource=<authentication database>"
                 "&authMechanism=SCRAM-SHA-1")
          client = pymongo.MongoClient(uri)
-
-.. tip::
-  
-   For best performance on Python versions older than 2.7.8, install the
-   `backports.pbkdf2 <https://pypi.python.org/pypi/backports.pbkdf2/>`__ package.
 
 .. _mongodb_x509:
 
