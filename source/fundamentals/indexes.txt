@@ -1,5 +1,6 @@
 .. _pymongo-indexes:
 
+=======
 Indexes
 =======
 
@@ -14,163 +15,141 @@ Indexes
    :values: reference
  
 .. meta::
-   :keywords: query, location 
+   :keywords: query, optimization, efficiency
+
+.. toctree::
+
+   /indexes/single-field-index.txt
+   /indexes/compound-index.txt
+   /indexes/multikey-index.txt
+   /indexes/atlas-search-index.txt
+   /indexes/text-index.txt
+   /indexes/geospatial-index.txt
+   /indexes/unique-index.txt
+   /indexes/wildcard-index.txt
+   /indexes/clustered-index.txt
 
 Overview
 --------
 
-Adding indexes can help accelerate certain queries and can also add additional
-functionality to querying and storing documents.
+In this guide, you can learn how to use **indexes** with {+driver-short+}.
+Indexes can improve the efficiency of queries and add additional functionality
+to querying and storing documents.
 
-Unique Indexes
---------------
+Without indexes, MongoDB must scan every document in a collection to find the
+documents that match each query. These collection scans are
+slow and can negatively affect the performance of your application. However, if an
+appropriate index exists for a query, MongoDB can use the index to limit the
+documents it must inspect.
 
-This section demonstrates how to create a
-:manual:`unique index </core/index-unique/>` on a key that
-rejects documents whose value for that key already exists in the index.
+Operational Considerations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. tip::
-  
-  For more information about indexes, see the
-  :manual:`MongoDB Server manual. </indexes/>`
+To improve query performance, build indexes on fields that appear often in
+your application's queries and operations that return sorted results. Each
+index that you add consumes disk space and memory when active, so we recommend
+that you track index memory and disk usage for capacity planning. In addition,
+when a write operation updates an indexed field, MongoDB updates the related
+index.
 
-The following code creates a unique index on the ``user_id`` field:
+Since MongoDB supports dynamic schemas, applications can query against fields
+whose names are not known in advance or are arbitrary. MongoDB 4.2 introduced
+:manual:`wildcard indexes </core/index-wildcard/>` to help support these
+queries. Wildcard indexes are not designed to replace workload-based index
+planning.
 
-.. code-block:: python
+For more information about designing your data model and choosing indexes appropriate for your application, see the
+:manual:`Data Modeling and Indexes </core/data-model-operations/#indexes>` guide
+in the MongoDB Server manual.
 
-   >>> result = db.profiles.create_index([("user_id", pymongo.ASCENDING)], unique=True)
-   >>> sorted(list(db.profiles.index_information()))
-   ['_id_', 'user_id_1']
+Sample Data
+~~~~~~~~~~~
 
-.. note::
-  
-  MongoDB automatically creates an index on the ``_id`` field.
+The examples in this guide use the ``sample_mflix.movies`` collection
+from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
+free MongoDB Atlas cluster and load the sample datasets, see the
+:ref:`<pymongo-get-started>`.
 
-The following code creates two user profiles:
+Create an Index
+---------------
 
-.. code-block:: python
+MongoDB supports several different index types to support querying your data.
+The following pages describe the most common index types and provide sample
+code for creating each index type. For a full list of index types, see
+:manual:`Indexes </indexes/>` in the MongoDB Server manual.
 
-   >>> user_profiles = [{"user_id": 211, "name": "Luke"}, {"user_id": 212, "name": "Ziltoid"}]
-   >>> result = db.profiles.insert_many(user_profiles)
+- :ref:`pymongo-single-field-index`
+- :ref:`pymongo-compound-index`
+- :ref:`pymongo-multikey-index`
+- :ref:`pymongo-atlas-search-index`
+- :ref:`pymongo-text-index`
+- :ref:`pymongo-geospatial-index`
+- :ref:`pymongo-unique-index`
+- :ref:`pymongo-wildcard-index`
+- :ref:`pymongo-clustered-index`
 
-A unique index prevents you from inserting a document whose value for the ``user_id``
-field is already in the collection:
+Remove an Index
+---------------
 
-.. code-block:: python
+You can remove any unused index except the default unique index on the
+``_id`` field.
 
-   >>> new_profile = {"user_id": 213, "name": "Drew"}
-   >>> duplicate_profile = {"user_id": 212, "name": "Tommy"}
-   >>> result = db.profiles.insert_one(new_profile)  # This is fine.
-   >>> result = db.profiles.insert_one(duplicate_profile)
-   Traceback (most recent call last):
-   DuplicateKeyError: E11000 duplicate key error index: test_database.profiles.$user_id_1 dup key: { : 212 }
+The following sections show the ways to remove indexes:
 
-Geospatial Indexes
-------------------
+- Using an index specification document
+- Using an indexed name field
+- Using a wildcard character to remove all indexes
 
-This section shows how to create and use a ``~pymongo.GEO2D``
-index in PyMongo.
+Remove an Index Using the Index or Index Name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following code example shows how to create a geospatial index:
+Pass an instance of an index or the index name to the ``drop_index()`` method to
+remove an index from a collection.
 
-.. code-block:: python
+The following snippet removes an ascending index on the ``title`` field
+in a collection:
 
-   >>> from pymongo import MongoClient, GEO2D
-   >>> db = MongoClient().geo_example
-   >>> db.places.create_index([("loc", GEO2D)])
-   'loc_2d'
-
-Locations in MongoDB are represented using either embedded documents
-or lists where the first two elements are coordinates. The following code inserts
-four example locations into the geospatial index:
-
-.. code-block:: python
-
-   >>> result = db.places.insert_many(
-   ...     [{"loc": [2, 5]}, {"loc": [30, 5]}, {"loc": [1, 2]}, {"loc": [4, 4]}]
-   ... )
-   >>> result.inserted_ids
-   [ObjectId('...'), ObjectId('...'), ObjectId('...'), ObjectId('...')]
-
-.. tip::
-
-   To create a spherical (earth-like) geospatial index, use ``~pymongo.GEOSPHERE`` instead.
-   When specifying latitude and longitude coordinates in ``~pymongo.GEOSPHERE``,
-   list the longitude first and the latitude second.
-
-After you create and populate the geospatial index, you can find documents near another
-point. The following example shows how to find documents near a location that has
-the coordinates ``3, 6``:
-
-.. code-block:: python
-
-   >>> import pprint
-   >>> for doc in db.places.find({"loc": {"$near": [3, 6]}}).limit(3):
-   ...     pprint.pprint(doc)
-   ...
-   {'_id': ObjectId('...'), 'loc': [2, 5]}
-   {'_id': ObjectId('...'), 'loc': [4, 4]}
-   {'_id': ObjectId('...'), 'loc': [1, 2]}
+.. literalinclude:: /includes/indexes/indexes.py
+   :language: python
+   :start-after: start-remove-index
+   :end-before: end-remove-index
 
 .. note::
-  
-   If using ``pymongo.GEOSPHERE``, we recommend using the ``$nearSphere`` operator.
 
-To use the ``$maxDistance`` operator, you must import the ``~bson.son.SON`` module:
+   You cannot remove a single field from a compound text index. You must
+   drop the entire index and create a new one to update the indexed
+   fields.
 
-.. code-block:: python
+Remove All Indexes
+~~~~~~~~~~~~~~~~~~
 
-   >>> from bson.son import SON
-   >>> query = {"loc": SON([("$near", [3, 6]), ("$maxDistance", 100)])}
-   >>> for doc in db.places.find(query).limit(3):
-   ...     pprint.pprint(doc)
-   ...
-   {'_id': ObjectId('...'), 'loc': [2, 5]}
-   {'_id': ObjectId('...'), 'loc': [4, 4]}
-   {'_id': ObjectId('...'), 'loc': [1, 2]}
+Starting with MongoDB 4.2, you can drop all indexes by calling the
+``drop_indexes()`` method on your collection:
 
-It's also possible to query for all items within a given rectangle
-(specified by lower-left and upper-right coordinates):
+.. code-block:: java
 
-.. code-block:: python
+   collection.drop_indexes()
 
-   >>> query = {"loc": {"$within": {"$box": [[2, 2], [5, 6]]}}}
-   >>> for doc in db.places.find(query).sort("_id"):
-   ...     pprint.pprint(doc)
-   ...
-   {'_id': ObjectId('...'), 'loc': [2, 5]}
-   {'_id': ObjectId('...'), 'loc': [4, 4]}
+For prior versions of MongoDB, pass "*" as a parameter to your call to
+``drop_index()`` on your collection:
 
-Or a circle (specified by center point and radius):
+.. code-block:: java
 
-.. code-block:: python
+   collection.drop_index("*")
 
-   >>> query = {"loc": {"$within": {"$center": [[0, 0], 6]}}}
-   >>> for doc in db.places.find(query).sort("_id"):
-   ...     pprint.pprint(doc)
-   ...
-   {'_id': ObjectId('...'), 'loc': [2, 5]}
-   {'_id': ObjectId('...'), 'loc': [1, 2]}
-   {'_id': ObjectId('...'), 'loc': [4, 4]}
+Additional Information
+----------------------
 
-You can also use the ``~bson.son.SON`` module to run ``geoNear`` queries:
+To learn more about indexes in MongoDB, see the :manual:`Indexes </indexes>`
+guide in the MongoDB Server manual.
 
-.. code-block:: python
+API Documentation
+~~~~~~~~~~~~~~~~~
 
-   >>> from bson.son import SON
-   >>> db.command(SON([('geoNear', 'places'), ('near', [1, 2])]))
-   {'ok': 1.0, 'stats': ...}
+To learn more about any of the methods or types discussed in this
+guide, see the following API documentation:
 
-.. important::
-  
-   The ``geoNear`` command is deprecated starting in MongoDB 4.0. Use one of the following
-   operations instead:
-
-   * The ``$geoNear`` aggregation stage
-   * The ``$near`` query operator
-   * The ``$nearSphere`` query operator
-
-.. tip::
-  
-   For more information about geospatial indexes, see the
-   :manual:`MongoDB Server manual. </core/indexes/index-types/index-geospatial/>`
+- `create_index() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.create_index>`__
+- `create_indexes() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.create_indexes>`__
+- `drop_index() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.drop_index>`__
+- `drop_indexes() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.drop_indexes>`__

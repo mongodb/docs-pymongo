@@ -1,0 +1,59 @@
+.. _pymongo-unique-index:
+
+==============
+Unique Indexes
+==============
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: index, query, optimization, efficiency
+
+Overview
+--------
+
+Unique indexes ensure that the indexed fields do not store duplicate values. By
+default, MongoDB creates a unique index on the ``_id`` field during the creation
+of a collection. To create a unique index, specify the field or combination of
+fields that you want to prevent duplication on and set the ``unique`` option to
+``true``.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``sample_mflix.movies`` collection
+from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
+free MongoDB Atlas cluster and load the sample datasets, see the
+:ref:`<pymongo-get-started>`.
+
+Create a Unique Index
+---------------------
+
+The following example creates a unique, descending index on the ``theaterId`` field:
+
+.. literalinclude:: /includes/indexes/indexes.py
+   :language: python
+   :start-after: start-index-geo-query
+   :end-before: end-index-geo-query
+
+.. important::
+
+   If you perform a write operation that stores a duplicate value that violates
+   the unique index, the drier raises a ``DuplicateKeyException``, and MongoDB
+   throws an error resembling the following:
+
+   .. code-block:: none
+      :copyable: false
+
+      E11000 duplicate key error index
+
+For more information, see the :manual:`Unique Indexes </core/index-unique>` guide
+in the MongoDB Server manual.
