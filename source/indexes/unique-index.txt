@@ -24,7 +24,7 @@ Unique indexes ensure that the indexed fields do not store duplicate values. By
 default, MongoDB creates a unique index on the ``_id`` field during the creation
 of a collection. To create a unique index, specify the field or combination of
 fields that you want to prevent duplication on and set the ``unique`` option to
-``true``.
+``True``.
 
 Sample Data
 ~~~~~~~~~~~

@@ -75,8 +75,7 @@ Create an Index
 
 MongoDB supports several different index types to support querying your data.
 The following pages describe the most common index types and provide sample
-code for creating each index type. For a full list of index types, see
-:manual:`Indexes </indexes/>` in the MongoDB Server manual.
+code for creating each index type.
 
 - :ref:`pymongo-single-field-index`
 - :ref:`pymongo-compound-index`
@@ -94,14 +93,11 @@ Remove an Index
 You can remove any unused index except the default unique index on the
 ``_id`` field.
 
-The following sections show the ways to remove indexes:
+The following sections show how to remove a single index or to remove all
+indexes in a collection.
 
-- Using an index specification document
-- Using an indexed name field
-- Using a wildcard character to remove all indexes
-
-Remove an Index Using the Index or Index Name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Remove a Single Index
+~~~~~~~~~~~~~~~~~~~~~
 
 Pass an instance of an index or the index name to the ``drop_index()`` method to
 remove an index from a collection.

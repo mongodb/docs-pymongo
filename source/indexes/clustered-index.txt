@@ -23,7 +23,7 @@ Overview
 **Clustered indexes** instruct a collection to store documents ordered
 by a key value. To create a clustered index, specify the clustered index
 option with the ``_id`` field as the key and the unique field as
-``true`` when you create your collection.
+``True`` when you create your collection.
 
 Sample Data
 ~~~~~~~~~~~

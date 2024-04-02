@@ -29,7 +29,7 @@ language as an option when creating the index.
 
    MongoDB offers an improved full-text search solution,
    :atlas:`Atlas Search </atlas-search/>`. To learn more about Atlas Search
-   indexes and how to use them, see the :ref:`pymongo-atlas-search-indexes`
+   indexes and how to use them, see the :ref:`pymongo-atlas-search-index`
    guide.
 
 Sample Data
