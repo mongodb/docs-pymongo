@@ -1,0 +1,20 @@
+.. _pymongo-connect:
+
+==================
+Connect to MongoDB
+==================
+
+.. meta::
+   :description: Learn how to use (+driver-short+} to connect to from MongoDB.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   /connect/tls
+   /connect/client-certificates
+   /connect/csot
+
+- :ref:`pymongo-tls`
+- :ref:`pymongo-client-certificates`
+- :ref:`pymongo-csot`
