@@ -53,7 +53,7 @@ Python application.
 After you set up the app, access the ``orders`` collection by adding the
 following code to the application:
 
-.. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
    :language: python
    :copyable: true
    :start-after: start-coll
@@ -63,7 +63,7 @@ following code to the application:
 Delete any existing data and insert sample data into
 the ``orders`` collection as shown in the following code:
 
-.. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
    :language: python
    :copyable: true
    :start-after: start-insert-orders
@@ -82,7 +82,7 @@ Tutorial
       </reference/operator/aggregation/unwind>` stage to separate the
       entries in the ``products`` array into individual documents:
 
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-unwind
@@ -95,7 +95,7 @@ Tutorial
       </reference/operator/aggregation/match>` stage that matches
       products with a ``products.price`` value greater than ``15``:
 
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-match
@@ -114,7 +114,7 @@ Tutorial
       - ``total_value``: the total value of all the sales of the product
       - ``quantity``: the number of orders for the product
 
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-group
@@ -128,7 +128,7 @@ Tutorial
       ``product_id`` field from the values in the ``_id`` field
       that were set during the ``$group`` stage:
 
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-set
@@ -142,7 +142,7 @@ Tutorial
       ``$unset`` stage removes the ``_id`` field from the result
       documents:
             
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-unset
@@ -154,7 +154,7 @@ Tutorial
       Add the following code to the end of your application to perform
       the aggregation on the ``orders`` collection:
 
-      .. literalinclude:: /includes/aggregation/unpack-arrays.py
+.. TODO: .. literalinclude:: /includes/aggregation/unpack-arrays.py
          :language: python
          :copyable: true
          :start-after: start-run-agg

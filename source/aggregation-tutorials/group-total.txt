@@ -51,7 +51,7 @@ Python application.
 After you set up the app, access the ``orders`` collection by adding the
 following code to the application:
 
-.. literalinclude:: /includes/aggregation/group-total.py
+.. TODO: .. literalinclude:: /includes/aggregation/group-total.py
    :language: python
    :copyable: true
    :start-after: start-coll
@@ -61,7 +61,7 @@ following code to the application:
 Delete any existing data and insert sample data into
 the ``orders`` collection as shown in the following code:
 
-.. literalinclude:: /includes/aggregation/group-total.py
+.. TODO: .. literalinclude:: /includes/aggregation/group-total.py
    :language: python
    :copyable: true
    :start-after: start-insert-orders
@@ -80,6 +80,7 @@ Tutorial
       </reference/operator/aggregation/match>` stage that matches
       orders placed in 2020:
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -94,6 +95,7 @@ Tutorial
       ascending sort on the ``orderdate`` field to surface the earliest
       2020 purchase for each customer in the next stage:
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -115,6 +117,7 @@ Tutorial
       - ``orders``: the list of all the customer's purchases,
         including the date and value of each purchase
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -128,6 +131,7 @@ Tutorial
       </reference/operator/aggregation/sort>` stage to set an
       ascending sort on the ``first_purchase_date`` field:
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -142,6 +146,7 @@ Tutorial
       ``customer_id`` field from the values in the ``_id`` field
       that were set during the ``$group`` stage:
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -155,7 +160,8 @@ Tutorial
       </reference/operator/aggregation/unset>` stage. The
       ``$unset`` stage removes the ``_id`` field from the result
       documents:
-            
+
+.. TODO:           
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
@@ -168,6 +174,7 @@ Tutorial
       Add the following code to the end of your application to perform
       the aggregation on the ``orders`` collection:
 
+.. TODO:
       .. literalinclude:: /includes/aggregation/group-total.py
          :language: python
          :copyable: true
