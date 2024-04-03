@@ -11,22 +11,17 @@ Fundamentals
    :titlesonly:
    :maxdepth: 1
 
-   /fundamentals/authentication
-   /fundamentals/csot
    /fundamentals/collations
    /fundamentals/databases-and-collections
    /fundamentals/dates-and-times
-   /fundamentals/enterprise-authentication
    /fundamentals/gridfs
    /fundamentals/indexes
    /fundamentals/type-hints
 
 - :ref:`pymongo-auth`
-- :ref:`pymongo-csot`
 - :ref:`pymongo-collations`
 - :ref:`pymongo-databases-collections`
 - :ref:`pymongo-dates-times`
-- :ref:`pymongo-enterprise-auth`
 - :ref:`pymongo-gridfs`
 - :ref:`pymongo-indexes`
 - :ref:`pymongo-type-hints`

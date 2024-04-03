@@ -13,6 +13,10 @@ Read Data from MongoDB
 
    /read/retrieve
    /read/project
+   /read/count
+   /read/cursors
 
 - :ref:`pymongo-retrieve`
 - :ref:`pymongo-project`
+- :ref:`pymongo-count`
+- :ref:`pymongo-cursors`
