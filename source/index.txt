@@ -23,7 +23,6 @@ MongoDB PyMongo Documentation
    /specify-a-query
    /indexes
    /security
-   /gridfs
    /tools
    API Documentation <{+api-root+}>
    /faq
