@@ -20,8 +20,8 @@ Retrieve Distinct Field Values
 Overview
 --------
 
-In this guide, you can learn how to retrieve a list of distinct values for a
-specified field across a collection with {+driver-short+}.
+In this guide, you can learn how to retrieve a list of distinct values across a collection for a
+specified field with {+driver-short+}.
 
 Sample Data
 ~~~~~~~~~~~
@@ -61,7 +61,7 @@ value in the ``borough`` field, each value only appears in the results once.
 Retrieve Distinct Values Across Specified Documents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can provide a **query filter** to the distinct method to find the distinct
+You can provide a **query filter** to the ``distinct()`` method to find the distinct
 field values across a subset of documents in a collection. A query filter is an expression that specifies search
 criteria used to match documents in an operation. For more information about
 creating a query filter, see :ref:`pymongo-specify-query`.
@@ -115,7 +115,7 @@ The following table describes the options you can set to customize
    * - ``collation``
      - | An instance of ``Collation``.
 
-The following code calls the ``distinct()`` method to retrieve the distinct values of the ``name`` field for
+The following example retrieves the distinct values of the ``name`` field for
 all documents that have a ``borough`` field value of ``"Bronx"``. It also uses
 the ``comment`` option to add a comment to the operation.
 
