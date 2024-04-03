@@ -20,8 +20,11 @@ Retrieve Distinct Field Values
 Overview
 --------
 
-In this guide, you can learn how to retrieve a list of distinct values across a collection for a
-specified field with {+driver-short+}.
+Within a collection, different documents might contain different values for a
+single field. For example, one ``restaurant`` document has a ``borough`` value of ``"Manhattan"``, and
+another has a ``borough`` value of ``"Queens"``. With {+driver-short+}, you can
+retrieve all the distinct values that a field contains across multiple documents
+in a collection.
 
 Sample Data
 ~~~~~~~~~~~
@@ -54,9 +57,9 @@ the ``restaurants`` collection:
 
       <placeholder output>
 
-The results show each distinct value that appears in the ``borough`` field
+The results show every distinct value that appears in the ``borough`` field
 across all documents in the collection. Although several documents have the same
-value in the ``borough`` field, each value only appears in the results once.
+value in the ``borough`` field, each value appears in the results only once.
 
 Retrieve Distinct Values Across Specified Documents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -80,7 +83,6 @@ all documents that have a ``cuisine`` field value of ``"Italian"``:
 
       <placeholder output>
 
-
 Modify Distinct Behavior
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,7 +101,7 @@ The following table describes the options you can set to customize
      - Description
 
    * - ``filter``
-     - | A query filter that specifies which documents to retrieve distinct
+     - | A query filter that specifies the documents to retrieve distinct
          values from.
 
    * - ``session``
