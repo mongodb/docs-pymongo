@@ -68,7 +68,7 @@ Python application.
 After you set up the app, access the ``orders`` and ``products``
 collections by adding the following code to the application:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+.. literalinclude:: /includes/aggregation/one-to-one-join.py
    :language: python
    :copyable: true
    :start-after: start-colls
@@ -78,7 +78,7 @@ collections by adding the following code to the application:
 Delete any existing data and insert sample data into
 the ``orders`` collection as shown in the following code:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+.. literalinclude:: /includes/aggregation/one-to-one-join.py
    :language: python
    :copyable: true
    :start-after: start-insert-orders
@@ -88,7 +88,7 @@ the ``orders`` collection as shown in the following code:
 Delete any existing data and insert sample data into
 the ``products`` collection as shown in the following code:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+.. literalinclude:: /includes/aggregation/one-to-one-join.py
    :language: python
    :copyable: true
    :start-after: start-insert-products
@@ -107,7 +107,7 @@ Tutorial
       </reference/operator/aggregation/match>` stage that matches
       orders placed in 2020:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+      .. literalinclude:: /includes/aggregation/one-to-one-join.py
          :language: python
          :copyable: true
          :start-after: start-match
@@ -121,7 +121,7 @@ Tutorial
       ``$lookup`` stage joins the ``product_id`` field in the ``orders``
       collection to the ``id`` field in the ``products`` collection:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+      .. literalinclude:: /includes/aggregation/one-to-one-join.py
          :language: python
          :copyable: true
          :start-after: start-lookup
@@ -141,7 +141,7 @@ Tutorial
       and ``product_category``, from the values in the
       ``product_mapping`` object field:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+      .. literalinclude:: /includes/aggregation/one-to-one-join.py
          :language: python
          :copyable: true
          :start-after: start-set
@@ -161,7 +161,7 @@ Tutorial
       </reference/operator/aggregation/unset>` stage. The
       ``$unset`` stage removes unnecessary fields from the document:
             
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+      .. literalinclude:: /includes/aggregation/one-to-one-join.py
          :language: python
          :copyable: true
          :start-after: start-unset
@@ -173,7 +173,7 @@ Tutorial
       Add the following code to the end of your application to perform
       the aggregation on the ``orders`` collection:
 
-.. TODO: .. literalinclude:: /includes/aggregation/one-to-one-join.py
+      .. literalinclude:: /includes/aggregation/one-to-one-join.py
          :language: python
          :copyable: true
          :start-after: start-run-agg

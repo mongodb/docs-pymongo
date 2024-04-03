@@ -73,7 +73,7 @@ Python application.
 After you set up the app, access the ``products`` and ``orders``
 collections by adding the following code to the application:
 
-.. TODO: .. literalinclude:: /includes/aggregation/multi-field-join.py
+.. literalinclude:: /includes/aggregation/multi-field-join.py
    :language: python
    :copyable: true
    :start-after: start-colls
@@ -83,7 +83,7 @@ collections by adding the following code to the application:
 Delete any existing data and insert sample data into
 the ``products`` collection as shown in the following code:
 
-.. TODO: .. literalinclude:: /includes/aggregation/multi-field-join.py
+.. literalinclude:: /includes/aggregation/multi-field-join.py
    :language: python
    :copyable: true
    :start-after: start-insert-products
@@ -93,7 +93,7 @@ the ``products`` collection as shown in the following code:
 Delete any existing data and insert sample data into
 the ``orders`` collection as shown in the following code:
 
-.. TODO: .. literalinclude:: /includes/aggregation/multi-field-join.py
+.. literalinclude:: /includes/aggregation/multi-field-join.py
    :language: python
    :copyable: true
    :start-after: start-insert-orders
@@ -120,7 +120,6 @@ Tutorial
       code uses aliases for the ``name`` and ``variation`` fields
       set when creating the ``$lookup`` stage:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -132,7 +131,6 @@ Tutorial
       </reference/operator/aggregation/match>` stage to match
       orders placed in 2020:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -144,7 +142,6 @@ Tutorial
       </reference/operator/aggregation/unset>` stage to remove
       unneeded fields from the ``orders`` collection side of the join:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -157,7 +154,6 @@ Tutorial
       Configure this stage to store the processed lookup fields in
       an array field called ``orders``:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -172,7 +168,6 @@ Tutorial
       products for which there is at least one order in 2020,
       based on the ``orders`` array calculated in the previous step:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -187,7 +182,6 @@ Tutorial
       ``$unset`` stage removes the ``_id`` and ``description``
       fields from the result documents:
 
-.. TODO:           
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true
@@ -200,7 +194,6 @@ Tutorial
       Add the following code to the end of your application to perform
       the aggregation on the ``products`` collection:
 
-.. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
          :language: python
          :copyable: true

@@ -49,7 +49,7 @@ Python application.
 After you set up the app, access the ``persons`` collection by adding the
 following code to the application:
 
-.. TODO: .. literalinclude:: /includes/aggregation/filtered-subset.py
+.. literalinclude:: /includes/aggregation/filtered-subset.py
    :language: python
    :copyable: true
    :start-after: start-collection
@@ -59,7 +59,7 @@ following code to the application:
 Delete any existing data in the collections and insert sample data into
 the ``persons`` collection as shown in the following code:
 
-.. TODO: .. literalinclude:: /includes/aggregation/filtered-subset.py
+.. literalinclude:: /includes/aggregation/filtered-subset.py
    :language: python
    :copyable: true
    :start-after: start-insert-persons
@@ -78,7 +78,7 @@ Tutorial
       </reference/operator/aggregation/match>` stage that finds documents in which
       the value of the ``vocation`` field is ``"ENGINEER"``:
 
-.. TODO:      .. literalinclude:: /includes/aggregation/filtered-subset.py
+      .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
          :copyable: true
          :start-after: start-match
@@ -92,7 +92,7 @@ Tutorial
       documents in descending order by the ``dateofbirth`` field to
       list the youngest people first:
 
-.. TODO:      .. literalinclude:: /includes/aggregation/filtered-subset.py
+      .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
          :copyable: true
          :start-after: start-sort
@@ -105,7 +105,7 @@ Tutorial
       stage to the pipeline to output only the first three documents in
       the results.
 
-.. TODO:      .. literalinclude:: /includes/aggregation/filtered-subset.py
+      .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
          :copyable: true
          :start-after: start-limit
@@ -118,7 +118,7 @@ Tutorial
       </reference/operator/aggregation/unset>` stage. The
       ``$unset`` stage removes unnecessary fields from the result documents:
             
-.. TODO:     .. literalinclude:: /includes/aggregation/filtered-subset.py
+      .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
          :copyable: true
          :start-after: start-unset
@@ -136,7 +136,7 @@ Tutorial
       Add the following code to the end of your application to perform
       the aggregation on the ``persons`` collection:
 
-.. TODO:      .. literalinclude:: /includes/aggregation/filtered-subset.py
+      .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
          :copyable: true
          :start-after: start-run-agg
