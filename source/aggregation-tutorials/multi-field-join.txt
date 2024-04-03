@@ -118,7 +118,7 @@ Tutorial
       </reference/operator/aggregation/match>` stage to match the
       values of two fields on each side of the join. Note that the following
       code uses aliases for the ``name`` and ``variation`` fields
-      set when :ref:`creating the $lookup stage <pymongo-multi-field-agg-lookup-stage>`:
+      set when creating the ``$lookup`` stage:
 
 .. TODO:
       .. literalinclude:: /includes/aggregation/multi-field-join.py
@@ -151,8 +151,6 @@ Tutorial
          :start-after: start-embedded-pl-unset
          :end-before: end-embedded-pl-unset
          :dedent:
-
-      .. _pymongo-multi-field-agg-lookup-stage:
 
       After the embedded pipeline is completed, add the
       ``$lookup`` stage to the main aggregation pipeline.
