@@ -424,3 +424,8 @@ The following Python idioms can produce this result:
    pymongo.errors.BulkWriteError: batch op errors occurred
    >>> docs
    [{'_id': ObjectId('560f1933fba52279f0b0da0e')}]
+
+Indexes
+-------
+
+.. include:: /includes/troubleshooting/unique-index.rst

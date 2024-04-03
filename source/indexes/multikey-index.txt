@@ -42,7 +42,7 @@ The following example creates a multikey index on the ``rated``, ``genres``, and
    :start-after: start-index-multikey
    :end-before: end-index-multikey
 
-The following is an example of a query that uses the index created in the preceding code snippet:
+The following is an example of a query that uses the index created in the preceding code example:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python

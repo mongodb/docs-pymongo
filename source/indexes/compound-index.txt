@@ -42,7 +42,7 @@ The following example creates a compound index on the ``type`` and ``rated`` fie
    :end-before: end-compound-index
 
 The following is an example of a query that uses the index created in
-the preceding code snippet:
+the preceding code example:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python

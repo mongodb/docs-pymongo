@@ -50,7 +50,8 @@ The following example creates a text index on the ``plot`` field:
    :start-after: start-index-text-single
    :end-before: end-index-text-single
 
-The following is an example of a query that uses the index created in the preceding code snippet.
+The following is an example of a query that uses the index created in the
+preceding code example:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python
@@ -65,7 +66,7 @@ text index for multiple text fields, create a compound
 index. A text search runs on all the text fields within the compound
 index.
 
-The following snippet creates a compound text index for the ``title`` and ``genre``
+The following example creates a compound text index for the ``title`` and ``genre``
 fields:
 
 .. literalinclude:: /includes/indexes/indexes.py

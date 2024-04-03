@@ -22,9 +22,10 @@ Overview
 
 Unique indexes ensure that the indexed fields do not store duplicate values. By
 default, MongoDB creates a unique index on the ``_id`` field during the creation
-of a collection. To create a unique index, specify the field or combination of
-fields that you want to prevent duplication on and set the ``unique`` option to
-``True``.
+of a collection. To create a unique index, perform the following steps:
+
+- Specify the field or combination of fields that you want to prevent duplication on.
+- Set the ``unique`` option to``True``.
 
 Sample Data
 ~~~~~~~~~~~
@@ -37,23 +38,17 @@ free MongoDB Atlas cluster and load the sample datasets, see the
 Create a Unique Index
 ---------------------
 
-The following example creates a unique, descending index on the ``theaterId`` field:
+The following example creates a descending unique index on the ``theaterId`` field:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python
    :start-after: start-index-geo-query
    :end-before: end-index-geo-query
 
-.. important::
-
-   If you perform a write operation that stores a duplicate value that violates
-   the unique index, the drier raises a ``DuplicateKeyException``, and MongoDB
-   throws an error resembling the following:
-
-   .. code-block:: none
-      :copyable: false
-
-      E11000 duplicate key error index
-
 For more information, see the :manual:`Unique Indexes </core/index-unique>` guide
 in the MongoDB Server manual.
+
+Troubleshooting
+---------------
+
+.. include:: /includes/troubleshooting/unique-index.rst

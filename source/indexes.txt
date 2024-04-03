@@ -52,7 +52,7 @@ that you track index memory and disk usage for capacity planning. In addition,
 when a write operation updates an indexed field, MongoDB updates the related
 index.
 
-Since MongoDB supports dynamic schemas, applications can query against fields
+Because MongoDB supports dynamic schemas, applications can query against fields
 whose names are not known in advance or are arbitrary. MongoDB 4.2 introduced
 :manual:`wildcard indexes </core/index-wildcard/>` to help support these
 queries. Wildcard indexes are not designed to replace workload-based index
@@ -102,7 +102,7 @@ Remove a Single Index
 Pass an instance of an index or the index name to the ``drop_index()`` method to
 remove an index from a collection.
 
-The following snippet removes an ascending index on the ``title`` field
+The following example removes an ascending index on the ``title`` field
 in a collection:
 
 .. literalinclude:: /includes/indexes/indexes.py
@@ -126,7 +126,7 @@ Starting with MongoDB 4.2, you can drop all indexes by calling the
 
    collection.drop_indexes()
 
-For prior versions of MongoDB, pass ``"*"`` as a parameter to your call to
+For earlier versions of MongoDB, pass ``"*"`` as a parameter to your call to
 ``drop_index()`` on your collection:
 
 .. code-block:: java
