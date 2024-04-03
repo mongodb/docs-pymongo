@@ -425,6 +425,18 @@ The following Python idioms can produce this result:
    >>> docs
    [{'_id': ObjectId('560f1933fba52279f0b0da0e')}]
 
+.. _pymongo-troubleshoot-tls:
+
+TLS
+---
+
+.. include:: /includes/troubleshooting/tls.rst
+
+Projections
+-----------
+
+.. include:: /includes/troubleshooting/projections.rst
+
 Indexes
 -------
 
