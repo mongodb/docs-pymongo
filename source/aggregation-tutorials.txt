@@ -70,7 +70,7 @@ Once you install the driver, create a file called
 ``agg_tutorial.py``. Paste the following code in this file to create an
 app template for the aggregation tutorials:
 
-.. literalinclude:: /includes/aggregation/template-app.js
+.. literalinclude:: /includes/aggregation/template-app.py
    :language: python
    :copyable: true
 

@@ -1,10 +1,11 @@
 name = "pymongo"
 title = "PyMongo"
 toc_landing_pages = [
-    "/get-started", 
-    "/write-operations", 
-    "/read", 
-    "/connect"
+    "/get-started",
+    "/write-operations",
+    "/read",
+    "/connect",
+    "/aggregation-tutorials",
 ]
 
 intersphinx = [
