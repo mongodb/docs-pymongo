@@ -36,7 +36,7 @@ See the following sections that describe GridFS operations and how to
 perform them:
 
 - :ref:`Create a GridFS bucket <gridfs-create-bucket>`
-- :ref:`Store Files <gridfs-store-files>`
+- :ref:`Create a GridFS bucket <gridfs-upload-files>`
 - :ref:`Retrieve File Information <gridfs-retrieve-file-info>`
 - :ref:`Download Files <gridfs-download-files>`
 - :ref:`Rename Files <gridfs-rename-files>`
