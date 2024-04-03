@@ -5,6 +5,7 @@ toc_landing_pages = [
     "/write-operations",
     "/read",
     "/connect",
+    "/indexes",
     "/aggregation-tutorials",
 ]
 
