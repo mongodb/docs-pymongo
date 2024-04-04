@@ -32,15 +32,8 @@ size limit of 16MB. For more detailed information on whether GridFS is
 suitable for your use case, see :manual:`GridFS </core/gridfs>` in the
 MongoDB Server manual.
 
-See the following sections that describe GridFS operations and how to
-perform them:
-
-- :ref:`Create a GridFS bucket <gridfs-create-bucket>`
-- :ref:`Create a GridFS bucket <gridfs-upload-files>`
-- :ref:`Retrieve File Information <gridfs-retrieve-file-info>`
-- :ref:`Download Files <gridfs-download-files>`
-- :ref:`Rename Files <gridfs-rename-files>`
-- :ref:`Delete Files <gridfs-delete-files>`
+The following sections describe GridFS operations and how to
+perform them.
 
 How GridFS Works
 ----------------
@@ -57,16 +50,16 @@ When you create a new GridFS bucket, the driver creates the preceding
 collections, prefixed with the default bucket name ``fs``, unless
 you specify a different name. The driver also creates an index on each
 collection to ensure efficient retrieval of the files and related
-metadata. The driver only creates the GridFS bucket on the first write
-operation if it does not already exist. The driver only creates indexes if
-they do not exist and when the bucket is empty. For more information about
+metadata. The driver creates the GridFS bucket, if it doesn't exist, only when the first write
+operation is performed. The driver creates indexes only if they don't exist and when the
+bucket is empty. For more information about
 GridFS indexes, see :manual:`GridFS Indexes </core/gridfs/#gridfs-indexes>`
 in the MongoDB Server manual.
 
 When storing files with GridFS, the driver splits the files into smaller
 chunks, each represented by a separate document in the ``chunks`` collection.
 It also creates a document in the ``files`` collection that contains
-a file id, file name, and other file metadata. You can upload the file from
+a file ID, file name, and other file metadata. You can upload the file from
 memory or from a stream. See the following diagram to see how GridFS splits
 the files when uploaded to a bucket.
 
@@ -84,7 +77,7 @@ Create a GridFS Bucket
 ----------------------
 
 To store or retrieve files from GridFS, create a GridFS bucket by calling the
-``GridFSBucket()``constructor and passing in a ``Database`` instance.
+``GridFSBucket()`` constructor and passing in a ``Database`` instance.
 You can use the ``GridFSBucket`` instance to
 call read and write operations on the files in your bucket.
 
@@ -141,12 +134,12 @@ about the file it refers to, including:
 
 To retrieve files from a GridFS bucket, call the ``find()`` method on the ``GridFSBucket``
 instance. The method returns a ``Cursor`` instance
-from which you can access the results.
+from which you can access the results. To learn more about ``Cursor`` objects in
+{+driver-short+}, see :ref:`<pymongo-cursors>`.
 
 The following code example shows you how to retrieve and print file metadata
-from all your files in a GridFS bucket. Among the different ways that you can
-traverse the retrieved results from the ``Cursor`` iterable, the
-following example uses the ``for...of`` syntax to display the results:
+from all your files in a GridFS bucket. It uses the ``for...of`` syntax to traverse the
+``Cursor`` iterable and display the results:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -156,7 +149,8 @@ following example uses the ``for...of`` syntax to display the results:
 
 The ``find()`` method accepts various query specifications. You can use
 its parameters to specify the sort order, maximum number of documents to return,
-and the number of documents to skip before returning.
+and the number of documents to skip before returning. To learn more about querying
+MongoDB, see :ref:`<pymongo-retrieve>`.
 
 .. _gridfs-download-files:
 
@@ -209,14 +203,6 @@ Use the ``rename()`` method to update the name of a GridFS file in your
 bucket. You must specify the file to rename by its ``_id`` field
 rather than its file name.
 
-.. note::
-
-   The ``rename()`` method supports updating the name of only one file at
-   a time. To rename multiple files, retrieve a list of files matching the
-   file name from the bucket, extract the ``_id`` field from the files you
-   want to rename, and pass each value in separate calls to the ``rename()``
-   method.
-
 The following example shows how to update the ``filename`` field to
 ``"newFileName"`` by referencing a document's ``_id`` field:
 
@@ -225,6 +211,14 @@ The following example shows how to update the ``filename`` field to
       :copyable: true
       :start-after: start rename files
       :end-before: end rename files
+
+.. note::
+
+   The ``rename()`` method supports updating the name of only one file at
+   a time. To rename multiple files, retrieve a list of files matching the
+   file name from the bucket, extract the ``_id`` field from the files you
+   want to rename, and pass each value in separate calls to the ``rename()``
+   method.
 
 .. _gridfs-delete-files:
 
@@ -235,13 +229,6 @@ Use the ``delete()`` method to remove a file's collection document and associate
 chunks from your bucket. This effectively deletes the file. You must
 specify the file by its ``_id`` field rather than its file name.
 
-.. note::
-
-   The ``delete()`` method supports deleting only one file at a time. To
-   delete multiple files, retrieve the files from the bucket, extract
-   the ``_id`` field from the files you want to delete, and pass each value
-   in separate calls to the ``delete()`` method.
-
 The following example shows you how to delete a file by referencing its ``_id`` field:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
@@ -250,6 +237,12 @@ The following example shows you how to delete a file by referencing its ``_id`` 
       :start-after: start rename files
       :end-before: end rename files
 
+.. note::
+
+   The ``delete()`` method supports deleting only one file at a time. To
+   delete multiple files, retrieve the files from the bucket, extract
+   the ``_id`` field from the files you want to delete, and pass each value
+   in separate calls to the ``delete()`` method.
 API Documentation
 -----------------
 
