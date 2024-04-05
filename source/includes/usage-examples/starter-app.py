@@ -2,12 +2,14 @@
 from pymongo import MongoClient
 
 try:
-    database = client.get_database("<your database>")
-    movies = database.get_collection("<your collection>")
-
     # start authentication code here
 
     # end authentication code here
+
+    database = client.get_database("<your database>")
+    collection = database.get_collection("<your collection>")
+
+    # ...
 
     client.close()
 
