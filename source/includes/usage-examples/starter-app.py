@@ -6,10 +6,7 @@ try:
 
     # end authentication code here
 
-    database = client.get_database("<your database>")
-    collection = database.get_collection("<your collection>")
-
-    # ...
+    # other application code
 
     client.close()
 
