@@ -34,7 +34,7 @@ Starter App
       :start-after: # start starter app
       :end-before: # end starter app
       :linenos:
-      :emphasize-lines: 10-12
+      :emphasize-lines: 7-9
 
 SCRAM-SHA-256
 -------------
