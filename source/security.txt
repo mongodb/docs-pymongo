@@ -4,7 +4,18 @@
 Secure Your Data
 ================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
 .. meta::
+   :keywords: ldap, encryption, principal, tls, authorize, boto, ecs, aws
    :description: Learn how to use (+driver-short+} to secure your data.
 
 .. toctree::
