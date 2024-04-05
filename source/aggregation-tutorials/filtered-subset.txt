@@ -90,7 +90,8 @@ Tutorial
       Next, add a :manual:`$sort
       </reference/operator/aggregation/sort>` stage that sorts the
       documents in descending order by the ``dateofbirth`` field to
-      list the youngest people first:
+      list the youngest people first. Because Python dictionaries don't maintain order
+      use a ``SON``or ``OrderedDict`` object:
 
       .. literalinclude:: /includes/aggregation/filtered-subset.py
          :language: python
