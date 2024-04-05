@@ -1,0 +1,20 @@
+.. _pymongo-security:
+
+================
+Secure Your Data
+================
+
+.. meta::
+   :description: Learn how to use (+driver-short+} to secure your data.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   /security/authentication
+   /security/enterprise-authentication
+   /security/in-use-encryption
+
+- :ref:`pymongo-auth`
+- :ref:`pymongo-enterprise-auth`
+- :ref:`pymongo-in-use-encryption`

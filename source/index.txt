@@ -13,10 +13,16 @@ MongoDB PyMongo Documentation
 .. toctree::
 
    /previous-versions
-   /quick-start
+   /get-started
    /whats-new
    /fundamentals
+   /connect
+   /write-operations
    /read
+   /aggregation-tutorials
+   /specify-a-query
+   /indexes
+   /security
    /tools
    API Documentation <{+api-root+}>
    /faq

@@ -1,6 +1,13 @@
 name = "pymongo"
 title = "PyMongo"
-toc_landing_pages = ["/read"]
+toc_landing_pages = [
+    "/get-started",
+    "/write-operations",
+    "/read",
+    "/connect",
+    "/indexes",
+    "/aggregation-tutorials",
+]
 
 intersphinx = [
     "https://www.mongodb.com/docs/manual/objects.inv",
@@ -22,3 +29,5 @@ version = "v{+version-number+}"
 example = "https://raw.githubusercontent.com/mongodb/docs-pymongo/{+docs-branch+}/source/includes/code-examples"
 stable-api = "Stable API"
 api-root = "https://pymongo.readthedocs.io/en/{+patch-version-number+}/api/"
+string-data-type = "``str``"
+int-data-type = "``int``"
