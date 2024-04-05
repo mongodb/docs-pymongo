@@ -5,11 +5,9 @@ try:
     database = client.get_database("<your database>")
     movies = database.get_collection("<your collection>")
 
-    # start your code here
-    uri = "<your connection string>"
-    client = MongoClient(uri)
+    # start authentication code here
 
-    # end your code here
+    # end authentication code here
 
     client.close()
 
