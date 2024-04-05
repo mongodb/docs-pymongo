@@ -7,7 +7,7 @@ Databases and Collections
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 .. facet::
@@ -69,16 +69,16 @@ The following example accesses a collection named "test_collection":
 Create a Collection
 -------------------
 
-Use the ``create_collection()`` method to implicitly create a collection in a
+Use the ``create_collection()`` method to explicitly create a collection in a
 MongoDB database.
 
-The following example creates a collection called "exampleCollection":
+The following example creates a collection called "example_collection":
 
 .. code-block:: python
    :emphasize-lines: 2
 
    database = client.getDatabase["test_database"]
-   database.create_collection("exampleCollection")
+   database.create_collection("example_collection")
 
 You can specify collection options, such as maximum size and document
 validation rules, by passing them in as keyword arguments. To see a full list of
@@ -147,7 +147,7 @@ and collections inherit them from the database. However, you can change these
 settings on your database or collection by using one of the following methods:
 
 - ``get_database()``: Gets the database with its settings inherited
-  from the client changes the specified settings.
+  from the client and changes the specified settings.
 - ``database.with_options()``: Gets the database and changes the specified
   settings.
 - ``get_collection()``: Gets the collection and changes the specified settings.
@@ -209,12 +209,12 @@ a ``tag_sets`` parameter.
 
 The ``tag_sets`` parameter is a list of dictionaries. Each dictionary
 includes tag values that the replica-set member must match to be selected for use.
-{+driver-short+} tries each set of tags in order until it finds a set of
+{+driver-short+} attempts each set of tags, in order, until it finds a set of
 tags with at least one matching replica-set member.
 
 In the following code example, the tag set passed to the ``read_preference`` parameter
 instructs {+driver-short+} to prefer reads from the
-New York data center (``dc``), but to fall back to the San Francisco data center:
+New York data center (``dc``) and to fall back to the San Francisco data center:
 
 .. code-block:: python
 
