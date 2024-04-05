@@ -17,6 +17,7 @@ MongoDB PyMongo Documentation
    /whats-new
    /fundamentals
    /connect
+   /databases-collections
    /write-operations
    /read
    /aggregation-tutorials
