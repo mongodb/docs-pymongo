@@ -29,15 +29,8 @@ Secure Your Data
 Overview
 --------
 
-This page contains copyable code examples for you to use. First, copy the example
-code to your application. Then add any of the smaller samples to the highlighted area
-below. 
-
-To learn more about any of these authentication patterns, see the links after the
-code sample.
-
-Starter App
------------
+This page contains copyable code examples for you to use. First, copy the following example
+code to your application:
 
 .. literalinclude:: /includes/usage-examples/starter-app.py
       :language: python
@@ -46,6 +39,13 @@ Starter App
       :end-before: # end starter app
       :linenos:
       :emphasize-lines: 4-6
+
+Then, add any of the smaller samples to the highlighted area
+below.
+
+To learn more about any of these authentication patterns, see the links after the
+code sample.
+
 
 SCRAM-SHA-256
 -------------
