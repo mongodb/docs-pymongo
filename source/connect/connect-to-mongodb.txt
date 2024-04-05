@@ -45,7 +45,9 @@ A standard connection string includes the following pieces:
    * - ``username:password@``
 
      - Optional. Authentication credentials. If you include these, the client
-       authenticates the user against the database specified in ``authSource``. 
+       authenticates the user against the database specified in ``authSource``.
+       For more information about the ``authSource`` connection option, see
+       :ref:`pymongo-auth`. 
 
    * - ``host[:port]``
 
