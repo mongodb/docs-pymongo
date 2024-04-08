@@ -29,8 +29,16 @@ Secure Your Data
 Overview
 --------
 
-This page contains copyable code examples for you to use. First, copy the following example
-code to your application:
+MongoDB supports multiple mechanisms that you can use to authenticate your application.
+This page contains code examples that show each of these mechanisms.
+
+To use an authentication example from this page, perform the following steps:
+
+1. Copy the authentication code example into your application.
+#. Replace all placeholders in the code examples with the relevant values for your
+   MongoDB deployment. ``<hostname>`` is an example of a placeholder.
+
+If you don't have your own application yet, you can use the following starter code:
 
 .. literalinclude:: /includes/usage-examples/starter-app.py
       :language: python
@@ -40,12 +48,8 @@ code to your application:
       :linenos:
       :emphasize-lines: 4-6
 
-Then, add any of the smaller samples to the highlighted area
-below.
-
-To learn more about any of these authentication patterns, see the links after the
-code sample.
-
+To learn more about any of the authentication mechanisms on this page, see the links below
+each code example.
 
 SCRAM-SHA-256
 -------------
@@ -139,12 +143,6 @@ the Authentication guide.
 MONGODB-AWS
 -----------
 
-To use MONGODB-AWS authentication, install {+driver-short+} with the ``aws`` option:
-
-.. code-block:: sh
-
-   python -m pip install pymongo[aws]
-
 ``MongoClient`` Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -155,7 +153,7 @@ To use MONGODB-AWS authentication, install {+driver-short+} with the ``aws`` opt
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://@<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
                                       username="<AWS IAM access key ID>",
                                       password="<AWS IAM secret access key>",
                                       authMechanism="MONGODB-AWS")
@@ -326,8 +324,15 @@ ECS Container or EC2 Instance
 To learn more about authenticating from an ECS container, see
 :ref:`pymongo-mongodb-aws-ec` in the Authentication guide.
 
-Kerberos (Unix)
----------------
+Kerberos
+--------
+
+.. note:: MongoDB Enterprise Only
+
+   Kerberos authentication is available only in MongoDB Enterprise.
+
+Unix
+~~~~
 
 .. tabs::
 
@@ -354,8 +359,8 @@ Kerberos (Unix)
 To learn more about authenticating with Kerberos, see
 :ref:`pymongo-kerberos` in the Authentication guide.
 
-Kerberos (Windows)
-------------------
+Windows
+~~~~~~~
 
 .. tabs::
 
@@ -391,6 +396,10 @@ To learn more about authenticating with Kerberos, see
 
 PLAIN SASL
 ----------
+
+.. note:: MongoDB Enterprise Only
+
+   PLAIN SASL authentication is available only in MongoDB Enterprise.
 
 .. tabs::
 
