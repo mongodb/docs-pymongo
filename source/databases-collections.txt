@@ -145,12 +145,12 @@ and collections inherit them from the database. However, you can change these
 settings on your database or collection by using one of the following methods:
 
 - ``get_database()``: Gets the database and applies the client's read
-   preference, read concern, and write preference.
+  preference, read concern, and write preference.
 - ``database.with_options()``: Gets the database and applies its current read
-   preference, read concern, and write preference.
+  preference, read concern, and write preference.
 - ``get_collection()``: Gets the collection and applies its current read preference, read concern, and write preference.
 - ``collection.with_options()``: Gets the collection and applies the database's read
-   preference, read concern, and write preference.
+  preference, read concern, and write preference.
 
 To change read or write settings with the preceding methods, call the method and
 pass in the collection or database name, and the new read preference, read
