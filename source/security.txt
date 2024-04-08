@@ -44,12 +44,7 @@ the relevant values for your MongoDB deployment.
 
 .. _pymongo-auth-sample:
 
-Sample Application
-~~~~~~~~~~~~~~~~~~
-
-You can use the following sample application to experiment with authenticating to
-MongoDB. Replace the highlighted lines with an authentication code example from this
-page.
+.. include:: /includes/usage-examples/sample-app-intro.rst
 
 .. literalinclude:: /includes/usage-examples/sample-app.py
       :language: python
@@ -202,7 +197,7 @@ Environment Variables
          client = pymongo.MongoClient(uri)
 
 To learn more about authenticating with AWS environment variables, see
-:ref:`pymongo-mongodb-aws-creds-file` in the Authentication guide.
+:ref:`pymongo-mongodb-aws-env-vars` in the Authentication guide.
 
 Shared Credentials File
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -226,7 +221,7 @@ Shared Credentials File
          client = pymongo.MongoClient(uri)
 
 To learn more about authenticating with a shared AWS credentials file, see
-:ref:`pymongo-mongodb-aws-credentials` in the Authentication guide.
+:ref:`pymongo-mongodb-aws-creds-file` in the Authentication guide.
 
 AWS Config File
 ~~~~~~~~~~~~~~~
