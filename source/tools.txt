@@ -21,6 +21,7 @@ Overview
 --------
 
 This page describes some popular third-party libraries for working with {+driver-short+}.
+With the exception of Motor, all libraries on this page are maintained by the community.
 To keep this list current, projects that haven't been updated recently will
 occasionally be removed from the list or moved to the end.
 
