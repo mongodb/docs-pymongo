@@ -32,15 +32,15 @@ Overview
 MongoDB supports multiple mechanisms that you can use to authenticate your application.
 This page contains code examples that show each of these mechanisms.
 
-To use an authentication example from this page, perform the following steps:
+.. tip::
+  
+  To learn more about any of the authentication mechanisms on this page, see the
+  :ref:`pymongo-auth` and :ref:`pymongo-enterprise-auth` pages.
 
-1. Copy the authentication code example into your application or the
-   :ref:`sample application <pymongo-auth-sample>`.
-#. Replace all placeholders in the code examples with the relevant values for your
-   MongoDB deployment. ``<hostname>`` is an example of a placeholder.
-
-To learn more about any of the authentication mechanisms on this page, see the links below
-each code example.
+To use an authentication example from this page, copy the code example into the
+:ref:`sample application <pymongo-auth-sample>` or your own application.
+Be sure to replace all placeholders in the code examples, such as ``<hostname>``, with
+the relevant values for your MongoDB deployment.
 
 .. _pymongo-auth-sample:
 
@@ -51,11 +51,11 @@ You can use the following sample application to experiment with authenticating t
 MongoDB. Replace the highlighted lines with an authentication code example from this
 page.
 
-.. literalinclude:: /includes/usage-examples/starter-app.py
+.. literalinclude:: /includes/usage-examples/sample-app.py
       :language: python
       :copyable: true
-      :start-after: # start starter app
-      :end-before: # end starter app
+      :start-after: # start sample app
+      :end-before: # end sample app
       :linenos:
       :emphasize-lines: 4-6
 

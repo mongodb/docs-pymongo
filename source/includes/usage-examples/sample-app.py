@@ -6,6 +6,9 @@ try:
 
     # end authentication code here
 
+    client.admin.command("ping")
+    print("Authenticated successfully")
+
     # other application code
 
     client.close()
