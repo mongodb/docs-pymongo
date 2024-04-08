@@ -16,9 +16,8 @@ MongoDB PyMongo Documentation
    /connect
    /write-operations
    /read
-   /aggregation-tutorials
-   /specify-a-query
    /indexes
+   /aggregation-tutorials
    /security
    /tools
    /faq
