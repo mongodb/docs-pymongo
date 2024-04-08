@@ -25,16 +25,16 @@ collections with {+driver-short+}.
 
 MongoDB organizes data into a hierarchy of the following levels:
 
-- Databases
-- Collections
-- Documents
+- **Databases**: The top level of data organization in a MongoDB instance.
+- **Collections**: MongoDB stores documents in collections. They are analogous
+  to tables in relational databases.
+- **Documents**: Contain literal data such as string, numbers, dates, and other
+  embedded documents.
 
-Databases are the top level of data organization in a MongoDB instance.
-MongoDB organizes databases into collections, which contain **documents**.
-Documents contain literal data such as strings, numbers, dates, and
-other embedded documents. For more information about document field
-types and structure, see the :manual:`Documents </core/document/>` guide in the
-MongoDB Server manual.
+For more information about document field types and structure, see the
+:manual:`Documents </core/document/>` guide in the MongoDB Server manual.
+
+.. TODO: Add a diagram here
 
 Access a Database
 -----------------
@@ -57,14 +57,14 @@ The following example accesses a collection named "test_collection":
 .. code-block:: python
    :emphasize-lines: 2
 
-   database = client.getDatabase["test_database"]
+   database = client["test_database"]
    collection = database["test_collection"]
 
 .. tip::
 
    If the provided collection name does not already exist in the database,
    MongoDB implicitly creates the collection when you first insert data
-   into that collection.
+   into it.
 
 Create a Collection
 -------------------
@@ -77,11 +77,11 @@ The following example creates a collection called "example_collection":
 .. code-block:: python
    :emphasize-lines: 2
 
-   database = client.getDatabase["test_database"]
+   database = client["test_database"]
    database.create_collection("example_collection")
 
 You can specify collection options, such as maximum size and document
-validation rules, by passing them in as keyword arguments. To see a full list of
+validation rules, by passing them in as keyword arguments. For a full list of
 optional parameters, see the `create_collection() API documentation
 <{+api-root+}pymongo/database.html#pymongo.database.Database.create_collection>`__.
 
@@ -117,7 +117,7 @@ For more information about iterating over a cursor, see :ref:`pymongo-cursors`.
 Delete a Collection
 -------------------
 
-You can delete a collection from the database using the ``drop_collection()``
+You can delete a collection from the database by using the ``drop_collection()``
 method.
 
 The following example deletes the ``test_collection`` collection:
@@ -132,7 +132,7 @@ The following example deletes the ``test_collection`` collection:
    Dropping a collection from your database permanently deletes all
    documents and all indexes within that collection.
 
-   Only drop collections that contain data that is no longer needed.
+   Drop a collection only if the data in it is no longer needed.
 
 Configure Read and Write Operations
 -----------------------------------
@@ -146,13 +146,13 @@ By default, databases inherit these settings from the ``MongoClient`` instance,
 and collections inherit them from the database. However, you can change these
 settings on your database or collection by using one of the following methods:
 
-- ``get_database()``: Gets the database with its settings inherited
-  from the client and changes the specified settings.
-- ``database.with_options()``: Gets the database and changes the specified
-  settings.
-- ``get_collection()``: Gets the collection and changes the specified settings.
-- ``collection.with_options()``: Gets the collection with its settings inherited
-  from its database and changes the specified settings.
+- ``get_database()``: Gets the database and applies the client's read
+   preference, read concern, and write preference.
+- ``database.with_options()``: Gets the database and applies its current read
+   preference, read concern, and write preference.
+- ``get_collection()``: Gets the collection and applies its current read preference, read concern, and write preference.
+- ``collection.with_options()``: Gets the collection and applies the database's read
+   preference, read concern, and write preference.
 
 To change read or write settings with the preceding methods, call the method and
 pass in the collection or database name, and the new read preference, read
@@ -190,7 +190,7 @@ collection called ``test-collection`` with the ``with_options()`` method:
 .. tip::
 
    To see the types of read preferences available in the ``ReadPreference`` enum, see the
-   `API documentation <{+api-root+}pymongo/read_preferences.html#pymongo.read_preferences.ReadPreference>`__.
+   `API documentation <{+api-root+}pymongo/read_preferences.html#pymongo.read_preferences.ReadPreference>`__. 
 
 To learn more about the read and write settings, see the following guides in the
 MongoDB Server manual:
@@ -202,33 +202,26 @@ MongoDB Server manual:
 Tag Sets
 ~~~~~~~~
 
-You can :manual:`tag </core/read-preference-tags/>` replica-set
-members according to any criteria you choose. By default, {+driver-short+} ignores tags
-when choosing a member to read from, but you can configure your read preference with
-a ``tag_sets`` parameter.
+In MongoDB Server, you can apply key-value :manual:`tags
+</core/read-preference-tags/>` to replica-set
+members according to any criteria you choose. You can then use
+those tags to target one or more members for a read operation.
 
-The ``tag_sets`` parameter is a list of dictionaries. Each dictionary
-includes tag values that the replica-set member must match to be selected for use.
-{+driver-short+} attempts each set of tags, in order, until it finds a set of
-tags with at least one matching replica-set member.
+By default, {+driver-short+} ignores tags
+when choosing a member to read from. To instruct {+driver-short+}
+to prefer certain tags, pass them as a parameter to your
+`read preference class <{+api-root+}pymongo/read_preferences.html#pymongo.read_preferences.Primary>`__ 
+constructor. 
 
 In the following code example, the tag set passed to the ``read_preference`` parameter
 instructs {+driver-short+} to prefer reads from the
-New York data center (``dc``) and to fall back to the San Francisco data center:
+New York data center (``'dc': 'ny'``) and to fall back to the San Francisco data
+center (``'dc': 'sf'``):
 
 .. code-block:: python
 
    db = client.get_database(
         'test', read_preference=Secondary([{'dc': 'ny'}, {'dc': 'sf'}]))
-
-
-When performing a read, the ``MongoClient`` in the preceding example attempts to find
-secondary members in New York, then in San Francisco. If it can't find a secondary member
-in either location, it raises an ``AutoReconnect`` error.
-
-To avoid an ``AutoReconnect`` error, include an empty dictionary (``{}``) at the end of
-the list. This instructs {+driver-short+} to read from any member that matches the mode,
-ignoring tags.
 
 Local Threshold
 ~~~~~~~~~~~~~~~
@@ -247,7 +240,7 @@ The following example specifies a local threshold of 35 milliseconds:
    :emphasize-lines: 3
 
    client = MongoClient(replicaSet='repl0',
-                        readPreference='secondaryPreferred',
+                        readPreference=ReadPreference.SECONDARY_PREFERRED,
                         localThresholdMS=35)
 
 In the preceding example, {+driver-short+} distributes reads between matching members
@@ -259,6 +252,11 @@ within 35 milliseconds of the closest member's ping time.
    replica set through a ``mongos`` instance. In this case, use the
    :manual:`localThreshold </reference/program/mongos/#std-option-mongos.--localThreshold>`
    command-line option.
+
+Troubleshooting
+---------------
+
+.. include:: /includes/troubleshooting/read-write-options.rst
 
 API Documentation
 -----------------
