@@ -34,11 +34,21 @@ This page contains code examples that show each of these mechanisms.
 
 To use an authentication example from this page, perform the following steps:
 
-1. Copy the authentication code example into your application.
+1. Copy the authentication code example into your application or the
+   :ref:`sample application <pymongo-auth-sample>`.
 #. Replace all placeholders in the code examples with the relevant values for your
    MongoDB deployment. ``<hostname>`` is an example of a placeholder.
 
-If you don't have your own application yet, you can use the following starter code:
+To learn more about any of the authentication mechanisms on this page, see the links below
+each code example.
+
+.. _pymongo-auth-sample:
+
+Sample Application
+~~~~~~~~~~~~~~~~~~
+
+You can use the following sample application to experiment with authenticating to
+MongoDB:
 
 .. literalinclude:: /includes/usage-examples/starter-app.py
       :language: python
@@ -47,9 +57,6 @@ If you don't have your own application yet, you can use the following starter co
       :end-before: # end starter app
       :linenos:
       :emphasize-lines: 4-6
-
-To learn more about any of the authentication mechanisms on this page, see the links below
-each code example.
 
 SCRAM-SHA-256
 -------------
