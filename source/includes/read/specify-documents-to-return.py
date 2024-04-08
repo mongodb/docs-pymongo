@@ -24,7 +24,7 @@ results = restaurants.find({ "cuisine" : "Italian"}, sort={"name": pymongo.ASCEN
 
 for restaurant in results:
     print(restaurant["name"])
-# end-sort-method
+# end-sort-option
 
 # start-skip
 results = restaurants.find({ "borough" : "Manhattan"}).skip(10)

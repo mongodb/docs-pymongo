@@ -90,17 +90,17 @@ The following example returns all documents with the ``cuisine`` value of
 .. io-code-block::
 
    .. input:: /includes/read/specify-documents-to-return.py
-      :start-after: start-limit-method
-      :end-before: end-limit-method
+      :start-after: start-sort-method
+      :end-before: end-sort-method
       :language: python
 
    .. output::
 
-      ...
-      Aria
-      Armando'S Kitchen
-      Armando'S Restaurant
-      Armani Restaurant
+      (Lewis Drug Store) Locanda Vini E Olii
+      101 Restaurant And Bar
+      44 Sw Ristorante & Bar
+      900 Park
+      A Voce
       ...
       Zucchero E Pomodori
 
@@ -111,17 +111,17 @@ query as the preceding example:
 .. io-code-block::
 
    .. input:: /includes/read/specify-documents-to-return.py
-      :start-after: start-limit-option
-      :end-before: end-limit-option
+      :start-after: start-sort-option
+      :end-before: end-sort-option
       :language: python
 
    .. output::
 
-      ...
-      Aria
-      Armando'S Kitchen
-      Armando'S Restaurant
-      Armani Restaurant
+      (Lewis Drug Store) Locanda Vini E Olii
+      101 Restaurant And Bar
+      44 Sw Ristorante & Bar
+      900 Park
+      A Voce
       ...
       Zucchero E Pomodori
 
@@ -177,7 +177,7 @@ You can combine the ``limit()``, ``sort()``, and ``skip()`` methods in a single
 operation. This allows you to set a maximum number of sorted documents to
 return, skipping a specified number of documents before returning.
 
-The following example returns the documents with the ``cuisine`` value of
+The following example returns documents with the ``cuisine`` value of
 ``"Italian"``. The results are sorted in alphabetical order, skipping the first
 10 documents:
 
@@ -220,3 +220,21 @@ same query as the preceding example:
       Acqua Santa
       Acquista Trattoria
       Acquolina Catering
+
+Additional Information
+----------------------
+
+For more information about specifying a query, see :ref:`pymongo-specify-query`.
+
+For more information about retrieveing documents, see :ref:`pymongo-retrieve`.
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+To learn more about any of the methods or types discussed in this
+guide, see the following API Documentation:
+
+- `find() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.find>`__
+- `limit() <{+api-root+}pymongo/cursor.html#pymongo.cursor.Cursor.limit>`__
+- `sort() <{+api-root+}pymongo/cursor.html#pymongo.cursor.Cursor.sort>`__
+- `skip() <{+api-root+}pymongo/cursor.html#pymongo.cursor.Cursor.skip>`__
