@@ -48,7 +48,8 @@ Sample Application
 ~~~~~~~~~~~~~~~~~~
 
 You can use the following sample application to experiment with authenticating to
-MongoDB:
+MongoDB. Replace the highlighted lines with an authentication code example from this
+page.
 
 .. literalinclude:: /includes/usage-examples/starter-app.py
       :language: python
