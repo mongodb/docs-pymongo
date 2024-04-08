@@ -10,6 +10,13 @@ Specify Documents to Return
    :depth: 2
    :class: singlecol
 
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: read, paginate, pagination, order, code example
+
 Overview
 --------
 
