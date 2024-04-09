@@ -1,18 +1,19 @@
+# start sample app
 from pymongo import MongoClient
 
-uri = "<connection string URI>"
-client = MongoClient(uri)
-
 try:
-    database = client["<database name>"]
-    collection = database["<collection name>"]
+    # start authentication code here
 
-    # start example code here
+    # end authentication code here
 
-    # end example code here
+    client.admin.command("ping")
+    print("Authenticated successfully")
+
+    # other application code
 
     client.close()
 
 except Exception as e:
     raise Exception(
         "The following error occurred: ", e)
+# end sample app
