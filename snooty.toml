@@ -7,6 +7,7 @@ toc_landing_pages = [
     "/connect",
     "/indexes",
     "/aggregation",
+    "/aggregation/aggregation-tutorials",
 ]
 
 intersphinx = [
