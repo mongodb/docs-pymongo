@@ -1,8 +1,8 @@
-.. _pymongo-aggregation:
+.. _pymongo-aggregation-basics:
 
-===========
-Aggregation
-===========
+==================
+Aggregation Basics
+==================
 
 .. facet::
    :name: genre
@@ -112,7 +112,7 @@ of New York. To do so, it uses an aggregation pipeline with the following stages
    for document in aggCursor:
        print(document)
 
-The preceding code example produces output similar to the following example:
+The preceding code example produces output similar to the following:
 
 .. code-block:: javascript
    
@@ -149,7 +149,7 @@ command. Select the corresponding tab below to see an example of each method.
 
          python3 -m pip install pymongoexplain
 
-      The following code example runs the preceding aggregation and prints the explanation
+      The following code example runs the preceding aggregation example and prints the explanation
       returned by MongoDB: 
      
       .. io-code-block::
@@ -184,7 +184,7 @@ command. Select the corresponding tab below to see an example of each method.
    .. tab:: Database Command
       :tabid: db-command
 
-      The following code example runs the preceding aggregation and prints the explanation
+      The following code example runs the preceding aggregation example and prints the explanation
       returned by MongoDB: 
 
       .. io-code-block::
@@ -216,7 +216,7 @@ command. Select the corresponding tab below to see an example of each method.
 
 .. tip::
 
-   Use Python's ``pprint`` module to format explanations:
+   You can use Python's ``pprint`` module to make explanation results easier to read:
 
    .. code-block:: python
 
