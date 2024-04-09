@@ -1,0 +1,18 @@
+.. _pymongo-aggregation-landing:
+
+=====================
+Aggregation Pipelines
+=====================
+
+.. meta::
+   :description: Learn how to use (+driver-short+} to perform aggregation operations.
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   /aggregation/aggregation
+   /aggregation/aggregation-tutorials
+
+- :ref:`pymongo-aggregation`
+- :ref:`pymongo-aggregation-tutorials-landing`
