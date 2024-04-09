@@ -108,8 +108,8 @@ of New York. To do so, it uses an aggregation pipeline with the following stages
 
    # Define an aggregation pipeline with a match stage and a group stage
    pipeline = [
-       { $match: { cuisine: "Bakery" } },
-       { $group: { _id: "$borough", count: { $sum: 1 } } }
+       { "$match": { "cuisine": "Bakery" } },
+       { "$group": { "_id": "$borough", "count": { "$sum": 1 } } }
    ]
 
    # Execute the aggregation
@@ -167,8 +167,8 @@ command. Select the corresponding tab below to see an example of each method.
         
            # Define an aggregation pipeline with a match stage and a group stage
            pipeline = [
-              { $match: { cuisine: "Bakery" } },
-              { $group: { _id: "$borough", count: { $sum: 1 } } }
+              { "$match": { "cuisine": "Bakery" } },
+              { "$group": { "_id": "$borough", "count": { "$sum": 1 } } }
            ]
 
            # Execute the operation and print the explanation
