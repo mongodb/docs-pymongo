@@ -7,7 +7,7 @@ try:
     database = client["<database name>"]
     collection = database["<collection name>"]
 
-    # start example code below
+    # start example code here
 
     # end example code here
 
