@@ -1,8 +1,8 @@
-.. _pymongo-aggregation-basics:
+.. _pymongo-aggregation-operations:
 
-==================
-Aggregation Basics
-==================
+======================
+Aggregation Operations
+======================
 
 .. facet::
    :name: genre
