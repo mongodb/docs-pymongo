@@ -1,10 +1,10 @@
 # start-find-one
-results = collection.find_one({"<field name>" : "<value>"})
+results = collection.find_one({ "<field name>" : "<value>" })
 
 print(results)
 # end-find-one
 # start-find
-results = collection.find({"<field name>" : "<value>"})
+results = collection.find({ "<field name>" : "<value>" })
 
 for document in results:
     print(document)
@@ -15,7 +15,7 @@ count = collection.count_documents()
 print(count)
 #end-count-all
 # start-count-query
-count = collection.count_documents({"<field name>": "<value>"})
+count = collection.count_documents({ "<field name>": "<value>" })
 
 print(count)
 # end-count-query

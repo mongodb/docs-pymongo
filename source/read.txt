@@ -4,6 +4,12 @@
 Read Data from MongoDB
 ======================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
 .. facet::
    :name: genre
    :values: reference
@@ -47,7 +53,7 @@ the relevant values for your MongoDB deployment.
    :language: python
    :copyable:
    :linenos:
-   :emphasize-lines: 9-11
+   :emphasize-lines: 10-12
 
 Find One
 --------
@@ -109,8 +115,8 @@ Estimated Document Count
 To learn more about the ``estimated_document_count()`` method, see the
 :ref:`pymongo-estimated-count` guide.
 
-Distinct
---------
+Retrieve Distinct Values
+------------------------
 
 .. literalinclude:: /includes/usage-examples/retrieve-code-examples.py
    :start-after: start-distinct
