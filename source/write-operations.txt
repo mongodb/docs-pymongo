@@ -4,8 +4,19 @@
 Write Data to MongoDB
 =====================
 
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
 .. meta::
    :description: Learn how to use {+driver-short+} to write data to MongoDB.
+   :keywords: usage examples, save, crud, create, code example
 
 .. toctree::
    :titlesonly:
