@@ -2,9 +2,14 @@ from pymongo import MongoClient
 
 try:
 
-    # start example code here
+    # start connection code here
 
-    # end example code here
+    # end connection code here
+
+    client.admin.command("ping")
+    print("Connected successfully")
+
+    # other application code
 
     client.close()
 

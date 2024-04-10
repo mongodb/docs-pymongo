@@ -4,7 +4,6 @@
       :tabid: mongoclient
 
       .. code-block:: python
-         :emphasize-lines: 2
 
          client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname>:<port>",
                                       compressors = "snappy,zstd,zlib")
@@ -13,7 +12,6 @@
       :tabid: connectionstring
 
       .. code-block:: python
-         :emphasize-lines: 2
 
          uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
                 "compressors=snappy,zstd,zlib")

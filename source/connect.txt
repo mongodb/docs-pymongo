@@ -28,12 +28,6 @@ Connect to MongoDB
    /connect/stable-api
    /connect/csot
 
-- :ref:`pymongo-tls`
-- :ref:`pymongo-network-compression`
-- :ref:`pymongo-server-selection`
-- :ref:`pymongo-stable-api`
-- :ref:`pymongo-csot`
-
 Overview
 --------
 
@@ -46,7 +40,7 @@ to MongoDB with various settings.
   provided in each section.
 
 To use a connection example from this page, copy the code example into the
-:ref:`sample application <pymongo-auth-sample>` or your own application.
+:ref:`sample application <pymongo-connect-sample>` or your own application.
 Be sure to replace all placeholders in the code examples, such as ``<hostname>``, with
 the relevant values for your MongoDB deployment.
 
@@ -155,7 +149,6 @@ zlib Compression Level
       :tabid: mongoclient
 
       .. code-block:: python
-         :emphasize-lines: 2-3
 
          client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname>:<port>",
                                       compressors = "zlib",
@@ -165,7 +158,6 @@ zlib Compression Level
       :tabid: connectionstring
 
       .. code-block:: python
-         :emphasize-lines: 2-3
 
          uri = ("mongodb://<username>:<password>@<hostname>:<port>/?"
                 "compressors=zlib"
@@ -218,7 +210,6 @@ timeoutMS Connection Option
       :tabid: mongoclient
 
       .. code-block:: python
-         :emphasize-lines: 2
 
          client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname@:<port>",
                                       timeoutMS=<timeout length>)
@@ -227,7 +218,6 @@ timeoutMS Connection Option
       :tabid: connectionstring
 
       .. code-block:: python
-         :emphasize-lines: 1
 
          uri = "mongodb://<username>:<password>@<hostname:<port>/?timeoutMS=<timeout length>"
          client = pymongo.MongoClient(uri)
