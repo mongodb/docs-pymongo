@@ -15,7 +15,7 @@ Connect to MongoDB
    :values: reference
  
 .. meta::
-   :description: Learn how to use (+driver-short+} to connect to MongoDB.
+   :description: Learn how to use {+driver-short+} to connect to MongoDB.
    :keywords: client, ssl
 
 .. toctree::
@@ -49,10 +49,10 @@ the relevant values for your MongoDB deployment.
 .. include:: /includes/usage-examples/sample-app-intro.rst
 
 .. literalinclude:: /includes/usage-examples/connect-sample-app.py
-      :language: python
-      :copyable: true
-      :linenos:
-      :emphasize-lines: 5-7
+   :language: python
+   :copyable: true
+   :linenos:
+   :emphasize-lines: 5-7
 
 Transport Layer Security (TLS)
 ------------------------------
@@ -181,11 +181,13 @@ To learn more about customizing server selection, see
 {+stable-api+}
 --------------
 
-.. literalinclude:: /includes/connect/stable_api.py
-   :start-after: # start stable api
-   :end-before: # end stable api
-   :language: python
-   :dedent:
+.. code-block:: python
+   :emphasize-lines: 4
+
+   from pymongo.server_api import ServerApi
+
+   client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname:<port>",
+                        server_api=ServerApi("<{+stable-api+} version>"))
 
 To learn more about the {+stable-api+}, see :ref:`pymongo-stable-api`.
 
