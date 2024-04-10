@@ -1,11 +1,6 @@
 from pymongo import MongoClient
 
 try:
-    uri = "<connection string URI>"
-    client = MongoClient(uri)
-
-    database = client["<database name>"]
-    collection = database["<collection name>"]
 
     # start example code here
 

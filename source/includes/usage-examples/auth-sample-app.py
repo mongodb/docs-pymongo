@@ -1,4 +1,3 @@
-# start sample app
 from pymongo import MongoClient
 
 try:
@@ -16,4 +15,3 @@ try:
 except Exception as e:
     raise Exception(
         "The following error occurred: ", e)
-# end sample app
