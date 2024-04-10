@@ -32,7 +32,7 @@ types of indexes that you can use with {+driver-short+}.
 
 .. tip::
 
-  To learn more about working with indexes, see the :ref:`pymongo-indexes`
+  To learn more about working with indexes, see the :ref:`pymongo-work-with-indexes`
   guide. To learn more about any of the indexes shown on this page, see the link
   provided in each section.
 
