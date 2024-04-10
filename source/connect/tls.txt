@@ -141,7 +141,7 @@ You can do this in two ways: by passing an argument to the
 
 .. note:: 
   
-   You can't use both a CRL and :ref:`OCSP <pymongo-ocsp>` in the same TLS handshake.
+   You can't use both a CRL and :ref:`OCSP <pymongo-disable-ocsp>` in the same TLS handshake.
 
 .. _pymongo-client-cert:
 
