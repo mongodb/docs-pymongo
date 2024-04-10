@@ -199,7 +199,8 @@ timeout Block
 
 .. code-block:: python
 
-   with pymongo.timeout(<timeout length>): 
+   with pymongo.timeout(<timeout length>):
+      # perform operations here
 
 To learn more about client-side timeouts, see :ref:`pymongo-csot`.
 
