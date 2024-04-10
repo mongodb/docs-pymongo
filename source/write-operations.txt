@@ -22,7 +22,7 @@ Overview
 --------
 
 On this page, you can see copyable code examples that show common
-methods you can use to write documents to MongoDB with {+driver-short+}.
+methods you can use to write data to MongoDB with {+driver-short+}.
 
 .. tip::
 
@@ -42,7 +42,7 @@ the relevant values for your MongoDB deployment.
    :language: python
    :copyable:
    :linenos:
-   :emphasize-lines: 10-12
+   :emphasize-lines: 11-13
 
 Insert One
 ----------
@@ -53,8 +53,8 @@ Insert One
    :language: python
    :copyable:
 
-To learn more about the ``insert_one()`` method, see :ref:`pymongo-write-insert` in
-the Insert Documents guide.
+To learn more about the ``insert_one()`` method, see the :ref:`Insert Documents
+<pymongo-write-insert>` guide.
 
 Insert Multiple
 ---------------

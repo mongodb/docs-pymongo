@@ -64,7 +64,7 @@ print(result.deleted_count)
 operations = [
     pymongo.InsertOne(
         {
-            "<new document field name>" : "<new document value>"
+            "<field name>" : "<value>"
         }
     ),
     pymongo.UpdateMany(
