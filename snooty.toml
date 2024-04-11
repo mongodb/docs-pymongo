@@ -7,6 +7,8 @@ toc_landing_pages = [
     "/connect",
     "/indexes",
     "work-with-indexes",
+    "/aggregation",
+    "/aggregation/aggregation-tutorials",
     "/security",
     "/aggregation-tutorials",
 ]
