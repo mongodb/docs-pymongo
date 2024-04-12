@@ -10,6 +10,7 @@ toc_landing_pages = [
     "/aggregation/aggregation-tutorials",
     "/security",
     "/aggregation-tutorials",
+    "/data-formats",
 ]
 
 intersphinx = [

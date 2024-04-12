@@ -21,6 +21,7 @@ MongoDB PyMongo Documentation
    /aggregation
    /security
    /tools
+   /data-formats
    /faq
    /troubleshooting
    /whats-new
