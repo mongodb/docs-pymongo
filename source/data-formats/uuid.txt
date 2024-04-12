@@ -92,9 +92,10 @@ Application P, written in Python, uses the following code to try to find the doc
 inserted by Application C:
 
 .. code-block:: python
-   :emphasize-lines: 3
+   :emphasize-lines: 4
 
    from uuid import UUID
+   
    collection = client.example_db.uuid_test
    result = collection.find_one({'_id': UUID('00112233-4455-6677-8899-aabbccddeeff')})
 
@@ -104,9 +105,10 @@ UUIDs as BSON binary. To find the document, Application P must use code similar
 to the following example:
 
 .. code-block:: python
-   :emphasize-lines: 3
+   :emphasize-lines: 4
    
    from uuid import UUID
+   
    collection = client.example_db.uuid_test
    result = collection.find_one({'_id': UUID('33221100-5544-7766-8899-aabbccddeeff')})
 
@@ -409,7 +411,10 @@ example:
   unspecified_collection.insert_one({'_id': 'bar', 'uuid': uuid4()})
   Traceback (most recent call last):
   ...
-  ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED. UUIDs can be manually converted to bson.Binary instances using bson.Binary.from_uuid() or a different UuidRepresentation can be configured. See the documentation for UuidRepresentation for more information.
+  ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED.
+  UUIDs can be manually converted to bson.Binary instances using bson.Binary.from_uuid()
+  or a different UuidRepresentation can be configured. See the documentation for
+  UuidRepresentation for more information.
 
 Instead, you must explicitly convert a native UUID to a ``Binary`` object by using the
 ``Binary.from_uuid()`` method, as shown in the following example:
