@@ -42,7 +42,7 @@ A standard connection string includes the following pieces:
      - Required. A prefix that identifies this as a string in the
        standard connection format.
 
-   * - ``username:password@``
+   * - ``username:password``
 
      - Optional. Authentication credentials. If you include these, the client
        authenticates the user against the database specified in ``authSource``.
@@ -72,10 +72,12 @@ To use a connection URI, pass it as a string to the ``MongoClient`` constructor.
 following example, the driver uses a sample connection URI to connect to a MongoDB 
 instance on port ``27017`` of ``localhost``: 
 
-.. literalinclude:: /includes/connect/local_connection.py
-   :language: python
-   :start-after: # start local connection
-   :end-before: # end local connection
+.. code-block:: python
+
+   from pymongo import MongoClient
+   
+   uri = "mongodb://localhost:27017/"
+   client = MongoClient(uri)
 
 .. tip:: Reusing Your Client
 
@@ -119,9 +121,6 @@ code also uses the ``server_api`` option to specify a {+stable-api+} version.
 
 .. literalinclude:: /includes/connect/atlas_connection.py
    :language: python
-   :start-after: # start atlas connection
-   :end-before: # end atlas connection
-
 
 Connect to a Replica Set
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,7 +140,9 @@ In the following example, the driver uses a sample connection URI to connect to 
 MongoDB replica set ``sampleRS``, which is running on port ``27017`` of three different
 hosts, including ``sample.host1``:
 
-.. literalinclude:: /includes/connect/replica_set_connection.py
-   :language: python
-   :start-after: # start replica set connection
-   :end-before: # end replica set connection
+.. code-block::
+
+   from pymongo import MongoClient
+
+   uri = "mongodb://sample.host1:27017/?replicaSet=sampleRS"
+   client = MongoClient(uri)

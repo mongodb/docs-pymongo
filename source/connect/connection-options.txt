@@ -31,14 +31,13 @@ Using the Connection URI
 
 If you pass a connection URI to the ``MongoClient`` constructor, you can include
 connection options in the string as ``<name>=<value>`` pairs. In the following example,
-the connection URI contains the ``connect_timeout`` option with a value of ``60000``
+the connection URI contains the ``connectTimeoutMS`` option with a value of ``60000``
 and the ``tls`` option with a value of ``true``:
 
-.. literalinclude:: /includes/connect/local_connection_config.py
-   :language: python
-   :dedent:
-   :start-after: # start local connection config
-   :end-before: # end local connection config
+.. code-block:: python
+
+   uri = "mongodb://<hostname>:<port>/?connectTimeoutMS=60000&tls=true"
+   client = pymongo.MongoClient(uri)
 
 .. _pymongo-mongo-client-settings:
 
@@ -52,11 +51,10 @@ change settings at runtime and helps you catch errors during compilation.
 The following example shows how to use the ``MongoClient`` constructor to set
 connection options:
 
-.. literalinclude:: /includes/connect/mongoclient_settings_config.py
-   :language: python
-   :dedent:
-   :start-after: # start mongo client settings config
-   :end-before: # end mongo client settings config
+.. code-block:: python
+
+   uri = "mongodb://<hostname>:<port>"
+   client = pymongo.MongoClient(uri, connectTimeoutMS=60000, tls=True)
 
 Connection Options
 ------------------
