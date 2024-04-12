@@ -20,8 +20,8 @@ MongoDB PyMongo Documentation
    /indexes
    /aggregation
    /security
-   /tools
    /data-formats
+   /tools
    /faq
    /troubleshooting
    /whats-new
