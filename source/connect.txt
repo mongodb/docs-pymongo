@@ -22,6 +22,8 @@ Connect to MongoDB
    :titlesonly:
    :maxdepth: 1
 
+   /connect/mongoclient
+   /connect/connection-targets
    /connect/tls
    /connect/network-compression
    /connect/server-selection
@@ -173,7 +175,7 @@ Server Selection
 .. code-block:: python
 
    client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname>:<port>",
-                                     server_selector=<selector function>)
+                                server_selector=<selector function>)
 
 To learn more about customizing server selection, see
 :ref:`pymongo-server-selection`.
@@ -182,12 +184,11 @@ To learn more about customizing server selection, see
 --------------
 
 .. code-block:: python
-   :emphasize-lines: 4
 
    from pymongo.server_api import ServerApi
 
    client = pymongo.MongoClient("mongodb://<username>:<password>@<hostname:<port>",
-                        server_api=ServerApi("<{+stable-api+} version>"))
+                                server_api=ServerApi("<{+stable-api+} version>"))
 
 To learn more about the {+stable-api+}, see :ref:`pymongo-stable-api`.
 
