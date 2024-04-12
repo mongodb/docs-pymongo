@@ -1,12 +1,12 @@
 .. _pymongo-uuid:
 
-UUID Types
-==========
+Universally Unique IDs (UUIDs)
+==============================
 
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 .. facet::
@@ -14,7 +14,7 @@ UUID Types
    :values: reference
 
 .. meta::
-   :keywords: unique, id
+   :keywords: encode, decode, bson, binary, code examples
 
 Overview
 --------
@@ -154,6 +154,7 @@ more about the available UUID representations, see :ref:`pymongo-uuid-options`.
       .. code-block:: python
 
          from bson.binary import UuidRepresentation
+
          client = pymongo.MongoClient("mongodb://<hostname>:<port>",
                                       uuidRepresentation=UuidRepresentation.STANDARD)
 
@@ -396,22 +397,39 @@ This will be true if the following criteria are met:
 Troubleshooting
 ---------------
 
-Native ``uuid.UUID`` objects cannot directly be encoded to
-``~bson.binary.Binary`` when the UUID representation is ``UNSPECIFIED``
-and attempting to do so will result in an exception:
+ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This error results from trying to encode a native ``UUID`` object to a ``Binary`` object
+when the UUID representation is ``UNSPECIFIED``, as shown in the following code
+example:
 
 .. code-block:: python
 
-  unspec_collection.insert_one({'_id': 'bar', 'uuid': uuid4()})
+  unspecified_collection.insert_one({'_id': 'bar', 'uuid': uuid4()})
   Traceback (most recent call last):
   ...
   ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED. UUIDs can be manually converted to bson.Binary instances using bson.Binary.from_uuid() or a different UuidRepresentation can be configured. See the documentation for UuidRepresentation for more information.
 
-Instead, applications using ``~bson.binary.UuidRepresentation.UNSPECIFIED``
-must explicitly coerce a native UUID using the
-the ``~bson.binary.Binary.from_uuid`` method method:
+Instead, you must explicitly convert a native UUID to a ``Binary`` object by using the
+``Binary.from_uuid()`` method, as shown in the following example:
 
 .. code-block:: python
 
   explicit_binary = Binary.from_uuid(uuid4(), UuidRepresentation.STANDARD)
   unspec_collection.insert_one({'_id': 'bar', 'uuid': explicit_binary})
+
+API Documentation
+-----------------
+
+To learn more about UUIDs and {+driver-short+},
+see the following API documentation:
+
+- `Binary <{+api-root+}bson/binary.html#bson.binary.Binary>`__
+- `UUID <https://docs.python.org/3/library/uuid.html#uuid.UUID>`__
+- `UuidRepresentation <{+api-root+}bson/binary.html#bson.binary.UuidRepresentation>`__
+- `ObjectId <{+api-root+}bson/objectid.html#bson.objectid.ObjectId>`__
+- `get_database() <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient.get_database>`__
+- `get_collection() <{+api-root+}pymongo/database.html#pymongo.database.Database.get_collection>`__
+- `database.with_options() <{+api-root+}pymongo/database.html#pymongo.database.Database.with_options>`__
+- `collection.with_options() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.with_options>`__
