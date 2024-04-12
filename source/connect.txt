@@ -52,7 +52,7 @@ the relevant values for your MongoDB deployment.
    :language: python
    :copyable: true
    :linenos:
-   :emphasize-lines: 5-7
+   :emphasize-lines: 4-6
 
 Transport Layer Security (TLS)
 ------------------------------
