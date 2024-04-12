@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 
-# Replace the placeholder with your connection string.
 uri = "<connection string>"
 client = MongoClient(uri)
 
@@ -13,11 +12,6 @@ try:
 
     # start-insert-orders
     orders_coll.delete_many({})
-
-    pipeline = [
-        {"$match": {"cuisine": "Bakery"}},
-        {"$group": {"_id": "$borough", "count": {"$sum": 1}}}
-    ]
 
     order_data = [
         {
@@ -33,7 +27,7 @@ try:
                     "name": "Karcher Hose Set",
                     "price": 22,
                 },
-            ],
+            ]
         },
         {
             "order_id": 1197372932325,
@@ -42,8 +36,8 @@ try:
                     "prod_id": "abc12345",
                     "name": "Asus Laptop",
                     "price": 429,
-                },
-            ],
+                }
+            ]
         },
         {
             "order_id": 9812343774839,
@@ -57,8 +51,8 @@ try:
                     "prod_id": "def45678",
                     "name": "Karcher Hose Set",
                     "price": 21,
-                },
-            ],
+                }
+            ]
         },
         {
             "order_id": 4433997244387,
@@ -77,9 +71,9 @@ try:
                     "prod_id": "xyz11228",
                     "name": "Russell Hobbs Chrome Kettle",
                     "price": 16,
-                },
-            ],
-        },
+                }
+            ]
+        }
     ]
 
     orders_coll.insert_many(order_data)
@@ -88,25 +82,40 @@ try:
     pipeline = []
 
     # start-unwind
-    pipeline.append({"$unwind": {"path": "$products"}})
+    pipeline.append({
+        "$unwind": {
+            "path": "$products"
+        }
+    })
     # end-unwind
 
     # start-match
-    pipeline.append({"$match": {"products.price": {"$gt": 15}}})
+    pipeline.append({
+        "$match": {
+            "products.price": {
+                "$gt": 15
+            }
+        }
+    })
     # end-match
 
     # start-group
-    pipeline.append({"$group": {
-        "_id": "$products.prod_id",
-        "product": {"$first": "$products.name"},
-        "total_value": {"$sum": "$products.price"},
-        "quantity": {"$sum": 1},
-    },
+    pipeline.append({
+        "$group": {
+            "_id": "$products.prod_id",
+            "product": {"$first": "$products.name"},
+            "total_value": {"$sum": "$products.price"},
+            "quantity": {"$sum": 1}
+        }
     })
     # end-group
 
     # start-set
-    pipeline.append({"$set": {"product_id": "$_id"}})
+    pipeline.append({
+        "$set": {
+            "product_id": "$_id"
+        }
+    })
     # end-set
 
     # start-unset

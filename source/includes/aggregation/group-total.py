@@ -52,7 +52,7 @@ try:
         },
         {
             "customer_id": "tj@wheresmyemail.com",
-            "orderdate": datetime(2021, 2, 29, 7, 49, 32),
+            "orderdate": datetime(2021, 2, 28, 7, 49, 32),
             "value": 1024
         },
         {
