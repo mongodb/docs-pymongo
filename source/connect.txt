@@ -56,6 +56,34 @@ the relevant values for your MongoDB deployment.
    :linenos:
    :emphasize-lines: 4-6
 
+Connection
+----------
+
+Local Deployment
+~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   uri = "mongodb://localhost:27017/"
+   client = MongoClient(uri)
+
+Atlas
+~~~~~
+
+.. code-block:: python
+
+   uri = "<Atlas connection string>"
+   client = MongoClient(uri, server_api=pymongo.server_api.ServerApi(
+    version="1", strict=True, deprecation_errors=True))
+
+Replica Set
+~~~~~~~~~~~
+
+.. code-block:: python
+   
+   uri = "mongodb://<replica set member>:<port>/?replicaSet=<replica set name>"
+   client = MongoClient(uri)
+
 Transport Layer Security (TLS)
 ------------------------------
 
