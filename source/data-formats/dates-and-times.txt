@@ -263,15 +263,20 @@ the local time to UTC. When the document is retrieved, the ``datetime`` value ha
 Handling Out-of-Range datetimes
 -------------------------------
 
-Python's ``datetime`` can only represent ``datetime`` values between
+Python's ``datetime`` class can only represent ``datetime`` values between
 ``datetime.min`` and ``datetime.max``.
-With BSON, you can represent a much greater range of date-time values. It allows any
+You can represent a much greater range of dates and times by using BSON, which allows any
 64-bit millisecond value from the :wikipedia:`Unix epoch <Unix_time>`.
 
-To represent a BSON time with {+driver-short+}, you can create a
+To represent a BSON time with {+driver-short+}, create a
 ``datetime_ms.DatetimeMS`` object, a wrapper for Python's built-in ``int`` type.
-To instruct {+driver-short+} to automatically decode UTC ``datetime`` values as
-``DatetimeMS`` objects, set the ``datetime_conversion`` parameter of ``CodecOptions``
+You can manually create a ``DatetimeMS`` object by passing in one of the following values:
+
+- An ``int`` representing the number of milliseconds since the Unix epoch
+- A ``datetime`` object
+
+You can also instruct {+driver-short+} to automatically decode UTC ``datetime`` values as
+``DatetimeMS`` objects. To do so, set the ``datetime_conversion`` parameter of ``CodecOptions``
 to one of the following values from ``datetime_ms.DatetimeConversion``:
 
 - ``DatetimeConversion.DATETIME``
@@ -279,58 +284,112 @@ to one of the following values from ``datetime_ms.DatetimeConversion``:
 - ``DatetimeConversion.DATETIME_AUTO``
 - ``DatetimeConversion.DATETIME_CLAMP``
 
-The default value, ``~bson.datetime_ms.DatetimeConversion.DATETIME``,
-raises an ``~builtin.OverflowError`` upon attempting to decode an out-of-range date.
+The following sections describe the preceding values.
 
-``~bson.datetime_ms.DatetimeConversion.DATETIME_MS`` returns only
-``~bson.datetime_ms.DatetimeMS`` objects, regardless of whether the
-represented datetime is in out-of-range: 
+DatetimeConversion.DATETIME
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: python
+``DatetimeConversion.DATETIME`` is the default value. This value causes {+driver-short+}
+to raise an ``OverflowError`` when it tries to decode an out-of-range date.
 
-   >>> from datetime import datetime
-   >>> from bson import encode, decode
-   >>> from bson.datetime_ms import DatetimeMS
-   >>> from bson.codec_options import CodecOptions, DatetimeConversion
-   >>> x = encode({"x": datetime(1970, 1, 1)})
-   >>> codec_ms = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_MS)
-   >>> decode(x, codec_options=codec_ms)
-   {'x': DatetimeMS(0)}
+DatetimeConversion.DATETIME_MS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``~bson.datetime_ms.DatetimeConversion.DATETIME_AUTO`` returns
-``~datetime.datetime`` if the underlying UTC datetime is within range,
-or ``~bson.datetime_ms.DatetimeMS`` if the underlying datetime
-cannot be represented using the built-in Python ``~datetime.datetime``:
+This value instructs {+driver-short+} to return only ``DatetimeMS`` objects, even if
+the date is within the range of ``datetime``:
 
-.. code-block:: python
+.. io-code-block::
 
-   >>> x = encode({"x": datetime(1970, 1, 1)})
-   >>> y = encode({"x": DatetimeMS(-(2**62))})
-   >>> codec_auto = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_AUTO)
-   >>> decode(x, codec_options=codec_auto)
-   {'x': datetime.datetime(1970, 1, 1, 0, 0)}
-   >>> decode(y, codec_options=codec_auto)
-   {'x': DatetimeMS(-4611686018427387904)}
+   .. input::
+      :language: python
 
-``~bson.datetime_ms.DatetimeConversion.DATETIME_CLAMP`` "clamps"
-the resulting ``~datetime.datetime`` objects, forcing them to be within
-the ``~datetime.datetime.min`` and ``~datetime.datetime.max`` boundaries
-(trimmed to ``999000`` microseconds):
+      from datetime import datetime
+      from bson import encode, decode
+      from bson.datetime_ms import DatetimeMS
+      from bson.codec_options import CodecOptions, DatetimeConversion
+   
+      val = encode({"date": datetime(1970, 1, 1)})
+      codec_ms = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_MS)
+      decoded = decode(val, codec_options=codec_ms)
+      print(decoded)
 
-.. code-block:: python
+   .. output::
+      :language: javascript
 
-   >>> x = encode({"x": DatetimeMS(2**62)})
-   >>> y = encode({"x": DatetimeMS(-(2**62))})
-   >>> codec_clamp = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_CLAMP)
-   >>> decode(x, codec_options=codec_clamp)
-   {'x': datetime.datetime(9999, 12, 31, 23, 59, 59, 999000)}
-   >>> decode(y, codec_options=codec_clamp)
-   {'x': datetime.datetime(1, 1, 1, 0, 0)}
+      {'date': DatetimeMS(0)}
 
-``~bson.datetime_ms.DatetimeMS`` objects support rich comparison
-methods against other instances of ``~bson.datetime_ms.DatetimeMS``.
-They can also be converted to ``~datetime.datetime`` objects by using
-the ``~bson.datetime_ms.DatetimeMS.to_datetime()`` method.
+DatetimeConversion.DATETIME_AUTO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This value instructs {+driver-short+} to return ``datetime`` objects if the value is
+within ``datetime`` range, and return a ``DatetimeMS`` object otherwise. The following
+code example encodes and decodes one datetime in the ``datetime`` range and one
+outside the range:
+
+.. io-code-block::
+
+   .. input::
+      :language: python
+   
+      from datetime import datetime
+      from bson import encode, decode
+      from bson.datetime_ms import DatetimeMS
+      from bson.codec_options import CodecOptions, DatetimeConversion
+   
+      in_range = encode({"date": datetime(1970, 1, 1)})
+      out_of_range = encode({"date": DatetimeMS(-(2**62))})
+      codec_auto = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_AUTO)
+   
+      in_decoded = decode(in_range, codec_options=codec_auto)
+      out_decoded = decode(out_of_range, codec_options=codec_auto)
+      print(f"in-range date: {in_decoded}") 
+      print(f"out-of-range date: {out_decoded}") 
+
+   .. output::
+      :language: python
+
+      in-range date: {'date': datetime.datetime(1970, 1, 1, 0, 0)}
+      out-of-range date: {'x': DatetimeMS(-4611686018427387904)}
+
+DatetimeConversion.DATETIME_CLAMP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This value "clamps" the resulting ``datetime`` objects, forcing them to be within
+the ``datetime`` range (trimmed to 999,000 microseconds).
+
+The following code example encodes and decodes one datetime earlier than the ``datetime``
+range and one datetime later than the ``datetime`` range:
+
+.. io-code-block::
+
+   .. input::
+      :language: python
+
+      from datetime import datetime
+      from bson import encode, decode
+      from bson.datetime_ms import DatetimeMS
+      from bson.codec_options import CodecOptions, DatetimeConversion
+   
+      before = encode({"x": DatetimeMS(-(2**62))})
+      after = encode({"x": DatetimeMS(2**62)})
+      codec_clamp = CodecOptions(datetime_conversion=DatetimeConversion.DATETIME_CLAMP)
+   
+      before_decoded = decode(before, codec_options=codec_clamp)
+      after_decoded = decode(after, codec_options=codec_clamp)
+      print(f"datetime before the range: {before_decoded}")
+      print(f"datetime after the range: {after_decoded}")
+
+   .. output::
+      :language: python
+
+      datetime before the range: {'x': datetime.datetime(1, 1, 1, 0, 0)}
+      datetime after the range: {'x': datetime.datetime(9999, 12, 31, 23, 59, 59, 999000)}
+
+.. tip::
+
+   ``DatetimeMS`` objects support rich comparison methods against other instances of
+   ``DatetimeMS``. You can also convert them to ``datetime`` objects by using
+   the ``DatetimeMS.to_datetime()`` method.
 
 API Documentation
 -----------------
