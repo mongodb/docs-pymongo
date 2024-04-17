@@ -75,7 +75,7 @@ The following code example localizes a ``datetime`` value to the
       print(f"Local datetime: {local_datetime}")
 
    .. output::
-      :language: python
+      :language: shell
    
       UTC datetime: 2002-10-27 06:00:00
       Local datetime: 2002-10-27 06:00:00-08:00
@@ -102,7 +102,7 @@ For these sections, assume that a MongoDB collection named ``sample_collection``
 contains the following document. The value of the ``"date"`` field is a UTC ``datetime``
 value.
 
-.. code-block:: python
+.. code-block:: shell
 
    {"date": datetime(2002, 10, 27, 14, 0, 0)}
 
@@ -128,7 +128,7 @@ the one in the sample document.
       print(f"datetime.tzinfo: {find_result.tzinfo}")
 
    .. output::
-      :language: python
+      :language: shell
       :visible: false
 
       datetime: 2002-10-27 14:00:00
@@ -162,7 +162,7 @@ an aware ``datetime``:
       print(f"datetime.tzinfo: {find_result.tzinfo}")
 
    .. output::
-      :language: python
+      :language: shell
       :visible: false
 
       datetime: 2002-10-27 14:00:00+00:00
@@ -204,7 +204,7 @@ the ``datetime`` value to the ``"US/Pacific"`` time zone:
       print(find_result)
 
    .. output::
-      :language: python
+      :language: shell
       :visible: false
 
       datetime: 2002-10-27 06:00:00-08:00
@@ -254,7 +254,7 @@ is in UTC.
       print(f"datetime after storage: {find_result}")
 
    .. output::
-      :language: python
+      :language: shell
       :visible: false
 
       datetime before storage: 2002-10-27 06:00:00-08:00
@@ -388,7 +388,7 @@ outside the range:
       print(f"out-of-range date: {out_decoded}") 
 
    .. output::
-      :language: python
+      :language: shell
 
       in-range date: {'date': datetime.datetime(1970, 1, 1, 0, 0)}
       out-of-range date: {'x': DatetimeMS(-4611686018427387904)}
@@ -423,7 +423,7 @@ at the beginning and end of the allowed range.
       print(f"datetime after the range: {after_decoded}")
 
    .. output::
-      :language: python
+      :language: shell
 
       datetime before the range: {'x': datetime.datetime(1, 1, 1, 0, 0)}
       datetime after the range: {'x': datetime.datetime(9999, 12, 31, 23, 59, 59, 999000)}
@@ -440,7 +440,7 @@ API Documentation
 For more information about working with dates and times in {+driver-short+},
 see the following API documentation:
 
-- `datetime at docs.python.org <https://docs.python.org/3/library/datetime.html#datetime.datetime>`__
-- `pytz at pypi.org <https://pypi.org/project/pytz/>`__
+- ``datetime`` at `docs.python.org <https://docs.python.org/3/library/datetime.html#datetime.datetime>`__
+- ``pytz`` at `pypi.org <https://pypi.org/project/pytz/>`__
 - `CodecOptions <{+api-root+}bson/codec_options.html#bson.codec_options.CodecOptions>`__
 - `DatetimeMS <{+api-root+}bson/datetime_ms.html>`__
