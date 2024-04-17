@@ -326,7 +326,7 @@ in the following example:
       print(decoded)
 
    .. output::
-      :language: python
+      :language: shell
 
       ...
       bson.errors.InvalidBSON: year -146136543 is out of range (Consider Using
