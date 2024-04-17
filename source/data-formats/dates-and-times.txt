@@ -69,9 +69,10 @@ The following code example localizes a ``datetime`` value to the
       from pytz import timezone
 
       utc_datetime = datetime(2002, 10, 27, 6, 0, 0)
-      print(f"UTC datetime: {utc_datetime}")
       pacific = timezone("US/Pacific")
       local_datetime = pacific.localize(utc_datetime)
+      
+      print(f"UTC datetime: {utc_datetime}")
       print(f"Local datetime: {local_datetime}")
 
    .. output::
@@ -201,8 +202,9 @@ the ``datetime`` value to the ``"US/Pacific"`` time zone:
       collection = database.get_collection("sample_collection", options)
       
       find_result = collection.find_one()["date"]
-      print(find_result)
-
+      print(f"datetime: {find_result}")
+      print(f"datetime.tzinfo: {find_result.tzinfo}")
+   
    .. output::
       :language: shell
       :visible: false
