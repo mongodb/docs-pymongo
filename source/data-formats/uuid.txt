@@ -32,7 +32,7 @@ compatibility when working with UUIDs.
 .. _example-legacy-uuid:
 
 A Short History of MongoDB UUIDs
---------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Consider a UUID with the following canonical textual representation:
 
@@ -43,7 +43,7 @@ Consider a UUID with the following canonical textual representation:
 Originally, MongoDB represented UUIDs as BSON ``Binary``
 values of subtype 3. Because subtype 3 didn't standardize the byte order of UUIDs
 during encoding, different MongoDB drivers encoded UUIDs with different byte orders.
-Use the tabs below to compare the ways in which different MongoDB language drivers
+Use the following tabs to compare the ways in which different MongoDB language drivers
 encoded the preceding UUID to ``Binary`` subtype 3:
 
 .. tabs::
@@ -71,50 +71,13 @@ encoded the preceding UUID to ``Binary`` subtype 3:
 
 To standardize UUID byte order, we created ``Binary`` subtype 4. Although this subtype
 is handled consistently across MongoDB drivers, some MongoDB deployments still contain
-UUID values of subtype 3. These legacy UUIDs can result in highly unintuitive behavior,
-as shown in the following example.
+UUID values of subtype 3.
 
-Example: Applications Share a MongoDB Deployment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Application C, written in C#, generates a UUID and uses it as the ``_id``
-of a document. The canonical textual representation of the generated UUID is the
-following:
-
-.. code-block::
-
-    00112233-4455-6677-8899-aabbccddeeff
-    
-Application C inserts the document into the ``uuid_test`` collection of
-the ``example_db`` database. 
-
-Application P, written in Python, uses the following code to try to find the document
-inserted by Application C:
-
-.. code-block:: python
-   :emphasize-lines: 4
-
-   from uuid import UUID
-   
-   collection = client.example_db.uuid_test
-   result = collection.find_one({'_id': UUID('00112233-4455-6677-8899-aabbccddeeff')})
-
-The preceding search won't find the document inserted by Application C, because the
-MongoDB .NET/C# Driver and {+driver-short+} use different byte orders when representing
-UUIDs as BSON binary. To find the document, Application P must use code similar
-to the following example:
-
-.. code-block:: python
-   :emphasize-lines: 4
-   
-   from uuid import UUID
-   
-   collection = client.example_db.uuid_test
-   result = collection.find_one({'_id': UUID('33221100-5544-7766-8899-aabbccddeeff')})
-
-Byte-order mismatches among MongoDB drivers, like the one shown above, hinder
-interoperability. Always configure your ``MongoClient`` object with the
-``UuidRepresentation`` appropriate to the data you're handling.
+.. important::
+  
+   Use caution when working storing or retrieving UUIDs of subtype 3. 
+   A UUID of this type stored by one MongoDB driver might have a different value when
+   retrieved by a different driver.
 
 .. _specify-uuid-representation:
 
@@ -231,37 +194,31 @@ The following table summarizes the UUID representations that {+driver-short+} su
    :header-rows: 1
 
    * - UUID Representation
-     - Default?
-     - Encode ``UUID`` to:
-     - Decode ``Binary`` subtype 4 to:
-     - Decode ``Binary`` subtype 3 to:
+     - Encode ``UUID`` to
+     - Decode ``Binary`` subtype 4 to
+     - Decode ``Binary`` subtype 3 to
 
-   * - :ref:`unspecified-representation-details`
-     - Yes
+   * - :ref:`unspecified-representation-details` (default)
      - Raise ``ValueError``
      - ``Binary`` subtype 4
      - ``Binary`` subtype 3
 
    * - :ref:`standard-representation-details`
-     - No
      - ``Binary`` subtype 4
      - ``UUID``
      - ``Binary`` subtype 3
 
    * - :ref:`python-legacy-representation-details`
-     - No
      - ``Binary`` subtype 3 with standard byte order
      - ``Binary`` subtype 4
      - ``UUID``
 
    * - :ref:`java-legacy-representation-details`
-     - No
      - ``Binary`` subtype 3 with Java legacy byte order
      - ``Binary`` subtype 4
      - ``UUID``
 
    * - :ref:`csharp-legacy-representation-details`
-     - No
      - ``Binary`` subtype 3 with C# legacy byte order
      - ``Binary`` subtype 4
      - ``UUID``
@@ -356,9 +313,10 @@ byte order as the ``UUID.bytes`` property.
 
 Use the ``PYTHON_LEGACY`` UUID representation if the
 UUID you're reading from MongoDB was inserted using the ``PYTHON_LEGACY`` representation.
-This will be true if the following criteria are met:
+This will be true if both of the following criteria are met:
 
-- The UUID was inserted by an application using {+driver-short+}.
+- The UUID was inserted by an application using a version of {+driver-short+} earlier
+  than v4.0.
 - The application that inserted the UUID didn't specify the ``STANDARD`` UUID
   representation.
 
@@ -374,7 +332,7 @@ Driver. When using the ``JAVA_LEGACY`` UUID representation, {+driver-short+} enc
 
 Use the ``JAVA_LEGACY`` UUID representation if the
 UUID you're reading from MongoDB was inserted using the ``JAVA_LEGACY`` representation.
-This will be true if the following criteria are met:
+This will be true if both of the following criteria are met:
 
 - The UUID was inserted by an application using the MongoDB Java Driver.
 - The application didn't specify the ``STANDARD`` UUID representation.
@@ -391,7 +349,7 @@ native ``UUID`` objects to ``Binary`` subtype 3 objects with C# legacy byte orde
 
 Use the ``CSHARP_LEGACY`` UUID representation if the
 UUID you're reading from MongoDB was inserted using the ``CSHARP_LEGACY`` representation.
-This will be true if the following criteria are met:
+This will be true if both of the following criteria are met:
 
 - The UUID was inserted by an application using the MongoDB .NET/C# Driver.
 - The application didn't specify the ``STANDARD`` UUID representation.
