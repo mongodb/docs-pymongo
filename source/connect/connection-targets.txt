@@ -33,7 +33,7 @@ in your connection string:
 - MongoDB username
 - MongoDB password
 
-Then, pass this connection string to the ``MongoClient`` constructor.
+Then, pass your connection string to the ``MongoClient`` constructor.
 
 .. tip::
 
@@ -71,12 +71,13 @@ deployment:
 Replica Sets
 ------------
 
-To connect to a replica set , specify the hostnames (or IP addresses) and 
-port numbers of the members of the replica set in your connection string.
+To connect to a replica set, specify the hostnames (or IP addresses) and 
+port numbers of the replica-set members in your connection string.
 
 If you aren't able to provide a full list of hosts in the replica set, you can 
 specify one or more of the hosts in the replica set and instruct {+driver-short+} to 
-perform automatic discovery. To do so, do one of the following actions:
+perform automatic discovery to find the others. To instruct the driver to perform
+automatic discovery, perform one of the following actions:
 
 - Specify the name of the replica set as the value of the ``replicaSet`` parameter.
 - Specify ``false`` as the value of the ``directConnection`` parameter.
@@ -86,7 +87,7 @@ In the following example, the driver uses a sample connection URI to connect to 
 MongoDB replica set ``sampleRS``, which is running on port ``27017`` of three different
 hosts, including ``host1``:
 
-.. code-block::
+.. code-block:: python
 
    from pymongo import MongoClient
 

@@ -38,13 +38,13 @@ to connect to MongoDB.
 Connection URI
 --------------
 
-A standard connection string includes the following pieces:
+A standard connection string includes the following components:
 
 .. list-table::
    :widths: 20 80
    :header-rows: 1
 
-   * - Piece
+   * - Component
      - Description
 
    * - ``mongodb://``
@@ -69,7 +69,7 @@ A standard connection string includes the following pieces:
      - Optional. The authentication database to use if the
        connection string includes ``username:password@``
        authentication credentials but not the ``authSource`` option. If you don't include 
-       this piece, the client authenticates the user against the ``admin`` database.
+       this component, the client authenticates the user against the ``admin`` database.
 
    * - ``?<options>``
 
