@@ -75,7 +75,7 @@ UUID values of subtype 3.
 
 .. important::
   
-   Use caution when working storing or retrieving UUIDs of subtype 3. 
+   Use caution when storing or retrieving UUIDs of subtype 3. 
    A UUID of this type stored by one MongoDB driver might have a different value when
    retrieved by a different driver.
 
