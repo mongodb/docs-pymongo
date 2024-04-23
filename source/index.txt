@@ -36,8 +36,7 @@ Overview
 
 Welcome to the documentation site for the official MongoDB {+driver-short+}
 Driver. PyMongo is a Python distribution containing tools for working with
-`MongoDB <http://www.mongodb.org>`_, and is the recommended way to
-work with MongoDB from Python.
+MongoDB, and is the recommended way to work with MongoDB from Python.
 
 Get Started
 -----------
@@ -54,7 +53,7 @@ in the :ref:`pymongo-databases-collections` section.
 Write Data to MongoDB
 ---------------------
 
-Learn how you can write data to MongoDB in the :ref:`pymongo-read` section.
+Learn how you can write data to MongoDB in the :ref:`pymongo-write` section.
 
 Read Data from MongoDB
 ----------------------
@@ -64,8 +63,8 @@ Learn how you can retrieve data from MongoDB in the :ref:`pymongo-read` section.
 Optimize Queries with Indexes
 -----------------------------
 
-Learn how to work with common types of indexes that you can use with
-{+driver-short+} in the :ref:`pymongo-indexes` section.
+Learn how to work with common types of indexes in the :ref:`pymongo-indexes`
+section.
 
 Transform Your Data with Aggregation
 ------------------------------------
