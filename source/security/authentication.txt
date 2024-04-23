@@ -563,9 +563,11 @@ First, create a Python dictionary for your authentication mechanism properties, 
 in the following example. Replace the ``<audience>`` placeholder with
 the percent-encoded application or service that the OIDC access token is intended for.
 
-.. code-block:: python
-
-    properties = {"ENVIRONMENT": "azure", "TOKEN_RESOURCE": "<audience>"}
+.. literalinclude:: /includes/authentication/azure-imds.py
+            :language: python
+            :copyable: true
+            :start-after: # define properties and MongoClient
+            :end-before: client = MongoClient(
 
 Then, set the following connection options:
 
@@ -582,33 +584,20 @@ You can set these options in two ways: by passing arguments to the
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         
-         properties = {"ENVIRONMENT": "azure", "TOKEN_RESOURCE": "<audience>"}
-
-         client = MongoClient(
-            "mongodb://<hostname>:<port>",
-            username="<Azure identity client ID>",
-            authMechanism="MONGODB-OIDC",
-            authMechanismProperties=properties,
-         )
+      .. literalinclude:: /includes/authentication/azure-imds.py
+            :language: python
+            :copyable: true
+            :start-after: # start mongoclient
+            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. code-block:: python
-
-         from pymongo import MongoClient
-
-         properties = {"ENVIRONMENT": "azure", "TOKEN_RESOURCE": "<audience>"}
-         
-         uri = ("mongodb://<hostname>:<port>/?"
-                "username="<Azure identity client ID>"
-                "&authMechanism=MONGODB-OIDC"
-                "&authMechanismProperties=properties")
-         client = MongoClient(uri)
+      .. literalinclude:: /includes/authentication/azure-imds.py
+            :language: python
+            :copyable: true
+            :start-after: # start connection string
+            :end-before: # end connection string
 
 .. tip::
    
@@ -641,38 +630,7 @@ Then, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         
-         properties = {"ENVIRONMENT": "gcp", "TOKEN_RESOURCE": "<audience>"}
-
-         client = MongoClient(
-            "mongodb://<hostname>:<port>",
-            username="<GCP identity client ID>",
-            authMechanism="MONGODB-OIDC",
-            authMechanismProperties=properties,
-         )
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-
-         properties = {"ENVIRONMENT": "gcp", "TOKEN_RESOURCE": "<audience>"}
-         
-         uri = ("mongodb://<hostname>:<port>/?"
-                "username="<GCP identity client ID>"
-                "&authMechanism=MONGODB-OIDC"
-                "&authMechanismProperties=properties")
-         client = MongoClient(uri)
+.. include:: /includes/authentication/gcp-imds-tabs.rst
 
 AWS EKS
 ~~~~~~~
@@ -723,52 +681,7 @@ You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 After you set the preceding environment variable, 
 
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. code-block:: python
-
-         import os
-         from pymongo import MongoClient
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-         
-         class MyCallback(OIDCCallback):
-            def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                with open(os.environ["AWS_WEB_IDENTITY_TOKEN_FILE"]) as fid:
-                    token = fid.read()
-                return OIDCCallbackResult(access_token=token)
-    
-         props = {"OIDC_CALLBACK": MyCallback()}
-
-         client = MongoClient(
-            "mongodb://<hostname>:<port>",
-            authMechanism="MONGODB-OIDC",
-            authMechanismProperties=properties,
-         )
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. code-block:: python
-
-         import os
-         from pymongo import MongoClient
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-         
-         class MyCallback(OIDCCallback):
-            def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                with open(os.environ["AWS_WEB_IDENTITY_TOKEN_FILE"]) as fid:
-                    token = fid.read()
-                return OIDCCallbackResult(access_token=token)
-    
-         props = {"OIDC_CALLBACK": MyCallback()}
-
-         uri = ("mongodb://<hostname>:<port>/?"
-                "&authMechanism=MONGODB-OIDC"
-                "&authMechanismProperties=properties")
-         client = MongoClient(uri)
+.. include:: /includes/authentication/aws-eks-tabs.rst
 
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -784,10 +697,13 @@ implement one method, ``fetch()``, that returns the OIDC token in the form of an
 
 The following example shows how to define a callback class named ``MyCallback``. This class
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
-service-account token-file location:
+service-account token-file location.
 
 .. code-block:: python
 
+   audience = <percent-encoded application or service that the OIDC access token is intended for>
+   client_id = <Azure identity client ID>
+   
    class MyCallback(OIDCCallback):
        def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
            credential = DefaultAzureCredential(managed_identity_client_id=client_id)
@@ -810,58 +726,7 @@ Finally, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         from azure.identity import DefaultAzureCredential
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-         
-         audience = <percent-encoded application or service that the OIDC access token is intended for>
-         client_id = <Azure identity client ID>
-         
-         class MyCallback(OIDCCallback):
-             def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                 credential = DefaultAzureCredential(managed_identity_client_id=client_id)
-                 token = credential.get_token(f"{audience}/.default").token
-                 return OIDCCallbackResult(access_token=token) 
-         
-         properties = {"OIDC_CALLBACK": MyCallback()}
-
-         client = MongoClient(
-            "mongodb://<hostname>:<port>",
-            authMechanism="MONGODB-OIDC",
-            authMechanismProperties=properties,
-         )
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         from azure.identity import DefaultAzureCredential
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-         
-         audience = <percent-encoded application or service that the OIDC access token is intended for>
-         client_id = <Azure identity client ID>
-         
-         class MyCallback(OIDCCallback):
-             def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                 credential = DefaultAzureCredential(managed_identity_client_id=client_id)
-                 token = credential.get_token(f"{audience}/.default").token
-                 return OIDCCallbackResult(access_token=token) 
-         
-         properties = {"OIDC_CALLBACK": MyCallback()}
-         
-         uri = ("mongodb://<hostname>:<port>/?"
-                "&authMechanism=MONGODB-OIDC"
-                "&authMechanismProperties=properties")
-         client = MongoClient(uri)
+.. include:: /includes/authentication/azure-envs-tabs.rst
 
 GCP GKE
 ~~~~~~~
@@ -876,7 +741,7 @@ implement one method, ``fetch()``, that returns the OIDC token in the form of an
 
 The following example shows how to define a callback class named ``MyCallback``. This class
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
-service-account token-file location:
+service-account token-file location.
 
 .. code-block:: python
 
@@ -902,50 +767,7 @@ Finally, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-         
-         class MyCallback(OIDCCallback):
-             def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                 with open("/var/run/secrets/kubernetes.io/serviceaccount/token") as fid:
-                     token = fid.read()
-             return OIDCCallbackResult(access_token=token)
-         
-         properties = {"OIDC_CALLBACK": MyCallback()}
-
-         client = MongoClient(
-            "mongodb://<hostname>:<port>",
-            authMechanism="MONGODB-OIDC",
-            authMechanismProperties=properties,
-         )
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. code-block:: python
-
-         from pymongo import MongoClient
-         from pymongo.auth_oidc import OIDCCallback, OIDCCallbackContext, OIDCCallbackResult
-
-         class MyCallback(OIDCCallback):
-             def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-                 with open("/var/run/secrets/kubernetes.io/serviceaccount/token") as fid:
-                     token = fid.read()
-                 return OIDCCallbackResult(access_token=token)
-
-         properties = {"OIDC_CALLBACK": MyCallback()}
-         
-         uri = ("mongodb://<hostname>:<port>/?"
-                "&authMechanism=MONGODB-OIDC"
-                "&authMechanismProperties=properties")
-         client = MongoClient(uri)
+.. include:: /includes/authentication/gcp-gke-tabs.rst
 
 API Documentation
 -----------------
