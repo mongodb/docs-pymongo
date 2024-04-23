@@ -358,7 +358,7 @@ Unix
          client = pymongo.MongoClient(uri)
 
 To learn more about authenticating with Kerberos, see
-:ref:`pymongo-kerberos` in the Authentication guide.
+:ref:`pymongo-kerberos` in the Enterprise Authentication guide.
 
 Windows
 ~~~~~~~
@@ -393,7 +393,7 @@ Windows
                client = pymongo.MongoClient(uri)
 
 To learn more about authenticating with Kerberos, see
-:ref:`pymongo-kerberos` in the Authentication guide.
+:ref:`pymongo-kerberos` in the Enterprise Authentication guide.
 
 PLAIN SASL
 ----------
@@ -426,7 +426,7 @@ PLAIN SASL
          client = pymongo.MongoClient(uri)
 
 To learn more about authenticating with PLAIN SASL, see
-:ref:`pymongo-sasl` in the Authentication guide.
+:ref:`pymongo-sasl` in the Enterprise Authentication guide.
 
 MONGODB-OIDC
 ------------
@@ -450,6 +450,9 @@ Azure IMDS
             :language: python
             :copyable: true
 
+To learn more about authenticating with OIDC, see
+:ref:`pymongo-mongodb-oidc-azure-imds` in the Authentication guide.
+
 GCP IMDS
 ~~~~~~~~
 
@@ -468,6 +471,9 @@ GCP IMDS
       .. literalinclude:: /includes/authentication/gcp-imds-connection-string.py
             :language: python
             :copyable: true
+
+To learn more about authenticating with OIDC, see
+:ref:`pymongo-mongodb-oidc-gcp-imds` in the Authentication guide.
 
 AWS EKS
 ~~~~~~~
@@ -488,6 +494,9 @@ AWS EKS
             :language: python
             :copyable: true
 
+To learn more about authenticating with OIDC, see
+:ref:`pymongo-mongodb-oidc-aws-eks` in the Authentication guide.
+
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -507,6 +516,9 @@ Other Azure Environments
             :language: python
             :copyable: true
 
+To learn more about authenticating with OIDC, see
+:ref:`pymongo-mongodb-oidc-azure-envs` in the Authentication guide.
+
 GCP GKE
 ~~~~~~~
 
@@ -525,3 +537,6 @@ GCP GKE
       .. literalinclude:: /includes/authentication/gcp-gke-connection-string.py
             :language: python
             :copyable: true
+
+To learn more about authenticating with OIDC, see
+:ref:`pymongo-mongodb-oidc-gcp-gke` in the Authentication guide.

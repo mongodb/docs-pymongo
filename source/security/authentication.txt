@@ -532,6 +532,8 @@ You can set this option in two ways: by passing an argument to the
          uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
+.. _pymongo-mongodb-oidc:
+
 MONGODB-OIDC
 ------------
 
@@ -550,6 +552,8 @@ authenticate to various platforms.
 For more information about the MONGODB-OIDC authentication mechanism, see
 :manual:`OpenID Connect Authentication </core/security-oidc/>` in the MongoDB Server
 manual.
+
+.. _pymongo-mongodb-oidc-azure-imds:
 
 Azure IMDS
 ~~~~~~~~~~
@@ -600,6 +604,8 @@ You can set these options in two ways: by passing arguments to the
    If your application is running on an Azure VM, and only one managed identity is
    associated with the VM, you can omit the ``username`` connection option.
 
+.. _pymongo-mongodb-oidc-gcp-imds:
+
 GCP IMDS
 ~~~~~~~~
 
@@ -643,6 +649,8 @@ You can set these options in two ways: by passing arguments to the
       .. literalinclude:: /includes/authentication/gcp-imds-connection-string.py
             :language: python
             :copyable: true
+
+.. _pymongo-mongodb-oidc-aws-eks:
 
 AWS EKS
 ~~~~~~~
@@ -709,6 +717,8 @@ After you set the preceding environment variable,
             :language: python
             :copyable: true
 
+.. _pymongo-mongodb-oidc-azure-envs:
+
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -771,6 +781,8 @@ You can set these options in two ways: by passing arguments to the
       .. literalinclude:: /includes/authentication/azure-envs-connection-string.py
             :language: python
             :copyable: true
+
+.. _pymongo-mongodb-oidc-gcp-gke:
 
 GCP GKE
 ~~~~~~~
