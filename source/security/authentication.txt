@@ -687,7 +687,7 @@ includes a ``fetch()`` method that retrieves an OIDC token from the file specifi
    :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
-``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
+``"OIDC_CALLBACK"``, whose value is an instance of your custom callback class:
 
 .. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
    :language: python
@@ -754,7 +754,7 @@ service-account token-file location.
    :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
-``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
+``"OIDC_CALLBACK"``, whose value is an instance of your custom callback class:
 
 .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
    :language: python
@@ -813,7 +813,7 @@ service-account token-file location.
    :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
-``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
+``"OIDC_CALLBACK"``, whose value is an instance of your custom callback class:
 
 .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
    :language: python
