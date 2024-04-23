@@ -729,7 +729,7 @@ Kubernetes Service (AKS), you can use the
 `azure-identity <https://pypi.org/project/azure-identity/>`__ package to fetch
 authentication credentials.
 
-First, Use pip to install the ``azure-identity`` library, as shown in the
+First, use pip to install the ``azure-identity`` library, as shown in the
 following example:
 
 .. code-block:: sh
