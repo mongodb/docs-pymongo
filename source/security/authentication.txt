@@ -729,7 +729,14 @@ Kubernetes Service (AKS), you can use the
 `azure-identity <https://pypi.org/project/azure-identity/>`__ package to fetch
 authentication credentials.
 
-First, define a class that inherits from the ``OIDCCallback`` class. This class must
+First, Use pip to install the ``azure-identity`` library, as shown in the
+following example:
+
+.. code-block:: sh
+
+   python3 -m pip install azure-identity
+
+Next, define a class that inherits from the ``OIDCCallback`` class. This class must
 implement one method, ``fetch()``, that returns the OIDC token in the form of an
 ``OIDCCallbackResult`` object.
 
@@ -737,23 +744,20 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
 service-account token-file location.
 
-.. code-block:: python
-
-   audience = <percent-encoded application or service that the OIDC access token is intended for>
-   client_id = <Azure identity client ID>
-   
-   class MyCallback(OIDCCallback):
-       def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-           credential = DefaultAzureCredential(managed_identity_client_id=client_id)
-           token = credential.get_token(f"{audience}/.default").token
-           return OIDCCallbackResult(access_token=token)
+.. literalinclude:: /includes/authentication/aws-eks.py
+   :language: python
+   :copyable: true
+   :start-after: # define callback, properties, and MongoClient
+   :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. code-block:: python
-
-    properties = {"OIDC_CALLBACK": MyCallback()}
+.. literalinclude:: /includes/authentication/aws-eks.py
+   :language: python
+   :copyable: true
+   :start-after: return OIDCCallbackResult(access_token=token)
+   :end-before: client = MongoClient(
 
 Finally, set the following connection options:
 
@@ -764,7 +768,25 @@ Finally, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. include:: /includes/authentication/azure-envs-tabs.rst
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/azure-envs.py
+            :language: python
+            :copyable: true
+            :start-after: # start mongoclient
+            :end-before: # end mongoclient
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/azure-envs.py
+            :language: python
+            :copyable: true
+            :start-after: # start connection string
+            :end-before: # end connection string
 
 GCP GKE
 ~~~~~~~
@@ -781,20 +803,20 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
 service-account token-file location.
 
-.. code-block:: python
-
-   class MyCallback(OIDCCallback):
-       def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-           with open("/var/run/secrets/kubernetes.io/serviceaccount/token") as fid:
-               token = fid.read()
-           return OIDCCallbackResult(access_token=token)
+.. literalinclude:: /includes/authentication/gcp-gke.py
+   :language: python
+   :copyable: true
+   :start-after: # define callback, properties, and MongoClient
+   :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. code-block:: python
-
-    properties = {"OIDC_CALLBACK": MyCallback()}
+.. literalinclude:: /includes/authentication/gcp-gke.py
+   :language: python
+   :copyable: true
+   :start-after: return OIDCCallbackResult(access_token=token)
+   :end-before: client = MongoClient(
 
 Finally, set the following connection options:
 
@@ -805,7 +827,25 @@ Finally, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. include:: /includes/authentication/gcp-gke-tabs.rst
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/gcp-gke.py
+            :language: python
+            :copyable: true
+            :start-after: # start mongoclient
+            :end-before: # end mongoclient
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/gcp-gke.py
+            :language: python
+            :copyable: true
+            :start-after: # start connection string
+            :end-before: # end connection string
 
 API Documentation
 -----------------
