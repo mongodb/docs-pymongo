@@ -564,10 +564,10 @@ in the following example. Replace the ``<audience>`` placeholder with
 the percent-encoded application or service that the OIDC access token is intended for.
 
 .. literalinclude:: /includes/authentication/azure-imds.py
-            :language: python
-            :copyable: true
-            :start-after: # define properties and MongoClient
-            :end-before: client = MongoClient(
+   :language: python
+   :copyable: true
+   :start-after: # define properties and MongoClient
+   :end-before: client = MongoClient(
 
 Then, set the following connection options:
 
@@ -616,9 +616,11 @@ First, create a Python dictionary for your authentication mechanism properties, 
 in the following example. Replace the ``<audience>`` placeholder with
 the percent-encoded application or service that the OIDC access token is intended for.
 
-.. code-block:: python
-
-    properties = {"ENVIRONMENT": "gcp", "TOKEN_RESOURCE": "<audience>"}
+.. literalinclude:: /includes/authentication/gcp-imds.py
+   :language: python
+   :copyable: true
+   :start-after: # define properties and MongoClient
+   :end-before: client = MongoClient(
 
 Then, set the following connection options:
 
@@ -630,7 +632,25 @@ Then, set the following connection options:
 You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 
-.. include:: /includes/authentication/gcp-imds-tabs.rst
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/gcp-imds.py
+            :language: python
+            :copyable: true
+            :start-after: # start mongoclient
+            :end-before: # end mongoclient
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/gcp-imds.py
+            :language: python
+            :copyable: true
+            :start-after: # start connection string
+            :end-before: # end connection string
 
 AWS EKS
 ~~~~~~~
@@ -656,20 +676,20 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from the file specified in the
 ``AWS_WEB_IDENTITY_TOKEN_FILE`` environment variable.
 
-.. code-block:: python
-
-   class MyCallback(OIDCCallback):
-       def fetch(self, context: OIDCCallbackContext) -> OIDCCallbackResult:
-           with open(os.environ["AWS_WEB_IDENTITY_TOKEN_FILE"]) as fid:
-               token = fid.read()
-           return OIDCCallbackResult(access_token=token)
+.. literalinclude:: /includes/authentication/aws-eks.py
+   :language: python
+   :copyable: true
+   :start-after: # define callback, properties, and MongoClient
+   :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. code-block:: python
-
-    properties = {"OIDC_CALLBACK": MyCallback()}
+.. literalinclude:: /includes/authentication/aws-eks.py
+   :language: python
+   :copyable: true
+   :start-after: return OIDCCallbackResult(access_token=token)
+   :end-before: client = MongoClient(
 
 Finally, set the following connection options:
 
@@ -681,7 +701,25 @@ You can set these options in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string.
 After you set the preceding environment variable, 
 
-.. include:: /includes/authentication/aws-eks-tabs.rst
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/aws-eks.py
+            :language: python
+            :copyable: true
+            :start-after: # start mongoclient
+            :end-before: # end mongoclient
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/aws-eks.py
+            :language: python
+            :copyable: true
+            :start-after: # start connection string
+            :end-before: # end connection string
 
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
