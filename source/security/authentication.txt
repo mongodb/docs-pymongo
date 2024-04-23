@@ -563,7 +563,7 @@ First, create a Python dictionary for your authentication mechanism properties, 
 in the following example. Replace the ``<audience>`` placeholder with
 the percent-encoded application or service that the OIDC access token is intended for.
 
-.. literalinclude:: /includes/authentication/azure-imds.py
+.. literalinclude:: /includes/authentication/azure-imds-mongoclient.py
    :language: python
    :copyable: true
    :start-after: # define properties and MongoClient
@@ -584,20 +584,16 @@ You can set these options in two ways: by passing arguments to the
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. literalinclude:: /includes/authentication/azure-imds.py
+      .. literalinclude:: /includes/authentication/azure-imds-mongoclient.py
             :language: python
             :copyable: true
-            :start-after: # start mongoclient
-            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. literalinclude:: /includes/authentication/azure-imds.py
+      .. literalinclude:: /includes/authentication/azure-imds-connection-string.py
             :language: python
             :copyable: true
-            :start-after: # start connection string
-            :end-before: # end connection string
 
 .. tip::
    
@@ -616,7 +612,7 @@ First, create a Python dictionary for your authentication mechanism properties, 
 in the following example. Replace the ``<audience>`` placeholder with
 the percent-encoded application or service that the OIDC access token is intended for.
 
-.. literalinclude:: /includes/authentication/gcp-imds.py
+.. literalinclude:: /includes/authentication/gcp-imds-mongoclient.py
    :language: python
    :copyable: true
    :start-after: # define properties and MongoClient
@@ -637,20 +633,16 @@ You can set these options in two ways: by passing arguments to the
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. literalinclude:: /includes/authentication/gcp-imds.py
+      .. literalinclude:: /includes/authentication/gcp-imds-mongoclient.py
             :language: python
             :copyable: true
-            :start-after: # start mongoclient
-            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. literalinclude:: /includes/authentication/gcp-imds.py
+      .. literalinclude:: /includes/authentication/gcp-imds-connection-string.py
             :language: python
             :copyable: true
-            :start-after: # start connection string
-            :end-before: # end connection string
 
 AWS EKS
 ~~~~~~~
@@ -676,7 +668,7 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from the file specified in the
 ``AWS_WEB_IDENTITY_TOKEN_FILE`` environment variable.
 
-.. literalinclude:: /includes/authentication/aws-eks.py
+.. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
    :language: python
    :copyable: true
    :start-after: # define callback, properties, and MongoClient
@@ -685,7 +677,7 @@ includes a ``fetch()`` method that retrieves an OIDC token from the file specifi
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. literalinclude:: /includes/authentication/aws-eks.py
+.. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
    :language: python
    :copyable: true
    :start-after: return OIDCCallbackResult(access_token=token)
@@ -706,20 +698,16 @@ After you set the preceding environment variable,
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. literalinclude:: /includes/authentication/aws-eks.py
+      .. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
             :language: python
             :copyable: true
-            :start-after: # start mongoclient
-            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. literalinclude:: /includes/authentication/aws-eks.py
+      .. literalinclude:: /includes/authentication/aws-eks-connection-string.py
             :language: python
             :copyable: true
-            :start-after: # start connection string
-            :end-before: # end connection string
 
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -744,7 +732,7 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
 service-account token-file location.
 
-.. literalinclude:: /includes/authentication/aws-eks.py
+.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
    :language: python
    :copyable: true
    :start-after: # define callback, properties, and MongoClient
@@ -753,7 +741,7 @@ service-account token-file location.
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. literalinclude:: /includes/authentication/aws-eks.py
+.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
    :language: python
    :copyable: true
    :start-after: return OIDCCallbackResult(access_token=token)
@@ -773,20 +761,16 @@ You can set these options in two ways: by passing arguments to the
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. literalinclude:: /includes/authentication/azure-envs.py
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
             :language: python
             :copyable: true
-            :start-after: # start mongoclient
-            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. literalinclude:: /includes/authentication/azure-envs.py
+      .. literalinclude:: /includes/authentication/azure-envs-connection-string.py
             :language: python
             :copyable: true
-            :start-after: # start connection string
-            :end-before: # end connection string
 
 GCP GKE
 ~~~~~~~
@@ -803,7 +787,7 @@ The following example shows how to define a callback class named ``MyCallback``.
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
 service-account token-file location.
 
-.. literalinclude:: /includes/authentication/gcp-gke.py
+.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
    :language: python
    :copyable: true
    :start-after: # define callback, properties, and MongoClient
@@ -812,7 +796,7 @@ service-account token-file location.
 After you define your callback class, create a Python dictionary that contains one key,
 ``OIDC_CALLBACK``, whose value is an instance of your custom callback class:
 
-.. literalinclude:: /includes/authentication/gcp-gke.py
+.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
    :language: python
    :copyable: true
    :start-after: return OIDCCallbackResult(access_token=token)
@@ -832,20 +816,16 @@ You can set these options in two ways: by passing arguments to the
    .. tab:: MongoClient
       :tabid: mongoclient
 
-      .. literalinclude:: /includes/authentication/gcp-gke.py
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
             :language: python
             :copyable: true
-            :start-after: # start mongoclient
-            :end-before: # end mongoclient
 
    .. tab:: Connection String
       :tabid: connectionstring
 
-      .. literalinclude:: /includes/authentication/gcp-gke.py
+      .. literalinclude:: /includes/authentication/gcp-gke-connection-string.py
             :language: python
             :copyable: true
-            :start-after: # start connection string
-            :end-before: # end connection string
 
 API Documentation
 -----------------
