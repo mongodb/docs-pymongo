@@ -82,7 +82,7 @@ Specialized Data Formats
 ------------------------
 
 Learn how to work with specialized data formats and custom types in the
-:ref:`pymongo-data-formats`.
+:ref:`pymongo-data-formats` section.
 
 Third-Party Tools
 -----------------
