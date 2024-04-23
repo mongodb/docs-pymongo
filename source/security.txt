@@ -427,3 +427,101 @@ PLAIN SASL
 
 To learn more about authenticating with PLAIN SASL, see
 :ref:`pymongo-sasl` in the Authentication guide.
+
+MONGODB-OIDC
+------------
+
+Azure IMDS
+~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/azure-imds-mongoclient.py
+            :language: python
+            :copyable: true
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/azure-imds-connection-string.py
+            :language: python
+            :copyable: true
+
+GCP IMDS
+~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/gcp-imds-mongoclient.py
+            :language: python
+            :copyable: true
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/gcp-imds-connection-string.py
+            :language: python
+            :copyable: true
+
+AWS EKS
+~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
+            :language: python
+            :copyable: true
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/aws-eks-connection-string.py
+            :language: python
+            :copyable: true
+
+Other Azure Environments
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
+            :language: python
+            :copyable: true
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/azure-envs-connection-string.py
+            :language: python
+            :copyable: true
+
+GCP GKE
+~~~~~~~
+
+.. tabs::
+
+   .. tab:: MongoClient
+      :tabid: mongoclient
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
+            :language: python
+            :copyable: true
+
+   .. tab:: Connection String
+      :tabid: connectionstring
+
+      .. literalinclude:: /includes/authentication/gcp-gke-connection-string.py
+            :language: python
+            :copyable: true
