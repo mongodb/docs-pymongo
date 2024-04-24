@@ -37,7 +37,7 @@ Language Compatibility
 {+driver-short+} supports both CPython and PyPy.
 
 When a version of Python is marked end-of-life (EOL), the next minor release of
-{+driver-short+} drops support for that version. The driver also offers the
+{+driver-short+} drops support for that version. The driver offers the
 following ongoing support for EOL Python versions:
 
 - **CPython**: The last minor {+driver-short+} version compatible with the EOL CPython
