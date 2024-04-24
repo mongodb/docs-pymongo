@@ -16,6 +16,9 @@ Troubleshooting
 .. meta::
    :keywords: error, help
 
+On this page, you can find solutions to common issues encountered while using
+{+driver-short+} with MongoDB.
+
 Connection
 ----------
 
@@ -164,10 +167,16 @@ configured to use the ``SON`` class:
 When you find the preceding subdocument, the driver represents query results with
 ``SON`` objects and preserves key order:
 
-.. code-block:: python
+.. io-code-block::
 
-   print(collection_son.find_one())
-   # Returns: SON([('_id', 1.0), ('subdocument', SON([('b', 1.0), ('a', 1.0)]))])
+   .. input::
+      :language: python
+      
+      print(collection_son.find_one())
+   
+   .. output::
+
+      SON([('_id', 1.0), ('subdocument', SON([('b', 1.0), ('a', 1.0)]))])
 
 The subdocument's actual storage layout is now visible: "b" is before "a".
 
