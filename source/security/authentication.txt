@@ -694,32 +694,17 @@ After you define your callback class, create a Python dictionary that contains o
    :start-after: return OIDCCallbackResult(access_token=token)
    :end-before: client = MongoClient(
 
-Finally, set the following connection options:
+Finally, set the following connection options by passing arguments to the ``MongoClient``
+constructor:
 
 - ``authMechanism``: Set to ``"MONGODB-OIDC"``.
 - ``authMechanismProperties``: Set to the ``properties`` dictionary that you created in the
   previous step.
 
-You can set these options in two ways: by passing arguments to the
-``MongoClient`` constructor or through parameters in your connection string.
-
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
-            :language: python
-            :copyable: true
-            :emphasize-lines: 14-18
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. literalinclude:: /includes/authentication/azure-envs-connection-string.py
-            :language: python
-            :copyable: true
-            :emphasize-lines: 14-16
+.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
+      :language: python
+      :copyable: true
+      :emphasize-lines: 14-18
 
 .. _pymongo-mongodb-oidc-gcp-gke:
 
@@ -753,32 +738,17 @@ After you define your callback class, create a Python dictionary that contains o
    :start-after: return OIDCCallbackResult(access_token=token)
    :end-before: client = MongoClient(
 
-Finally, set the following connection options:
+Finally, set the following connection options by passing arguments to the ``MongoClient``
+constructor:
 
 - ``authMechanism``: Set to ``"MONGODB-OIDC"``.
 - ``authMechanismProperties``: Set to the ``properties`` dictionary that you created
   in the previous step.
 
-You can set these options in two ways: by passing arguments to the
-``MongoClient`` constructor or through parameters in your connection string.
-
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
-            :language: python
-            :copyable: true
-            :emphasize-lines: 11-15
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. literalinclude:: /includes/authentication/gcp-gke-connection-string.py
-            :language: python
-            :copyable: true
-            :emphasize-lines: 11-13
+.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
+      :language: python
+      :copyable: true
+      :emphasize-lines: 11-15
 
 API Documentation
 -----------------
