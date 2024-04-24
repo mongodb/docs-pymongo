@@ -1,3 +1,17 @@
+Server Reports Wire Version X, PyMongo Requires Y
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you attempt to connect to a MongoDB Server v3.4 or earlier,
+{+driver-short+} throws the following error:
+
+.. code-block:: 
+
+   pymongo.errors.ConfigurationError: Server at localhost:27017 reports wire version 5, but this version of PyMongo requires at least 6 (MongoDB 3.6).
+
+This occurs when the driver version is too new for the server it's connecting to.
+To resolve this issue, upgrade your database to a v3.6 or later, or downgrade to
+PyMongo v3.x, which supports MongoDB Server v2.6 or later.
+
 AutoReconnect
 ~~~~~~~~~~~~~
 
