@@ -475,28 +475,6 @@ GCP IMDS
 To learn more about authenticating with OIDC, see
 :ref:`pymongo-mongodb-oidc-gcp-imds` in the Authentication guide.
 
-AWS EKS
-~~~~~~~
-
-.. tabs::
-
-   .. tab:: MongoClient
-      :tabid: mongoclient
-
-      .. literalinclude:: /includes/authentication/aws-eks-mongoclient.py
-            :language: python
-            :copyable: true
-
-   .. tab:: Connection String
-      :tabid: connectionstring
-
-      .. literalinclude:: /includes/authentication/aws-eks-connection-string.py
-            :language: python
-            :copyable: true
-
-To learn more about authenticating with OIDC, see
-:ref:`pymongo-mongodb-oidc-aws-eks` in the Authentication guide.
-
 Other Azure Environments
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
