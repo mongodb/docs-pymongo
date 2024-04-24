@@ -4,5 +4,5 @@ from pymongo import MongoClient
 uri = ("mongodb://<hostname>:<port>/?"
        "username=<Azure identity client ID>"
        "&authMechanism=MONGODB-OIDC"
-       "&authMechanismProperties=environment:azure,token_resource:<audience>")
+       "&authMechanismProperties=ENVIRONMENT:azure,TOKEN_RESOURCE:<audience>")
 client = MongoClient(uri)

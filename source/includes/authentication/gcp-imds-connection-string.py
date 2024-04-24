@@ -4,5 +4,5 @@ from pymongo import MongoClient
 uri = ("mongodb://<hostname>:<port>/?"
        "username=<GCP identity client ID>"
        "&authMechanism=MONGODB-OIDC"
-       "&authMechanismProperties=environment:gcp,token_resource:<audience>")
+       "&authMechanismProperties=ENVIRONMENT:gcp,TOKEN_RESOURCE:<audience>")
 client = MongoClient(uri)
