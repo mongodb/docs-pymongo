@@ -32,6 +32,8 @@ You can use several types of specialized data formats in your {+driver-short+}
 application. To learn how to work with these data formats, see the following
 sections:
 
-- :ref:`pymongo-custom-types`
-- :ref:`pymongo-dates-times`
-- :ref:`pymongo-uuid`
+- Learn how to encode and decode custom types in the :ref:`pymongo-custom-types` guide.
+- Learn how to work with Python ``datetime`` objects in {+driver-short+} in the
+  :ref:`pymongo-dates-times` guide.
+- Learn about UUIDs and how to maintain cross-language compatibility while
+  working with them in the :ref:`pymongo-uuid` guide.
