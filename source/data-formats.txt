@@ -25,6 +25,13 @@ Specialized Data Formats
    /data-formats/dates-and-times
    /data-formats/uuid
 
+Overview
+--------
+
+You can use several types of specialized data formats in your {+driver-short+}
+application. To learn how to work with these data formats, see the following
+sections:
+
 - :ref:`pymongo-custom-types`
 - :ref:`pymongo-dates-times`
 - :ref:`pymongo-uuid`
