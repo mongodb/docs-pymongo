@@ -156,7 +156,7 @@ named arguments to them. The following table describes the commonly used argumen
          exceeded, {+driver-short+} aborts the operation and raises an ``ExecutionTimeout``.
 
 The following example uses the ``find()`` method to find all documents where
-the ``"cuisine"`` field has the value ``"Italian"``, and sets a maximum execution
+the ``"cuisine"`` field has the value ``"Italian"`` and sets a maximum execution
 time of 10 seconds:
 
 .. code-block:: python
