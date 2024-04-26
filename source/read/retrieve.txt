@@ -157,7 +157,7 @@ named arguments to them. The following table describes the commonly used argumen
 
 The following example uses the ``find()`` method to find all documents where
 the ``"cuisine"`` field has the value ``"Italian"`` and sets a maximum execution
-time of 10 seconds:
+time of 10 seconds (10,000 milliseconds):
 
 .. code-block:: python
    :copyable: true
@@ -175,7 +175,7 @@ Additional Information
 
 To learn more about query filters, see :ref:`pymongo-specify-query`.
 
-For runnable examples of retrieving documents with {+driver-short+}, see
+For runnable code examples of retrieving documents with {+driver-short+}, see
 :ref:`pymongo-read`.
 
 API Documentation

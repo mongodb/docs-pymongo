@@ -171,7 +171,7 @@ document-level validation.
 Additional Information
 ----------------------
 
-For runnable examples of inserting documents with {+driver-short+}, see
+For runnable code examples of inserting documents with {+driver-short+}, see
 :ref:`pymongo-write`.
 
 API Documentation
