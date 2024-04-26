@@ -328,7 +328,7 @@ You can configure OIDC for GCP IMDS in two ways: by passing arguments to the
       .. literalinclude:: /includes/authentication/gcp-imds-mongoclient.py
             :language: python
             :copyable: true
-            :emphasize-lines: 5-10
+            :emphasize-lines: 5-9
 
    .. tab:: Connection String
       :tabid: connectionstring
@@ -346,7 +346,7 @@ You can configure OIDC for GCP IMDS in two ways: by passing arguments to the
       .. literalinclude:: /includes/authentication/gcp-imds-connection-string.py
             :language: python
             :copyable: true
-            :emphasize-lines: 4-7
+            :emphasize-lines: 4-6
 
 .. _pymongo-mongodb-oidc-azure-envs:
 
