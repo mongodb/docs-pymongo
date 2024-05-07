@@ -129,8 +129,8 @@ Retrieve Distinct Values
 To learn more about the ``distinct()`` method, see the
 :ref:`pymongo-distinct` guide.
 
-Watch for Changes
------------------
+Monitor Data Changes
+--------------------
 
 .. literalinclude:: /includes/usage-examples/retrieve-code-examples.py
    :start-after: start-watch-for-changes
