@@ -102,7 +102,8 @@ and only watch for update operations:
    :language: python
 
 To learn more about modifying your change stream output, see the
-:manual:`</changeStreams/#modify-change-stream-output>` in the MongoDB Server
+:manual:`Modify Change Stream Output
+</changeStreams/#modify-change-stream-output>` section in the MongoDB Server
 manual.
 
 Modify ``watch()`` Behavior
@@ -145,11 +146,11 @@ of ``watch()``:
        | ``resume_after`` is mutually exclusive with ``start_after`` and ``start_at_operation_time``.
 
    * - ``start_after``
-     - | Directs watch() to attempt starting a new change stream after the
+     - | Directs ``watch()`` to start a new change stream after the
          operation specified in the resume token. Allows notifications to
          resume after an invalidate event.
-       | Each change stream event document includes a resume token as the _id
-         field. Pass the entire _id field of the change event document that
+       | Each change stream event document includes a resume token as the ``_id``
+         field. Pass the entire ``_id`` field of the change event document that
          represents the operation you want to resume after.
        | ``start_after`` is mutually exclusive with ``resume_after`` and ``start_at_operation_time``.
        
@@ -164,8 +165,8 @@ of ``watch()``:
          empty batch. Defaults to 1000 milliseconds.
 
    * - ``show_expanded_events``
-     - | Starting in MongoDB 6.0, change streams support change notifications
-         for DDL events, like the ``createIndexes`` and ``dropIndexes`` events. To
+     - | Starting in MongoDB Server v6.0, change streams support change notifications
+         for Data Definition Language (DDL) events, such as the ``createIndexes`` and ``dropIndexes`` events. To
          include expanded events in a change stream, create the change stream
          cursor and set this parameter to ``True``.
 
@@ -242,7 +243,7 @@ With the change stream application running, updating a document in the
     'updateDescription': {'updatedFields': {'cuisine': 'Irish'}, 'removedFields': [], 'truncatedArrays': []}}
 
 To learn more about pre-images and post-images, see the 
-:manual:`pre- and post-images section <changeStreams#change-streams-with-document-pre--and-post-images>` 
+:manual:`pre- and post-images section </changeStreams#change-streams-with-document-pre--and-post-images>` 
 in the MongoDB Server manual.
 
 Additional Information
