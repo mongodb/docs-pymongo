@@ -30,7 +30,7 @@ Sample Data
 
 The examples in this guide use the ``sample_restaurants.restaurants`` collection
 from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the
+free MongoDB Atlas cluster and load the sample datasets, see
 :ref:`<pymongo-get-started>`.
 
 Open a Change Stream
@@ -39,11 +39,11 @@ Open a Change Stream
 To open a change stream, call the ``watch()`` method. The instance on which you
 call the ``watch()`` method on determines the scope of events that the change
 stream listens for. You can call the ``watch()`` method on the following
-instances:
+classes:
 
-- ``MongoClient``: Monitors all changes in the MongoDB deployment
-- ``Database``: Monitors changes in all collections in the database
-- ``Collection``: Monitors changes in the collection
+- ``MongoClient``: To monitor all changes in the MongoDB deployment
+- ``Database``: To monitor changes in all collections in the database
+- ``Collection``: To monitor changes in the collection
 
 The following example opens a change stream on the ``restaurants`` collection
 and outputs changes to the shell as they occur:
@@ -94,7 +94,7 @@ You can specify the following stages in the ``pipeline`` parameter:
 - ``$unset``
 
 The following example uses the ``pipeline`` parameter to open a change stream
-and only watch for update operations:
+that records only update operations:
 
 .. literalinclude:: /includes/read/change-streams.py
    :start-after: start-change-stream-pipeline
@@ -242,8 +242,8 @@ With the change stream application running, updating a document in the
     'ns': {'db': 'sample_restaurants', 'coll': 'restaurants'}, 'documentKey': {'_id': ObjectId('...')},
     'updateDescription': {'updatedFields': {'cuisine': 'Irish'}, 'removedFields': [], 'truncatedArrays': []}}
 
-To learn more about pre-images and post-images, see the 
-:manual:`pre- and post-images section </changeStreams#change-streams-with-document-pre--and-post-images>` 
+To learn more about pre-images and post-images, see 
+:manual:`/changeStreams#change-streams-with-document-pre--and-post-images` 
 in the MongoDB Server manual.
 
 Additional Information
