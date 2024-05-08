@@ -46,7 +46,7 @@ classes:
 - ``Collection``: To monitor changes in the collection
 
 The following example opens a change stream on the ``restaurants`` collection
-and outputs changes to the shell as they occur:
+and outputs changes as they occur:
 
 .. literalinclude:: /includes/read/change-streams.py
    :start-after: start-open-change-stream
@@ -65,7 +65,7 @@ example updates a document with a ``name`` field value of ``Blarney Castle``:
    :language: python
 
 When you update the collection, the change stream application prints the change
-to the shell as it occurs. The change event printed to the shell resembles the
+as it occurs. The printed change event resembles the
 following:
 
 .. code-block:: sh
