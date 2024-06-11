@@ -218,7 +218,7 @@ authenticate to various platforms.
 For more information about the MONGODB-OIDC authentication mechanism, see
 :manual:`OpenID Connect Authentication </core/security-oidc/>` and
 :manual:`MongoDB Server Parameters </reference/parameters/#mongodb-parameter-param.oidcIdentityProviders>`
-in the{+mdb-server+} manual.
+in the MongoDB Server manual.
 
 .. _pymongo-mongodb-oidc-azure-imds:
 
