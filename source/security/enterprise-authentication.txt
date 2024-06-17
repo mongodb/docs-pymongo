@@ -222,9 +222,8 @@ in the {+mdb-server+} manual.
 
 .. note:: 
 
-   All OIDC requests from {+driver-short+} are synchronous and block the ``asyncio`` loop.
-
-Our OIDC docs must call out that all OIDC requests are synchronous and block the asyncio loop specifically because the Python stdlib lacks async HTTP request support.
+   Because Python's Standard Library doesn't support asynchronous HTTP requests,
+   all OIDC requests from {+driver-short+} are synchronous and block the ``asyncio`` loop.
 
 .. _pymongo-mongodb-oidc-azure-imds:
 
