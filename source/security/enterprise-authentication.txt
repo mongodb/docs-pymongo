@@ -220,6 +220,12 @@ For more information about the MONGODB-OIDC authentication mechanism, see
 :manual:`MongoDB Server Parameters </reference/parameters/#mongodb-parameter-param.oidcIdentityProviders>`
 in the {+mdb-server+} manual.
 
+.. note:: 
+
+   All OIDC requests from {+driver-short+} are synchronous and block the ``asyncio`` loop.
+
+Our OIDC docs must call out that all OIDC requests are synchronous and block the asyncio loop specifically because the Python stdlib lacks async HTTP request support.
+
 .. _pymongo-mongodb-oidc-azure-imds:
 
 Azure IMDS
