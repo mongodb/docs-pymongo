@@ -39,7 +39,7 @@ The {+driver-short+} v4.8 release includes the following new features:
 - Implemented Secure Software Development Life Cycle (SSDLC) automation in the release
   process. GitHub releases include a software bill of materials (SBOM) and signature
   files corresponding to the distribution files released on PyPI.
-- In objects of type ``bson.binary.Binary``, the ``repr()`` is redacted when the binary
+- In objects of type ``bson.binary.Binary``, the ``repr()`` method is redacted when the binary
   subtype is ``SENSITIVE_SUBTYPE`` (``8``).
 - Fixed a bug in change streams where both the ``startAtOperationTime`` and ``resumeToken``
   fields could be added to a retry attempt, which caused the retry to fail.
