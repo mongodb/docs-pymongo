@@ -104,17 +104,15 @@ constructor, as shown below:
 Upload Files
 ------------
 
-Use the ``upload_from_stream()`` method from the ``GridFSBucket`` class to upload
-a file to a GridFS bucket. Pass the following parameters to the  ``upload_from_stream()``
+Use the ``open_upload_stream()`` method from the ``GridFSBucket`` class to upload
+a file to a GridFS bucket. Pass the following parameters to the  ``open_upload_stream()``
 method:
 
-- ``filename``: The name of the file to store the uploaded content
-- ``source``: The file you want to upload
-- ``chunk_size_bytes``: The number of bytes per chunk of this file (optional).
-- ``metadata``: The file metadata (optional).
+- ``filename``: The name of the file you want to upload
+- ``chunk_size_bytes``: The number of bytes per chunk of this file (optional)
+- ``metadata``: The file metadata (optional)
 
-The following code example uploads a file located at ``./file_to_upload`` and stores
-its contents in ``my_file``:
+The following code example uploads a file named ``"my_file"`` to a GridFS bucket:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -163,11 +161,11 @@ Download Files
 --------------
 
 You can download files from your MongoDB database by using the
-``download_to_stream_by_name()`` method from the ``GridFSBucket``
+``open_download_stream_by_name()`` method from the ``GridFSBucket``
 class.
 
 The following example shows you how to download a file referenced
-by the file name, ``my_file``, into a file named ``output_file``:
+by the file name, ``"my_file"``, and read its contents:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -181,7 +179,7 @@ by the file name, ``my_file``, into a file named ``output_file``:
    GridFS will stream the most recent file with the given name (as
    determined by the ``uploadDate`` field).
 
-Alternatively, you can use the ``download_to_stream()``
+Alternatively, you can use the ``open_download_stream()``
 method, which takes the ``_id`` field of a file as a parameter:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
