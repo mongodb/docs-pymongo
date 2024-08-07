@@ -1,41 +1,36 @@
 # start create bucket
-const db = client.db(dbName);
-const bucket = new mongodb.GridFSBucket(db);
+db = MongoClient().test
+bucket = gridfs.GridFSBucket(db)
 # end create bucket
 
 # start create custom bucket
-const bucket = new mongodb.GridFSBucket(db, { bucketName: 'myCustomBucket' });
+bucket = gridfs.GridFSBucket(db, bucket_name='myCustomBucket')
 # end create custom bucket
 
 # start upload files
-   fs.createReadStream('./myFile').
-        pipe(bucket.openUploadStream('myFile', {
-            chunkSizeBytes: 1048576,
-            metadata: { field: 'myField', value: 'myValue' }
-        }));
+with open("my_file", "rb") as f:
+    file_id = fs.put(f, filename="my_file")
 # end upload files
 
 # start retrieve file info
-   const cursor = bucket.find({});
-   for await (const doc of cursor) {
-      console.log(doc);
-   }
+for file in bucket.find({}):
+    data = file.read()
 # end retrieve file info
 
 # start download files name
-   bucket.openDownloadStreamByName('myFile').
-        pipe(fs.createWriteStream('./outputFile'));
+destination = open('output_file','wb')
+bucket.download_to_stream_by_name("my_file", destination)
 # end download files name
 
 # start download files id
-   bucket.openDownloadStream(ObjectId("60edece5e06275bf0463aaf3")).
-        pipe(fs.createWriteStream('./outputFile'));
+destination = open('output_file','wb+')
+bucket.download_to_stream(file_id, destination)
 # end download files id
 
 # start rename files
-   bucket.rename(ObjectId("60edece5e06275bf0463aaf3"), "newFileName");
+fs.rename(file_id, "new_file_name")
 # end rename files
 
 # start delete files
-   bucket.delete(ObjectId("60edece5e06275bf0463aaf3"));
+bucket.delete(file_id)
 # end delete files
