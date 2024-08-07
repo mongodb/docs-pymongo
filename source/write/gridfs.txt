@@ -104,12 +104,17 @@ constructor, as shown below:
 Upload Files
 ------------
 
-Use the ``open_upload_stream()`` method from the ``GridFSBucket`` class to create an upload
-stream for a given file name. The
-``open_upload_stream()`` method allows you to specify configuration information
-such as file chunk size and other field/value pairs to store as metadata. Set
-these options as parameters of ``open_upload_stream()``, as shown in the
-following code example:
+Use the ``upload_from_stream()`` method from the ``GridFSBucket`` class to upload
+a file to a GridFS bucket. Pass the following parameters to the  ``upload_from_stream()``
+method:
+
+- ``filename``: The name of the file to store the uploaded content
+- ``source``: The file you want to upload
+- ``chunk_size_bytes``: The number of bytes per chunk of this file (optional).
+- ``metadata``: The file metadata (optional).
+
+The following code example uploads a file located at ``./file_to_upload`` and stores
+its contents in ``my_file``:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -138,7 +143,7 @@ from which you can access the results. To learn more about ``Cursor`` objects in
 {+driver-short+}, see :ref:`<pymongo-cursors>`.
 
 The following code example shows you how to retrieve and print file metadata
-from all your files in a GridFS bucket. It uses the ``for...of`` syntax to traverse the
+from all your files in a GridFS bucket. It uses the ``for...in`` syntax to traverse the
 ``Cursor`` iterable and display the results:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
@@ -158,12 +163,11 @@ Download Files
 --------------
 
 You can download files from your MongoDB database by using the
-``open_download_stream_by_name()`` method from ``GridFSBucket`` to create a
-download stream.
+``download_to_stream_by_name()`` method from the ``GridFSBucket``
+class.
 
 The following example shows you how to download a file referenced
-by the file name, stored in the ``filename`` field, into your working
-directory:
+by the file name, ``my_file``, into a file named ``output_file``:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -177,7 +181,7 @@ directory:
    GridFS will stream the most recent file with the given name (as
    determined by the ``uploadDate`` field).
 
-Alternatively, you can use the ``open_download_stream()``
+Alternatively, you can use the ``download_to_stream()``
 method, which takes the ``_id`` field of a file as a parameter:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
@@ -204,7 +208,7 @@ bucket. You must specify the file to rename by its ``_id`` field
 rather than its file name.
 
 The following example shows how to update the ``filename`` field to
-``"newFileName"`` by referencing a document's ``_id`` field:
+``"new_file_name"`` by referencing a document's ``_id`` field:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
