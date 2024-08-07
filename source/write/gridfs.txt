@@ -83,7 +83,7 @@ call read and write operations on the files in your bucket.
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start create bucket
       :end-before: end create bucket
 
@@ -95,7 +95,7 @@ constructor, as shown below:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start create custom bucket
       :end-before: end create custom bucket
 
@@ -113,7 +113,7 @@ example:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start upload files
       :end-before: end upload files
 
@@ -143,7 +143,7 @@ from all your files in a GridFS bucket. It uses the ``for...in`` syntax to trave
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start retrieve file info
       :end-before: end retrieve file info
 
@@ -166,7 +166,7 @@ by the file name, ``"my_file"``, and read its contents:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start download files name 
       :end-before: end download files name
 
@@ -181,7 +181,7 @@ method, which takes the ``_id`` field of a file as a parameter:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start download files id
       :end-before: end download files id
 
@@ -207,7 +207,7 @@ The following example shows how to update the ``filename`` field to
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start rename files
       :end-before: end rename files
 
@@ -232,7 +232,7 @@ The following example shows you how to delete a file by referencing its ``_id`` 
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
-      :copyable: true
+      :dedent:
       :start-after: start delete files
       :end-before: end delete files
 
