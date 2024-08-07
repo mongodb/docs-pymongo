@@ -104,15 +104,12 @@ constructor, as shown below:
 Upload Files
 ------------
 
-Use the ``open_upload_stream()`` method from the ``GridFSBucket`` class to upload
-a file to a GridFS bucket. Pass the following parameters to the  ``open_upload_stream()``
-method:
-
-- ``filename``: The name of the file you want to upload
-- ``chunk_size_bytes``: The number of bytes per chunk of this file (optional)
-- ``metadata``: The file metadata (optional)
-
-The following code example uploads a file named ``"my_file"`` to a GridFS bucket:
+Use the ``open_upload_stream()`` method from the ``GridFSBucket`` class to
+create an upload stream for a given file name. The ``open_upload_stream()``
+method allows you to specify configuration information such as file chunk
+size and other field/value pairs to store as metadata. Set these options
+as parameters of ``open_upload_stream()``, as shown in the following code
+example:
 
 .. literalinclude:: /includes/gridfs/gridfs.py
       :language: python
@@ -161,8 +158,8 @@ Download Files
 --------------
 
 You can download files from your MongoDB database by using the
-``open_download_stream_by_name()`` method from the ``GridFSBucket``
-class.
+``open_download_stream_by_name()`` method from ``GridFSBucket`` to create a
+download stream.
 
 The following example shows you how to download a file referenced
 by the file name, ``"my_file"``, and read its contents:
