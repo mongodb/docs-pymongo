@@ -252,7 +252,7 @@ timeoutMS Connection Option
 
       .. code-block:: python
 
-         uri = "mongodb://<db_username>:<password>@<hostname:<port>/?timeoutMS=<timeout length>"
+         uri = "mongodb://<db_username>:<db_password>@<hostname:<port>/?timeoutMS=<timeout length>"
          client = pymongo.MongoClient(uri)
 
 To learn more about client-side timeouts, see :ref:`pymongo-csot`.
