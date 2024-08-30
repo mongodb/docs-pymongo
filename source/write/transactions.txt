@@ -160,7 +160,7 @@ API Documentation
 To learn more about any of the types or methods discussed in this
 guide, see the following API Documentation:
 
-- `ClietSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__
+- `ClientSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__
 - `WriteConcern <{+api-root+}pymongo/write_concern.html#pymongo.write_concern.WriteConcern>`__
 - `start_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.start_transaction>`__
 - `with_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.with_transaction>`__
