@@ -26,6 +26,7 @@ MongoDB {+driver-short+} Documentation
    /troubleshooting
    /whats-new
    /upgrade
+   /motor-async-migration
    /previous-versions
    /issues-and-help
    /compatibility
@@ -119,6 +120,12 @@ Upgrade {+driver-short+} Versions
 
 Learn what changes you might need to make to your application to upgrade driver versions
 in the :ref:`pymongo-upgrade` section.
+
+Migrate From Motor to {+driver-async+}
+------------------------------------
+
+Learn how to migrate your Motor application to {+driver-async+} in the
+:ref:`pymongo-motor-to-async` section.
 
 Previous Versions
 -----------------
