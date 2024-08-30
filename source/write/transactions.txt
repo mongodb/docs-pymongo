@@ -9,7 +9,7 @@ Transactions
    :values: reference
 
 .. meta::
-   :keywords: code example, rollback, undo operation
+   :keywords: ACID, write, consistency, code example
 
 .. contents:: On this page
    :local:
