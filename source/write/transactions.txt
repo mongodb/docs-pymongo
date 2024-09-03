@@ -21,7 +21,7 @@ Overview
 --------
 
 In this guide, you can learn how to use the {+driver-short+} driver to perform
-**transactions**. Transactions allowyou to run a series of operations that do 
+**transactions**. Transactions allow you to run a series of operations that do 
 not change any data until the transaction is committed. If any operation in 
 the transaction returns an error, the driver cancels the transaction and discards 
 all data changes before they ever become visible.
