@@ -162,6 +162,9 @@ guide, see the following API Documentation:
 
 - `ClientSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__
 - `WriteConcern <{+api-root+}pymongo/write_concern.html#pymongo.write_concern.WriteConcern>`__
+- `abort_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.abort_transaction>`__
+- `commit_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.commit_transaction>`__
+- `end_session() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.end_session>`__
 - `start_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.start_transaction>`__
 - `with_transaction() <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession.with_transaction>`__
 - `insert_one() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.insert_one>`__
