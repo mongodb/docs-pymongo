@@ -20,24 +20,22 @@ Transactions
 Overview
 --------
 
-In this guide, you can learn how to use the {+driver-long+} to perform
-**transactions**. :manual:`Transactions </core/transactions/>` allow
-you to run a series of operations that do not change any data until the
-transaction is committed. If any operation in the transaction returns an
-error, the driver cancels the transaction and discards all data changes
-before they ever become visible.
+In this guide, you can learn how to use the {+driver-short+} driver to perform
+**transactions**. Transactions allowyou to run a series of operations that do 
+not change any data until the transaction is committed. If any operation in 
+the transaction returns an error, the driver cancels the transaction and discards 
+all data changes before they ever become visible.
 
 In MongoDB, transactions run within logical **sessions**. A
-:manual:`session </reference/server-sessions/>` is a grouping of related
-read or write operations that you intend to run sequentially. Sessions
-enable :manual:`causal consistency
-</core/read-isolation-consistency-recency/#causal-consistency>` for a
-group of operations or allow you to execute operations in an
-:website:`ACID transaction </basics/acid-transactions>`. MongoDB
-guarantees that the data involved in your transaction operations remains
-consistent, even if the operations encounter unexpected errors.
+session is a grouping of related read or write operations that you intend to run 
+sequentially. Sessions enable **causal consistency** for a
+group of operations and allow you to run operations in an
+**ACID-compliant transaction**, which is a transaction that meets an expectation
+of atomicity, consistency, isolation, and durability. MongoDB guarantees that the 
+data involved in your transaction operations remains consistent, even if the 
+operations encounter unexpected errors.
 
-When using the {+driver-short+}, you can create a new session from a
+When using {+driver-short+}, you can create a new session from a
 ``MongoClient`` instance as a ``ClientSession`` type. We recommend that you reuse
 your ``MongoClient`` for multiple sessions and transactions instead of
 creating a new client each time.
@@ -61,7 +59,7 @@ Methods
 -------
 
 After you start a session by using the ``start_session()`` method, you can manage 
-the session state by using the methods provided by the returned ``ClientSession``.
+the session state by using the following methods provided by the returned ``ClientSession``:
 
 .. list-table::
    :widths: 25 75
@@ -96,10 +94,10 @@ the session state by using the methods provided by the returned ``ClientSession`
          </reference/method/Session.commitTransaction/>`  in the Server manual.
 
    * - ``with_transaction()``
-     - | Starts a transaction on this session and executes a callback once, then
+     - | Starts a transaction on this session and runs ``callback`` once, then
          commits the transaction. In the event of an exception, this method may retry
          the commit or the entire transaction, which may invoke the callback multiple 
-         times by a single call to ``with_transaction``.
+         times by a single call to ``with_transaction()``.
        |
        | **Parameters**: ``callback``, ``read_concern``, ``write_concern``, ``read_preference``, ``max_commit_time_ms``
        | **Return Type**: ``_T``
@@ -109,8 +107,8 @@ the session state by using the methods provided by the returned ``ClientSession`
          Returns an error if there is no active session to end.
 
 A ``ClientSession`` also has methods to retrieve session
-properties and modify mutable session properties. View the :ref:`API
-documentation <api-docs-transaction>` to learn more about these methods.
+properties and modify mutable session properties. To learn more about these
+methods, see the :ref:`API documentation <api-docs-transaction>`.
 
 Example
 -------
@@ -121,9 +119,9 @@ following steps:
 
 1. Create a session from the client using the ``start_session()`` method.
 #. Use the ``with_transaction()`` method to start a transaction.
-#. Insert multiple documents. The ``with_transaction()`` method executes the
-   insert and commits the transaction. If any operation results in
-   errors, ``with_transaction()`` handles canceling the transaction. This method
+#. Insert multiple documents. The ``with_transaction()`` method runs the
+   insert operation and commits the transaction. If any operation results in
+   errors, ``with_transaction()`` cancels the transaction. This method
    ensures that the session closes properly when the block exits.
 #. Close the connection to the server with the ``client.close()`` method.
 
@@ -158,7 +156,7 @@ API Documentation
 ~~~~~~~~~~~~~~~~~
 
 To learn more about any of the types or methods discussed in this
-guide, see the following API Documentation:
+guide, see the following API documentation:
 
 - `ClientSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__
 - `WriteConcern <{+api-root+}pymongo/write_concern.html#pymongo.write_concern.WriteConcern>`__
