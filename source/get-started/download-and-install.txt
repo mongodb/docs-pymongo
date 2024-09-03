@@ -12,7 +12,7 @@ Download and Install
       Ensure you have the following dependencies installed
       in your development environment:
       
-      - `Python3 version 3.7 or later <https://www.python.org/downloads/>`__
+      - `Python3 version 3.8 or later <https://www.python.org/downloads/>`__
       - `pip <https://pip.pypa.io/en/stable/installation/>`__
       - `dnspython <https://pypi.org/project/dnspython/>`__
 
@@ -67,7 +67,7 @@ Download and Install
              .. code-block:: bash
 
                 python3 -m venv venv
-                venv\Scripts\activate
+                . venv\Scripts\activate
       
       With the virtual environment activated, run the following command to
       install the current version of {+driver-short+}:
