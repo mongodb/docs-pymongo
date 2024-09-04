@@ -117,13 +117,13 @@ The following example shows how you can create a session, create a
 transaction, and commit a multi-document insert operation through the
 following steps:
 
-1. Create a session from the client using the ``start_session()`` method.
+1. Create a session from the client by using the ``start_session()`` method.
 #. Use the ``with_transaction()`` method to start a transaction.
 #. Insert multiple documents. The ``with_transaction()`` method runs the
    insert operation and commits the transaction. If any operation results in
    errors, ``with_transaction()`` cancels the transaction. This method
    ensures that the session closes properly when the block exits.
-#. Close the connection to the server with the ``client.close()`` method.
+#. Close the connection to the server by using the ``client.close()`` method.
 
 .. literalinclude:: /includes/write/transaction.py
    :start-after: start-transaction
