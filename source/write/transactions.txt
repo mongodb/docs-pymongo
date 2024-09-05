@@ -100,7 +100,7 @@ the session state by using the following methods provided by the returned ``Clie
          times by a single call to ``with_transaction()``.
        |
        | **Parameters**: ``callback``, ``read_concern``, ``write_concern``, ``read_preference``, ``max_commit_time_ms``
-       | **Return Type**: ``_T``
+       | **Return Value**: The return value of the ``callback`` function
 
    * - ``end_session()``
      - | Finishes this session. If a transaction has started, this method aborts it.
