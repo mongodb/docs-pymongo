@@ -7,7 +7,7 @@ Migrate to the {+driver-async+} Driver
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 .. facet::
@@ -23,12 +23,12 @@ Overview
 The {+driver-async+} driver is a unification of {+driver-short+} and the `Motor
 library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
 identify the changes you must make to migrate an application from
-{+driver-short+} or from Motor to the {+driver-async+} driver.
+{+driver-short+} or Motor to the {+driver-async+} driver.
 
 Migrate From {+driver-short+}
 --------------------
 
-The {+driver-async+} driver behaves nearly identically to {+driver-short+}, but
+The {+driver-async+} driver behaves similarly to {+driver-short+}, but
 all methods that perform network operations are coroutines and must be awaited.
 To migrate from {+driver-short+} to {+driver-async+}, you must update your code
 to replace all uses of ``MongoClient`` with ``AsyncMongoClient`` and add the
@@ -61,7 +61,7 @@ Client Methods
      - .. code-block:: python
           
           async with await client.watch(...) as stream:
-             ...
+          ...
 
    * - ``server_info()``
      - .. code-block:: python
@@ -108,8 +108,7 @@ Database Methods
      - .. code-block:: python
 
           async with await client.admin.aggregate(...) as cursor:
-              async for operation in cursor:
-              print(operation)
+          ...
 
    * - ``command()``
      - .. code-block:: python
@@ -281,11 +280,13 @@ Collection Methods
      - .. code-block:: python
           
           async for doc in await collection.aggregate(...):
+          ...
 
    * - ``aggregate_raw_batches()``
      - .. code-block:: python
           
           async for batch in await collection.aggregate_raw_batches(...):
+          ...
 
    * - ``rename()``
      - .. code-block:: python
@@ -320,8 +321,8 @@ most cases, you can directly migrate existing Motor applications to
 {+driver-short+}, changing only the application's import statements, and
 by using ``AsyncMongoClient`` in place of ``MotorClient``.
 
-The following section details Motor method signatures that the
-{+driver-async+} changes:
+The following section shows the method signature changes that you must make when
+migrating from Motor to the {+driver-async+} driver:
 
 Method Signature Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~
