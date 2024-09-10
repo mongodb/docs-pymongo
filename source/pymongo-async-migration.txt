@@ -20,10 +20,11 @@ Migrate to the {+driver-async+} Driver
 Overview
 --------
 
-The {+driver-async+} driver is a unification of {+driver-short+} and the `Motor
-library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
-identify the changes you must make to migrate an application from
-{+driver-short+} or Motor to the {+driver-async+} driver.
+In September 2024, MongoDB released the {+driver-async+} driver to unify {+driver-short+}
+and `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the asynchronous
+MongoDB driver for Python. In this guide, you can identify the changes you must
+make to migrate an application from {+driver-short+} or Motor to the
+{+driver-async+} driver.
 
 Migrate From {+driver-short+}
 --------------------
@@ -31,14 +32,20 @@ Migrate From {+driver-short+}
 The {+driver-async+} driver behaves similarly to {+driver-short+}, but
 all methods that perform network operations are coroutines and must be awaited.
 To migrate from {+driver-short+} to {+driver-async+}, you must update your code
-to replace all uses of ``MongoClient`` with ``AsyncMongoClient`` and add the
-``await`` keyword to all asynchronous method calls. If an asynchronous method is
-called within a function, you must also mark the function as ``async``.
+in the following ways:
+
+- Replace all uses of ``MongoClient`` with ``AsyncMongoClient``.
+- Add the ``await`` keyword to all asynchronous method calls .
+- If an asynchronous method is called within a function, mark the function as ``async``.
+
+The following sections describe how to implement the asynchronous API.
 
 Asynchronous Methods
 ~~~~~~~~~~~~~~~~~~~~
 
-The following methods are asynchronous in {+driver-async+}:
+The following tables list the asynchronous methods that are available in the
+{+driver-async+} driver. To call these methods, you must ``await`` them and call them
+inside an ``async`` function.
 
 Client Methods
 ``````````````
@@ -318,8 +325,20 @@ Migrate From Motor
 
 The {+driver-async+} driver behaves nearly identically to the Motor library. In
 most cases, you can directly migrate existing Motor applications to
-{+driver-short+}, changing only the application's import statements, and
-by using ``AsyncMongoClient`` in place of ``MotorClient``.
+{+driver-short+ by using ``AsyncMongoClient`` in place of ``MotorClient``, and
+changing the application's import statements to import from ``pymongo``.
+
+The following example shows the difference in imports to use a client for
+read and write operations in Motor compared to {+driver-async+}:
+
+.. code-block:: python
+
+   # Motor client import
+   from motor.motor_asyncio import AsyncIOMotorClient
+
+   # {+driver-async+} client import
+   from pymongo import AsyncMongoClient
+
 
 The following section shows the method signature changes that you must make when
 migrating from Motor to the {+driver-async+} driver:
