@@ -341,7 +341,7 @@ read and write operations in Motor compared to {+driver-async+}:
 
 
 The following section shows the method signature changes that you must make when
-migrating from Motor to the {+driver-async+} driver:
+migrating from Motor to the {+driver-async+} driver.
 
 Method Signature Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~
