@@ -325,7 +325,7 @@ Migrate From Motor
 
 The {+driver-async+} driver behaves nearly identically to the Motor library. In
 most cases, you can directly migrate existing Motor applications to
-{+driver-short+} by using ``AsyncMongoClient`` in place of ``MotorClient``, and
+{+driver-async+} by using ``AsyncMongoClient`` in place of ``MotorClient``, and
 changing the application's import statements to import from ``pymongo``.
 
 The following example shows the difference in imports to use a client for
