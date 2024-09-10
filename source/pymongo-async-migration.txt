@@ -20,11 +20,10 @@ Migrate to the {+driver-async+} Driver
 Overview
 --------
 
-In September 2024, MongoDB released the {+driver-async+} driver to unify {+driver-short+}
-and `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the asynchronous
-MongoDB driver for Python. In this guide, you can identify the changes you must
-make to migrate an application from {+driver-short+} or Motor to the
-{+driver-async+} driver.
+The {+driver-async+} driver is a unification of {+driver-short+} and the `Motor
+library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
+identify the changes you must make to migrate an application from
+{+driver-short+} or Motor to the {+driver-async+} driver.
 
 Migrate From {+driver-short+}
 --------------------
@@ -35,7 +34,7 @@ To migrate from {+driver-short+} to {+driver-async+}, you must update your code
 in the following ways:
 
 - Replace all uses of ``MongoClient`` with ``AsyncMongoClient``.
-- Add the ``await`` keyword to all asynchronous method calls .
+- Add the ``await`` keyword to all asynchronous method calls.
 - If an asynchronous method is called within a function, mark the function as ``async``.
 
 The following sections describe how to implement the asynchronous API.
@@ -62,28 +61,28 @@ Client Methods
 
           from pymongo import AsyncMongoClient
 
-          client = AsyncMongoClient(...)
+          AsyncMongoClient(...)
 
    * - ``watch()``
      - .. code-block:: python
 
           async with await client.watch(...) as stream:
-          ...
+             ...
 
    * - ``server_info()``
      - .. code-block:: python
 
-          info = await client.server_info(...)
+          await client.server_info(...)
 
    * - ``list_databases()``
      - .. code-block:: python
 
-          databases = await client.list_databases()
+          await client.list_databases()
 
    * - ``list_database_names()``
      - .. code-block:: python
 
-          database_names = await client.list_database_names()
+          await client.list_database_names()
 
    * - ``drop_database()``
      - .. code-block:: python
@@ -104,7 +103,7 @@ Database Methods
      - .. code-block:: python
 
           async with await db.watch(...) as stream:
-          ...
+             ...
 
    * - ``create_collection()``
      -   .. code-block:: python
@@ -115,27 +114,27 @@ Database Methods
      - .. code-block:: python
 
           async with await client.admin.aggregate(...) as cursor:
-          ...
+             ...
 
    * - ``command()``
      - .. code-block:: python
 
-          result = await db.command(...)
+          await db.command(...)
 
    * - ``cursor_command()``
      - .. code-block:: python
 
-          curr = await db.cursor_command(...)
+          await db.cursor_command(...)
 
    * - ``list_collections()``
      - .. code-block:: python
 
-          collections = await db.list_collections()
+          await db.list_collections()
 
    * - ``list_collection_names()``
      - .. code-block:: python
 
-          collection_names = await db.list_collection_names()
+          await db.list_collection_names()
 
    * - ``drop_collection()``
      - .. code-block:: python
@@ -145,12 +144,12 @@ Database Methods
    * - ``validate_collection()``
      - .. code-block:: python
 
-          result = await db.validate_collection(...)
+          await db.validate_collection(...)
 
    * - ``dereference()``   
      - .. code-block:: python
 
-          result = await db.dereference(...)
+          await db.dereference(...)
 
 Collection Methods
 ``````````````````
@@ -166,7 +165,7 @@ Collection Methods
      - .. code-block:: python
 
           async with await collection.watch(...) as stream:
-          ...
+             ...
    
    * - ``insert_one()``
      - .. code-block:: python
@@ -211,17 +210,17 @@ Collection Methods
    * - ``find_one()``
      - .. code-block:: python
           
-          result = await collection.find_one(...)
+          await collection.find_one(...)
    
    * - ``estimated_document_count()``
      - .. code-block:: python
 
-          count = await collection.estimated_document_count()
+          await collection.estimated_document_count()
 
    * - ``count_documents()``
      - .. code-block:: python
 
-          count = await collection.count_documents(...)
+          await collection.count_documents(...)
 
    * - ``create_index()``
      - .. code-block:: python
@@ -246,17 +245,17 @@ Collection Methods
    * - ``list_indexes()``
      - .. code-block:: python
 
-          indexes = await collection.list_indexes()
+          await collection.list_indexes()
 
    * - ``index_information()``
      - .. code-block:: python
 
-          info = await collection.index_information()
+          await collection.index_information()
 
    * - ``list_search_indexes()``
      - .. code-block:: python
 
-          indexes = await collection.list_search_indexes()
+          await collection.list_search_indexes()
 
    * - ``create_search_index()``
      - .. code-block:: python
@@ -281,19 +280,19 @@ Collection Methods
    * - ``options()``
      - .. code-block:: python
 
-          options = await collection.options()
+          await collection.options()
    
    * - ``aggregate()``
      - .. code-block:: python
 
           async for doc in await collection.aggregate(...):
-          ...
+             ...
 
    * - ``aggregate_raw_batches()``
      - .. code-block:: python
 
           async for batch in await collection.aggregate_raw_batches(...):
-          ...
+             ...
 
    * - ``rename()``
      - .. code-block:: python
@@ -303,22 +302,22 @@ Collection Methods
    * - ``distinct()``
      - .. code-block:: python
 
-          distinct_values = await collection.distinct(...)
+          await collection.distinct(...)
 
    * - ``find_one_and_delete()``
      - .. code-block:: python
 
-          result = await collection.find_one_and_delete(...)
+          await collection.find_one_and_delete(...)
 
    * - ``find_one_and_replace()``
      - .. code-block:: python
 
-          result = await collection.find_one_and_replace(...)
+          await collection.find_one_and_replace(...)
 
    * - ``find_one_and_update()``
      - .. code-block:: python
 
-          result = await collection.find_one_and_update(...)
+          await collection.find_one_and_update(...)
 
 Migrate From Motor
 ------------------
@@ -340,8 +339,8 @@ read and write operations in Motor compared to {+driver-async+}:
    from pymongo import AsyncMongoClient
 
 
-The following section shows the method signature changes that you must make when
-migrating from Motor to the {+driver-async+} driver.
+The following section shows the method signature changes that you must implement
+in your application when migrating from Motor to the {+driver-async+} driver.
 
 Method Signature Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~
