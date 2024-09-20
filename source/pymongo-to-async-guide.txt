@@ -1,8 +1,8 @@
-.. _pymongo-async-migration:
+.. _pymongo-to-async-guide:
 
-===================================
-Migrate to the {+driver-async+} Driver
-===================================
+====================================
+Switch from {+driver-short+} to {+driver-async+}
+====================================
 
 .. contents:: On this page
    :local:
@@ -15,15 +15,15 @@ Migrate to the {+driver-async+} Driver
    :values: reference
 
 .. meta::
-   :keywords: motor, async, refactor, migration
+   :keywords: asyncronous, refactor, migration
 
 Overview
 --------
 
 The {+driver-async+} driver is a unification of {+driver-short+} and the `Motor
 library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
-identify the changes you must make to migrate an application from
-{+driver-short+} or Motor to the {+driver-async+} driver.
+identify the changes you must make to switch from {+driver-short+} to
+{+driver-async+}.
 
 Migrate From {+driver-short+}
 --------------------
@@ -38,6 +38,8 @@ in the following ways:
 - If an asynchronous method is called within a function, mark the function as ``async``.
 
 The following sections describe how to implement the asynchronous API.
+
+.. _pymongo-async-methods:
 
 Asynchronous Methods
 ~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +63,7 @@ Client Methods
 
           from pymongo import AsyncMongoClient
 
-          AsyncMongoClient(...)
+          async with AsyncMongoClient(...)
 
    * - ``watch()``
      - .. code-block:: python
@@ -319,39 +321,8 @@ Collection Methods
 
           await collection.find_one_and_update(...)
 
-Migrate From Motor
-------------------
+Additional Information
+----------------------
 
-The {+driver-async+} driver behaves nearly identically to the Motor library. In
-most cases, you can directly migrate existing Motor applications to
-{+driver-async+} by using ``AsyncMongoClient`` in place of ``MotorClient``, and
-changing the application's import statements to import from ``pymongo``.
-
-The following example shows the difference in imports to use a client for
-read and write operations in Motor compared to {+driver-async+}:
-
-.. code-block:: python
-
-   # Motor client import
-   from motor.motor_asyncio import AsyncIOMotorClient
-
-   # {+driver-async+} client import
-   from pymongo import AsyncMongoClient
-
-
-The following section shows the method signature changes that you must implement
-in your application when migrating from Motor to the {+driver-async+} driver.
-
-Method Signature Changes
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The following Motor method signatures behave differently in the {+driver-async+} driver:
-
-- ``GridOut.open()`` returns ``None``.
-- ``AsyncMongoClient.__init__()`` does not accept an ``io_loop`` parameter.
-- ``GridIn.set()`` does not accept a filename. Instead pass a file name by using the
-  ``GridIn.filename`` attribute.
-- ``Cursor.each()`` does not exist in the {+driver-async+} driver.
-- ``stream_to_handler()`` does not exist in the {+driver-async+} driver.
-- ``to_list(0)`` is not valid in the {+driver-async+} driver. Use
-  ``to_list(None)`` instead.
+To learn more about asynchronous Python, see the `Python Asyncio documentation
+<https://docs.python.org/3/library/asyncio.html>`__.

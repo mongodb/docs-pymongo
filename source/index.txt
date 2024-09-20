@@ -26,7 +26,8 @@ MongoDB {+driver-short+} Documentation
    /troubleshooting
    /whats-new
    /upgrade
-   /pymongo-async-migration
+   /pymongo-async-motor-migration
+   /pymongo-to-async-guide
    /previous-versions
    /issues-and-help
    /compatibility
@@ -121,13 +122,20 @@ Upgrade {+driver-short+} Versions
 Learn what changes you might need to make to your application to upgrade driver versions
 in the :ref:`pymongo-upgrade` section.
 
-Migrate to the {+driver-async+} Driver
-------------------------------------
+Migrate from Motor to the {+driver-async+} Driver
+------------------------------------------------
 
-In September 2024, MongoDB released the {+driver-async+} driver to unify {+driver-short+}
-and `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the asynchronous
-MongoDB driver for Python. Learn how to migrate from {+driver-short+} or Motor
-to the {+driver-async+} driver in the :ref:`pymongo-async-migration` section.
+In September 2024, MongoDB released the {+driver-async+} driver as a replacement
+for `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the previous asynchronous
+MongoDB driver for Python. Learn how to migrate from Motor
+to the {+driver-async+} driver in the :ref:`pymongo-async-motor-migration`
+section.
+
+Switch from {+driver-short+} to {+driver-async+}
+----------------------------------------------
+
+Learn what changes you need to make to switch from {+driver-short+} to
+{+driver-async+} in the :ref:`pymongo-to-async-guide` section.
 
 Previous Versions
 -----------------
