@@ -35,7 +35,7 @@ in the following ways:
 
 - Replace all uses of ``MongoClient`` with ``AsyncMongoClient``.
 - Add the ``await`` keyword to all asynchronous method calls.
-- If an asynchronous method is called within a function, mark the function as ``async``.
+- If you call an asynchronous method inside of a function, mark the function as ``async``.
 
 The following sections describe how to implement the asynchronous API.
 
