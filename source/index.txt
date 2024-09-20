@@ -122,8 +122,8 @@ Upgrade {+driver-short+} Versions
 Learn what changes you might need to make to your application to upgrade driver versions
 in the :ref:`pymongo-upgrade` section.
 
-Migrate from Motor to the {+driver-async+} Driver
-------------------------------------------------
+Migrate from Motor to {+driver-async+}
+-------------------------------------
 
 In September 2024, MongoDB released the {+driver-async+} driver as a replacement
 for `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the previous asynchronous

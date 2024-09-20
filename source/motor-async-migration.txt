@@ -1,8 +1,8 @@
 .. _pymongo-async-motor-migration:
 
-===============================================
-Migrate from Motor to the {+driver-async+} Driver
-===============================================
+====================================
+Migrate from Motor to {+driver-async+}
+====================================
 
 .. contents:: On this page
    :local:
@@ -23,7 +23,7 @@ Overview
 The {+driver-async+} driver is a unification of {+driver-short+} and the `Motor
 library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
 identify the changes you must make to migrate an application from
-{+driver-short+} or Motor to the {+driver-async+} driver.
+Motor to the {+driver-async+} driver.
 
 Migrate From Motor
 ------------------

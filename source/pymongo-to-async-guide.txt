@@ -25,12 +25,12 @@ library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
 identify the changes you must make to switch from {+driver-short+} to
 {+driver-async+}.
 
-Migrate From {+driver-short+}
---------------------
+Switch From {+driver-short+}
+-------------------
 
 The {+driver-async+} driver behaves similarly to {+driver-short+}, but
 all methods that perform network operations are coroutines and must be awaited.
-To migrate from {+driver-short+} to {+driver-async+}, you must update your code
+To switch from {+driver-short+} to {+driver-async+}, you must update your code
 in the following ways:
 
 - Replace all uses of ``MongoClient`` with ``AsyncMongoClient``.
