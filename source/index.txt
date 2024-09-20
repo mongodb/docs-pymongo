@@ -26,7 +26,7 @@ MongoDB {+driver-short+} Documentation
    /troubleshooting
    /whats-new
    /upgrade
-   /pymongo-async-motor-migration
+   /motor-async-migration
    /pymongo-to-async-guide
    /previous-versions
    /issues-and-help
