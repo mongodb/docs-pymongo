@@ -17,6 +17,8 @@ Switch from {+driver-short+} to {+driver-async+}
 .. meta::
    :keywords: asyncronous, refactor, migration
 
+.. include:: /includes/pymongo-async-experimental.rst
+
 Overview
 --------
 

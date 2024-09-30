@@ -17,6 +17,8 @@ Migrate from Motor to {+driver-async+}
 .. meta::
    :keywords: motor, async, refactor, migration
 
+.. include:: /includes/pymongo-async-experimental.rst
+
 Overview
 --------
 
@@ -62,10 +64,13 @@ The following Motor method signatures behave differently in the {+driver-async+}
 - ``AsyncMongoClient.__init__()`` does not accept an ``io_loop`` parameter.
 - ``GridIn.set()`` does not accept a filename. Instead pass a file name by using the
   ``GridIn.filename`` attribute.
-- ``Cursor.each()`` does not exist in the {+driver-async+} driver.
-- ``stream_to_handler()`` does not exist in the {+driver-async+} driver.
-- ``to_list(0)`` is not valid in the {+driver-async+} driver. Use
+- ``AsyncCursor.each()`` does not exist in the {+driver-async+} driver.
+- ``MotorGridOut.stream_to_handler()`` does not exist in the {+driver-async+} driver.
+- ``AsyncCursor.to_list(0)`` is not valid in the {+driver-async+} driver. Use
   ``to_list(None)`` instead.
+- ``MongoClient`` is thread safe and can be used by many threads, however, an
+  ``AsyncMongoClient`` is not thread safe and should only be used by a single
+  event loop.
 
 Additional Information
 ----------------------
