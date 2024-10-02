@@ -15,14 +15,26 @@ What's New
    :values: reference
 
 .. meta::
-   :keywords: update, new feature, deprecation, upgrade, driver v4.7
+   :keywords: update, new feature, deprecation, upgrade, driver v4.7, driver v4.8, driver v4.9
 
 Learn what's new in:
 
+* :ref:`Version 4.9 <version-4.9>`
 * :ref:`Version 4.8 <version-4.8>`
 * :ref:`Version 4.7 <version-4.7>`
 
 .. _upcoming-breaking-changes:
+
+.. _version-4.9:
+
+What's New in 4.9
+-----------------
+
+- Adds support for MongoDB 8.0 and Python 3.13.
+- Adds support for range queries with Queryable Encryption.
+- Adds a new asynchronous API. This API is in beta and is subject to change
+  before full release. 
+.. TODO: Add link to the Pymongo Async migration guide
 
 .. _version-4.8:
 
