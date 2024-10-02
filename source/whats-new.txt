@@ -35,13 +35,13 @@ The {+driver-short+} v4.10 release includes the following new features:
 
 - Adds provisional support for a new binary BSON subtype (9), which can be used
   for efficient storage and retrieval of :atlas:`vectors
-  </atlas-vector-search/vector-search-overview/#std-term-vector>`. This includes
-  the new methods: ``bson.binary.Binary.from_vector`` and ``bson.binary.Binary.as_vector``.
-  Support for BSON subtype 9 is in beta and is subject to change before the
+  </atlas-vector-search/vector-search-overview/#std-term-vector>` by using the
+  ``bson.binary.Binary.from_vector()`` and ``bson.binary.Binary.as_vector()``
+  methods. Support for BSON subtype 9 is in beta and is subject to change before the
   generally available release.
-- Adds ``"C"`` to client metadata when an application uses the C extension.
+- Adds ``"c"`` to the ``driver.name``client metadata field when an application uses the C extension.
 - Fixes a bug that could cause ``AsyncMongoClient`` to deadlock.
-- Fixes a bug that caused Windows to fail when importing {+driver-short+} if
+- Fixes a bug that causes Windows to fail when importing {+driver-short+} if
   asyncio is misconfigured.
 
 .. _version-4.9:
