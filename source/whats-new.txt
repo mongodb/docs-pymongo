@@ -34,8 +34,9 @@ What's New in 4.10
 The {+driver-short+} v4.10 release includes the following new features:
 
 - Adds provisional support for a new binary BSON subtype (9), which can be used
-  for efficient storage and retrieval of vectors. This includes the new methods:
-  ``bson.binary.Binary.from_vector`` and ``bson.binary.Binary.as_vector``.
+  for efficient storage and retrieval of :atlas:`vectors
+  </atlas-vector-search/vector-search-overview/#std-term-vector>`. This includes
+  the new methods: ``bson.binary.Binary.from_vector`` and ``bson.binary.Binary.as_vector``.
   Support for BSON subtype 9 is in beta and is subject to change before the
   generally available release.
 - Adds ``"C"`` to client metadata when an application uses the C extension.
