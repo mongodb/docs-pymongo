@@ -41,8 +41,6 @@ The {+driver-short+} v4.10 release includes the following new features:
   generally available release.
 - Adds ``"c"`` to the ``driver.name`` client metadata field when an application uses the C extension.
 - Fixes a bug that could cause ``AsyncMongoClient`` to deadlock.
-- Fixes a bug that causes Windows to fail when importing {+driver-short+} if
-  asyncio is misconfigured.
 
 .. _version-4.9:
 
