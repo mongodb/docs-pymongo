@@ -39,7 +39,7 @@ The {+driver-short+} v4.10 release includes the following new features:
   ``bson.binary.Binary.from_vector()`` and ``bson.binary.Binary.as_vector()``
   methods. Support for BSON subtype 9 is in beta and is subject to change before the
   generally available release.
-- Adds ``"c"`` to the ``driver.name``client metadata field when an application uses the C extension.
+- Adds ``"c"`` to the ``driver.name`` client metadata field when an application uses the C extension.
 - Fixes a bug that could cause ``AsyncMongoClient`` to deadlock.
 - Fixes a bug that causes Windows to fail when importing {+driver-short+} if
   asyncio is misconfigured.
