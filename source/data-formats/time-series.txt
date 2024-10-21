@@ -64,14 +64,15 @@ method:
 - ``timeseries`` argument 
 
 The ``timeseries`` argument is of type ``dict``. It contains the following fields:
+
 - ``timeField``
 - ``metaField``
 - ``granularity``
 - ``bucketMaxSpanSeconds``
 - ``bucketRoundingSeconds``
 
-See `Command Fields <https://www.mongodb.com/docs/manual/reference/command/create/#command-fields>`__
-to learn more about what these fields mean.
+See :manual:`Command Fields </reference/command/create/#command-fields>`
+to learn more about these fields.
 
 The following example shows how to create a time series collection using the 
 {+driver-short+}.
@@ -160,7 +161,7 @@ document contains the following fields:
 
     collection.insert_many(document_list)
 
-.. tip:: ``datetime`` format
+.. tip:: Formatting Dates and Times
 
     See :ref:`pymongo-dates-times` to learn more about using ``datetime``
     objects in {+driver-short+}.
