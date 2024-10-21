@@ -198,9 +198,3 @@ API documentation:
 - `list_collections() <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/database.html#pymongo.database.Database.list_collections>`__
 - `insert_one() <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/collection.html#pymongo.collection.Collection.insert_one>`__
 - `insert_many() <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/collection.html#pymongo.collection.Collection.insert_many>`__
-
-
-
-
-
-
