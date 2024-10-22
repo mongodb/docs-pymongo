@@ -49,8 +49,8 @@ What's New in 4.9
 
 .. warning:: Breaking Changes
 
-  {+driver-short+} v4.9 contains breaking changes. For more information, see
-  :ref:`version-4.9-breaking-changes`.
+   {+driver-short+} v4.9 contains breaking changes. For more information, see
+   :ref:`version-4.9-breaking-changes`.
 
 The {+driver-short+} v4.9 release includes the following new features:
 
