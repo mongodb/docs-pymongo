@@ -7,13 +7,13 @@ Time Series Data
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 1
+   :depth: 2
    :class: singlecol
 
 Overview
 --------
 
-In this guide, you can learn how to use the {+driver-short+} to store
+In this guide, you can learn how to use {+driver-short+} to store
 and interact with **time series data**.
 
 Time series data is composed of the following components:
@@ -57,7 +57,7 @@ Create a Time Series Collection
    connected to a deployment running {+mdb-server+} 5.0 or later.
 
 You can create a time series collection to store time series data. To create
-a time series collection, pass the following parameters to the ``create_collection()``
+a time series collection, pass the following arguments to the ``create_collection()``
 method:
 
 - Name of the new collection to create
@@ -65,23 +65,26 @@ method:
 
 The ``timeseries`` argument is of type ``dict``. It contains the following fields:
 
-- ``timeField``
-- ``metaField``
-- ``granularity``
-- ``bucketMaxSpanSeconds``
-- ``bucketRoundingSeconds``
+- ``timeField``: Specifies the field that stores a timestamp in each time series
+  document.
+- ``metaField``: Specifies the field that stores metadata in each time series 
+  document.
+- ``granularity``: Specifies the approximate time between consecutive timestamps.
+  The possible values are ``'seconds'``, ``'minutes'``, and ``'hours'``.
+- ``bucketMaxSpanSeconds``: Sets the maximum time between timestamps in the 
+  same bucket.
+- ``bucketRoundingSeconds``: Sets the number of seconds to round down by when 
+  MongoDB sets the minimum timestamp for a new bucket. Must be equal to 
+  ``bucketMaxSpanSeconds``.
 
 See :manual:`Command Fields </reference/command/create/#command-fields>`
 to learn more about these fields.
 
-The following example shows how to create a time series collection using the 
-{+driver-short+}.
-
 Example
 ~~~~~~~
 
-This example creates a time series collection named ``october2024`` with the
-``timeField`` option set to ``"timestamp"``.
+The following example creates a time series collection named ``october2024`` with the
+``timeField`` option set to ``"timestamp"``:
 
 .. code-block:: python
 
@@ -109,6 +112,7 @@ all collections in the database:
 
     .. output::
         :language: json
+        :visible: false
 
         {
             "name": "october2024", 
@@ -163,8 +167,8 @@ document contains the following fields:
 
 .. tip:: Formatting Dates and Times
 
-    See :ref:`pymongo-dates-times` to learn more about using ``datetime``
-    objects in {+driver-short+}.
+    To learn more about using ``datetime`` objects in {+driver-short+}, see 
+    :ref:`pymongo-dates-times`.
 
 .. _pymongo-time-series-read:
 
