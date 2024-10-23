@@ -56,9 +56,8 @@ Create a Time Series Collection
    To create and interact with time series collections, you must be
    connected to a deployment running {+mdb-server+} 5.0 or later.
 
-You can create a time series collection to store time series data. To create
-a time series collection, pass the following arguments to the ``create_collection()``
-method:
+To create a time series collection, pass the following arguments to the 
+``create_collection()`` method:
 
 - Name of the new collection to create
 - ``timeseries`` argument 
@@ -96,8 +95,8 @@ The following example creates a time series collection named ``october2024`` wit
 
     database.create_collection("october2024", timeseries=time_series_options)
 
-To check if you successfully created the collection, you can print out a list of
-all collections in the database:
+To check if you successfully created the collection, you can get a list of all
+collections in your database and filter by collection name.
 
 .. io-code-block::
     :copyable: true
@@ -105,10 +104,7 @@ all collections in the database:
     .. input::
         :language: python
         
-        collection_list = database.list_collections()
-
-        for c in collection_list:
-            print(c)
+        print(list(database.list_collections(filter={'name': 'october2024'})))
 
     .. output::
         :language: json
@@ -128,7 +124,6 @@ all collections in the database:
                 "readOnly": False
             }
         }
-        ...
 
 .. _pymongo-time-series-write:
 
