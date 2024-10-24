@@ -4,6 +4,13 @@
 Download and Install
 ====================
 
+.. note:: Alternative Installation Methods
+
+   The following guide shows you how to install the {+driver-short+} using
+   `pip <https://pip.pypa.io/en/stable/installation/>`__. To install the 
+   {+driver-short+} from source, see `Install from Source <https://pymongo.readthedocs.io/en/stable/installation.html#installing-from-source>`__
+   in the `API Documentation <https://pymongo.readthedocs.io/en/4.10.1/api/>`__.
+
 .. procedure::
    :style: connected
 
