@@ -123,3 +123,47 @@ following steps:
 - Downgrade Python to v3.9 or earlier
 - Upgrade {+mdb-server+} to v4.2 or later
 - Install {+driver-short+} with the :ref:`OCSP <pymongo-disable-ocsp>` option, which relies on PyOpenSSL
+
+Unsafe Legacy Renegotiation Disabled
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When using OpenSSL v3 or later, you might see an error similar to the following
+message:
+
+.. code-block:: python
+
+   886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+
+These types of errors occur due to outdated or buggy SSL proxies that mistakenly
+enforce legacy TLS renegotiation. 
+
+To resolve this issue, use the ``UnsafeLegacyServerConnect`` option with the 
+``OPENSSL_CONF`` environment variable. To do this, create a configuration
+file with the following content:
+
+.. code-block:: shell
+
+   openssl_conf = openssl_init
+
+   [openssl_init]
+   ssl_conf = ssl_sect
+
+   [ssl_sect]
+   system_default = system_default_sect
+
+   [system_default_sect]
+   Options = UnsafeLegacyServerConnect
+
+Then run Python using that OpenSSL config file:
+
+.. code-block:: shell
+
+   OPENSSL_CONF=/path/to/the/config/file/above.cnf python ...
+
+The ``UnsafeLegacyServerConnect`` option in ``OPENSSL_CONF`` requires OpenSSL v3.0.4 
+or greater.
+
+.. warning::
+
+   This workaround should only be used as a last resort to address ``unsafe legacy 
+   renegotiation disabled`` errors.
