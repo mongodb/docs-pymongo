@@ -135,7 +135,7 @@ message:
    MongoServerSelectionError: 886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
 
 These types of errors occur due to outdated or buggy SSL proxies that mistakenly
-enforce legacy TLS renegotiation. 
+enforce legacy `TLS renegotiation <https://www.ibm.com/docs/en/i/7.3?topic=settings-renegotiation>`__. 
 
 To resolve this issue, use the ``UnsafeLegacyServerConnect`` option with the 
 ``OPENSSL_CONF`` environment variable. Create a configuration
