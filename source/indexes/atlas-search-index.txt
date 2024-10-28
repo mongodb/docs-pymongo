@@ -1,8 +1,8 @@
 .. _pymongo-atlas-search-index:
 
-====================
-Atlas Search Indexes
-====================
+======================================
+Atlas Search and Vector Search Indexes
+======================================
 
 .. contents:: On this page
    :local:
@@ -20,13 +20,20 @@ Atlas Search Indexes
 Overview
 --------
 
-The Atlas Search feature enables you to perform full-text searches on
-collections hosted on MongoDB Atlas. The indexes specify the behavior of
+You can manage your :atlas:`Atlas Search </atlas-search>` and 
+:atlas:`Atlas Vector Search </atlas-vector-search/vector-search-overview/>`
+indexes by using the {+driver-short+}. The indexes specify the behavior of
 the search and which fields to index.
 
-To learn more about MongoDB Atlas Search, see the
-:atlas:`Atlas Search Indexes </atlas-search/atlas-search-overview/>`
-documentation.
+Atlas Search enables you to perform full-text searches on
+collections hosted on MongoDB Atlas. Atlas Search indexes specify the behavior of
+the search and which fields to index.
+
+Atlas Vector Search enables you to perform semantic searches on vector
+embeddings stored in MongoDB Atlas. Vector Search indexes define the
+indexes for the vector embeddings that you want to query and the boolean,
+date, objectId, numeric, string, or UUID values that you want to use to
+pre-filter your data.
 
 You can call the following methods on a collection to manage your Atlas Search
 indexes:
