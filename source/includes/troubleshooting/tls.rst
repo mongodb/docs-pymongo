@@ -132,13 +132,13 @@ message:
 
 .. code-block:: python
 
-   886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+   MongoServerSelectionError: 886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
 
 These types of errors occur due to outdated or buggy SSL proxies that mistakenly
 enforce legacy TLS renegotiation. 
 
 To resolve this issue, use the ``UnsafeLegacyServerConnect`` option with the 
-``OPENSSL_CONF`` environment variable. To do this, create a configuration
+``OPENSSL_CONF`` environment variable. Create a configuration
 file with the following content:
 
 .. code-block:: shell
