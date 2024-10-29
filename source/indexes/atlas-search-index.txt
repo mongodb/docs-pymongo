@@ -62,16 +62,31 @@ Create a Search Index
 You can use the `create_search_index() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.create_search_index>`__
 and the
 `create_search_indexes() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.create_search_indexes>`__
-methods to create Atlas Search indexes.
+methods to create Atlas Search indexes or Atlas Vector Search indexes.
 
-The following code example shows how to create a single index:
+The following code example shows how to create a single Atlas Search index:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python
    :start-after: start-create-search-index
    :end-before: end-create-search-index
 
-The following code example shows how to create multiple indexes:
+The following code example shows how to create a single Atlas Vector Search index
+using the `SearchIndexModel <{+api-root+}pymongo/operations.html#pymongo.operations.SearchIndexModel>`__
+object:
+
+.. literalinclude:: /includes/indexes/indexes.py
+   :language: python
+   :start-after: start-create-vector-search-index
+   :end-before: end-create-vector-search-index
+
+You can use `create_search_indexes() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.create_search_indexes>`__
+to create multiple indexes. These indexes can be Atlas Search indexes or Atlas
+Vector Search indexes. ``create_search_indexes()`` requires the ``SearchIndexModel``
+object.
+
+The following code example shows how to create an Atlas Search index and Atlas
+Vector Search index:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python
@@ -85,7 +100,8 @@ List Search Indexes
 
 You can use the
 `list_search_indexes() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.list_search_indexes>`__
-method to return the Atlas Search indexes of a collection.
+method to return the Atlas Search indexes and Atlas Vector Search indexes 
+of a collection.
 
 The following code example shows how to print a list of the search indexes of
 a collection:
@@ -103,15 +119,23 @@ Update a Search Index
 
 You can use the
 `update_search_index() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.update_search_index>`__
-method to update an Atlas Search index.
+method to update an Atlas Search index or Atlas Vector Search index.
 
-The following code shows how to update a search index:
+The following code example shows how to update an Atlas Search index:
 
 .. literalinclude:: /includes/indexes/indexes.py
    :language: python
    :dedent:
    :start-after: start-update-search-indexes
    :end-before: end-update-search-indexes
+
+The following code example shows how to update an Atlas Vector Search index:
+
+.. literalinclude:: /includes/indexes/indexes.py
+   :language: python
+   :dedent:
+   :start-after: start-update-vector-search-indexes
+   :end-before: end-update-vector-search-indexes
 
 .. _pymongo-atlas-search-index-drop:
 
@@ -120,7 +144,7 @@ Delete a Search Index
 
 You can use the
 `drop_search_index() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.drop_search_index>`__
-method to remove an Atlas Search index.
+method to remove an Atlas Search index or Atlas Vector Search index.
 
 The following code shows how to delete a search index from a collection:
 
