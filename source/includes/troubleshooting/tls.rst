@@ -134,14 +134,16 @@ message:
 
    MongoServerSelectionError: 886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
 
-These types of errors occur due to outdated or buggy SSL proxies that mistakenly
+These types of errors occur because of outdated or buggy SSL proxies that mistakenly
 enforce legacy `TLS renegotiation <https://www.ibm.com/docs/en/i/7.3?topic=settings-renegotiation>`__. 
 
-To resolve this issue, use the ``UnsafeLegacyServerConnect`` option with the 
-``OPENSSL_CONF`` environment variable. Create a configuration
-file with the following content:
+To resolve this issue, create a configuration file that includes the 
+``UnsafeLegacyServerConnect`` option. This option requires OpenSSL v3.0.4 or 
+greater. The following example shows how to set the ``UnsafeLegacyServerConnect`` 
+option:
 
 .. code-block:: shell
+   :emphasize-lines: 10
 
    openssl_conf = openssl_init
 
@@ -154,16 +156,16 @@ file with the following content:
    [system_default_sect]
    Options = UnsafeLegacyServerConnect
 
-Then run Python using that OpenSSL config file:
+Then run Python while setting the ``OPENSSL_CONF`` environment variable to use
+OpenSSL configuration file you just created:
 
 .. code-block:: shell
 
    OPENSSL_CONF=/path/to/the/config/file/above.cnf python ...
 
-The ``UnsafeLegacyServerConnect`` option in ``OPENSSL_CONF`` requires OpenSSL v3.0.4 
-or greater.
+.. important::
 
-.. warning::
-
-   This workaround should only be used as a last resort to address ``unsafe legacy 
-   renegotiation disabled`` errors.
+   Because setting the ``UnsafeLegacyServerConnect`` option has 
+   `security implications <https://docs.openssl.org/3.0/man3/SSL_CTX_set_options/#patched-openssl-client-and-unpatched-server>`__, 
+   this workaround should only be used as a last 
+   resort to address ``unsafe legacy renegotiation disabled`` errors.
