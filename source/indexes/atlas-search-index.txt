@@ -22,7 +22,7 @@ Overview
 
 You can manage your :atlas:`Atlas Search </atlas-search>` and 
 :atlas:`Atlas Vector Search </atlas-vector-search/vector-search-overview/>`
-indexes by using the {+driver-short+}. The indexes specify the behavior of
+indexes by using {+driver-short+}. The indexes specify the behavior of
 the search and which fields to index.
 
 Atlas Search enables you to perform full-text searches on
@@ -85,7 +85,7 @@ to create multiple indexes. These indexes can be Atlas Search indexes or Atlas
 Vector Search indexes. ``create_search_indexes()`` requires the ``SearchIndexModel``
 object.
 
-The following code example shows how to create an Atlas Search index and Atlas
+The following code example shows how to create an Atlas Search index and an Atlas
 Vector Search index:
 
 .. literalinclude:: /includes/indexes/indexes.py
