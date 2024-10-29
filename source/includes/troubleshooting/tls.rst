@@ -157,7 +157,7 @@ option:
    Options = UnsafeLegacyServerConnect
 
 Then run Python while setting the ``OPENSSL_CONF`` environment variable to use
-OpenSSL configuration file you just created:
+the OpenSSL configuration file you just created:
 
 .. code-block:: shell
 
