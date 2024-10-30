@@ -112,7 +112,7 @@ Version 4.11 Breaking Changes
 - {+mdb-server+} v3.6 is no longer supported. The minimum supported {+mdb-server+}
   version is now v4.0.
 
-- The minimum wire version is now 7. See :manual:`minWireVersion </manual/reference/command/hello/#mongodb-data-hello.minWireVersion>`.
+- The minimum wire version is now 7. See :manual:`minWireVersion </reference/command/hello/#mongodb-data-hello.minWireVersion>`.
 
 .. _version-4.9-breaking-changes:
 
