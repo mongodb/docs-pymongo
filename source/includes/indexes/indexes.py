@@ -97,13 +97,13 @@ search_index_model = SearchIndexModel(
     "fields": [
       {
         "type": "vector",
-        "numDimensions": <numberOfDimensions>,
-        "path": "<fieldToIndex>",
-        "similarity": "euclidean | cosine | dotProduct"
+        "numDimensions": <number of dimensions>,
+        "path": "<field to index>",
+        "similarity":  <select from "euclidean", "cosine", "dotProduct">
       }
     ]
   },
-  name="<nameOfIndex>",
+  name="<index name>",
   type="vectorSearch",
 )
 
@@ -113,7 +113,7 @@ collection.create_search_index(model=search_index_model)
 
 # start-create-search-indexes
 
-index_one = SearchIndexModel(
+search_idx = SearchIndexModel(
     definition ={
         "mappings": {
             "dynamic": True
@@ -122,14 +122,14 @@ index_one = SearchIndexModel(
     name="my_index",
 )
 
-index_two_vector = SearchIndexModel(
+vector_idx = SearchIndexModel(
   definition={
     "fields": [
       {
         "type": "vector",
-        "numDimensions": <numberOfDimensions>,
-        "path": "<fieldToIndex>",
-        "similarity": "euclidean | cosine | dotProduct"
+        "numDimensions": <number of dimensions>,
+        "path": "<field to index>",
+        "similarity": <select from "euclidean", "cosine", "dotProduct">
       }
     ]
   },
@@ -137,7 +137,7 @@ index_two_vector = SearchIndexModel(
   type="vectorSearch",
 )
 
-indexes = [index_one, index_two_vector]
+indexes = [search_idx, vector_idx]
 
 collection.create_search_indexes(models=indexes)
 # end-create-search-indexes
@@ -165,7 +165,7 @@ new_index_definition = {
         {
             "type": "vector",
             "numDimensions": 1536,
-            "path": "<fieldToIndex>",
+            "path": "<field to index>",
             "similarity": "euclidean"
         },
     ]
