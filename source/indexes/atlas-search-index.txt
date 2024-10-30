@@ -36,7 +36,7 @@ date, objectId, numeric, string, or UUID values that you want to use to
 pre-filter your data.
 
 You can call the following methods on a collection to manage your Atlas Search
-and vector Search indexes:
+and Vector Search indexes:
 
 - ``create_search_index()``
 - ``create_search_indexes()``

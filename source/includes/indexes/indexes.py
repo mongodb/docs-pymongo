@@ -99,7 +99,7 @@ search_index_model = SearchIndexModel(
         "type": "vector",
         "numDimensions": <number of dimensions>,
         "path": "<field to index>",
-        "similarity":  <select from "euclidean", "cosine", "dotProduct">
+        "similarity":  "<select from euclidean, cosine, dotProduct>"
       }
     ]
   },
@@ -129,7 +129,7 @@ vector_idx = SearchIndexModel(
         "type": "vector",
         "numDimensions": <number of dimensions>,
         "path": "<field to index>",
-        "similarity": <select from "euclidean", "cosine", "dotProduct">
+        "similarity": "<select from euclidean, cosine, dotProduct>"
       }
     ]
   },
