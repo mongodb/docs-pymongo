@@ -137,35 +137,51 @@ message:
 These types of errors occur because of outdated or buggy SSL proxies that mistakenly
 enforce legacy `TLS renegotiation <https://www.ibm.com/docs/en/i/7.3?topic=settings-renegotiation>`__. 
 
-To resolve this issue, create a configuration file that includes the 
-``UnsafeLegacyServerConnect`` option. This option requires OpenSSL v3.0.4 or 
-greater. The following example shows how to set the ``UnsafeLegacyServerConnect`` 
-option:
+To resolve this issue, perform the following steps:
 
-.. code-block:: shell
-   :emphasize-lines: 10
+.. procedure::
+   
+   .. step:: Check OpenSSL Version
 
-   openssl_conf = openssl_init
+      Run the following command to ensure that you have OpenSSL vv3.0.4 or
+      later installed:
 
-   [openssl_init]
-   ssl_conf = ssl_sect
+      .. code-block:: bash
 
-   [ssl_sect]
-   system_default = system_default_sect
+         openssl version
 
-   [system_default_sect]
-   Options = UnsafeLegacyServerConnect
+   .. step:: Use ``UnsafeLegacyServerConnect`` Option
+   
+      Create a configuration file that includes the 
+      ``UnsafeLegacyServerConnect`` option. The following example shows how to set 
+      the ``UnsafeLegacyServerConnect`` option:
 
-Then run Python while setting the ``OPENSSL_CONF`` environment variable to use
-the OpenSSL configuration file you just created:
+      .. code-block:: shell
+         :emphasize-lines: 10
 
-.. code-block:: shell
+         openssl_conf = openssl_init
 
-   OPENSSL_CONF=/path/to/the/config/file/above.cnf python ...
+         [openssl_init]
+         ssl_conf = ssl_sect
+
+         [ssl_sect]
+         system_default = system_default_sect
+
+         [system_default_sect]
+         Options = UnsafeLegacyServerConnect
+
+   .. step:: Run Python With OpenSSL Configuration
+
+      Run Python while setting the ``OPENSSL_CONF`` environment variable to use
+      the OpenSSL configuration file you just created:
+
+      .. code-block:: shell
+
+         OPENSSL_CONF=/path/to/the/config/file/above.cnf python ...
 
 .. important::
 
    Because setting the ``UnsafeLegacyServerConnect`` option has 
    `security implications <https://docs.openssl.org/3.0/man3/SSL_CTX_set_options/#patched-openssl-client-and-unpatched-server>`__, 
-   this workaround should only be used as a last 
+   use this workaround as a last 
    resort to address ``unsafe legacy renegotiation disabled`` errors.
