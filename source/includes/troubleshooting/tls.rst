@@ -132,7 +132,7 @@ message:
 
 .. code-block:: python
 
-   MongoServerSelectionError: 886E0000:error:0A000152:SSL routines:final_renegotiate:unsafe legacy renegotiation disabled:c:\ws\deps\openssl\openssl\ssl\statem\extensions.c:922:
+   [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled
 
 These types of errors occur because of outdated or buggy SSL proxies that mistakenly
 enforce legacy `TLS renegotiation <https://www.ibm.com/docs/en/i/7.3?topic=settings-renegotiation>`__. 
