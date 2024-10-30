@@ -140,6 +140,7 @@ enforce legacy `TLS renegotiation <https://www.ibm.com/docs/en/i/7.3?topic=setti
 To resolve this issue, perform the following steps:
 
 .. procedure::
+   :style: normal
    
    .. step:: Check OpenSSL Version
 
@@ -150,7 +151,7 @@ To resolve this issue, perform the following steps:
 
          openssl version
 
-   .. step:: Use ``UnsafeLegacyServerConnect`` Option
+   .. step:: Use the ``UnsafeLegacyServerConnect`` Option
    
       Create a configuration file that includes the 
       ``UnsafeLegacyServerConnect`` option. The following example shows how to set 
@@ -170,7 +171,7 @@ To resolve this issue, perform the following steps:
          [system_default_sect]
          Options = UnsafeLegacyServerConnect
 
-   .. step:: Run Python With OpenSSL Configuration
+   .. step:: Run Python with OpenSSL Configuration
 
       Run Python while setting the ``OPENSSL_CONF`` environment variable to use
       the OpenSSL configuration file you just created:
