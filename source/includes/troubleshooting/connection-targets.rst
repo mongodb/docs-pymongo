@@ -1,12 +1,12 @@
 Server Reports Wire Version X, PyMongo Requires Y
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you try to connect to {+mdb-server+} v3.4 or earlier,
+If you try to connect to {+mdb-server+} v3.6 or earlier,
 {+driver-short+} might raise the following error:
 
 .. code-block:: 
 
-   pymongo.errors.ConfigurationError: Server at localhost:27017 reports wire version 5, but this version of PyMongo requires at least 6 (MongoDB 3.6).
+   pymongo.errors.ConfigurationError: Server at localhost:27017 reports wire version 6, but this version of PyMongo requires at least 7 (MongoDB 4.0).
 
 This occurs when the driver version is too new for the server it's connecting to.
 To resolve this issue, you can do one of the following:
