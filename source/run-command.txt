@@ -55,7 +55,7 @@ command, which returns information about the server:
 
 .. io-code-block::
     :copyable: true
-    
+
     .. input:: /includes/run-command.py
         :language: python
         :start-after: start-hello
@@ -131,7 +131,7 @@ Command Cursor
 
 The ``command()`` method returns the result of the command that was run.
 You can also use the ``cursor_command()`` method, which issues a MongoDB 
-command and parses the response as a `CommandCursor <{+api-root+}command_cursor.html#pymongo.command_cursor.CommandCursor>`__.
+command and parses the response as a `CommandCursor <{+api-root+}pymongo/command_cursor.html#pymongo.command_cursor.CommandCursor>`__.
 The ``CommandCursor`` can be used to iterate over command results.
 
 The following example uses the ``cursor_command()`` method on the ``sample_mflix``
@@ -172,9 +172,9 @@ you can handle the ``CommandCursor`` accordingly.
 
    The ``command()`` and ``cursor_command()`` methods do not obey the read preference you might
    have set on your ``Database`` instance elsewhere in your code. If a 
-   `Client Session <{+api-root+}bson/objectid.html#bson.objectid.ObjectId>`__ is
+   `Client Session <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__ is
    provided by using the ``session`` parameter, and this session is in a 
-   `transaction <{+api-root+}client_session.html#transactions>`__, the command's
+   `transaction <{+api-root+}pymongo/client_session.html#transactions>`__, the command's
    read preference will be set to the transaction's read preference. Otherwise,
    the command's read preference defaults to ``PRIMARY``.
    
@@ -188,7 +188,7 @@ you can handle the ``CommandCursor`` accordingly.
       :end-before: end-readpref
 
    Learn more about the ``read_preferences`` module in the `API documentation
-   <{+api-root+}read_preferences.html#module-pymongo.read_preferences>`__.
+   <{+api-root+}pymongo/read_preferences.html#module-pymongo.read_preferences>`__.
 
    To learn more about read preference options, see :manual:`Read
    Preference </core/read-preference/>` in the {+mdb-server+} manual.
@@ -243,5 +243,5 @@ API Documentation
 For more information about the ``command()`` and ``cursor_command()`` methods, 
 see the following {+driver-short+} API documentation:
 
-- `command() <{+api-root+}database.html#pymongo.database.Database.command>`__
-- `cursor_command() <{+api-root+}database.html#pymongo.database.Database.cursor_command>`__
+- `command() <{+api-root+}pymongo/database.html#pymongo.database.Database.command>`__
+- `cursor_command() <{+api-root+}pymongo/database.html#pymongo.database.Database.cursor_command>`__
