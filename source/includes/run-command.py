@@ -34,7 +34,7 @@ print(result.to_list())
 
 database = client.get_database("sample_mflix")
 
-result = database.command("dbStats", "movies")
+result = database.command("dbStats")
 
 print(result)
 
