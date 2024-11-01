@@ -173,7 +173,7 @@ you can handle the ``CommandCursor`` accordingly.
 
    The ``command()`` and ``cursor_command()`` methods do not obey the read preference you might
    have set on your ``Database`` instance elsewhere in your code. If a 
-   `Client Session <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__ is
+   `ClientSession <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__ is
    provided by using the ``session`` parameter, and this session is in a 
    `transaction <{+api-root+}pymongo/client_session.html#transactions>`__, the command's
    read preference will be set to the transaction's read preference. Otherwise,
