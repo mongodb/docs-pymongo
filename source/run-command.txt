@@ -46,8 +46,9 @@ Execute a Command
 -----------------
 
 You can use the ``command()`` method to run a database command. You must specify
-the command and any relevant parameters. These can be passed as strings or as
-a ``dict``. The method will return the result of the command that was run.
+the command and any relevant arguments. If the command is simple, these can be
+passed as strings. Otherwise, they can be passed as a ``dict``. 
+The method will return the result of the command that was run.
 
 The following code shows how you can use the ``command()``
 method on a ``Database`` to run the ``hello``
