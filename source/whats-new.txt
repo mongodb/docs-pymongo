@@ -37,6 +37,12 @@ What's New in 4.11
    {+driver-short+} v4.11 contains breaking changes. For more information, see
    :ref:`version-4.11-breaking-changes`.
 
+The {+driver-short+} v4.11 release includes the following new features:
+
+- Adds support for free-threaded CPython when running Python v3.13+. 
+  For more information about free threading, see the 
+  `Python documentation <https://docs.python.org/3/howto/free-threading-python.html>`__.
+
 .. _version-4.10:
 
 What's New in 4.10
