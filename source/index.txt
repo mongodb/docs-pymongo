@@ -28,7 +28,7 @@ MongoDB {+driver-short+} Documentation
    What's New </whats-new>
    Upgrade </upgrade>
    Migrate Motor to PyMongo Async </motor-async-migration>
-   Switch PyMongo to PyMongo Async </pymongo-to-async-guide>
+   Switch to PyMongo Async </pymongo-to-async-guide>
    Previous Versions </previous-versions>
    Issues & Help </issues-and-help>
    Compatibility </compatibility>
