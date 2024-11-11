@@ -13,22 +13,22 @@ MongoDB {+driver-short+} Documentation
 .. toctree::
 
    Get Started </get-started>
-   /connect
-   /databases-collections
-   /write-operations
-   /read
-   /run-command
-   /indexes
-   /aggregation
-   /security
-   /data-formats
-   /tools
-   /faq
-   /troubleshooting
-   /whats-new
-   /upgrade
-   /motor-async-migration
-   /pymongo-to-async-guide
+   Connect to MongoDB </connect>
+   Databases & Collections </databases-collections>
+   Write Data </write-operations>
+   read Data </read>
+   Run a Database Command </run-command>
+   Indexes </indexes>
+   Aggregation </aggregation>
+   Security </security>
+   Data Formats </data-formats>
+   Third-Party Tools </tools>
+   FAQ </faq>
+   Troubleshooting </troubleshooting>
+   What's New </whats-new>
+   Upgrade </upgrade>
+   Migrate Motor to PyMongo Async </motor-async-migration>
+   Switch PyMongo to PyMongo Async/pymongo-to-async-guide
    /previous-versions
    /issues-and-help
    /compatibility
