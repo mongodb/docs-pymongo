@@ -19,15 +19,15 @@ Work with Indexes
 
 .. toctree::
 
-   /indexes/single-field-index.txt
-   /indexes/compound-index.txt
-   /indexes/multikey-index.txt
-   /indexes/atlas-search-index.txt
-   /indexes/text-index.txt
-   /indexes/geospatial-index.txt
-   /indexes/unique-index.txt
-   /indexes/wildcard-index.txt
-   /indexes/clustered-index.txt
+   Single-Field Indexes </indexes/single-field-index.txt>
+   Compound Indexes </indexes/compound-index.txt>
+   Multikey Indexes </indexes/multikey-index.txt>
+   Atlas Search Indexes /indexes/atlas-search-index.txt
+   Text Indexes </indexes/text-index.txt>
+   Geospatial Indexes </indexes/geospatial-index.txt>
+   Unique Indexes </indexes/unique-index.txt>
+   Wildcard Indexes </indexes/wildcard-index.txt>
+   Clustered Indexes </indexes/clustered-index.txt>
 
 Overview
 --------
