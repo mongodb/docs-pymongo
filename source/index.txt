@@ -13,7 +13,7 @@ MongoDB {+driver-short+} Documentation
 .. toctree::
 
    Get Started </get-started>
-   Connect to MongoDB </connect>
+   Connect </connect>
    Databases & Collections </databases-collections>
    Write Data </write-operations>
    Read Data </read>
@@ -27,7 +27,7 @@ MongoDB {+driver-short+} Documentation
    Troubleshooting </troubleshooting>
    What's New </whats-new>
    Upgrade </upgrade>
-   Migrate Motor to PyMongo Async </motor-async-migration>
+   Migrate from Motor </motor-async-migration>
    Switch to PyMongo Async </pymongo-to-async-guide>
    Previous Versions </previous-versions>
    Issues & Help </issues-and-help>
