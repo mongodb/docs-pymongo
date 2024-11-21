@@ -22,7 +22,7 @@ Work with Indexes
    Single Field </indexes/single-field-index>
    Compound </indexes/compound-index>
    Multikey </indexes/multikey-index>
-   Atlas Search </indexes/atlas-search-index>
+   Atlas & Vector Search </indexes/atlas-search-index>
    Text </indexes/text-index>
    Geospatial </indexes/geospatial-index>
    Unique </indexes/unique-index>
