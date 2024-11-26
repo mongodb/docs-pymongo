@@ -1,0 +1,37 @@
+.. _django-get-started-create-app:
+
+=====================
+Write Data to MongoDB
+=====================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: app, odm, code example
+
+.. procedure::
+   :style: connected
+
+   .. step:: Start a Python shell
+
+      From your ``quickstart`` project directory, run the following command to 
+      enter the Python shell:
+
+      .. code-block:: bash
+
+         python3 manage.py shell
+
+   .. step:: Insert a movie into the database
+
+      From your Python shell, run the following commands:
+
+      .. code-block:: python
+
+         from sample_mflix.models import Movies, Users
+         parasite = Movies(name="Parasite", runtime=132)
+         parasite.save()
+
+      This code inserts a movie with a ``name`` value of ``"Parasite"`` into 
+      the ``sample_mflix`` MongoDB database.

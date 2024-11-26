@@ -1,0 +1,128 @@
+.. _django-get-started-create-app:
+
+=====================
+Create an Application
+=====================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: app, odm, code example
+
+.. procedure::
+   :style: connected
+
+   .. step:: Create a "sample_mflix" app
+
+      From your ``quickstart`` project directory, run the following command to create a 
+      new Django app called ``sample_mflix`` based on a custom template:
+      
+      .. code-block:: bash
+
+         python3 manage.py startapp sample_mflix --template https://github.com/mongodb-labs/django-mongodb-app/archive/refs/heads/5.0.x.zip
+
+      .. note:: App Template
+
+         The ``django-mongodb-app`` template ensures that your ``app.py`` file
+         includes the line ``"default_auto_field = 'django_mongodb.fields.ObjectIdAutoField'"``.
+
+   .. step:: Create a view
+
+      Open the ``views.py`` file in your ``sample_mflix`` directory and replace
+      its contents with the following code:
+      
+      .. code-block:: python
+
+         from django.http import HttpResponse
+
+
+         def index(request):
+            return HttpResponse("Hello, world. You're at the application index.")
+
+   .. step:: Configure a URL
+
+      Create a new file called ``urls.py`` file in your ``sample_mflix`` directory and add
+      the following code:
+      
+      .. code-block:: python
+
+         from django.urls import path
+
+         from . import views
+
+         urlpatterns = [
+            path("", views.index, name="index"),
+         ]
+      
+      Then, navigate to the ``quickstart/urls.py`` file and replace its contents with
+      the following code:
+
+      .. code-block:: python
+
+         from django.contrib import admin
+         from django.urls import include, path
+
+         urlpatterns = [
+            path("sample_mflix/", include("sample_mflix.urls")),
+            path("admin/", admin.site.urls),
+         ]
+
+      Visit http://127.0.0.1:8000/sample_mflix/ to see the text defined in your view.
+
+   .. step:: Apply database migrations
+
+      From your project root, run the following command:
+      
+      .. code-block:: bash
+
+         python manage.py migrate
+
+   .. step:: Create models for movie and users data
+
+      Open the ``models.py`` file in the ``sample_mflix`` directory and replace 
+      its contents with the following code:
+
+      .. code-block:: python
+
+         from django.db import models
+
+
+         class Movies(models.Model):
+            name = models.CharField(max_length=200)
+            runtime = models.IntegerField(default=0)
+
+
+         class Users(models.Model):
+            name = models.CharField(max_length=200)
+            email = models.CharField(max_length=200)
+
+
+   .. step:: Include your app in your project
+
+      Open the ``settings.py`` file in ``quickstart`` and edit your 
+      ``INSTALLED_APPS`` setting to resemble the following code:
+      
+      .. code-block:: python
+
+         INSTALLED_APPS = [
+            'sample_mflix.apps.SampleMflixConfig',
+            'quickstart.apps.MongoAdminConfig',
+            'quickstart.apps.MongoAuthConfig',
+            'quickstart.apps.MongoContentTypesConfig',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+         ]
+
+   .. step:: Create migrations for your new models
+
+      From your project root, run the following command to create
+      migrations for the ``Movies`` and ``Users`` models and Apply
+      the changes to the database:
+      
+      .. code-block:: bash
+
+         python3 manage.py makemigrations sample_mflix
+         python3 manage.py migrate

@@ -1,0 +1,28 @@
+.. _django-get-started:
+
+===============================
+Get Started with {+django-odm+}
+===============================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :description: Learn how to create an app to connect to a MongoDB deployment by using Django MongoDB.
+   :keywords: quick start, tutorial, basics
+
+.. toctree::
+
+   Download & Install </django-get-started/django-install/>
+   Create a Deployment </django-get-started/django-create-deployment/>
+   Create a Connection String </django-get-started/django-connection-string/>
+   Configure a MongoDB Connection </django-get-started/django-connect-mongodb/>
+   Create an Application </django-get-started/django-create-app/>
+   Write Data to MongoDB </django-get-started/django-write-data/>

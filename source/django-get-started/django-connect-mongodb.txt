@@ -1,0 +1,89 @@
+.. _django-get-started-connect:
+
+=================================
+Configure your MongoDB Connection
+=================================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: app, odm, code example
+
+.. procedure::
+   :style: connected
+
+   .. step:: Create a Django project
+
+      From your shell, run the following command to create a 
+      new Django project called ``quickstart`` based on a custom template:
+      
+      .. code-block:: bash
+
+         django-admin startproject quickstart --template https://github.com/mongodb-labs/django-mongodb-project/archive/refs/heads/{+django-version-number+}.x.zip
+      
+      .. note:: Project Template
+
+         The ``django-mongodb-project`` template resembles the default Django project
+         template but makes the following changes:
+         
+         - Includes MongoDB-specific migrations
+         - Modifies the ``settings.py`` file to instruct Django
+           to use an ``ObjectId`` value as each model's primary key
+
+      After running this command, your ``quickstart`` project has
+      the following file structure:
+
+      .. code-block:: bash
+
+         quickstart/
+            manage.py
+            mongo_migrations/
+                __init__.py
+                contenttypes/
+                auth/
+                admin/
+            quickstart/
+                __init__.py
+                apps.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+
+   .. step:: Update your database settings
+
+      Open your ``settings.py`` file and navigate to the ``DATABASES`` setting.
+      Replace this setting with the following code:
+
+      .. code-block:: bash
+
+         DATABASES = {
+            "default": {
+               "ENGINE": "django_mongodb",
+               "NAME": "db",
+               "USER": "<username>",
+               "PASSWORD": "<password>",
+               "HOST": "<connection string URI>",
+            },
+         }
+
+      Replace the ``<username>`` and ``<password>`` placeholders with your
+      Atlas database user's username and password. Then, replace the
+      ``<connection string URI>`` placeholder with the connection string
+      that you copied from the :ref:`django-get-started-connection-string`
+      step of this guide.
+
+   .. step:: Start the server
+
+      To verify that you installed {+django-odm+} and correctly configured
+      your project, run the following command from your project root:
+
+      .. code-block:: bash
+
+         python3 manage.py runserver
+
+      Then, visit http://127.0.0.1:8000/. You should see a "Congratulations!"
+      message and an image of a rocket. 
+

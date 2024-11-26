@@ -13,6 +13,7 @@ MongoDB {+driver-short+} Documentation
 .. toctree::
 
    Get Started </get-started>
+   Get Started with Django MongoDB </django-get-started>
    Connect </connect>
    Databases & Collections </databases-collections>
    Write Data </write-operations>
