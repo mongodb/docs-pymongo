@@ -26,3 +26,5 @@ Get Started with {+django-odm+}
    Configure a MongoDB Connection </django-get-started/django-connect-mongodb/>
    Create an Application </django-get-started/django-create-app/>
    Write Data to MongoDB </django-get-started/django-write-data/>
+   View MongoDB Data </django-get-started/django-view-data/>
+   Next Steps </django-get-started/django-next-steps/>

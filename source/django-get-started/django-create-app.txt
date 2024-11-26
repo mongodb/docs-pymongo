@@ -119,7 +119,7 @@ Create an Application
    .. step:: Create migrations for your new models
 
       From your project root, run the following command to create
-      migrations for the ``Movies`` and ``Users`` models and Apply
+      migrations for the ``Movies`` and ``Users`` models and apply
       the changes to the database:
       
       .. code-block:: bash

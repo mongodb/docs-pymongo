@@ -1,0 +1,12 @@
+.. _django-get-started-create-app:
+
+=================
+View MongoDB Data
+=================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: app, odm, code example

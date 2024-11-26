@@ -36,6 +36,7 @@ Configure your MongoDB Connection
       the following file structure:
 
       .. code-block:: bash
+         :copyable: false
 
          quickstart/
             manage.py
