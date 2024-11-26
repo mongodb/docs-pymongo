@@ -77,27 +77,30 @@ Create an Application
       
       .. code-block:: bash
 
-         python manage.py migrate
+         python3 manage.py migrate
 
-   .. step:: Create models for movie and users data
+   .. step:: Create models for movie and user data
 
       Open the ``models.py`` file in the ``sample_mflix`` directory and replace 
       its contents with the following code:
 
       .. code-block:: python
 
+         import datetime
+
          from django.db import models
 
 
          class Movies(models.Model):
-            name = models.CharField(max_length=200)
+            title = models.CharField(max_length=200)
+            plot = models.CharField(max_length=800)
             runtime = models.IntegerField(default=0)
-
+            released = models.DateTimeField("release date", null=True)
 
          class Users(models.Model):
-            name = models.CharField(max_length=200)
+            name = models.CharField(max_length=100)
             email = models.CharField(max_length=200)
-
+            password = models.CharField(max_length=100)
 
    .. step:: Include your app in your project
 

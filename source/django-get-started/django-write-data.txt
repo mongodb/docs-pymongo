@@ -30,8 +30,8 @@ Write Data to MongoDB
       .. code-block:: python
 
          from sample_mflix.models import Movies, Users
-         parasite = Movies(name="Parasite", runtime=132)
+         parasite = Movies(title="Parasite", runtime=132)
          parasite.save()
 
-      This code inserts a movie with a ``name`` value of ``"Parasite"`` into 
+      This code inserts a movie with a ``title`` value of ``"Parasite"`` into 
       the ``sample_mflix`` MongoDB database.
