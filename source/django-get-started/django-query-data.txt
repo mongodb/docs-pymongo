@@ -16,7 +16,7 @@ Query MongoDB Data
 
    .. step:: Query the users collection for a specified email
 
-      From the same Python shell as the :ref:`django-get-started-create-app`
+      From the same Python shell as the :ref:`django-get-started-write`
       step of this tutorial, run the following code to query the 
       ``sample_mflix.users`` collection for a user whose email is 
       ``"jason_momoa@gameofthron.es"``:
@@ -34,8 +34,8 @@ Query MongoDB Data
    .. step:: Query the movies collection for runtime values
 
       Run the following code to query the ``sample_mflix.movies``
-      collection for movies that have a runtime value less than
-      10:
+      collection for movies that have a ``runtime`` value less than
+      ``10``:
 
       .. code-block:: bash
 

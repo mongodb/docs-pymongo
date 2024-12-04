@@ -85,7 +85,7 @@ Configure your MongoDB Connection
 
          python3 manage.py runserver
 
-      Then, visit http://127.0.0.1:8000/. You should see a "Congratulations!"
+      Then, visit http://127.0.0.1:8000/. This page displays a "Congratulations!"
       message and an image of a rocket. 
 
 After completing these steps, you have a Django project configured
