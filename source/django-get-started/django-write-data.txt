@@ -23,15 +23,64 @@ Write Data to MongoDB
 
          python3 manage.py shell
 
-   .. step:: Insert a movie into the database
+   .. step:: Import the required classes and modules
 
-      From your Python shell, run the following commands:
+      From your Python shell, run the following code to import
+      your models and the modules for creating a ``datetime`` object:
 
       .. code-block:: python
 
          from sample_mflix.models import Movies, Users
-         parasite = Movies(title="Parasite", runtime=132)
-         parasite.save()
+         from django.utils import timezone
+         from datetime import datetime
 
-      This code inserts a movie with a ``title`` value of ``"Parasite"`` into 
-      the ``sample_mflix`` MongoDB database.
+   .. step:: Insert a movie into the database
+
+      Run the following code to create a ``Movies`` model that
+      stores data about a movie titled ``"Minari"``:
+
+      .. code-block:: python
+         
+         movie = Movies(title="Minari", plot=
+         "A Korean-American family moves to an Arkansas farm in search of their own American Dream",
+         runtime=117, released=timezone.make_aware(datetime(2020, 1, 26, 0, 0),
+         timezone.get_current_timezone()))
+
+      Save the model to store its data as a document in the ``movies``
+      collection, as shown in the following code:
+
+      .. code-block:: python
+         
+         movie.save()
+
+   .. step:: Insert a user into the database
+
+      Run the following code to create a ``Users`` model that
+      stores data about a user named ``"Abigail Carter"``:
+
+      .. code-block:: python
+         
+         user = Users(name="Abigail Carter", email="abigail.carter@fakegmail.com",
+         password="secure123")
+
+      Save the model to store its data as a document in the ``users``
+      collection, as shown in the following code:
+
+      .. code-block:: python
+         
+         user.save()
+
+   .. step:: Render your new models
+
+      To ensure that your ``Movies`` model was inserted into the database,
+      visit the http://127.0.0.1:8000/sample_mflix/recent_movies/ URL.
+      You should see a list of five movies in the ``sample_mflix.movies``
+      database, with your new movie listed at the top.
+
+      Then, ensure that your ``Users`` model was inserted into the
+      database by visiting the http://127.0.0.1:8000/sample_mflix/users_list/
+      URL. You should see a list of ten users in the ``sample_mflix.users``
+      database, with your new user listed at the top.
+
+After completing these steps, you have new documents in the ``movies``
+and ``users`` collection in the ``sample_mflix`` sample database.

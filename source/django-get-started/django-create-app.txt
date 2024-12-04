@@ -28,7 +28,47 @@ Create an Application
          The ``django-mongodb-app`` template ensures that your ``app.py`` file
          includes the line ``"default_auto_field = 'django_mongodb.fields.ObjectIdAutoField'"``.
 
-   .. step:: Create a view
+   .. step:: Create models for movie and user data
+
+      Open the ``models.py`` file in the ``sample_mflix`` directory and replace 
+      its contents with the following code:
+
+      .. code-block:: python
+
+         from django.db import models
+
+         class Movies(models.Model):
+            title = models.CharField(max_length=200)
+            plot = models.TextField(null=True)
+            runtime = models.IntegerField(default=0)
+            released = models.DateTimeField("release date", null=True)
+
+            class Meta:
+               managed = False
+               db_table = "movies"
+            
+            def __str__(self):
+               return self.title
+
+
+         class Users(models.Model):
+            name = models.CharField(max_length=100)
+            email = models.CharField(max_length=200)
+            password = models.CharField(max_length=100)
+
+            class Meta:
+               managed = False
+               db_table = "users"
+
+            def __str__(self):
+               return self.name
+
+      The ``Movies`` model represents the ``sample_mflix.movies`` collection
+      and stores information about movies. The ``Users`` model represents
+      the ``sample_mflix.users`` collection and stores account credentials
+      for users of a movie streaming platform.
+
+   .. step:: Create views to display data
 
       Open the ``views.py`` file in your ``sample_mflix`` directory and replace
       its contents with the following code:
@@ -36,15 +76,29 @@ Create an Application
       .. code-block:: python
 
          from django.http import HttpResponse
+         from django.shortcuts import render
 
+         from .models import Movies, Users
 
          def index(request):
-            return HttpResponse("Hello, world. You're at the application index.")
+            return HttpResponse("Hello! You've reached the Django MongoDB sample app landing page.")
 
-   .. step:: Configure a URL
+         def recent_movies(request):
+            movies = Movies.objects.all().order_by('-released')[:3]
+            return render(request, 'recent_movies.html', {'movies': movies})
 
-      Create a new file called ``urls.py`` file in your ``sample_mflix`` directory and add
-      the following code:
+         def users_list(request):
+            users = Users.objects.all().order_by('name')[:10]
+            return render(request, 'users_list.html', {'users': users})
+
+      These views display a landing page message and information about your ``Movies``
+      and ``Users`` models.
+   
+   .. step:: Configure URLs for your views
+
+      Create a new file called ``urls.py`` file in your ``sample_mflix`` directory.
+      To map the views defined in the preceding steps to URLs, paste the following
+      code into ``urls.py``:
       
       .. code-block:: python
 
@@ -54,6 +108,8 @@ Create an Application
 
          urlpatterns = [
             path("", views.index, name="index"),
+            path('recent_movies/', views.recent_movies, name='recent_movies'),
+            path('users_list/', views.users_list, name='users_list'),
          ]
       
       Then, navigate to the ``quickstart/urls.py`` file and replace its contents with
@@ -69,38 +125,77 @@ Create an Application
             path("admin/", admin.site.urls),
          ]
 
-      Visit http://127.0.0.1:8000/sample_mflix/ to see the text defined in your view.
+   .. step:: Create a template to format your views
 
-   .. step:: Apply database migrations
-
-      From your project root, run the following command:
+      In your ``sample_mflix`` directory, create a subdirectory called
+      ``templates``. Then, create a file called ``recent_movies.html``
+      and paste the following code:
       
-      .. code-block:: bash
+      .. code-block:: python
 
-         python3 manage.py migrate
+         <!-- templates/recent_movies.html -->
+         <!DOCTYPE html>
+         <html lang="en">
+         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Recent Movies</title>
+         </head>
+         <body>
+            <h1>Three Most Recent Movies</h1>
+            <ul>
+               {% for movie in movies %}
+                     <li>
+                        <strong>{{ movie.title }}</strong> (Released: {{ movie.released }})
+                     </li>
+               {% empty %}
+                     <li>No movies found.</li>
+               {% endfor %}
+            </ul>
+         </body>
+         </html>
+      
+      This template formats the movie data requested by the ``recent_movies`` view.
 
-   .. step:: Create models for movie and user data
-
-      Open the ``models.py`` file in the ``sample_mflix`` directory and replace 
-      its contents with the following code:
+      Create another file in the ``sample_mflix/templates`` directory called
+      ``users_list.html`` and paste the following code:
 
       .. code-block:: python
 
-         import datetime
+         <!-- templates/users_list.html -->
+         <!DOCTYPE html>
+         <html lang="en">
+         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Users List</title>
+         </head>
+         <body>
+            <h1>Users List</h1>
+            <table>
+               <thead>
+                     <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                     </tr>
+               </thead>
+               <tbody>
+                     {% for user in users %}
+                        <tr>
+                           <td>{{ user.name }}</td>
+                           <td>{{ user.email }}</td>
+                        </tr>
+                     {% empty %}
+                        <tr>
+                           <td colspan="2">No users found.</td>
+                        </tr>
+                     {% endfor %}
+               </tbody>
+            </table>
+         </body>
+         </html>
 
-         from django.db import models
-
-
-         class Movies(models.Model):
-            title = models.CharField(max_length=200)
-            plot = models.CharField(max_length=800)
-            runtime = models.IntegerField(default=0)
-            released = models.DateTimeField("release date", null=True)
-
-         class Users(models.Model):
-            name = models.CharField(max_length=100)
-            email = models.CharField(max_length=200)
-            password = models.CharField(max_length=100)
+      This template formats the user data requested by the ``users_list`` view.
 
    .. step:: Include your app in your project
 
@@ -129,3 +224,6 @@ Create an Application
 
          python3 manage.py makemigrations sample_mflix
          python3 manage.py migrate
+
+After completing these steps, you have a basic {+django-odm+} app that
+you can use to interact with the ``sample_mflix`` database.
