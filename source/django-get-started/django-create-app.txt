@@ -84,7 +84,7 @@ Create an Application
             return HttpResponse("Hello! You've reached the Django MongoDB sample app landing page.")
 
          def recent_movies(request):
-            movies = Movies.objects.all().order_by('-released')[:3]
+            movies = Movies.objects.all().order_by('-released')[:5]
             return render(request, 'recent_movies.html', {'movies': movies})
 
          def users_list(request):
@@ -142,7 +142,7 @@ Create an Application
             <title>Recent Movies</title>
          </head>
          <body>
-            <h1>Three Most Recent Movies</h1>
+            <h1>Five Most Recent Movies</h1>
             <ul>
                {% for movie in movies %}
                      <li>
