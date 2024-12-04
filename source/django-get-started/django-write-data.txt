@@ -70,6 +70,21 @@ Write Data to MongoDB
          
          user.save()
 
+   .. step:: Start the development server
+
+      Exit the Python shell by running the following code:
+
+      .. code-block:: python
+         
+        exit()
+
+      Then, start your server by running the following command
+      from your ``quickstart`` directory:
+
+      .. code-block:: bash
+         
+         python3 manage.py runserver
+
    .. step:: Render your new models
 
       To ensure that your ``Movies`` model was inserted into the database,

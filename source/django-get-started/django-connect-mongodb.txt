@@ -63,7 +63,7 @@ Configure your MongoDB Connection
          DATABASES = {
             "default": {
                "ENGINE": "django_mongodb",
-               "NAME": "db",
+               "NAME": "sample_mflix",
                "USER": "<username>",
                "PASSWORD": "<password>",
                "HOST": "<connection string URI>",

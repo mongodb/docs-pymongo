@@ -97,7 +97,7 @@ Create an Application
    .. step:: Configure URLs for your views
 
       Create a new file called ``urls.py`` file in your ``sample_mflix`` directory.
-      To map the views defined in the preceding steps to URLs, paste the following
+      To map the views defined in the preceding step to URLs, paste the following
       code into ``urls.py``:
       
       .. code-block:: python
