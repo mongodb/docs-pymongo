@@ -26,5 +26,19 @@ Get Started with {+django-odm+}
    Configure a MongoDB Connection </django-get-started/django-connect-mongodb/>
    Create an Application </django-get-started/django-create-app/>
    Write Data to MongoDB </django-get-started/django-write-data/>
-   View MongoDB Data </django-get-started/django-view-data/>
+   Query MongoDB Data </django-get-started/django-query-data/>
    Next Steps </django-get-started/django-next-steps/>
+
+{+django-odm+} is a PyMongo integration that allows you to use the
+MongoDB document model in your Django application. This tutorial shows
+you how to create a Django app, connect to MongoDB cluster hosted on
+MongoDB Atlas, and interact with data in your cluster.
+
+.. tip:: 
+
+   MongoDB Atlas is a fully managed cloud database service that hosts your MongoDB
+   deployments. You can create your own free (no credit card required) MongoDB Atlas 
+   deployment by following the steps in this guide.
+
+Follow this tutorial to connect a sample Django application to a MongoDB Atlas
+deployment. 

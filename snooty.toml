@@ -12,6 +12,7 @@ toc_landing_pages = [
     "/security",
     "/aggregation-tutorials",
     "/data-formats",
+    "/django-get-started",
 ]
 
 intersphinx = [

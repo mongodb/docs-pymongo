@@ -76,7 +76,7 @@ Write Data to MongoDB
 
       .. code-block:: python
          
-        exit()
+         exit()
 
       Then, start your server by running the following command
       from your ``quickstart`` directory:
