@@ -1,4 +1,4 @@
-.. _django-get-started-create-app:
+.. _django-get-started-query:
 
 ==================
 Query MongoDB Data

@@ -125,7 +125,7 @@ Create an Application
             path("admin/", admin.site.urls),
          ]
 
-   .. step:: Create a template to format your views
+   .. step:: Create templates to format your data
 
       In your ``sample_mflix`` directory, create a subdirectory called
       ``templates``. Then, create a file called ``recent_movies.html``

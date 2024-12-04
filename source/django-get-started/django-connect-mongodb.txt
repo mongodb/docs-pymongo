@@ -88,3 +88,5 @@ Configure your MongoDB Connection
       Then, visit http://127.0.0.1:8000/. You should see a "Congratulations!"
       message and an image of a rocket. 
 
+After completing these steps, you have a Django project configured
+to access MongoDB data.
