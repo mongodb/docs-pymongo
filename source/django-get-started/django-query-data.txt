@@ -11,44 +11,50 @@ Query MongoDB Data
 .. meta::
    :keywords: app, odm, code example
 
-.. step:: Query the users collection for a specified email
+.. procedure::
+   :style: connected
 
-   From the same Python shell as the :ref:`django-get-started-create-app`
-   step of this tutorial, run the following code to query the 
-   ``sample_mflix.users`` collection for a user whose email is 
-   ``"jason_momoa@gameofthron.es"``:
+   .. step:: Query the users collection for a specified email
 
-   .. code-block:: bash
+      From the same Python shell as the :ref:`django-get-started-create-app`
+      step of this tutorial, run the following code to query the 
+      ``sample_mflix.users`` collection for a user whose email is 
+      ``"jason_momoa@gameofthron.es"``:
 
-      Users.objects.filter(email="jason_momoa@gameofthron.es").first()
+      .. code-block:: bash
 
-   This code returns the name of the matching user:
+         Users.objects.filter(email="jason_momoa@gameofthron.es").first()
 
-   .. code-block:: bash
+      This code returns the name of the matching user:
 
-      <QuerySet [<Users: Khal Drogo>]>
+      .. code-block:: bash
 
-.. step:: Query the movies collection for runtime values
+         <QuerySet [<Users: Khal Drogo>]>
 
-   Run the following code to query the ``sample_mflix.movies``
-   collection for movies that have a runtime value less than
-   10:
+   .. step:: Query the movies collection for runtime values
 
-   .. code-block:: bash
+      Run the following code to query the ``sample_mflix.movies``
+      collection for movies that have a runtime value less than
+      10:
 
-      Movies.objects.filter(runtime__lt=10)
+      .. code-block:: bash
 
-   This code returns a truncated list of the matching movies:
+         Movies.objects.filter(runtime__lt=10)
 
-   .. code-block:: bash
+      This code returns a truncated list of the matching movies:
 
-      <QuerySet [<Movies: Winsor McCay, the Famous Cartoonist of the N.Y.
-      Herald and His Moving Comics>, <Movies: Steamboat Willie>, <Movies:
-      Three Little Pigs>, <Movies: The Band Concert>, <Movies: Who Killed Cock Robin?>,
-      <Movies: Dots>, <Movies: The Cat Concerto>, <Movies: Begone Dull Care>,
-      <Movies: Mi adorado Juan>, <Movies: Neighbours>, <Movies: A Phantasy>,
-      <Movies: Duck Amuck>, <Movies: Duck Dodgers in the 24èth Century>,
-      <Movies: Blinkity Blank>, <Movies: One Froggy Evening>,
-      <Movies: What's Opera, Doc?>, <Movies: Lines: Horizontal>,
-      <Movies: Il fornaretto di Venezia>, <Movies: Dog Star Man: Part IV>,
-      <Movies: Now>, '...(remaining elements truncated)...']>
+      .. code-block:: bash
+
+         <QuerySet [<Movies: Winsor McCay, the Famous Cartoonist of the N.Y.
+         Herald and His Moving Comics>, <Movies: Steamboat Willie>, <Movies:
+         Three Little Pigs>, <Movies: The Band Concert>, <Movies: Who Killed Cock Robin?>,
+         <Movies: Dots>, <Movies: The Cat Concerto>, <Movies: Begone Dull Care>,
+         <Movies: Mi adorado Juan>, <Movies: Neighbours>, <Movies: A Phantasy>,
+         <Movies: Duck Amuck>, <Movies: Duck Dodgers in the 24èth Century>,
+         <Movies: Blinkity Blank>, <Movies: One Froggy Evening>,
+         <Movies: What's Opera, Doc?>, <Movies: Lines: Horizontal>,
+         <Movies: Il fornaretto di Venezia>, <Movies: Dog Star Man: Part IV>,
+         <Movies: Now>, '...(remaining elements truncated)...']>
+
+After completing this step, you can run queries on data stored in 
+your MongoDB deployment.

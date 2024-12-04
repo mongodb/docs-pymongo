@@ -89,4 +89,4 @@ Configure your MongoDB Connection
       message and an image of a rocket. 
 
 After completing these steps, you have a Django project configured
-to access MongoDB data.
+to use MongoDB.
