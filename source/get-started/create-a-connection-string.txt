@@ -27,14 +27,14 @@ To connect to an instance or deployment not hosted on Atlas, see
       :guilabel:`Clusters` section and click the :guilabel:`Connect` button
       for your new deployment.
 
-      .. figure:: /includes/figures/atlas_connection_select_cluster.png
+      .. figure:: /includes/figures/atlas_connection_connect_cluster.png
          :alt: The connect button in the clusters section of the Atlas UI
 
       Proceed to the :guilabel:`Connect your application` section and select
       "Python" from the :guilabel:`Driver` selection menu and the version
       that best matches the version you installed from the :guilabel:`Version`
       selection menu.
-      
+
    .. step:: Copy your Connection String
 
       Click the button on the right of the connection string to copy it to
