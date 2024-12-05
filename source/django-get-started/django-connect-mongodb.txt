@@ -74,7 +74,8 @@ Configure your MongoDB Connection
       Atlas database user's username and password. Then, replace the
       ``<connection string URI>`` placeholder with the connection string
       that you copied from the :ref:`django-get-started-connection-string`
-      step of this guide.
+      step of this guide. This configures your Django app to connect to
+      your Atlas deployment and access the ``sample_mflix`` sample database.
 
    .. step:: Start the server
 
