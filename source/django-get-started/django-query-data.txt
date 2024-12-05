@@ -28,6 +28,7 @@ Query MongoDB Data
       This code returns the name of the matching user:
 
       .. code-block:: bash
+         :copyable: false
 
          <QuerySet [<Users: Khal Drogo>]>
 
@@ -44,6 +45,7 @@ Query MongoDB Data
       This code returns a truncated list of the matching movies:
 
       .. code-block:: bash
+         :copyable: false
 
          <QuerySet [<Movies: Winsor McCay, the Famous Cartoonist of the N.Y.
          Herald and His Moving Comics>, <Movies: Steamboat Willie>, <Movies:
