@@ -1,0 +1,75 @@
+.. _django-get-started-download-and-install:
+
+====================
+Download and Install
+====================
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: setup, odm, code example
+
+.. procedure::
+   :style: connected
+
+   .. step:: Install Dependencies
+
+      Before installing {+django-odm+}, ensure you have the following dependencies installed
+      in your development environment:
+      
+      - `Python3 version 3.10 or later <https://www.python.org/downloads/>`__
+      - `pip <https://pip.pypa.io/en/stable/installation/>`__
+
+   .. step:: Create a virtual environment
+
+      Select the tab corresponding to your operating system and run the following commands
+      to create and activate a virtual environment in which to install {+django-odm+}:
+
+      .. tabs::
+
+          .. tab:: macOS / Linux
+             :tabid: mac-linux-venv
+
+             .. code-block:: bash
+
+                python3 -m venv venv
+                source venv/bin/activate
+
+          .. tab:: Windows
+             :tabid: windows-venv
+
+             .. code-block:: bash
+
+                python3 -m venv venv
+                . venv\Scripts\activate
+
+   .. step:: Install {+django-odm+}
+
+      With the virtual environment activated, run the following command to install
+      the Django integration:
+
+      .. code-block:: bash
+
+         pip install git+https://github.com/mongodb-labs/django-mongodb
+
+      This command also installs the following dependencies:
+
+      - PyMongo version {+version-number+}
+      - Django version {+django-version-number+}
+
+      .. important::
+
+         If you have already installed PyMongo and Django in your
+         development environment, ensure that they fulfill the following
+         version requirements:
+
+         - PyMongo: Your version must be greater than or equal to 4.6 and less than 5.0.
+         - Django: Your version must be greater than or equal to 5.0 and less than 5.1.
+
+
+After you complete these steps, you have {+django-odm+} and its
+dependencies installed in your development environment.
+
+
