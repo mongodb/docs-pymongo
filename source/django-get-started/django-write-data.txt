@@ -16,7 +16,7 @@ Write Data to MongoDB
 
    .. step:: Start a Python shell
 
-      From your ``quickstart`` project directory, run the following command to 
+      From your project's root directory, run the following command to 
       enter the Python shell:
 
       .. code-block:: bash
