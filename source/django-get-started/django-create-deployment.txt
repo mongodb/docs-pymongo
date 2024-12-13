@@ -14,8 +14,9 @@ your MongoDB database in the cloud.
    .. step:: Create a Free MongoDB deployment on Atlas
 
       Complete the :atlas:`Get Started with Atlas </getting-started?tck=docs_driver_python>`
-      guide to set up a new Atlas account and load sample data into a new free
-      tier MongoDB deployment.
+      guide to set up a new Atlas account and a free tier MongoDB deployment.
+      Ensure that you **load sample data** and **add your IP address** to the IP access
+      list.
       
    .. step:: Save your Credentials
 

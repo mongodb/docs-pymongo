@@ -45,6 +45,12 @@ Download and Install
                 python3 -m venv venv
                 . venv\Scripts\activate
 
+         .. tip::
+
+            In the preceding commands, you might need to replace
+            ``python3`` with the command that points to your Python
+            interpreter.
+
    .. step:: Install {+django-odm+}
 
       With the virtual environment activated, run the following command to install

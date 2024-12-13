@@ -16,7 +16,7 @@ Create an Application
 
    .. step:: Create a "sample_mflix" app
 
-      From your ``quickstart`` project directory, run the following command to create a 
+      From your project's root directory, run the following command to create a 
       new Django app called ``sample_mflix`` based on a custom template:
       
       .. code-block:: bash
