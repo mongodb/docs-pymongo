@@ -45,11 +45,11 @@ Download and Install
                 python3 -m venv venv
                 . venv\Scripts\activate
 
-         .. tip::
+      .. tip::
 
-            In the preceding commands, you might need to replace
-            ``python3`` with the command that points to your Python
-            3.10+ interpreter.
+         In the preceding commands, you might need to replace
+         ``python3`` with the command that points to your Python
+         3.10+ interpreter.
 
    .. step:: Install {+django-odm+}
 
