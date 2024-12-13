@@ -1,4 +1,4 @@
-.. _pymongo-get-started-connection-string:
+.. _django-get-started-connection-string:
 
 ==========================
 Create a Connection String
@@ -14,7 +14,7 @@ port of your deployment, the authentication mechanism, user credentials
 when applicable, and connection options.
 
 To connect to an instance or deployment not hosted on Atlas, see
-:ref:`pymongo-connection-targets`.
+:ref:`pymongo-connection-targets` in the PyMongo documentation.
 
 .. procedure::
    :style: connected
@@ -22,7 +22,7 @@ To connect to an instance or deployment not hosted on Atlas, see
    .. step:: Find your MongoDB Atlas Connection String
 
       To retrieve your connection string for the deployment that
-      you created in the :ref:`previous step <pymongo-get-started-create-deployment>`,
+      you created in the :ref:`previous step <django-get-started-create-deployment>`,
       log into your Atlas account and navigate to the
       :guilabel:`Clusters` section and click the :guilabel:`Connect` button
       for your new deployment.
@@ -54,4 +54,3 @@ To connect to an instance or deployment not hosted on Atlas, see
 After completing these steps, you have a connection string that
 contains your database username and password.
 
-.. include:: /includes/get-started/quickstart-troubleshoot.rst
