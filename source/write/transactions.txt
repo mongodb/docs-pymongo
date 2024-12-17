@@ -138,7 +138,7 @@ methods described in the preceding section to manually manage the transaction li
 
 .. note:: Parallel Operations Not Supported
 
-   PyMongo does not support running parallel operations within a single transaction.
+   {+driver-short+} does not support running parallel operations within a single transaction.
 
 Additional Information
 ----------------------
