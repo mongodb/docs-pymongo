@@ -136,7 +136,9 @@ If you require more control over your transactions, you can use the ``start_tran
 method. You can use this method with the ``commit_transaction()`` and ``abort_transaction()``
 methods described in the preceding section to manually manage the transaction lifecycle.
 
-.. sharedinclude:: dbx/transactions-parallelism.rst
+.. note:: Parallel Operations Not Supported
+
+   PyMongo does not support running parallel operations within a single transaction.
 
 Additional Information
 ----------------------
