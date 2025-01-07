@@ -11,8 +11,8 @@ Query MongoDB Data
 .. meta::
    :keywords: app, odm, code example
 
-You can use the Python interactive shell and your
-models to read data from the ``sample_mflix`` database.
+You can import your models into the Python interactive shell
+to read data from the ``sample_mflix`` database.
 
 .. procedure::
    :style: connected
@@ -42,7 +42,7 @@ models to read data from the ``sample_mflix`` database.
 
          <QuerySet [<Viewer: Khal Drogo>]>
 
-   .. step:: Query the "movies' collection for specified runtime values
+   .. step:: Query the "movies" collection for specified runtime values
 
       Run the following code to query the ``sample_mflix.movies``
       collection for movies that have a ``runtime`` value less than
