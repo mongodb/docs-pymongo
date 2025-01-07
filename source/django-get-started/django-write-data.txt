@@ -30,45 +30,71 @@ Write Data to MongoDB
 
       .. code-block:: python
 
-         from sample_mflix.models import Movies, Users
+         from sample_mflix.models import Movie, Award, Viewer
          from django.utils import timezone
          from datetime import datetime
 
    .. step:: Insert a movie into the database
 
-      Run the following code to create a ``Movies`` model that
-      stores data about a movie titled ``"Minari"``:
+      Run the following code to create an ``Movie`` object that
+      stores data about a movie titled ``"Minari"``, including
+      its awards in an ``Award`` object:
 
       .. code-block:: python
          
-         movie = Movies(title="Minari", plot=
+         movie_awards = Awards(wins=122, nominations=245, text="Won 1 Oscar")
+         movie = Movie(title="Minari", plot=
          "A Korean-American family moves to an Arkansas farm in search of their own American Dream",
-         runtime=117, released=timezone.make_aware(datetime(2020, 1, 26, 0, 0),
-         timezone.get_current_timezone()))
+         runtime=217, released=timezone.make_aware(datetime(2020, 1, 26, 0, 0),
+         timezone.get_current_timezone()), awards=movie_awards, genres=["Drama", "Comedy"])
 
-      Save the model to store its data as a document in the ``movies``
+      Save the object to store its data as a document in the ``movies``
       collection, as shown in the following code:
 
       .. code-block:: python
          
          movie.save()
 
-   .. step:: Insert a user into the database
+   .. step:: Update your movie object
 
-      Run the following code to create a ``Users`` model that
-      stores data about a user named ``"Abigail Carter"``:
+      The ``Movie`` object created in the previous step has inaccurate data:
+      the ``runtime`` value is ``217``, but the correct ``runtime`` is ``117``.
+
+      Run the following code to update the object's ``runtime`` value:
 
       .. code-block:: python
          
-         user = Users(name="Abigail Carter", email="abigail.carter@fakegmail.com",
+         movie.runtime = 117
+         movie.save()
+
+   .. step:: Insert a viewer into the database
+
+      You can also use your ``Viewer`` model to insert documents into the
+      ``sample_mflix.users`` collection. Run the following code to create
+      a ``Viewer`` object that stores data about a user named ``"Abigail Carter"``:
+
+      .. code-block:: python
+         
+         viewer = Viewer(name="Abigail Carter", email="abigail.carter@fakegmail.com",
          password="secure123")
 
-      Save the model to store its data as a document in the ``users``
+      Save the object to store its data as a document in the ``users``
       collection, as shown in the following code:
 
       .. code-block:: python
          
-         user.save()
+         viewer.save()
+
+   .. step:: Delete a viewer object
+
+      One movie viewer named "Alliser Thorne" no longer uses the movie streaming
+      site. To remove this viewer's corresponding document from the database,
+      run the following code:
+
+      .. code-block:: python
+         
+         old_viewer = Viewer.objects.filter(name="Alliser Thorne").first()
+         old_viewer.delete()
 
    .. step:: Start the development server
 
@@ -79,23 +105,25 @@ Write Data to MongoDB
          exit()
 
       Then, start your server by running the following command
-      from your ``quickstart`` directory:
+      from your project's root directory:
 
       .. code-block:: bash
          
          python3 manage.py runserver
 
-   .. step:: Render your new models
+   .. step:: Render your new objects
 
-      To ensure that your ``Movies`` model was inserted into the database,
+      To ensure that your ``Movie`` object was inserted into the database,
       visit the http://127.0.0.1:8000/sample_mflix/recent_movies/ URL.
       You should see a list of five movies in the ``sample_mflix.movies``
       database, with your new movie listed at the top.
 
-      Then, ensure that your ``Users`` model was inserted into the
-      database by visiting the http://127.0.0.1:8000/sample_mflix/users_list/
-      URL. You should see a list of ten users in the ``sample_mflix.users``
-      database, with your new user listed at the top.
+      Then, ensure that your ``Viewer`` object was inserted into the
+      database by visiting the http://127.0.0.1:8000/sample_mflix/viewers_list/
+      URL. You should see a list of ten viewer names in the ``sample_mflix.users``
+      database, with your new viewer listed at the top. Ensure that the
+      viewer named "Alliser Thorne", deleted in the previous step, does not appear
+      in this list.
 
-After completing these steps, you have new documents in the ``movies``
-and ``users`` collection in the ``sample_mflix`` sample database.
+After completing these steps, you have inserted and edited documents
+in the ``sample_mflix`` sample database.

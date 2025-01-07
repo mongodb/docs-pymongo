@@ -28,7 +28,7 @@ Create an Application
          The ``django-mongodb-app`` template ensures that your ``app.py`` file
          includes the line ``"default_auto_field = 'django_mongodb.fields.ObjectIdAutoField'"``.
 
-   .. step:: Create models for movie and user data
+   .. step:: Create models for movie, awards, and viewer data
 
       Open the ``models.py`` file in the ``sample_mflix`` directory and replace 
       its contents with the following code:
@@ -36,37 +36,53 @@ Create an Application
       .. code-block:: python
 
          from django.db import models
+         from django_mongodb.fields import EmbeddedModelField, ArrayField
 
-         class Movies(models.Model):
+         class Movie(models.Model):
             title = models.CharField(max_length=200)
             plot = models.TextField(null=True)
             runtime = models.IntegerField(default=0)
             released = models.DateTimeField("release date", null=True)
+            awards = EmbeddedModelField(Award)
+            genres = ArrayField(models.CharField(max_length=100), blank=True)
 
             class Meta:
-               managed = False
                db_table = "movies"
             
             def __str__(self):
                return self.title
+            
+         class Award(models.Model):
+            wins = models.IntegerField(default=0)
+            nominations = models.IntegerField(default=0)
+            text = models.CharField(max_length=100)
 
+            class Meta:
+               abstract = True
 
-         class Users(models.Model):
+         class Viewer(models.Model):
             name = models.CharField(max_length=100)
             email = models.CharField(max_length=200)
             password = models.CharField(max_length=100)
 
             class Meta:
-               managed = False
                db_table = "users"
 
             def __str__(self):
                return self.name
 
-      The ``Movies`` model represents the ``sample_mflix.movies`` collection
-      and stores information about movies. The ``Users`` model represents
-      the ``sample_mflix.users`` collection and stores account credentials
-      for users of a movie streaming platform.
+      The ``Movie`` model represents the ``sample_mflix.movies`` collection
+      and stores information about movies. This model contains an embedded 
+      model field named ``awards``, which stores an ``Award`` object. The
+      model also contains an array field named ``genres``, which stores
+      a list of genres that describe the movie.
+
+      The ``Award`` model does not represent a separate collection. Instead, it 
+      represents the embedded document values that the ``awards``
+      field of the ``Movie`` model stores.
+      
+      The ``Viewer`` model represents the ``sample_mflix.users`` collection
+      and stores account credentials for movie viewers.
 
    .. step:: Create views to display data
 
@@ -78,21 +94,22 @@ Create an Application
          from django.http import HttpResponse
          from django.shortcuts import render
 
-         from .models import Movies, Users
+         from .models import Movie, Viewer
 
          def index(request):
-            return HttpResponse("Hello! You've reached the Django MongoDB sample app landing page.")
+            return HttpResponse("Hello, world. You're at the application index.")
+
 
          def recent_movies(request):
-            movies = Movies.objects.all().order_by('-released')[:5]
+            movies = Movie.objects.all().order_by('-released')[:5]
             return render(request, 'recent_movies.html', {'movies': movies})
 
-         def users_list(request):
-            users = Users.objects.all().order_by('name')[:10]
-            return render(request, 'users_list.html', {'users': users})
+         def viewers_list(request):
+            viewers = Viewer.objects.all().order_by('name')[:10]
+            return render(request, 'viewers_list.html', {'viewers': viewers})
 
-      These views display a landing page message and information about your ``Movies``
-      and ``Users`` models.
+      These views display a landing page message and information about your ``Movie``
+      and ``Viewer`` models.
    
    .. step:: Configure URLs for your views
 
@@ -109,7 +126,7 @@ Create an Application
          urlpatterns = [
             path("", views.index, name="index"),
             path('recent_movies/', views.recent_movies, name='recent_movies'),
-            path('users_list/', views.users_list, name='users_list'),
+            path('viewers_list/', views.viewers_list, name='viewers_list'),
          ]
       
       Then, navigate to the ``quickstart/urls.py`` file and replace its contents with
@@ -158,20 +175,20 @@ Create an Application
       This template formats the movie data requested by the ``recent_movies`` view.
 
       Create another file in the ``sample_mflix/templates`` directory called
-      ``users_list.html`` and paste the following code:
+      ``viewers_list.html`` and paste the following code:
 
       .. code-block:: python
 
-         <!-- templates/users_list.html -->
+         <!-- templates/viewers_list.html -->
          <!DOCTYPE html>
          <html lang="en">
          <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Users List</title>
+            <title>Viewers List</title>
          </head>
          <body>
-            <h1>Alphabetical Users List</h1>
+            <h1>Alphabetical Viewers List</h1>
             <table>
                <thead>
                      <tr>
@@ -180,14 +197,14 @@ Create an Application
                      </tr>
                </thead>
                <tbody>
-                     {% for user in users %}
+                     {% for viewer in viewers %}
                         <tr>
-                           <td>{{ user.name }}</td>
-                           <td>{{ user.email }}</td>
+                           <td>{{ viewer.name }}</td>
+                           <td>{{ viewer.email }}</td>
                         </tr>
                      {% empty %}
                         <tr>
-                           <td colspan="2">No users found.</td>
+                           <td colspan="2">No viewer found.</td>
                         </tr>
                      {% endfor %}
                </tbody>
@@ -195,7 +212,7 @@ Create an Application
          </body>
          </html>
 
-      This template formats the user data requested by the ``users_list`` view.
+      This template formats the user data requested by the ``viewers_list`` view.
 
    .. step:: Include your app in your project
 
@@ -217,7 +234,7 @@ Create an Application
    .. step:: Create migrations for your new models
 
       From your project root, run the following command to create
-      migrations for the ``Movies`` and ``Users`` models and apply
+      migrations for the ``Movie``, ``Award``, and ``Viewer`` models and apply
       the changes to the database:
       
       .. code-block:: bash

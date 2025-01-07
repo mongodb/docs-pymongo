@@ -27,6 +27,7 @@ Get Started with {+django-odm+}
    Create an Application </django-get-started/django-create-app/>
    Write Data to MongoDB </django-get-started/django-write-data/>
    Query MongoDB Data </django-get-started/django-query-data/>
+   Create an Admin Site </django-get-started/django-create-admin/>
    Next Steps </django-get-started/django-next-steps/>
 
 {+django-odm+} is a PyMongo integration that allows you to use the

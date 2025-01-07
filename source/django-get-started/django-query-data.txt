@@ -16,21 +16,24 @@ Query MongoDB Data
 
    .. step:: Query the users collection for a specified email
 
-      From the same Python shell as the :ref:`django-get-started-write`
-      step of this tutorial, run the following code to query the 
-      ``sample_mflix.users`` collection for a user whose email is 
+      Start a Python shell and include the required imports
+      by running the following code:
+      
+      
+      Then, run the following code to query the 
+      ``sample_mflix.users`` collection for a movie viewer whose email is 
       ``"jason_momoa@gameofthron.es"``:
 
       .. code-block:: bash
 
-         Users.objects.filter(email="jason_momoa@gameofthron.es").first()
+         Viewer.objects.filter(email="jason_momoa@gameofthron.es").first()
 
       This code returns the name of the matching user:
 
       .. code-block:: bash
          :copyable: false
 
-         <QuerySet [<Users: Khal Drogo>]>
+         <QuerySet [<Viewer: Khal Drogo>]>
 
    .. step:: Query the movies collection for runtime values
 
@@ -40,23 +43,23 @@ Query MongoDB Data
 
       .. code-block:: bash
 
-         Movies.objects.filter(runtime__lt=10)
+         Movie.objects.filter(runtime__lt=10)
 
       This code returns a truncated list of the matching movies:
 
       .. code-block:: bash
          :copyable: false
 
-         <QuerySet [<Movies: Winsor McCay, the Famous Cartoonist of the N.Y.
-         Herald and His Moving Comics>, <Movies: Steamboat Willie>, <Movies:
-         Three Little Pigs>, <Movies: The Band Concert>, <Movies: Who Killed Cock Robin?>,
-         <Movies: Dots>, <Movies: The Cat Concerto>, <Movies: Begone Dull Care>,
-         <Movies: Mi adorado Juan>, <Movies: Neighbours>, <Movies: A Phantasy>,
-         <Movies: Duck Amuck>, <Movies: Duck Dodgers in the 24èth Century>,
-         <Movies: Blinkity Blank>, <Movies: One Froggy Evening>,
-         <Movies: What's Opera, Doc?>, <Movies: Lines: Horizontal>,
-         <Movies: Il fornaretto di Venezia>, <Movies: Dog Star Man: Part IV>,
-         <Movies: Now>, '...(remaining elements truncated)...']>
+         <QuerySet [<Movie: Winsor McCay, the Famous Cartoonist of the N.Y.
+         Herald and His Moving Comics>, <Movie: Steamboat Willie>, <Movie:
+         Three Little Pigs>, <Movie: The Band Concert>, <Movie: Who Killed Cock Robin?>,
+         <Movie: Dots>, <Movie: The Cat Concerto>, <Movie: Begone Dull Care>,
+         <Movie: Mi adorado Juan>, <Movie: Neighbours>, <Movie: A Phantasy>,
+         <Movie: Duck Amuck>, <Movie: Duck Dodgers in the 24èth Century>,
+         <Movie: Blinkity Blank>, <Movie: One Froggy Evening>,
+         <Movie: What's Opera, Doc?>, <Movie: Lines: Horizontal>,
+         <Movie: Il fornaretto di Venezia>, <Movie: Dog Star Man: Part IV>,
+         <Movie: Now>, '...(remaining elements truncated)...']>
 
 After completing this step, you can run queries on data stored in 
 your MongoDB deployment.
