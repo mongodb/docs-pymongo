@@ -11,11 +11,11 @@ Configure your MongoDB Connection
 .. meta::
    :keywords: app, odm, code example
 
+After installing {+django-odm+} and creating a MongoDB Atlas deployment,
+you can create a Django project that connects to MongoDB.
+
 .. procedure::
    :style: connected
-
-   After installing {+django-odm+} and creating a MongoDB Atlas deployment,
-   you can create a Django project that connects to MongoDB.
 
    .. step:: Create a Django project
 

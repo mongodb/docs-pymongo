@@ -11,18 +11,18 @@ Create an Application
 .. meta::
    :keywords: app, odm, code example
 
+In your ``quickstart`` project, you can create an application
+that interacts with the Atlas sample database called ``sample_mflix``.
+This database contains a ``movies`` collection, which stores
+information about movies. The database also contains a ``users``
+collection, which stores information about movie viewers who use 
+a streaming service.
+
+To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Dataset
+</sample-data/sample-mflix/>` in the Atlas documentation.
+
 .. procedure::
    :style: connected
-
-   In your ``quickstart`` project, you can create an application
-   that interacts with the Atlas sample database called ``sample_mflix``.
-   This database contains a ``movies`` collection, which stores
-   information about movies. The database also contains a ``users``
-   collection, which stores information about movie viewers who use 
-   a streaming service.
-
-   To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Dataset
-   </sample-data/sample-mflix/>` in the Atlas documentation.
 
    .. step:: Create a "sample_mflix" app
 

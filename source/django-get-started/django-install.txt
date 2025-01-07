@@ -11,6 +11,9 @@ Download and Install
 .. meta::
    :keywords: setup, odm, code example
 
+Complete the following steps to install {+django-odm+} and its dependencies
+in your development environment.
+
 .. procedure::
    :style: connected
 
