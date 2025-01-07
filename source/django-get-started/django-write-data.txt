@@ -11,6 +11,11 @@ Write Data to MongoDB
 .. meta::
    :keywords: app, odm, code example
 
+You can use your application's models to update documents
+stored in the ``sample_mflix`` database. To update documents,
+enter the Python interactive shell and call create, update,
+and delete functions on your model objects.
+
 .. procedure::
    :style: connected
 
@@ -58,7 +63,7 @@ Write Data to MongoDB
    .. step:: Update your movie object
 
       The ``Movie`` object created in the previous step has inaccurate data:
-      the ``runtime`` value is ``217``, but the correct ``runtime`` is ``117``.
+      the ``runtime`` value is ``217``, but the correct ``runtime`` value is ``117``.
 
       Run the following code to update the object's ``runtime`` value:
 
@@ -71,7 +76,7 @@ Write Data to MongoDB
 
       You can also use your ``Viewer`` model to insert documents into the
       ``sample_mflix.users`` collection. Run the following code to create
-      a ``Viewer`` object that stores data about a user named ``"Abigail Carter"``:
+      a ``Viewer`` object that stores data about a movie viewer named ``"Abigail Carter"``:
 
       .. code-block:: python
          
@@ -113,14 +118,14 @@ Write Data to MongoDB
 
    .. step:: Render your new objects
 
-      To ensure that your ``Movie`` object was inserted into the database,
+      To ensure that you inserted a ``Movie`` object into the database,
       visit the http://127.0.0.1:8000/sample_mflix/recent_movies/ URL.
-      You should see a list of five movies in the ``sample_mflix.movies``
+      You can see a list of five movies in the ``sample_mflix.movies``
       database, with your new movie listed at the top.
 
-      Then, ensure that your ``Viewer`` object was inserted into the
+      Then, ensure that you inserted a ``Viewer`` object into the
       database by visiting the http://127.0.0.1:8000/sample_mflix/viewers_list/
-      URL. You should see a list of ten viewer names in the ``sample_mflix.users``
+      URL. You can see a list of ten viewer names in the ``sample_mflix.users``
       database, with your new viewer listed at the top. Ensure that the
       viewer named "Alliser Thorne", deleted in a previous step, does not appear
       in this list.

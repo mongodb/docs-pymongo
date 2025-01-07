@@ -14,6 +14,16 @@ Create an Application
 .. procedure::
    :style: connected
 
+   In your ``quickstart`` project, you can create an application
+   that interacts with the Atlas sample database called ``sample_mflix``.
+   This database contains a ``movies`` collection, which stores
+   information about movies. The database also contains a ``users``
+   collection, which stores information about movie viewers who use 
+   a streaming service.
+
+   To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Dataset
+   </sample-data/sample-mflix/>` in the Atlas documentation.
+
    .. step:: Create a "sample_mflix" app
 
       From your project's root directory, run the following command to create a 
@@ -78,8 +88,7 @@ Create an Application
       a list of genres that describe the movie.
 
       The ``Award`` model does not represent a separate collection. Instead, it 
-      represents the embedded document values that the ``awards``
-      field of the ``Movie`` model stores.
+      represents the embedded document values stored in the ``Movie`` model.
       
       The ``Viewer`` model represents the ``sample_mflix.users`` collection
       and stores account credentials for movie viewers.
@@ -243,4 +252,4 @@ Create an Application
          python3 manage.py migrate
 
 After completing these steps, you have a basic {+django-odm+} app that
-you can use to interact with the ``sample_mflix`` database.
+you can use to access the ``sample_mflix`` Atlas database.

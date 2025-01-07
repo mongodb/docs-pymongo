@@ -11,14 +11,14 @@ your MongoDB database in the cloud.
 .. procedure::
    :style: connected
 
-   .. step:: Create a Free MongoDB deployment on Atlas
+   .. step:: Create a free MongoDB deployment on Atlas
 
       Complete the :atlas:`Get Started with Atlas </getting-started?tck=docs_driver_python>`
       guide to set up a new Atlas account and a free tier MongoDB deployment.
       Ensure that you **load sample data** and **add your IP address** to the IP access
       list.
       
-   .. step:: Save your Credentials
+   .. step:: Save your credentials
 
       After you create your database user, save that user's 
       username and password to a safe location for use in an upcoming step.

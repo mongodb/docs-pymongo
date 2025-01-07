@@ -19,7 +19,7 @@ To connect to an instance or deployment not hosted on Atlas, see
 .. procedure::
    :style: connected
 
-   .. step:: Find your MongoDB Atlas Connection String
+   .. step:: Find your MongoDB Atlas connection string
 
       To retrieve your connection string for the deployment that
       you created in the :ref:`previous step <django-get-started-create-deployment>`,
@@ -35,7 +35,7 @@ To connect to an instance or deployment not hosted on Atlas, see
       that best matches the version you installed from the :guilabel:`Version`
       selection menu.
 
-   .. step:: Copy your Connection String
+   .. step:: Copy your connection string
 
       Click the button on the right of the connection string to copy it to
       your clipboard as shown in the following screenshot:
@@ -43,7 +43,7 @@ To connect to an instance or deployment not hosted on Atlas, see
       .. figure:: /includes/figures/atlas_connection_copy_string_python.png
          :alt: The connection string copy button in the Atlas UI
 
-   .. step:: Update the Placeholders
+   .. step:: Update the placeholders
 
       Paste this connection string into a file in your preferred text editor
       and replace the ``<username>`` and ``<password>`` placeholders with

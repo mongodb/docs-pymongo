@@ -11,6 +11,9 @@ Query MongoDB Data
 .. meta::
    :keywords: app, odm, code example
 
+You can use the Python interactive shell and your
+models to read data from the ``sample_mflix`` database.
+
 .. procedure::
    :style: connected
 

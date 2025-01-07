@@ -14,7 +14,7 @@ Download and Install
 .. procedure::
    :style: connected
 
-   .. step:: Install Dependencies
+   .. step:: Install the dependencies
 
       Before installing {+django-odm+}, ensure you have the following dependencies installed
       in your development environment:
