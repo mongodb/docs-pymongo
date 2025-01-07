@@ -63,10 +63,9 @@ in the Django documentation.
       Enter the username and password created in the previous step to log in to
       the site. 
 
-   .. step:: Access your sample_mflix app from the admin site
+   .. step:: Access your "sample_mflix" app from the admin site
 
-      After logging in to the admin site, you can see the following index
-      page:
+      After logging in to the admin site, you can see the following information:
 
       .. figure:: /includes/figures/django_admin_index.png
          :alt: The initial content displayed on the Django admin site.

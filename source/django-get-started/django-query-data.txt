@@ -14,11 +14,15 @@ Query MongoDB Data
 .. procedure::
    :style: connected
 
-   .. step:: Query the users collection for a specified email
+   .. step:: Query the "users" collection for a specified email
 
-      Start a Python shell and include the required imports
+      Start a Python shell and import the required models
       by running the following code:
       
+      .. code-block:: bash
+
+         python3 manage.py shell
+         from sample_mflix.models import Movie, Viewer
       
       Then, run the following code to query the 
       ``sample_mflix.users`` collection for a movie viewer whose email is 
@@ -35,7 +39,7 @@ Query MongoDB Data
 
          <QuerySet [<Viewer: Khal Drogo>]>
 
-   .. step:: Query the movies collection for runtime values
+   .. step:: Query the "movies' collection for specified runtime values
 
       Run the following code to query the ``sample_mflix.movies``
       collection for movies that have a ``runtime`` value less than

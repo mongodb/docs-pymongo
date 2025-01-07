@@ -122,7 +122,7 @@ Write Data to MongoDB
       database by visiting the http://127.0.0.1:8000/sample_mflix/viewers_list/
       URL. You should see a list of ten viewer names in the ``sample_mflix.users``
       database, with your new viewer listed at the top. Ensure that the
-      viewer named "Alliser Thorne", deleted in the previous step, does not appear
+      viewer named "Alliser Thorne", deleted in a previous step, does not appear
       in this list.
 
 After completing these steps, you have inserted and edited documents
