@@ -65,7 +65,7 @@ you can create a Django project that connects to MongoDB.
 
          DATABASES = {
             "default": {
-               "ENGINE": "django_mongodb",
+               "ENGINE": "django_mongodb_backend",
                "NAME": "sample_mflix",
                "USER": "<username>",
                "PASSWORD": "<password>",

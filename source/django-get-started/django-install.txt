@@ -61,7 +61,7 @@ in your development environment.
 
       .. code-block:: bash
 
-         pip install git+https://github.com/mongodb-labs/django-mongodb
+         pip install git+https://github.com/mongodb-labs/django-mongodb-backend
 
       This command also installs the following dependencies:
 

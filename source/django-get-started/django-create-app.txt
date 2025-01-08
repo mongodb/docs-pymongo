@@ -36,7 +36,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       .. note:: App Template
 
          The ``django-mongodb-app`` template ensures that your ``app.py`` file
-         includes the line ``"default_auto_field = 'django_mongodb.fields.ObjectIdAutoField'"``.
+         includes the line ``"default_auto_field = 'django_mongodb_backend.fields.ObjectIdAutoField'"``.
 
    .. step:: Create models for movie, awards, and viewer data
 
@@ -46,7 +46,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       .. code-block:: python
 
          from django.db import models
-         from django_mongodb.fields import EmbeddedModelField, ArrayField
+         from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
 
          class Movie(models.Model):
             title = models.CharField(max_length=200)
