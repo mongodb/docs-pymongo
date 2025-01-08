@@ -15,7 +15,7 @@ Get Started with {+django-odm+}
    :values: tutorial
  
 .. meta::
-   :description: Learn how to create an app to connect to a MongoDB deployment by using Django MongoDB.
+   :description: Learn how to create an app to connect to a MongoDB deployment by using Django MongoDB Backend.
    :keywords: quick start, tutorial, basics
 
 .. toctree::

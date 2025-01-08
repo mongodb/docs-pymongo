@@ -61,12 +61,12 @@ in your development environment.
 
       .. code-block:: bash
 
-         pip install git+https://github.com/mongodb-labs/django-mongodb-backend
+         pip install django-mongodb-backend
 
       This command also installs the following dependencies:
 
-      - PyMongo version {+version-number+}
-      - Django version {+django-version-number+}
+      - PyMongo version {+version-number+} and its dependencies
+      - Django version {+django-version-number+} and its dependencies
 
       .. important::
 
