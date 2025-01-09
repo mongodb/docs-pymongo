@@ -61,7 +61,6 @@ The model classes have the following definitions:
     
     class Theater(models.Model):
         theaterId = models.IntegerField(default=0)
-        location = EmbeddedModelField(Location)
         objects = MongoManager()
 
         class Meta:
@@ -70,27 +69,14 @@ The model classes have the following definitions:
         def __str__(self):
             return self.title
 
-    class Location(models.Model):
-        geo = EmbeddedModelField(Geo)
-
-        class Meta:
-            abstract = True
-        
-    class Geo(models.Model):
-        type = models.CharField(max_length=100)
-        coordinates = ArrayField(models.DecimalField(max_digits=9, decimal_places=6), blank=True)
-        
-        class Meta:
-            abstract = True
-
 To learn how to create a Django application that uses a similar ``Movie``
 model to interact with MongoDB documents, visit the :ref:`django-get-started`
 tutorial.
 
 .. _django-raw-queries-run:
 
-Perform a Raw Query
--------------------
+Run Raw Queries
+---------------
 
 To run a raw database query, pass an aggregation pipeline
 to the ``QuerySet.raw_aggregate()`` method. Aggregation pipelines
@@ -188,9 +174,9 @@ the ``raw_aggregate()`` method.
    You cannot use {+django-odm+} to create Atlas Search indexes.
    
    For instructions on using the PyMongo driver to create an Atlas
-   Search index, see :driver:`Atlas Search and Vector Search Indexes
-   </python/pymongo-driver/current/indexes/atlas-search-index/>` in
-   the PyMongo documentation.
+   Search index, see `Atlas Search and Vector Search Indexes
+   <https://www.mongodb.com/docs/languages/python/pymongo-driver/current/indexes/atlas-search-index/>`__
+   in the PyMongo documentation.
    
    For instructions on alternative methods of creating search indexes,
    see :atlas:`Create an Atlas Search Index </atlas-search/tutorial/create-index/>`
@@ -307,18 +293,22 @@ the ``raw_aggregate()`` method:
    You cannot use {+django-odm+} to create ``2d`` or ``2dsphere`` indexes.
    
    For instructions on using the PyMongo driver to create geospatial
-   indexes, see :driver:`Geospatial Indexes
-   </python/pymongo-driver/current/indexes/geospatial-index/>` in
-   the PyMongo documentation.
+   indexes, see `Geospatial Indexes
+   <https://www.mongodb.com/docs/languages/python/pymongo-driver/current/indexes/geospatial-index/>`__
+   in the PyMongo documentation.
    
    For instructions on using the MongoDB Shell to create geospatial
    indexes, see :manual:`Geospatial Indexes </core/indexes/index-types/index-geospatial/>`
    in the {+mdb-server+} manual.
 
-This example runs a geospatial query by passing the ``$near`` pipeline
-stage to the ``raw_aggregate()`` method. The code queries for documents
-in which the ``location.geo`` field stores a location within ``1000`` meters
-of the MongoDB Headquarters in New York City, NY:
+This example runs a geospatial query by passing the ``$match`` and
+``$geoWithin`` pipeline stages to the ``raw_aggregate()`` method. The
+code performs the following actions:
+
+- Specifies a list of coordinates that represent Chicago's boundaries
+- Queries for documents in which the ``location.geo`` field stores a
+  location within the Chicago area
+- Retrieves and prints the ``theaterId`` values of each movie theater in Chicago
 
 .. io-code-block::
     :copyable: true
@@ -326,36 +316,53 @@ of the MongoDB Headquarters in New York City, NY:
     .. input::
         :language: python
 
+        chicago_bounds = {
+            "type": "Polygon",
+            "coordinates": [[
+                [-87.851, 41.976],
+                [-87.851, 41.653],
+                [-87.651, 41.653],
+                [-87.651, 41.976],
+                [-87.851, 41.976] 
+            ]]
+        }
+
         theaters = Theater.objects.raw_aggregate([
             {
                 "$match": {
                     "location.geo": {
-                        "$near": {
-                            "$geometry": {
-                                "type": "Point",
-                                "coordinates": [-73.986805, 40.7620853]
-                            },
-                            "$maxDistance": 1000 
+                        "$geoWithin": {
+                            "$geometry": chicago_bounds
                         }
                     }
                 }
             },
             {
                 "$project": {
-                    "name": 1, 
-                    "location": 1
+                    "theaterId": 1
                 }
             }
         ])
 
         for t in theaters:
-            print(f"Theater: {t.name}, location: {t.location}\n")
+            print(f"Theater ID: {t.theaterId}")
 
     .. output::
         :language: none
         :visible: false
 
-        TODO
+        Theater ID: 2447
+        Theater ID: 311
+        Theater ID: 320
+        Theater ID: 2960
+        Theater ID: 2741
+        Theater ID: 306
+        Theater ID: 322
+        Theater ID: 319
+        Theater ID: 2862
+        Theater ID: 1777
+        Theater ID: 814
+        Theater ID: 323
 
 Additional Information
 ----------------------
