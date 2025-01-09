@@ -188,9 +188,9 @@ actions:
 
 - Specifies the Atlas Search index that covers the ``plot`` field
 - Queries for documents whose ``plot`` values contain the string
-  ``"whirlwind romance"`` with no more than ``3`` words in between
+  ``"whirlwind romance"`` with no more than ``3`` words between them
 - Returns portions of the ``plot`` string values that match
-  the query, along with metadata that indicates where the matches
+  the query and metadata that indicates where the matches
   occurred
 - Includes the ``title`` field and the ``highlight``, or matching text,
   of each result
