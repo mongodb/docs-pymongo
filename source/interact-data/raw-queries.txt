@@ -34,9 +34,9 @@ to the database in pipeline stages.
 Sample Data
 ~~~~~~~~~~~
 
-The examples in this guide use the ``Movie`` model, which represents the
-``sample_mflix.movies`` collection from the :atlas:`Atlas sample datasets </sample-data>`.
-The ``Movie`` model class has the following definition:
+The examples in this guide use the ``Movie`` and ``Theater`` models, which
+represent collections in the ``sample_mflix`` database from the :atlas:`Atlas sample datasets </sample-data>`.
+The model classes have the following definitions:
 
 .. code-block:: python
 
@@ -58,6 +58,30 @@ The ``Movie`` model class has the following definition:
 
         def __str__(self):
             return self.title
+    
+    class Theater(models.Model):
+        theaterId = models.IntegerField(default=0)
+        location = EmbeddedModelField(Location)
+        objects = MongoManager()
+
+        class Meta:
+            db_table = "theaters"
+        
+        def __str__(self):
+            return self.title
+
+    class Location(models.Model):
+        geo = EmbeddedModelField(Geo)
+
+        class Meta:
+            abstract = True
+        
+    class Geo(models.Model):
+        type = models.CharField(max_length=100)
+        coordinates = ArrayField(models.DecimalField(max_digits=9, decimal_places=6), blank=True)
+        
+        class Meta:
+            abstract = True
 
 To learn how to create a Django application that uses a similar ``Movie``
 model to interact with MongoDB documents, visit the :ref:`django-get-started`
@@ -263,6 +287,75 @@ actions:
 Query Geospatial Data
 ~~~~~~~~~~~~~~~~~~~~~
 
+You can use the ``raw_aggregate()`` method to run queries
+on fields containing geospatial data. Geospatial data represents
+a geographic location on the surface of the Earth or on a
+Euclidean plane.
+
+To run a geospatial query, create a ``2d`` or ``2dsphere`` index on fields
+containing geospatial data. Then, specify one of the following
+query operators in an aggregation pipeline parameter to
+the ``raw_aggregate()`` method:
+
+- ``$near``
+- ``$geoWithin``
+- ``$nearSphere``
+- ``$geoIntersects``
+
+.. important:: 
+
+   You cannot use {+django-odm+} to create ``2d`` or ``2dsphere`` indexes.
+   
+   For instructions on using the PyMongo driver to create geospatial
+   indexes, see :driver:`Geospatial Indexes
+   </python/pymongo-driver/current/indexes/geospatial-index/>` in
+   the PyMongo documentation.
+   
+   For instructions on using the MongoDB Shell to create geospatial
+   indexes, see :manual:`Geospatial Indexes </core/indexes/index-types/index-geospatial/>`
+   in the {+mdb-server+} manual.
+
+This example runs a geospatial query by passing the ``$near`` pipeline
+stage to the ``raw_aggregate()`` method. The code queries for documents
+in which the ``location.geo`` field stores a location within ``1000`` meters
+of the MongoDB Headquarters in New York City, NY:
+
+.. io-code-block::
+    :copyable: true
+
+    .. input::
+        :language: python
+
+        theaters = Theater.objects.raw_aggregate([
+            {
+                "$match": {
+                    "location.geo": {
+                        "$near": {
+                            "$geometry": {
+                                "type": "Point",
+                                "coordinates": [-73.986805, 40.7620853]
+                            },
+                            "$maxDistance": 1000 
+                        }
+                    }
+                }
+            },
+            {
+                "$project": {
+                    "name": 1, 
+                    "location": 1
+                }
+            }
+        ])
+
+        for t in theaters:
+            print(f"Theater: {t.name}, location: {t.location}\n")
+
+    .. output::
+        :language: none
+        :visible: false
+
+        TODO
 
 Additional Information
 ----------------------
@@ -277,3 +370,7 @@ in the {+mdb-server+} manual.
 
 To learn more about Atlas Search, see :atlas:`Atlas Search </atlas-search>`
 in the Atlas documentation.
+
+To learn more about running geospatial queries, see
+:manual:`Geospatial Queries </geospatial-queries/>`
+in the {+mdb-server+} manual.
