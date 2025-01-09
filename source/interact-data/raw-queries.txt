@@ -28,7 +28,7 @@ rather than Django methods.
 The Django QuerySet API provides a ``QuerySet.raw()`` method, which allows
 you to perform raw SQL queries on relational databases. {+django-odm+}
 does not support the ``raw()`` method. Instead, the ODM provides the
-``QuerySet.raw_aggregate()`` method, which you can use to send commands
+``QuerySet.raw_aggregate()`` method, which you can use to send instructions
 to the database in pipeline stages.
 
 Sample Data
@@ -95,7 +95,7 @@ Filter and Project Document Fields
 
 This example runs a raw database query by calling the
 ``raw_aggregate()`` method on your ``Movie`` objects,
-which represent documents in the ``sample_mflix.movies`` MongoDB
+which represent documents in the ``sample_mflix.movies``
 collection. The code passes the following aggregation pipeline stages
 to ``raw_aggregate()``:
 
@@ -125,7 +125,7 @@ to ``raw_aggregate()``:
             print(f"Plot of {m.title}, released on {m.released}: {m.plot}\n")
 
     .. output::
-        :language: javascript
+        :language: none
         :visible: false
 
         Plot of The Parent Trap, released on 1961-06-21 00:00:00+00:00:
@@ -217,7 +217,7 @@ actions:
             print(f"Title: {m.title}, text match details: {m.highlight}\n")
 
     .. output::
-        :language: javascript
+        :language: none
         :visible: false
 
         Title: Tokyo Fiancèe, text match details: [{'score': 2.3079638481140137, 'path': 'plot',
@@ -264,12 +264,11 @@ Query Geospatial Data
 ~~~~~~~~~~~~~~~~~~~~~
 
 
-
 Additional Information
 ----------------------
 
 To view more examples that use the ``raw_aggregate()`` method,
-see `QuerySet API Reference <{+django-api+}querysets.htmln>`__
+see `QuerySet API Reference <{+django-api+}querysets.html>`__
 in the {+django-odm+} API documentation.
 
 To learn more about running aggregation operations, see
