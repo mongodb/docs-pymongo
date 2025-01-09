@@ -51,20 +51,20 @@ which you must configure to set MongoDB as the default database
 connection.
 
 To configure the ``default`` key, include the following
-fields:
+nested keys:
 
 .. list-table::
    :header-rows: 1
    :widths: 20 80
 
-   * - Field
+   * - Key
      - Description
 
    * - **ENGINE**
-     - The backend driver to use for the connection. Set this field to ``"django_mongodb_backend"``.
+     - The backend driver to use for the connection. Set this key to ``"django_mongodb_backend"``.
 
    * - **HOST**
-     - | Your connection URI. For localhost connections, this field is optional. 
+     - | Your connection URI. For localhost connections, this key is optional. 
        | For SRV connections, you must include a scheme prefix (``mongodb+srv://``).
        |
        | If connecting to a replica set or sharded cluster with multiple hosts, specify 
@@ -81,10 +81,10 @@ fields:
 
    * - **PORT**
      - | The port number on which the database server is listening. 
-       | For MongoDB Atlas connections, this field is optional.
+       | For MongoDB Atlas connections, this key is optional.
 
    * - **OPTIONS**
-     - A dictionary of additional connection options for the database. This field is optional.
+     - A dictionary of additional connection options for the database. This key is optional.
 
 .. _django-manual-config-example:
 
@@ -125,7 +125,7 @@ to a MongoDB deployment with the following configuration:
 .. tip::
 
     To see a full list of connection options that you
-    can set in the ``OPTIONS`` field, see the optional
+    can set in the ``OPTIONS`` nested key, see the optional
     parameters for `MongoClient <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
     in the PyMongo API documentation.
 
