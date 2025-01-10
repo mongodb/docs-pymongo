@@ -22,11 +22,13 @@ Overview
 
 In this guide, you can learn how to use {+django-odm+} to run
 create, read, update, and delete (CRUD) operations on your MongoDB
-database.
+collection.
 
 You can use methods provided by the Django ``QuerySet`` API to run
-CRUD operations. This guide shows how to use the following ``QuerySet``
-methods:
+CRUD operations. To update documents in your collection, call the 
+``QuerySet`` operation methods on your model objects that represent the collection.
+Then, {+django-odm+} runs the operations on your collection documents.
+This guide shows how to use the following ``QuerySet`` methods:
 
 - :ref:`create() <django-crud-insert>`
 - :ref:`filter() and get() <django-crud-read>`
