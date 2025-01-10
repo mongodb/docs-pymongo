@@ -12,4 +12,5 @@ and interacts with data.
 
 Learn more about {+django-odm+} from the following resources:
 
-- :github:`django-mongodb </mongodb-labs/django-mongodb>` source code
+- :github:`django-mongodb-backend </mongodb-labs/django-mongodb-backend>` source code
+- `{+django-odm+} <{+django-api+}>`__ API documentation
