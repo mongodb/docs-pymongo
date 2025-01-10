@@ -29,7 +29,7 @@ CRUD operations. This guide shows how to use the following ``QuerySet``
 methods:
 
 - :ref:`create() <django-crud-insert>`
-- :ref:`filter() <django-crud-read>`
+- :ref:`filter() and get() <django-crud-read>`
 - :ref:`update() <django-crud-modify>`
 - :ref:`delete() <django-crud-delete>`
 
@@ -127,11 +127,8 @@ that specifies which documents to retrieve, as an argument to the ``filter()`` m
 Alternatively, you can call the ``get()`` method to retrieve a single document
 that matches your query. 
 
-.. TODO: (add to the previous paragraph) To view an example that calls the
-   ``get()`` method, see the Specify a Query guide.
-
-Example
-~~~~~~~
+Return Multiple Documents Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following example calls the ``filter()`` method on your ``Movie`` objects
 to retrieve documents from the ``sample_mflix.movies`` collection. The query
@@ -158,6 +155,34 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
        <Movie: First Person Plural>, <Movie: Just, Melvin: Just Evil>, <Movie: Sound and Fury>,
        <Movie: Peppermint Candy>]>
 
+Return One Document Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To retrieve only one document that matches your query criteria, call the
+``get()`` method and pass a query filter as an argument. The following example
+retrieves a document in which the ``title`` value is ``"Boyhood"``:
+
+.. io-code-block::
+    :copyable: true
+
+    .. input::
+       :language: python
+
+       from sample_mflix.models import Movie
+
+       Movie.objects.get(title="Boyhood")
+
+    .. output::
+       :language: none
+       :visible: false
+
+       <Movie: Boyhood>
+
+.. note::
+
+   If your query matches no documents or multiple documents, the ``get()``
+   method generates an error. To retrieve one document from a query
+   that might match multiple, chain the ``first()`` method to ``filter()``.
 
 .. _django-crud-modify:
 
