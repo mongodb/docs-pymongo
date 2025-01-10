@@ -39,6 +39,11 @@ methods:
     `QuerySet API reference <https://docs.djangoproject.com/en/5.1/ref/models/querysets/>`__
     in the Django documentation.
 
+You can also use the Django admin site to edit your models
+and their corresponding collections on a web interface. For
+more information, see `The Django admin site <https://docs.djangoproject.com/en/5.1/ref/contrib/admin/>`__
+in the Django documentation.
+
 Sample Data
 ~~~~~~~~~~~
 
@@ -67,9 +72,17 @@ The ``Movie`` model class has the following definition:
         def __str__(self):
             return self.title
 
+You can use the Python interactive shell to run the code examples.
+To enter the shell, run the following command from your project's 
+root directory:
+
+.. code-block:: bash
+
+   python3 manage.py shell
+
 To learn how to create a Django application that uses the ``Movie``
-model to interact with MongoDB documents, visit the :ref:`django-get-started`
-tutorial.
+model and the Python interactive shell to interact with MongoDB documents,
+visit the :ref:`django-get-started` tutorial.
 
 .. _django-crud-insert:
 
@@ -81,7 +94,7 @@ model objects that represent the collection. Pass the new document's fields
 and values as arguments to the ``create()`` method.
 
 Example
-```````
+~~~~~~~
 
 The following example calls the ``create()`` method on your ``Movie`` objects
 to insert a document into the ``sample_mflix.movies`` collection. The new
@@ -90,9 +103,9 @@ of ``141``:
 
 .. code-block:: python
 
-    from sample_mflix.models import Movie
+   from sample_mflix.models import Movie
 
-    movie = Movie.objects.create(title="Poor Things", runtime=141)
+   movie = Movie.objects.create(title="Poor Things", runtime=141)
 
 .. note::
 
@@ -118,7 +131,7 @@ that matches your query.
    ``get()`` method, see the Specify a Query guide.
 
 Example
-```````
+~~~~~~~
 
 The following example calls the ``filter()`` method on your ``Movie`` objects
 to retrieve documents from the ``sample_mflix.movies`` collection. The query
@@ -158,7 +171,7 @@ or criteria that specifies which documents to update, as an argument to the
 arguments to the ``update()`` method.
 
 Example
-```````
+~~~~~~~
 
 The following example calls the ``update()`` method on your ``Movie`` objects
 to modify documents in the ``sample_mflix.movies`` collection. The code matches
@@ -194,7 +207,7 @@ or criteria that specifies which documents to delete, as an argument to the
 ``filter()`` method.
 
 Example
-```````
+~~~~~~~
 
 The following example calls the ``delete()`` method on your ``Movie`` objects
 to delete documents in the ``sample_mflix.movies`` collection. The code matches
@@ -215,7 +228,7 @@ and deletes documents that have a ``runtime`` value of ``5``:
        :visible: false
 
        // Outputs the number of deleted documents and objects
-       16
+       (16, {'sample_mflix.Movie': 16})
 
 
 Additional Information
@@ -227,4 +240,4 @@ To view more create, read, update, and delete examples, see the following
 steps of the :ref:`django-get-started` tutorial:
 
 - :ref:`django-get-started-write`
-- :ref:`django-get-started-read`
+- :ref:`django-get-started-query`
