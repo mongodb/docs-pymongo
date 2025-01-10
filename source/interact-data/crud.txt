@@ -1,0 +1,230 @@
+.. _django-crud:
+
+=======================
+Perform CRUD Operations
+=======================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: insert, modify, read, write, code example
+
+Overview
+---------
+
+In this guide, you can learn how to use {+django-odm+} to run
+create, read, update, and delete (CRUD) operations on your MongoDB
+database.
+
+You can use methods provided by the Django ``QuerySet`` API to run
+CRUD operations. This guide shows how to use the following ``QuerySet``
+methods:
+
+- :ref:`create() <django-crud-insert>`
+- :ref:`filter() <django-crud-read>`
+- :ref:`update() <django-crud-modify>`
+- :ref:`delete() <django-crud-delete>`
+
+.. tip::
+
+    To learn more about Django's ``QuerySet`` API, see
+    `QuerySet API reference <https://docs.djangoproject.com/en/5.1/ref/models/querysets/>`__
+    in the Django documentation.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``Movie`` model, which represents
+the ``sample_mflix.movies`` collection from the :atlas:`Atlas sample datasets </sample-data>`.
+The ``Movie`` model class has the following definition:
+
+.. code-block:: python
+
+    from django.db import models
+    from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
+    from django_mongodb_backend.managers import MongoManager
+
+    class Movie(models.Model):
+        title = models.CharField(max_length=200)
+        plot = models.TextField(null=True)
+        runtime = models.IntegerField(default=0)
+        released = models.DateTimeField("release date", null=True)
+        awards = EmbeddedModelField(Award)
+        genres = ArrayField(models.CharField(max_length=100), blank=True)
+        objects = MongoManager()
+
+        class Meta:
+            db_table = "movies"
+
+        def __str__(self):
+            return self.title
+
+To learn how to create a Django application that uses the ``Movie``
+model to interact with MongoDB documents, visit the :ref:`django-get-started`
+tutorial.
+
+.. _django-crud-insert:
+
+Insert Documents
+----------------
+
+To insert a document into a collection, call the ``create()`` method on your
+model objects that represent the collection. Pass the new document's fields
+and values as arguments to the ``create()`` method.
+
+Example
+```````
+
+The following example calls the ``create()`` method on your ``Movie`` objects
+to insert a document into the ``sample_mflix.movies`` collection. The new
+document has a ``title`` value of ``"Poor Things"`` and a ``runtime`` value
+of ``141``:
+
+.. code-block:: python
+
+    from sample_mflix.models import Movie
+
+    movie = Movie.objects.create(title="Poor Things", runtime=141)
+
+.. note::
+
+   The ``create()`` method allows you to create a new ``Movie`` object
+   and save the object as a collection document in one method call.
+   To view an example that creates an object then saves it to the
+   database by calling ``save()``, see the :ref:`django-get-started-write`
+   step of the Getting Started tutorial.
+
+.. _django-crud-read:
+
+Read Documents
+--------------
+
+To retrieve documents from your collection, call the ``filter()`` method on your
+model objects that represent the collection. Pass a query filter, or criteria
+that specifies which documents to retrieve, as an argument to the ``filter()`` method.
+
+Alternatively, you can call the ``get()`` method to retrieve a single document
+that matches your query. 
+
+.. TODO: (add to the previous paragraph) To view an example that calls the
+   ``get()`` method, see the Specify a Query guide.
+
+Example
+```````
+
+The following example calls the ``filter()`` method on your ``Movie`` objects
+to retrieve documents from the ``sample_mflix.movies`` collection. The query
+returns ``Movie`` objects that represent movies released on January 1, 2000:
+
+.. io-code-block::
+    :copyable: true
+
+    .. input::
+       :language: python
+
+       from sample_mflix.models import Movie
+       from django.utils import timezone
+       from datetime import datetime
+
+       Movie.objects.filter(released=timezone.make_aware(datetime(2000, 1, 1, 0, 0),
+       timezone.get_current_timezone()))
+
+    .. output::
+       :language: none
+       :visible: false
+
+       <MongoQuerySet [<Movie: The Bumblebee Flies Anyway>, <Movie: Angels of the Universe>,
+       <Movie: First Person Plural>, <Movie: Just, Melvin: Just Evil>, <Movie: Sound and Fury>,
+       <Movie: Peppermint Candy>]>
+
+
+.. _django-crud-modify:
+
+Modify Documents
+----------------
+
+To modify documents in a collection, call the ``filter()`` and ``update()``
+methods on your model objects that represent the collection. Pass a query filter,
+or criteria that specifies which documents to update, as an argument to the
+``filter()`` method. Then, pass the fields and values you want to update as
+arguments to the ``update()`` method.
+
+Example
+```````
+
+The following example calls the ``update()`` method on your ``Movie`` objects
+to modify documents in the ``sample_mflix.movies`` collection. The code matches
+a document that has a ``title`` value of ``"High Fidelity"`` and adds a
+``plot`` field:
+
+.. io-code-block::
+    :copyable: true
+
+    .. input::
+       :language: python
+
+       from sample_mflix.models import Movie
+
+       Movie.objects.filter(title="High Fidelity").update(plot=
+       "Rob, a record store owner and compulsive list maker, recounts his top five breakups, including the one in progress.")
+
+    .. output::
+       :language: none
+       :visible: false
+
+       // Outputs the number of modified documents
+       1
+
+.. _django-crud-delete:
+
+Delete Documents
+----------------
+
+To delete documents in a collection, call the ``filter()`` and ``delete()``
+methods on your model objects that represent the collection. Pass a query filter,
+or criteria that specifies which documents to delete, as an argument to the
+``filter()`` method.
+
+Example
+```````
+
+The following example calls the ``delete()`` method on your ``Movie`` objects
+to delete documents in the ``sample_mflix.movies`` collection. The code matches
+and deletes documents that have a ``runtime`` value of ``5``:
+
+.. io-code-block::
+    :copyable: true
+
+    .. input::
+       :language: python
+
+       from sample_mflix.models import Movie
+
+       Movie.objects.filter(runtime=5).delete()
+
+    .. output::
+       :language: none
+       :visible: false
+
+       // Outputs the number of deleted documents and objects
+       16
+
+
+Additional Information
+----------------------
+
+.. TODO: To learn more about performing read operations, see the Specify a Query guide.
+
+To view more create, read, update, and delete examples, see the following
+steps of the :ref:`django-get-started` tutorial:
+
+- :ref:`django-get-started-write`
+- :ref:`django-get-started-read`
