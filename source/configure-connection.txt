@@ -29,8 +29,8 @@ Connection Configuration
 After installing {+django-odm+} and creating a project, you can configure
 your connection to MongoDB in the following ways:
 
-- :ref:`django-connection-configure-manual` by updating your
-  project's ``DATABASES`` setting
+- :ref:`django-connection-configure-manual` by specifying the
+  ``DATABASES`` variable in your project's settings
 - :ref:`django-connection-configure-automatic` by using
   the ``parse_uri()`` method
 
@@ -45,13 +45,14 @@ Manually Configure Database Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To manually configure your connection to MongoDB, update
-the ``DATABASES`` setting in your project's ``settings.py``
-file. The ``DATABASES`` setting has a ``default`` key,
-which you must configure to set MongoDB as the default database
+the ``DATABASES`` variable in your project's ``settings.py``
+file. Set the ``DATABASES`` variable to a dictionary value containing
+the database settings. You must configure the dictionary's
+``default`` key to set MongoDB as the default database
 connection.
 
-To configure the ``default`` key, include the following
-nested keys:
+To configure the ``default`` key, assign a nested dictionary as its value.
+This nested dictionary has the following keys:
 
 .. list-table::
    :header-rows: 1
@@ -91,7 +92,7 @@ nested keys:
 Example 
 ```````
 
-This example specifies the ``DATABASES`` setting to connect
+This example specifies the ``DATABASES`` variable to connect
 to a MongoDB deployment with the following configuration:
 
 - Connects to the ``my_database`` database
@@ -125,7 +126,7 @@ to a MongoDB deployment with the following configuration:
 .. tip::
 
     To see a full list of connection options that you
-    can set in the ``OPTIONS`` nested key, see the optional
+    can set in the ``OPTIONS`` key, see the optional
     parameters for `MongoClient <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
     in the PyMongo API documentation.
 
