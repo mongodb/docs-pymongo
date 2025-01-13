@@ -30,9 +30,9 @@ After installing {+django-odm+} and creating a project, you can configure
 your connection to MongoDB in the following ways:
 
 - :ref:`django-connection-configure-manual` by specifying the
-  ``DATABASES`` variable in your project's settings
+  ``DATABASES`` variable in your project's settings.
 - :ref:`django-connection-configure-automatic` by using
-  the ``parse_uri()`` method
+  the ``parse_uri()`` method.
 
 .. tip::
 
@@ -47,9 +47,15 @@ Manually Configure Database Settings
 To manually configure your connection to MongoDB, update
 the ``DATABASES`` variable in your project's ``settings.py``
 file. Set the ``DATABASES`` variable to a dictionary value containing
-the database settings. You must configure the dictionary's
-``default`` key to set MongoDB as the default database
-connection.
+the ``default`` key, as shown in the following example: 
+
+.. code-block:: python
+
+    DATABASES = {
+        "default": {
+            # Specify nested dictionary keys here
+        },
+    }
 
 To configure the ``default`` key, assign a nested dictionary as its value.
 This nested dictionary has the following keys:
@@ -68,37 +74,46 @@ This nested dictionary has the following keys:
      - | Your connection URI. For localhost connections, this key is optional. 
        | For SRV connections, you must include a scheme prefix (``mongodb+srv://``).
        |
-       | If connecting to a replica set or sharded cluster with multiple hosts, specify 
-       | each host separated by a comma.
+       | To specify more than one host, include all hostnames in one string. Use
+	     | a comma to separate each hostname, as shown in the following example:
+       
+         .. code-block:: python
+          
+            "HOST": "mongodb://mongos0.example.com:27017,mongos1.example.com:27017"
 
    * - **NAME**
      - The database you want to use.
 
    * - **USER**
-     - The username for authenticating to the database.
+     - The username for authenticating to the database, if your connection
+       requires authentication.
 
    * - **PASSWORD**
-     - The password for your database user.
+     - The password for your database user, if your connection requires authentication.
 
    * - **PORT**
-     - | The port number on which the database server is listening. 
+     - | The port number on which the database server is listening. The default
+         port is ``27017``.
        | For MongoDB Atlas connections, this key is optional.
 
    * - **OPTIONS**
-     - A dictionary of additional connection options for the database. This key is optional.
+     - | A dictionary of additional connection options for the database. This key is optional.
+       | To see a full list of connection options that you can set in the ``OPTIONS`` key,
+         see the optional parameters for `MongoClient <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
+         in the PyMongo API documentation.
 
 .. _django-manual-config-example:
 
 Example 
 ```````
 
-This example specifies the ``DATABASES`` variable to connect
-to a MongoDB deployment with the following configuration:
+In this example, the ``DATABASES`` variable specifies the
+following connection configuration:
 
-- Connects to the ``my_database`` database
+- Sets the database to ``my_database``
 - Provides authentication information for a database user
   whose username is ``my_user`` and password is ``my_password``
-- Uses the default MongoDB port (``27017``)
+- Specifies the default MongoDB port (``27017``)
 - Sets the ``retryWrites`` connection option to ``true``,
   which configures the driver to automatically retry certain
   write operations if they fail
@@ -123,13 +138,6 @@ to a MongoDB deployment with the following configuration:
         },
     }
 
-.. tip::
-
-    To see a full list of connection options that you
-    can set in the ``OPTIONS`` key, see the optional
-    parameters for `MongoClient <https://pymongo.readthedocs.io/en/4.10.1/api/pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
-    in the PyMongo API documentation.
-
 .. _django-connection-configure-automatic:
 
 Automatically Configure Database Settings
@@ -152,9 +160,8 @@ method accepts the following arguments:
 Example 
 ```````
 
-The following example uses the ``parse_uri()`` method to connect
-to a MongoDB deployment with the same configuration as 
-the previous :ref:`manual configuration <django-manual-config-example>`
+The following example uses the ``parse_uri()`` method to specify
+the same connection configuration as  the previous :ref:`manual configuration <django-manual-config-example>`
 example:
 
 .. code-block:: python
