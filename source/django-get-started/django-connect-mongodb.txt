@@ -64,13 +64,13 @@ you can create a Django project that connects to MongoDB.
       .. code-block:: bash
 
          DATABASES = {
-            "default": {
-               "ENGINE": "django_mongodb_backend",
-               "NAME": "sample_mflix",
-               "USER": "<username>",
-               "PASSWORD": "<password>",
-               "HOST": "<connection string URI>",
-            },
+             "default": {
+                 "ENGINE": "django_mongodb_backend",
+                 "NAME": "sample_mflix",
+                 "USER": "<username>",
+                 "PASSWORD": "<password>",
+                 "HOST": "<connection string URI>",
+             },
          }
 
       Replace the ``<username>`` and ``<password>`` placeholders with your

@@ -31,7 +31,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       
       .. code-block:: bash
 
-         python3 manage.py startapp sample_mflix --template https://github.com/mongodb-labs/django-mongodb-app/archive/refs/heads/5.0.x.zip
+         python3 manage.py startapp sample_mflix --template https://github.com/mongodb-labs/django-mongodb-app/archive/refs/heads/{+django-version-number+}.x.zip
 
       .. note:: App Template
 
@@ -50,11 +50,12 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
          class Movie(models.Model):
             title = models.CharField(max_length=200)
-            plot = models.TextField(null=True)
+            plot = models.TextField(blank=True)
             runtime = models.IntegerField(default=0)
-            released = models.DateTimeField("release date", null=True)
+            released = models.DateTimeField("release date", null=True, blank=True)
             awards = EmbeddedModelField(Award)
-            genres = ArrayField(models.CharField(max_length=100), blank=True)
+            genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+            objects = MongoManager()
 
             class Meta:
                db_table = "movies"
@@ -66,9 +67,6 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
             wins = models.IntegerField(default=0)
             nominations = models.IntegerField(default=0)
             text = models.CharField(max_length=100)
-
-            class Meta:
-               abstract = True
 
          class Viewer(models.Model):
             name = models.CharField(max_length=100)
@@ -108,14 +106,13 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
          def index(request):
             return HttpResponse("Hello, world. You're at the application index.")
 
-
          def recent_movies(request):
-            movies = Movie.objects.all().order_by('-released')[:5]
-            return render(request, 'recent_movies.html', {'movies': movies})
+            movies = Movie.objects.order_by("-released")[:5]
+            return render(request, "recent_movies.html", {"movies": movies})
 
          def viewers_list(request):
-            viewers = Viewer.objects.all().order_by('name')[:10]
-            return render(request, 'viewers_list.html', {'viewers': viewers})
+            viewers = Viewer.objects.order_by("name")[:10]
+            return render(request, "viewers_list.html", {"viewers": viewers})
 
       These views display a landing page message and information about your ``Movie``
       and ``Viewer`` models.
@@ -134,8 +131,8 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
          urlpatterns = [
             path("", views.index, name="index"),
-            path('recent_movies/', views.recent_movies, name='recent_movies'),
-            path('viewers_list/', views.viewers_list, name='viewers_list'),
+            path("recent_movies/", views.recent_movies, name="recent_movies"),
+            path("viewers_list/", views.viewers_list, name="viewers_list"),
          ]
       
       Then, navigate to the ``quickstart/urls.py`` file and replace its contents with

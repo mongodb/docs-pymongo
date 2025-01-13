@@ -31,7 +31,7 @@ and delete functions on your model objects.
    .. step:: Import the required classes and modules
 
       From your Python shell, run the following code to import
-      your models and the modules for creating a ``datetime`` object:
+      your models and the module for creating a ``datetime`` object:
 
       .. code-block:: python
 
@@ -47,11 +47,11 @@ and delete functions on your model objects.
 
       .. code-block:: python
          
-         movie_awards = Awards(wins=122, nominations=245, text="Won 1 Oscar")
+         movie_awards = Award(wins=122, nominations=245, text="Won 1 Oscar")
          movie = Movie(title="Minari", plot=
          "A Korean-American family moves to an Arkansas farm in search of their own American Dream",
-         runtime=217, released=timezone.make_aware(datetime(2020, 1, 26, 0, 0),
-         timezone.get_current_timezone()), awards=movie_awards, genres=["Drama", "Comedy"])
+         runtime=217, released=timezone.make_aware(datetime(2020, 1, 26, 0, 0)),
+         awards=movie_awards, genres=["Drama", "Comedy"])
 
       Save the object to store its data as a document in the ``movies``
       collection, as shown in the following code:

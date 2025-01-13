@@ -19,20 +19,20 @@ to read data from the ``sample_mflix`` database.
 
    .. step:: Query the "users" collection for a specified email
 
-      Start a Python shell and import the required models
-      by running the following code:
+      Start a Python shell by running the following command:
       
       .. code-block:: bash
 
          python3 manage.py shell
-         from sample_mflix.models import Movie, Viewer
       
       Then, run the following code to query the 
       ``sample_mflix.users`` collection for a movie viewer whose email is 
       ``"jason_momoa@gameofthron.es"``:
 
-      .. code-block:: bash
+      .. code-block:: python
 
+         from sample_mflix.models import Movie, Viewer
+         
          Viewer.objects.filter(email="jason_momoa@gameofthron.es").first()
 
       This code returns the name of the matching user:
@@ -48,7 +48,7 @@ to read data from the ``sample_mflix`` database.
       collection for movies that have a ``runtime`` value less than
       ``10``:
 
-      .. code-block:: bash
+      .. code-block:: python
 
          Movie.objects.filter(runtime__lt=10)
 

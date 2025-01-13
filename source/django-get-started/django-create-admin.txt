@@ -13,7 +13,7 @@ Create an Admin Site
 
 You can create a Django admin site to edit your application's 
 data from a web interface. To learn more about the Django admin
-site and its features, see `The Django admin site <https://docs.djangoproject.com/en/5.1/ref/contrib/admin/>`__
+site and its features, see `The Django admin site <https://docs.djangoproject.com/en/{+django-version-number+}/ref/contrib/admin/>`__
 in the Django documentation.
 
 .. procedure::
