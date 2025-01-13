@@ -24,7 +24,7 @@ questions through the :community-forum:`MongoDB Community Forums. <tag/python/>`
 Bugs / Feature Requests
 -----------------------
 
-To report a bug or to request a new feature in {+driver-short+},
+To report a bug or to request a new feature in {+django-odm+},
 please open an issue in JIRA, our issue-management tool, using the
 following steps:
 
@@ -33,7 +33,7 @@ following steps:
 #. Click :guilabel:`Create Issue`. Please provide as much information as possible about the
    issue and the steps to reproduce it.
 
-Bug reports in JIRA for the {+driver-short+} project can be viewed by everyone.
+Bug reports in JIRA for the {+django-odm+} project can be viewed by everyone.
 
 If you identify a security vulnerability in the driver or in any other
 MongoDB project, please report it according to the instructions found in
