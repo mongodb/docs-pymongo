@@ -104,8 +104,8 @@ This nested dictionary has the following keys:
 Example 
 ```````
 
-In this example, the ``DATABASES`` variable specifies the
-following connection configuration:
+In this example, the ``DATABASES`` variable performs the
+following actions:
 
 - Sets the database to ``my_database``
 - Provides authentication information for a database user
