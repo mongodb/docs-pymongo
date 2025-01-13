@@ -17,14 +17,14 @@ Issues & Help
 .. meta::
    :keywords: suggestion, bug, github, django
 
-We're glad to have such a vibrant community of {+django-odm+}
-users. We recommend seeking support for general
+We're glad to have such a vibrant community of users for the {+django-odm+}. We
+recommend seeking support for general
 questions through the :community-forum:`MongoDB Community Forums. <tag/python/>`
 
 Bugs / Feature Requests
 -----------------------
 
-To report a bug or to request a new feature in {+django-odm+},
+To report a bug or to request a new feature in the {+django-odm+},
 please open an issue in JIRA, our issue-management tool, using the
 following steps:
 
