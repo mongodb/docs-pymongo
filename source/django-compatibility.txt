@@ -1,0 +1,58 @@
+.. _django-compatibility:
+
+=============
+Compatibility
+=============
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+ 
+.. meta::
+   :keywords: backwards compatibility, versions, upgrade 
+
+MongoDB Compatibility
+---------------------
+
+{+django-odm+} uses the PyMongo driver to interact with MongoDB. Your
+application's supported {+mdb-server+} versions depend on its PyMongo version.
+The following compatibility table specifies the recommended version or versions
+of PyMongo for use with a specific version of MongoDB.
+
+The first column lists the driver version.
+
+.. sharedinclude:: dbx/lifecycle-schedule-callout.rst
+
+.. sharedinclude:: dbx/compatibility-table-legend.rst
+
+.. include:: /includes/mongodb-compatibility-table-pymongo.rst
+
+Driver Compatibility
+--------------------
+
+{+django-odm+} supports PyMongo versions 4.6 and later.
+
+Language Compatibility
+----------------------
+
+The following compatibility table specifies the recommended version of
+{+django-odm+} for use with a specific version of Python.
+The first column lists the driver version.
+
+.. include:: /includes/language-compatibility-table-django.rst
+
+For more information on how to read the compatibility tables, see our guide on 
+:ref:`MongoDB Compatibility Tables. <about-driver-compatibility>`
+
+Django Compatibility
+--------------------
+
+Your major and minor version of {+django-odm+} must match your Django version.
+For example, {+django-odm+} version 5.1 requires Django 5.1. The minimum supported
+Django version is v5.0.
