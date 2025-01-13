@@ -49,35 +49,35 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
          from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
 
          class Movie(models.Model):
-            title = models.CharField(max_length=200)
-            plot = models.TextField(blank=True)
-            runtime = models.IntegerField(default=0)
-            released = models.DateTimeField("release date", null=True, blank=True)
-            awards = EmbeddedModelField(Award)
-            genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
-            objects = MongoManager()
+             title = models.CharField(max_length=200)
+             plot = models.TextField(blank=True)
+             runtime = models.IntegerField(default=0)
+             released = models.DateTimeField("release date", null=True, blank=True)
+             awards = EmbeddedModelField(Award)
+             genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+             objects = MongoManager()
 
-            class Meta:
-               db_table = "movies"
+             class Meta:
+                 db_table = "movies"
             
-            def __str__(self):
-               return self.title
+             def __str__(self):
+                 return self.title
             
          class Award(models.Model):
-            wins = models.IntegerField(default=0)
-            nominations = models.IntegerField(default=0)
-            text = models.CharField(max_length=100)
+             wins = models.IntegerField(default=0)
+             nominations = models.IntegerField(default=0)
+             text = models.CharField(max_length=100)
 
          class Viewer(models.Model):
-            name = models.CharField(max_length=100)
-            email = models.CharField(max_length=200)
-            password = models.CharField(max_length=100)
+             name = models.CharField(max_length=100)
+             email = models.CharField(max_length=200)
+             password = models.CharField(max_length=100)
 
-            class Meta:
-               db_table = "users"
+             class Meta:
+                 db_table = "users"
 
-            def __str__(self):
-               return self.name
+             def __str__(self):
+                 return self.name
 
       The ``Movie`` model represents the ``sample_mflix.movies`` collection
       and stores information about movies. This model contains an embedded 
@@ -104,15 +104,15 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
          from .models import Movie, Viewer
 
          def index(request):
-            return HttpResponse("Hello, world. You're at the application index.")
+             return HttpResponse("Hello, world. You're at the application index.")
 
          def recent_movies(request):
-            movies = Movie.objects.order_by("-released")[:5]
-            return render(request, "recent_movies.html", {"movies": movies})
+             movies = Movie.objects.order_by("-released")[:5]
+             return render(request, "recent_movies.html", {"movies": movies})
 
          def viewers_list(request):
-            viewers = Viewer.objects.order_by("name")[:10]
-            return render(request, "viewers_list.html", {"viewers": viewers})
+             viewers = Viewer.objects.order_by("name")[:10]
+             return render(request, "viewers_list.html", {"viewers": viewers})
 
       These views display a landing page message and information about your ``Movie``
       and ``Viewer`` models.
@@ -130,9 +130,9 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
          from . import views
 
          urlpatterns = [
-            path("", views.index, name="index"),
-            path("recent_movies/", views.recent_movies, name="recent_movies"),
-            path("viewers_list/", views.viewers_list, name="viewers_list"),
+             path("", views.index, name="index"),
+             path("recent_movies/", views.recent_movies, name="recent_movies"),
+             path("viewers_list/", views.viewers_list, name="viewers_list"),
          ]
       
       Then, navigate to the ``quickstart/urls.py`` file and replace its contents with
@@ -144,8 +144,8 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
          from django.urls import include, path
 
          urlpatterns = [
-            path("sample_mflix/", include("sample_mflix.urls")),
-            path("admin/", admin.site.urls),
+             path("sample_mflix/", include("sample_mflix.urls")),
+             path("admin/", admin.site.urls),
          ]
 
    .. step:: Create templates to format your data
@@ -228,13 +228,13 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       .. code-block:: python
 
          INSTALLED_APPS = [
-            'sample_mflix.apps.SampleMflixConfig',
-            'quickstart.apps.MongoAdminConfig',
-            'quickstart.apps.MongoAuthConfig',
-            'quickstart.apps.MongoContentTypesConfig',
-            'django.contrib.sessions',
-            'django.contrib.messages',
-            'django.contrib.staticfiles',
+             'sample_mflix.apps.SampleMflixConfig',
+             'quickstart.apps.MongoAdminConfig',
+             'quickstart.apps.MongoAuthConfig',
+             'quickstart.apps.MongoContentTypesConfig',
+             'django.contrib.sessions',
+             'django.contrib.messages',
+             'django.contrib.staticfiles',
          ]
 
    .. step:: Create migrations for your new models
