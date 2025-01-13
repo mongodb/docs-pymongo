@@ -75,11 +75,8 @@ This nested dictionary has the following keys:
        | For SRV connections, you must include a scheme prefix (``mongodb+srv://``).
        |
        | To specify more than one host, include all hostnames in one string. Use
-	     | a comma to separate each hostname, as shown in the following example:
-       
-         .. code-block:: python
-          
-            "HOST": "mongodb://mongos0.example.com:27017,mongos1.example.com:27017"
+         a comma to separate each hostname.
+       | **Example:** ``"HOST": "mongodb://mongos0.example.com:27017,mongos1.example.com:27017"``
 
    * - **NAME**
      - The database you want to use.
