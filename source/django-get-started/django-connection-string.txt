@@ -50,8 +50,9 @@ To connect to an instance or deployment not hosted on Atlas, see
       Your connection string resembles the following example:
 
       .. code-block:: none
+         :copyable: false
 
-         mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/?retryWrites=true&w=majority
+         mongodb+srv://<username>:<password>@samplecluster.jkiff1s.mongodb.net/?retryWrites=true&w=majority&appName=SampleCluster
 
       
       Replace the ``<username>`` and ``<password>`` placeholders with
@@ -62,8 +63,9 @@ To connect to an instance or deployment not hosted on Atlas, see
       the following example:
       
       .. code-block:: none
+         :copyable: false
 
-         mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/sample_mflix?retryWrites=true&w=majority
+         mongodb+srv://<username>:<password>@samplecluster.jkiff1s.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=SampleCluster
 
 After completing these steps, you have a connection string that
 contains your database username, database password, and database name.
