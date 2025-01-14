@@ -26,7 +26,7 @@ query the database by using MongoDB's aggregation pipeline syntax
 rather than Django methods.
 
 The Django QuerySet API provides a ``QuerySet.raw()`` method, which allows
-you to perform raw SQL queries on relational databases. {+django-odm+}
+you to perform raw SQL queries on relational databases. However, {+django-odm+}
 does not support the ``raw()`` method. Instead, the ODM provides the
 ``QuerySet.raw_aggregate()`` method, which you can use to send instructions
 to the database in pipeline stages.
@@ -165,7 +165,7 @@ functionality, such as matching text phrases, scoring results for
 relevance, and highlighting matches. 
 
 To specify an Atlas Search query, create an Atlas Search index
-that covers the fields you want to query. Then, specify the ``$search``
+that covers the fields you want to query. Then, pass a ``$search``
 or ``$searchMeta`` stage in an aggregation pipeline parameter to
 the ``raw_aggregate()`` method.
 
@@ -279,7 +279,7 @@ a geographic location on the surface of the Earth or on a
 Euclidean plane.
 
 To run a geospatial query, create a ``2d`` or ``2dsphere`` index on fields
-containing geospatial data. Then, specify one of the following
+containing geospatial data. Then, pass one of the following
 query operators in an aggregation pipeline parameter to
 the ``raw_aggregate()`` method:
 
