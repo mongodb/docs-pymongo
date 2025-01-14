@@ -67,4 +67,3 @@ To connect to an instance or deployment not hosted on Atlas, see
 
 After completing these steps, you have a connection string that
 contains your database username, database password, and database name.
-

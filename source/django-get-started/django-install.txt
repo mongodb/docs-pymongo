@@ -34,7 +34,7 @@ in your development environment.
 
              .. code-block:: bash
 
-                python3 -m venv venv
+                python -m venv venv
                 source venv/bin/activate
 
           .. tab:: Windows
@@ -42,13 +42,13 @@ in your development environment.
 
              .. code-block:: bash
 
-                python3 -m venv venv
+                python -m venv venv
                 . venv\Scripts\activate
 
       .. tip::
 
          In the preceding commands, you might need to replace
-         ``python3`` with the command that points to your Python
+         ``python`` with the command that points to your Python
          3.10+ interpreter.
 
    .. step:: Install {+django-odm+}
@@ -63,9 +63,7 @@ in your development environment.
       This command also installs the following dependencies:
 
       - PyMongo version {+version-number+} and its dependencies
-      - Django version {+django-version-number+} and its dependencies
+      - Latest Django {+django-version-number+}.x version and its dependencies
 
 After you complete these steps, you have {+django-odm+} and its
 dependencies installed in your development environment.
-
-

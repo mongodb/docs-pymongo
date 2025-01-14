@@ -23,7 +23,7 @@ to read data from the ``sample_mflix`` database.
       
       .. code-block:: bash
 
-         python3 manage.py shell
+         python manage.py shell
       
       Then, run the following code to query the 
       ``sample_mflix.users`` collection for a movie viewer whose email is 

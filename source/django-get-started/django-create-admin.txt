@@ -29,7 +29,7 @@ in the Django documentation.
       
       .. code-block:: bash
 
-         python3 manage.py createsuperuser
+         python manage.py createsuperuser
 
       Then, your terminal prompts you for a username, email address,
       and password. For each prompt, enter the following information
@@ -51,7 +51,7 @@ in the Django documentation.
     
       .. code-block:: bash
 
-         python3 manage.py runserver
+         python manage.py runserver
 
       Once your server is running, visit the http://127.0.0.1:8000/admin/ 
       URL to see the admin site. This site displays the following login

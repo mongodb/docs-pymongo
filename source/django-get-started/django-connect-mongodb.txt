@@ -61,7 +61,7 @@ you can create a Django project that connects to MongoDB.
       Open your ``settings.py`` file and navigate to the ``DATABASES`` setting.
       Replace this setting with the following code:
 
-      .. code-block:: bash
+      .. code-block:: python
 
          DATABASES = {
             "default": django_mongodb_backend.parse_uri("<connection string URI>"),
@@ -79,7 +79,7 @@ you can create a Django project that connects to MongoDB.
 
       .. code-block:: bash
 
-         python3 manage.py runserver
+         python manage.py runserver
 
       Then, visit http://127.0.0.1:8000/. This page displays a "Congratulations!"
       message and an image of a rocket. 

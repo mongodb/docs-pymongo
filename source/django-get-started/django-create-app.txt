@@ -31,7 +31,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       
       .. code-block:: bash
 
-         python3 manage.py startapp sample_mflix --template https://github.com/mongodb-labs/django-mongodb-app/archive/refs/heads/{+django-version-number+}.x.zip
+         python manage.py startapp sample_mflix --template https://github.com/mongodb-labs/django-mongodb-app/archive/refs/heads/{+django-version-number+}.x.zip
 
       .. note:: App Template
 
@@ -58,6 +58,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
              class Meta:
                  db_table = "movies"
+                 managed = False
             
              def __str__(self):
                  return self.title
@@ -67,6 +68,9 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
              nominations = models.IntegerField(default=0)
              text = models.CharField(max_length=100)
 
+             class Meta:
+                 managed = False
+
          class Viewer(models.Model):
              name = models.CharField(max_length=100)
              email = models.CharField(max_length=200)
@@ -74,6 +78,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
              class Meta:
                  db_table = "users"
+                 managed = False
 
              def __str__(self):
                  return self.name
@@ -153,7 +158,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       ``templates``. Then, create a file called ``recent_movies.html``
       and paste the following code:
       
-      .. code-block:: python
+      .. code-block:: html
 
          <!-- templates/recent_movies.html -->
          <!DOCTYPE html>
@@ -182,7 +187,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       Create another file in the ``sample_mflix/templates`` directory called
       ``viewers_list.html`` and paste the following code:
 
-      .. code-block:: python
+      .. code-block:: html
 
          <!-- templates/viewers_list.html -->
          <!DOCTYPE html>
@@ -244,8 +249,8 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
       
       .. code-block:: bash
 
-         python3 manage.py makemigrations sample_mflix
-         python3 manage.py migrate
+         python manage.py makemigrations sample_mflix
+         python manage.py migrate
 
 After completing these steps, you have a basic {+django-odm+} app that
 you can use to access the ``sample_mflix`` Atlas database.
