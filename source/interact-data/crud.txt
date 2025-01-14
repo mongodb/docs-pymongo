@@ -115,8 +115,8 @@ of ``141``:
    The ``create()`` method allows you to create a new ``Movie`` object
    and save the object as a collection document in one method call.
    To view an example that creates an object then saves it to the
-   database by calling ``save()``, see the :ref:`django-get-started-write`
-   step of the Getting Started tutorial.
+   database by calling ``save()``, see `create() <https://docs.djangoproject.com/en/5.1/ref/models/querysets/#create>`__
+   in the Django documentation.
 
 .. _django-crud-read:
 
@@ -147,8 +147,7 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
        from django.utils import timezone
        from datetime import datetime
 
-       Movie.objects.filter(released=timezone.make_aware(datetime(2000, 1, 1, 0, 0),
-       timezone.get_current_timezone()))
+       Movie.objects.filter(released=timezone.make_aware(datetime(2000, 1, 1)))
 
     .. output::
        :language: none
