@@ -59,20 +59,21 @@ The ``Movie`` model class has the following definition:
     from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
     from django_mongodb_backend.managers import MongoManager
 
-    class Movie(models.Model):
-        title = models.CharField(max_length=200)
-        plot = models.TextField(null=True)
-        runtime = models.IntegerField(default=0)
-        released = models.DateTimeField("release date", null=True)
-        awards = EmbeddedModelField(Award)
-        genres = ArrayField(models.CharField(max_length=100), blank=True)
-        objects = MongoManager()
+   class Movie(models.Model):
+       title = models.CharField(max_length=200)
+       plot = models.TextField(blank=True)
+       runtime = models.IntegerField(default=0)
+       released = models.DateTimeField("release date", null=True, blank=True)
+       awards = EmbeddedModelField(Award)
+       genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
+       objects = MongoManager()
 
-        class Meta:
-            db_table = "movies"
-
-        def __str__(self):
-            return self.title
+       class Meta:
+           db_table = "movies"
+           managed = False
+      
+       def __str__(self):
+           return self.title
 
 You can use the Python interactive shell to run the code examples.
 To enter the shell, run the following command from your project's 
@@ -80,7 +81,7 @@ root directory:
 
 .. code-block:: bash
 
-   python3 manage.py shell
+   python manage.py shell
 
 To learn how to create a Django application that uses the ``Movie``
 model and the Python interactive shell to interact with MongoDB documents,
