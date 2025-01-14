@@ -3,7 +3,7 @@
    :stub-columns: 1
    :class: compatibility-large
 
-   * - Django MongoDB Backend Version
+   * - {+django-odm+} Version
      - Python 3.13
      - Python 3.12
      - Python 3.11
