@@ -32,7 +32,7 @@ your connection to MongoDB in the following ways:
 - :ref:`django-connection-configure-manual` by specifying the
   ``DATABASES`` variable in your project's settings.
 - :ref:`django-connection-configure-automatic` by using
-  the ``parse_uri()`` method.
+  the ``parse_uri()`` function.
 
 .. tip::
 
@@ -141,8 +141,8 @@ Automatically Configure Database Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To automatically construct the ``DATABASES`` setting that configures
-your MongoDB connection, you can use the ``parse_uri()`` method. This
-method accepts the following arguments:
+your MongoDB connection, you can use the ``parse_uri()`` function. This
+function accepts the following arguments:
 
 - ``uri``: Your MongoDB connection URI.
 - ``conn_max_age``: Configures persistent database connections.
@@ -157,8 +157,8 @@ method accepts the following arguments:
 Example 
 ```````
 
-The following example uses the ``parse_uri()`` method to specify
-the same connection configuration as  the previous :ref:`manual configuration <django-manual-config-example>`
+The following example uses the ``parse_uri()`` function to specify
+the same connection configuration as the previous :ref:`manual configuration <django-manual-config-example>`
 example:
 
 .. code-block:: python
