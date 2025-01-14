@@ -64,18 +64,10 @@ you can create a Django project that connects to MongoDB.
       .. code-block:: bash
 
          DATABASES = {
-             "default": {
-                 "ENGINE": "django_mongodb_backend",
-                 "NAME": "sample_mflix",
-                 "USER": "<username>",
-                 "PASSWORD": "<password>",
-                 "HOST": "<connection string URI>",
-             },
+            "default": django_mongodb_backend.parse_uri("<connection string URI>"),
          }
 
-      Replace the ``<username>`` and ``<password>`` placeholders with your
-      Atlas database user's username and password. Then, replace the
-      ``<connection string URI>`` placeholder with the connection string
+      Replace the ``<connection string URI>`` placeholder with the connection string
       that you copied from the :ref:`django-get-started-connection-string`
       step of this guide. This configures your Django app to connect to
       your Atlas deployment and access the ``sample_mflix`` sample database.

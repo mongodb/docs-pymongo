@@ -43,14 +43,28 @@ To connect to an instance or deployment not hosted on Atlas, see
       .. figure:: /includes/figures/atlas_connection_copy_string_python.png
          :alt: The connection string copy button in the Atlas UI
 
-   .. step:: Update the placeholders
+   .. step:: Edit and save the connection string
 
-      Paste this connection string into a file in your preferred text editor
-      and replace the ``<username>`` and ``<password>`` placeholders with
-      your database user's username and password.
+      Paste your connection string into a file in your preferred text editor
+      and save this file to a safe location for use in the next step.
+      Your connection string resembles the following example:
+
+      .. code-block:: none
+
+         mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/?retryWrites=true&w=majority
+
       
-      Save this file to a safe location for use in the next step.
+      Replace the ``<username>`` and ``<password>`` placeholders with
+      your database user's username and password.
+
+      Then, specify a connection to the ``sample_mflix`` database from the 
+      Atlas sample datasets by adding it after the hostname, as shown in
+      the following example:
+      
+      .. code-block:: none
+
+         mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/sample_mflix?retryWrites=true&w=majority
 
 After completing these steps, you have a connection string that
-contains your database username and password.
+contains your database username, database password, and database name.
 

@@ -40,7 +40,7 @@ to read data from the ``sample_mflix`` database.
       .. code-block:: bash
          :copyable: false
 
-         <QuerySet [<Viewer: Khal Drogo>]>
+         <Viewer: Khal Drogo>
 
    .. step:: Query the "movies" collection for specified runtime values
 

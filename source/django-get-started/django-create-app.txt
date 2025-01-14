@@ -55,7 +55,6 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
              released = models.DateTimeField("release date", null=True, blank=True)
              awards = EmbeddedModelField(Award)
              genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
-             objects = MongoManager()
 
              class Meta:
                  db_table = "movies"
