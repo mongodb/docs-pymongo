@@ -20,8 +20,8 @@ Configure Your Database Connection
 Overview
 --------
 
-In this guide, you can learn how to connect your Django project to MongoDB
-and configure the connection.
+In this guide, you can learn how to configure your Django project's
+connection to MongoDB.
 
 Connection Configuration 
 ------------------------
@@ -36,7 +36,7 @@ your connection to MongoDB in the following ways:
 
 .. tip::
 
-   To learn how to install the Django ODM and create a
+   To learn how to install {+django-odm+} and create a
    Django project, visit the :ref:`django-get-started` tutorial.
 
 .. _django-connection-configure-manual:
