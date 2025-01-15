@@ -157,7 +157,7 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
        :language: none
        :visible: false
 
-       <MongoQuerySet [<Movie: The Bumblebee Flies Anyway>, <Movie: Angels of the Universe>,
+       <QuerySet [<Movie: The Bumblebee Flies Anyway>, <Movie: Angels of the Universe>,
        <Movie: First Person Plural>, <Movie: Just, Melvin: Just Evil>, <Movie: Sound and Fury>,
        <Movie: Peppermint Candy>]>
 
