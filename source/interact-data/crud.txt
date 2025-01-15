@@ -116,8 +116,6 @@ of ``141``:
 
 .. code-block:: python
 
-   from sample_mflix.models import Movie
-
    movie = Movie.objects.create(title="Poor Things", runtime=141)
 
 .. note::
@@ -153,10 +151,6 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
     .. input::
        :language: python
 
-       from sample_mflix.models import Movie
-       from django.utils import timezone
-       from datetime import datetime
-
        Movie.objects.filter(released=timezone.make_aware(datetime(2000, 1, 1)))
 
     .. output::
@@ -179,8 +173,6 @@ retrieves a document in which the ``title`` value is ``"Boyhood"``:
 
     .. input::
        :language: python
-
-       from sample_mflix.models import Movie
 
        Movie.objects.get(title="Boyhood")
 
@@ -221,8 +213,6 @@ a document that has a ``title`` value of ``"High Fidelity"`` and adds a
     .. input::
        :language: python
 
-       from sample_mflix.models import Movie
-
        Movie.objects.filter(title="High Fidelity").update(plot=
        "Rob, a record store owner and compulsive list maker, recounts his top five breakups, including the one in progress.")
 
@@ -255,8 +245,6 @@ and deletes documents that have a ``runtime`` value of ``5``:
 
     .. input::
        :language: python
-
-       from sample_mflix.models import Movie
 
        Movie.objects.filter(runtime=5).delete()
 
