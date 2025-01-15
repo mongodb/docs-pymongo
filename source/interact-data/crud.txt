@@ -25,8 +25,8 @@ create, read, update, and delete (CRUD) operations on your MongoDB
 collection.
 
 You can use methods provided by the Django ``QuerySet`` API to run
-CRUD operations. To run these operations, call ``QuerySet`` methods
-your model's ``Manager``. The ``Manager`` class handles database
+CRUD operations. To run these operations, you can call ``QuerySet`` methods
+on your model's ``Manager``. The ``Manager`` class handles database
 operations and allows you to interact with your MongoDB data by referencing
 Django models. By default, Django adds a ``Manager`` named ``objects``
 to every model class. 
