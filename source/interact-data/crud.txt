@@ -25,9 +25,12 @@ create, read, update, and delete (CRUD) operations on your MongoDB
 collection.
 
 You can use methods provided by the Django ``QuerySet`` API to run
-CRUD operations. To update documents in your collection, call the 
-``QuerySet`` operation methods on your model objects that represent the collection.
-Then, {+django-odm+} runs the operations on your collection documents.
+CRUD operations. To run these operations, call ``QuerySet`` methods
+your model's ``Manager``. The ``Manager`` class handles database
+operations and allows you to interact with your MongoDB data by referencing
+Django models. By default, Django adds a ``Manager`` named ``objects``
+to every model class. 
+
 This guide shows how to use the following ``QuerySet`` methods:
 
 - :ref:`create() <django-crud-insert>`
@@ -57,7 +60,6 @@ The ``Movie`` model class has the following definition:
 
     from django.db import models
     from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
-    from django_mongodb_backend.managers import MongoManager
 
    class Movie(models.Model):
        title = models.CharField(max_length=200)
@@ -66,7 +68,6 @@ The ``Movie`` model class has the following definition:
        released = models.DateTimeField("release date", null=True, blank=True)
        awards = EmbeddedModelField(Award)
        genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
-       objects = MongoManager()
 
        class Meta:
            db_table = "movies"
@@ -83,6 +84,15 @@ root directory:
 
    python manage.py shell
 
+After entering the Python shell, ensure that you import the following models and
+modules:
+
+.. code-block:: python
+
+   from <your application name>.models import Movie
+   from django.utils import timezone
+   from datetime import datetime
+
 To learn how to create a Django application that uses the ``Movie``
 model and the Python interactive shell to interact with MongoDB documents,
 visit the :ref:`django-get-started` tutorial.
@@ -92,16 +102,16 @@ visit the :ref:`django-get-started` tutorial.
 Insert Documents
 ----------------
 
-To insert a document into a collection, call the ``create()`` method on your
-model objects that represent the collection. Pass the new document's fields
-and values as arguments to the ``create()`` method.
+To insert a document into a collection, call the ``create()`` method
+on an instance of your model's ``Manager`` class. Pass the new document's
+fields and values as arguments to the ``create()`` method.
 
 Example
 ~~~~~~~
 
-The following example calls the ``create()`` method on your ``Movie`` objects
-to insert a document into the ``sample_mflix.movies`` collection. The new
-document has a ``title`` value of ``"Poor Things"`` and a ``runtime`` value
+The following example calls the ``create()`` method to insert a document
+into the ``sample_mflix.movies`` collection. The new document has
+a ``title`` value of ``"Poor Things"`` and a ``runtime`` value
 of ``141``:
 
 .. code-block:: python
@@ -123,8 +133,8 @@ of ``141``:
 Read Documents
 --------------
 
-To retrieve documents from your collection, call the ``filter()`` method on your
-model objects that represent the collection. Pass a query filter, or criteria
+To retrieve documents from your collection, call the ``filter()`` method on an
+instance of your model's ``Manager`` class. Pass a query filter, or criteria
 that specifies which documents to retrieve, as an argument to the ``filter()`` method.
 
 Alternatively, you can call the ``get()`` method to retrieve a single document
@@ -133,8 +143,8 @@ that matches your query.
 Return Multiple Documents Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following example calls the ``filter()`` method on your ``Movie`` objects
-to retrieve documents from the ``sample_mflix.movies`` collection. The query
+The following example calls the ``filter()`` method to retrieve
+documents from the ``sample_mflix.movies`` collection. The query
 returns ``Movie`` objects that represent movies released on January 1, 2000:
 
 .. io-code-block::
@@ -192,7 +202,7 @@ Modify Documents
 ----------------
 
 To modify documents in a collection, call the ``filter()`` and ``update()``
-methods on your model objects that represent the collection. Pass a query filter,
+methods on an instance of your model's ``Manager`` class. Pass a query filter,
 or criteria that specifies which documents to update, as an argument to the
 ``filter()`` method. Then, pass the fields and values you want to update as
 arguments to the ``update()`` method.
@@ -200,8 +210,8 @@ arguments to the ``update()`` method.
 Example
 ~~~~~~~
 
-The following example calls the ``update()`` method on your ``Movie`` objects
-to modify documents in the ``sample_mflix.movies`` collection. The code matches
+The following example calls the ``update()`` method to modify
+documents in the ``sample_mflix.movies`` collection. The code matches
 a document that has a ``title`` value of ``"High Fidelity"`` and adds a
 ``plot`` field:
 
@@ -229,15 +239,15 @@ Delete Documents
 ----------------
 
 To delete documents in a collection, call the ``filter()`` and ``delete()``
-methods on your model objects that represent the collection. Pass a query filter,
+methods on an instance of your model's ``Manager`` class. Pass a query filter,
 or criteria that specifies which documents to delete, as an argument to the
 ``filter()`` method.
 
 Example
 ~~~~~~~
 
-The following example calls the ``delete()`` method on your ``Movie`` objects
-to delete documents in the ``sample_mflix.movies`` collection. The code matches
+The following example calls the ``delete()`` method to delete documents
+in the ``sample_mflix.movies`` collection. The code matches
 and deletes documents that have a ``runtime`` value of ``5``:
 
 .. io-code-block::
