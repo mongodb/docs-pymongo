@@ -43,7 +43,6 @@ Language Compatibility
 
 The following compatibility table specifies the recommended version of
 {+django-odm+} for use with a specific version of Python.
-The first column lists the ODM version.
 
 .. include:: /includes/language-compatibility-table-django.rst
 
