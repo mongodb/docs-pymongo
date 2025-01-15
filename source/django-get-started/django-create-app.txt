@@ -47,6 +47,14 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
          from django.db import models
          from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
+         
+         class Award(models.Model):
+             wins = models.IntegerField(default=0)
+             nominations = models.IntegerField(default=0)
+             text = models.CharField(max_length=100)
+
+             class Meta:
+                 managed = False
 
          class Movie(models.Model):
              title = models.CharField(max_length=200)
@@ -62,14 +70,6 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
             
              def __str__(self):
                  return self.title
-            
-         class Award(models.Model):
-             wins = models.IntegerField(default=0)
-             nominations = models.IntegerField(default=0)
-             text = models.CharField(max_length=100)
-
-             class Meta:
-                 managed = False
 
          class Viewer(models.Model):
              name = models.CharField(max_length=100)
