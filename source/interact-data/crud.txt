@@ -182,11 +182,14 @@ retrieves a document in which the ``title`` value is ``"Boyhood"``:
 
        <Movie: Boyhood>
 
-.. note::
+.. important::
 
    If your query matches no documents or multiple documents, the ``get()``
    method generates an error. To retrieve one document from a query
    that might match multiple, chain the ``first()`` method to ``filter()``.
+
+.. TODO: To view an example that uses the ``first()`` method, see
+   :ref:`` in the Specify a Query guide.
 
 .. _django-crud-modify:
 
