@@ -102,9 +102,9 @@ visit the :ref:`django-get-started` tutorial.
 Insert Documents
 ----------------
 
-To insert a document into a collection, call the ``create()`` method
-on an instance of your model's ``Manager`` class. Pass the new document's
-fields and values as arguments to the ``create()`` method.
+To insert a document into a collection, call the ``create()`` method on your
+model's ``Manager`` class. Pass the new document's field names and field values
+as arguments to the ``create()`` method.
 
 Example
 ~~~~~~~
@@ -131,8 +131,8 @@ of ``141``:
 Read Documents
 --------------
 
-To retrieve documents from your collection, call the ``filter()`` method on an
-instance of your model's ``Manager`` class. Pass a query filter, or criteria
+To retrieve documents from your collection, call the ``filter()`` method
+on your model's ``Manager`` class. Pass a query filter, or criteria
 that specifies which documents to retrieve, as an argument to the ``filter()`` method.
 
 Alternatively, you can call the ``get()`` method to retrieve a single document
@@ -194,7 +194,7 @@ Modify Documents
 ----------------
 
 To modify documents in a collection, call the ``filter()`` and ``update()``
-methods on an instance of your model's ``Manager`` class. Pass a query filter,
+methods on your model's ``Manager`` class. Pass a query filter,
 or criteria that specifies which documents to update, as an argument to the
 ``filter()`` method. Then, pass the fields and values you want to update as
 arguments to the ``update()`` method.
@@ -229,7 +229,7 @@ Delete Documents
 ----------------
 
 To delete documents in a collection, call the ``filter()`` and ``delete()``
-methods on an instance of your model's ``Manager`` class. Pass a query filter,
+methods on your model's ``Manager`` class. Pass a query filter,
 or criteria that specifies which documents to delete, as an argument to the
 ``filter()`` method.
 
