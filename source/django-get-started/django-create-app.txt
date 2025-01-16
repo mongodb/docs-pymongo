@@ -47,7 +47,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
 
          from django.db import models
          from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
-         
+
          class Award(models.Model):
              wins = models.IntegerField(default=0)
              nominations = models.IntegerField(default=0)
@@ -61,7 +61,7 @@ To learn more about the ``sample_mflix`` database, see :atlas:`Sample Mflix Data
              plot = models.TextField(blank=True)
              runtime = models.IntegerField(default=0)
              released = models.DateTimeField("release date", null=True, blank=True)
-             awards = EmbeddedModelField(Award)
+             awards = EmbeddedModelField(Award, null=True, blank=True)
              genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
 
              class Meta:
