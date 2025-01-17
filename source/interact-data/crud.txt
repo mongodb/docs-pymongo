@@ -120,7 +120,7 @@ of ``141``:
 
 The ``create()`` method allows you to create a new ``Movie`` object
 and save the object to MongoDB in one method call. Alternatively, you
-can create a Movie object and call save(), as shown in the following
+can create a ``Movie`` object and call ``save()``, as shown in the following
 code:
 
 .. code-block:: python
