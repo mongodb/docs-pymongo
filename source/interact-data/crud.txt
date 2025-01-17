@@ -24,30 +24,30 @@ In this guide, you can learn how to use {+django-odm+} to run
 create, read, update, and delete (CRUD) operations on your MongoDB
 collection.
 
-You can use methods provided by the Django ``QuerySet`` API to run
+You can use methods provided by the {+framework+} ``QuerySet`` API to run
 CRUD operations. To run these operations, you can call ``QuerySet`` methods
 on your model's ``Manager``. The ``Manager`` class handles database
 operations and allows you to interact with your MongoDB data by referencing
-Django models. By default, Django adds a ``Manager`` named ``objects``
+Django models. By default, {+framework+} adds a ``Manager`` named ``objects``
 to every model class. 
 
 This guide shows how to use the following ``QuerySet`` methods:
 
-- :ref:`create() <django-crud-insert>`
-- :ref:`filter() and get() <django-crud-read>`
-- :ref:`update() <django-crud-modify>`
-- :ref:`delete() <django-crud-delete>`
+- :ref:`create() <django-crud-insert>`: Inserts documents into the collection
+- :ref:`filter() and get() <django-crud-read>`: Retrieves one or multiple collection documents
+- :ref:`update() <django-crud-modify>`: Modifies collection documents
+- :ref:`delete() <django-crud-delete>`: Deletes collection documents
 
 .. tip::
 
-    To learn more about Django's ``QuerySet`` API, see
+    To learn more about {+framework+}'s ``QuerySet`` API, see the
     `QuerySet API reference <https://docs.djangoproject.com/en/5.1/ref/models/querysets/>`__
-    in the Django documentation.
+    in the {+framework+} documentation.
 
-You can also use the Django admin site to edit your models
+You can also use the {+framework+} admin site to edit your models
 and their corresponding collections on a web interface. For
-more information, see `The Django admin site <https://docs.djangoproject.com/en/5.1/ref/contrib/admin/>`__
-in the Django documentation.
+more information, see the `Django Admin Site <https://docs.djangoproject.com/en/5.1/ref/contrib/admin/>`__
+entry in the {+framework+} documentation.
 
 Sample Data
 ~~~~~~~~~~~
@@ -90,10 +90,10 @@ modules:
 .. code-block:: python
 
    from <your application name>.models import Movie
-   from django.utils import timezone
+   from {+framework+}.utils import timezone
    from datetime import datetime
 
-To learn how to create a Django application that uses the ``Movie``
+To learn how to create a {+framework+} application that uses the ``Movie``
 model and the Python interactive shell to interact with MongoDB documents,
 visit the :ref:`django-get-started` tutorial.
 
@@ -118,13 +118,15 @@ of ``141``:
 
    movie = Movie.objects.create(title="Poor Things", runtime=141)
 
-.. note::
+The ``create()`` method allows you to create a new ``Movie`` object
+and save the object to MongoDB in one method call. Alternatively, you
+can create a Movie object and call save(), as shown in the following
+code:
 
-   The ``create()`` method allows you to create a new ``Movie`` object
-   and save the object as a collection document in one method call.
-   To view an example that creates an object then saves it to the
-   database by calling ``save()``, see `create() <https://docs.djangoproject.com/en/5.1/ref/models/querysets/#create>`__
-   in the Django documentation.
+.. code-block:: python
+
+   movie = Movie(title="Poor Things", runtime=141)
+   movie.save()
 
 .. _django-crud-read:
 
@@ -186,9 +188,14 @@ retrieves a document in which the ``title`` value is ``"Boyhood"``:
 
    If your query matches no documents or multiple documents, the ``get()``
    method generates an error. To retrieve one document from a query
-   that might match multiple, chain the ``first()`` method to ``filter()``.
+   that might match multiple, chain the ``first()`` method to ``filter()``,
+   as shown in the following code:
 
-.. TODO: To view an example that uses the ``first()`` method, see
+   .. code-block:: python
+
+      Movie.objects.filter(title="Boyhood").first()
+
+.. TODO: To learn more about the ``first()`` method, see
    :ref:`` in the Specify a Query guide.
 
 .. _django-crud-modify:
@@ -216,9 +223,9 @@ a document that has a ``title`` value of ``"High Fidelity"`` and adds a
     .. input::
        :language: python
 
-       Movie.objects.filter(title="High Fidelity").update(plot=
-       "Rob, a record store owner and compulsive list maker, recounts his top five breakups, including the one in progress.")
-
+       Movie.objects.filter(
+           title="High Fidelity").update(
+           plot="Rob, a record store owner, recounts his top five breakups,including the one in progress.")
     .. output::
        :language: none
        :visible: false
