@@ -80,6 +80,8 @@ The ``Movie`` model class includes an inner ``Meta`` class and a ``__str__()`` m
 To learn about these model features, see :ref:`django-models-define` in the
 Create Models guide.
 
+Test: :class:`~django.db.models.IntegerField`
+
 Run Code Examples
 `````````````````
 
