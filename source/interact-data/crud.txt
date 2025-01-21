@@ -26,7 +26,7 @@ collection.
 
 You can use methods provided by the {+framework+} ``QuerySet`` API to run
 CRUD operations. To run these operations, you can call ``QuerySet`` methods
-on your model's ``Manager``. The ``Manager`` class handles database
+on your model's manager. The ``Manager`` class handles database
 operations and allows you to interact with your MongoDB data by referencing
 Django models. By default, {+framework+} adds a ``Manager`` named ``objects``
 to every model class. 
@@ -76,6 +76,13 @@ The ``Movie`` model class has the following definition:
        def __str__(self):
            return self.title
 
+The ``Movie`` model class includes an inner ``Meta`` class and a ``__str__()`` method.
+To learn about these model features, see :ref:`django-models-define` in the
+Create Models guide.
+
+Run Code Examples
+`````````````````
+
 You can use the Python interactive shell to run the code examples.
 To enter the shell, run the following command from your project's 
 root directory:
@@ -103,7 +110,7 @@ Insert Documents
 ----------------
 
 To insert a document into a collection, call the ``create()`` method on your
-model's ``Manager`` class. Pass the new document's field names and field values
+model's manager. Pass the new document's field names and field values
 as arguments to the ``create()`` method.
 
 Example
@@ -128,14 +135,18 @@ code:
    movie = Movie(title="Poor Things", runtime=141)
    movie.save()
 
+.. tip::
+
+   To learn more about the 
+
 .. _django-crud-read:
 
 Read Documents
 --------------
 
 To retrieve documents from your collection, call the ``filter()`` method
-on your model's ``Manager`` class. Pass a query filter, or criteria
-that specifies which documents to retrieve, as an argument to the ``filter()`` method.
+on your model's manager. Pass a query filter, or criteria that specifies
+which documents to retrieve, as an argument to the ``filter()`` method.
 
 Alternatively, you can call the ``get()`` method to retrieve a single document
 that matches your query. 
@@ -204,9 +215,9 @@ Modify Documents
 ----------------
 
 To modify documents in a collection, call the ``filter()`` and ``update()``
-methods on your model's ``Manager`` class. Pass a query filter,
-or criteria that specifies which documents to update, as an argument to the
-``filter()`` method. Then, pass the fields and values you want to update as
+methods on your model's manager. Pass a query filter, or criteria that
+specifies which documents to update, as an argument to the ``filter()``
+method. Then, pass the fields and values you want to update as
 arguments to the ``update()`` method.
 
 Example
