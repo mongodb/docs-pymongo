@@ -80,8 +80,6 @@ The ``Movie`` model class includes an inner ``Meta`` class and a ``__str__()`` m
 To learn about these model features, see :ref:`django-models-define` in the
 Create Models guide.
 
-Test: :djangoclass:`~django.db.models.IntegerField`
-
 Run Code Examples
 `````````````````
 
@@ -139,9 +137,9 @@ code:
 
 .. tip::
 
-   To learn more about the ``create()`` method, see
-   :django:meth:`~django.db.models.query.QuerySet.create()` in the {+framework+}
-   documentation.
+   To learn more about the ``create()`` method, see `create()
+    <{+django-docs+}/ref/models/querysets/#create>`__ in the {+framework+}
+    documentation.
 
 .. _django-crud-read:
 
@@ -180,9 +178,9 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
 
 .. tip::
 
-   To learn more about the ``filter()`` method, see
-   :meth:`~django.db.models.query.QuerySet.filter()` in the {+framework+}
-   documentation.
+   To learn more about the ``filter()`` method, see `filter()
+    <{+django-docs+}/ref/models/querysets/#filter>`__ in the {+framework+}
+    documentation.
 
 Return One Document Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -218,9 +216,9 @@ retrieves a document in which the ``title`` value is ``"Boyhood"``:
 
 .. tip::
 
-   To learn more about the ``get()`` method, see
-   :meth:`~django.db.models.query.QuerySet.get()` in the {+framework+}
-   documentation.
+   To learn more about the ``get()`` method, see `get()
+    <{+django-docs+}/ref/models/querysets/#get>`__ in the {+framework+}
+    documentation.
 
 .. _django-crud-modify:
 
@@ -259,9 +257,9 @@ a document that has a ``title`` value of ``"High Fidelity"`` and adds a
 
 .. tip::
 
-   To learn more about the ``update()`` method, see
-   :meth:`~django.db.models.query.QuerySet.update()` in the {+framework+}
-   documentation.
+   To learn more about the ``update()`` method, see `update()
+    <{+django-docs+}/ref/models/querysets/#update>`__ in the {+framework+}
+    documentation.
 
 .. _django-crud-delete:
 
@@ -297,10 +295,9 @@ and deletes documents that have a ``runtime`` value of ``5``:
 
 .. tip::
 
-   To learn more about the ``delete()`` method, see
-   :meth:`~django.db.models.query.QuerySet.delete()` in the {+framework+}
-   documentation.
-
+   To learn more about the ``delete()`` method, see `delete()
+    <{+django-docs+}/ref/models/querysets/#delete>`__ in the {+framework+}
+    documentation.
 
 Additional Information
 ----------------------
