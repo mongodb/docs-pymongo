@@ -80,7 +80,7 @@ The ``Movie`` model class includes an inner ``Meta`` class and a ``__str__()`` m
 To learn about these model features, see :ref:`django-models-define` in the
 Create Models guide.
 
-Test: :class:`~django.db.models.IntegerField`
+Test: :djangoclass:`~django.db.models.IntegerField`
 
 Run Code Examples
 `````````````````
@@ -140,7 +140,7 @@ code:
 .. tip::
 
    To learn more about the ``create()`` method, see
-   :meth:`~django.db.models.query.QuerySet.create()` in the {+framework+}
+   :django:meth:`~django.db.models.query.QuerySet.create()` in the {+framework+}
    documentation.
 
 .. _django-crud-read:
