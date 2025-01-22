@@ -59,14 +59,13 @@ The ``Movie`` model class has the following definition:
 .. code-block:: python
 
     from django.db import models
-    from django_mongodb_backend.fields import EmbeddedModelField, ArrayField
+    from django_mongodb_backend.fields import ArrayField
 
    class Movie(models.Model):
        title = models.CharField(max_length=200)
        plot = models.TextField(blank=True)
        runtime = models.IntegerField(default=0)
        released = models.DateTimeField("release date", null=True, blank=True)
-       awards = EmbeddedModelField(Award)
        genres = ArrayField(models.CharField(max_length=100), null=True, blank=True)
 
        class Meta:
