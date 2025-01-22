@@ -138,8 +138,8 @@ code:
 .. tip::
 
    To learn more about the ``create()`` method, see `create()
-    <{+django-docs+}/ref/models/querysets/#create>`__ in the {+framework+}
-    documentation.
+   <{+django-docs+}/ref/models/querysets/#create>`__ in the {+framework+}
+   documentation.
 
 .. _django-crud-read:
 
@@ -179,8 +179,8 @@ returns ``Movie`` objects that represent movies released on January 1, 2000:
 .. tip::
 
    To learn more about the ``filter()`` method, see `filter()
-    <{+django-docs+}/ref/models/querysets/#filter>`__ in the {+framework+}
-    documentation.
+   <{+django-docs+}/ref/models/querysets/#filter>`__ in the {+framework+}
+   documentation.
 
 Return One Document Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -217,8 +217,8 @@ retrieves a document in which the ``title`` value is ``"Boyhood"``:
 .. tip::
 
    To learn more about the ``get()`` method, see `get()
-    <{+django-docs+}/ref/models/querysets/#get>`__ in the {+framework+}
-    documentation.
+   <{+django-docs+}/ref/models/querysets/#get>`__ in the {+framework+}
+   documentation.
 
 .. _django-crud-modify:
 
@@ -258,8 +258,8 @@ a document that has a ``title`` value of ``"High Fidelity"`` and adds a
 .. tip::
 
    To learn more about the ``update()`` method, see `update()
-    <{+django-docs+}/ref/models/querysets/#update>`__ in the {+framework+}
-    documentation.
+   <{+django-docs+}/ref/models/querysets/#update>`__ in the {+framework+}
+   documentation.
 
 .. _django-crud-delete:
 
@@ -296,8 +296,8 @@ and deletes documents that have a ``runtime`` value of ``5``:
 .. tip::
 
    To learn more about the ``delete()`` method, see `delete()
-    <{+django-docs+}/ref/models/querysets/#delete>`__ in the {+framework+}
-    documentation.
+   <{+django-docs+}/ref/models/querysets/#delete>`__ in the {+framework+}
+   documentation.
 
 Additional Information
 ----------------------
