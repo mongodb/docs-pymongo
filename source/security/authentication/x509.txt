@@ -51,6 +51,8 @@ The code examples on this page use the following placeholders:
 
 To use the code examples on this page, replace these placeholders with your own values.
 
+.. include:: /includes/authentication/percent-encoding.rst
+
 Using X.509 Authentication in Your Application
 ----------------------------------------------
 
@@ -64,9 +66,9 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb[+srv]://<hostname>:<port>",
                                       tls=True,
-                                      tlsCertificateKeyFile="/path/to/client.pem",
+                                      tlsCertificateKeyFile="<path to X.509 certificate>",
                                       tlsCertificateKeyFilePassword="<X.509 certificate password>",
                                       authMechanism="MONGODB-X509")
 
@@ -75,9 +77,9 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<hostname>:<port>/?"
+         uri = ("mongodb[+srv]://<hostname>:<port>/?"
                 "tls=true"
-                "&tlsCertificateKeyFile=path/to/client.pem"
+                "&tlsCertificateKeyFile=<path to X.509 certificate>"
                 "&tlsCertificateKeyFilePassword=<X.509 certificate password>"
                 "&authMechanism=MONGODB-X509")
          client = pymongo.MongoClient(uri)

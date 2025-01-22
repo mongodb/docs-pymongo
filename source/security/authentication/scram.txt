@@ -16,7 +16,7 @@ SCRAM
    :values: reference
 
 .. meta::
-   :keywords: .NET, salt, default, code example
+   :keywords: salt, default, code example, authorize
 
 Overview
 --------
@@ -62,6 +62,8 @@ The code examples on this page use the following placeholders:
 
 To use the code examples on this page, replace these placeholders with your own values.
 
+.. include:: /includes/authentication/percent-encoding.rst
+
 Using SCRAM Authentication in Your Application
 ----------------------------------------------
 
@@ -77,10 +79,10 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb[+srv]://<hostname>:<port>",
                                       username="<db_username>",
                                       password="<db_password>",
-                                      authSource="<authentication database>",
+                                      authSource="<authenticationDb>",
                                       authMechanism="<authenticationMechanism>")
 
    .. tab:: Connection String
@@ -88,9 +90,9 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<percent-encoded db_username>:<percent-encoded db_password>"
+         uri = ("mongodb[+srv]://<percent-encoded db_username>:<percent-encoded db_password>"
                 "@<hostname>:<port>/?"
-                "authSource=<authentication database>"
+                "authSource=<authenticationDb>"
                 "&authMechanism=<authenticationMechanism>")
          client = pymongo.MongoClient(uri)
 

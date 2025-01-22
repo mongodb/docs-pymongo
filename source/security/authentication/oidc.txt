@@ -47,15 +47,17 @@ The code examples on this page use the following placeholders:
   to a MongoDB Atlas cluster. To learn more about the ``+srv`` option, see
   :manual:`Connection String Formats </reference/connection-string/#connection-string-formats>`
   in the {+mdb-server+} manual.
-- ``<username>``: The client ID or application ID of the Azure managed identity or
+- ``<Azure ID>``: The client ID or application ID of the Azure managed identity or
   enterprise application, if authenticating against Azure IMDS.
 - ``<hostname>``: The network address of your MongoDB deployment.
 - ``<port>``: The port number of your MongoDB deployment. If you omit this parameter,
   the driver uses the default port number (``27017``). You don't need to specify a port
   when connecting to a MongoDB Atlas cluster.
-- ``<audience>``: The audience parameter configured on your MongoDB deployment.
+- ``<audience>``: The value of the ``audience`` parameter configured on your MongoDB deployment.
 
 To use the code examples on this page, replace these placeholders with your own values.
+
+.. include:: /includes/authentication/percent-encoding.rst
 
 Using OIDC Authentication in Your Application
 ---------------------------------------------
@@ -89,10 +91,7 @@ You can configure OIDC for Azure IMDS in two ways: by passing arguments to the
       :tabid: mongoclient
 
       First, create a Python dictionary for your authentication mechanism properties, as shown
-      in the following example. Replace the ``<audience>`` placeholder with the
-      value of the ``audience`` parameter configured on your MongoDB deployment. 
-      
-      The following code example shows how to set these options in your connection string:
+      in the following example:
       
       .. literalinclude:: /includes/authentication/azure-imds-mongoclient.py
          :language: python
@@ -128,8 +127,6 @@ You can configure OIDC for Azure IMDS in two ways: by passing arguments to the
       - ``authMechanism``: Set to ``MONGODB-OIDC``.
       - ``authMechanismProperties``: Set to
         ``ENVIRONMENT:azure,TOKEN_RESOURCE:<audience>``.
-        Replace the ``<audience>`` placeholder with the
-        value of the ``audience`` parameter configured on your MongoDB deployment. 
         
         The following code example shows how to set these options in your connection string:
       
@@ -164,8 +161,7 @@ You can configure OIDC for GCP IMDS in two ways: by passing arguments to the
       :tabid: mongoclient
 
       First, create a Python dictionary for your authentication mechanism properties, as shown
-      in the following example. Replace the ``<audience>`` placeholder with
-      the value of the ``audience`` parameter configured on your MongoDB deployment.
+      in the following example.
 
       .. literalinclude:: /includes/authentication/gcp-imds-mongoclient.py
          :language: python
@@ -195,8 +191,6 @@ You can configure OIDC for GCP IMDS in two ways: by passing arguments to the
       - ``authMechanism``: Set to ``MONGODB-OIDC``.
       - ``authMechanismProperties``: Set to
         ``ENVIRONMENT:gcp,TOKEN_RESOURCE:<audience>``.
-        Replace the ``<audience>`` placeholder with the
-        value of the ``audience`` parameter configured on your MongoDB deployment.
 
       The following code example shows how to set these options in your connection string:
       

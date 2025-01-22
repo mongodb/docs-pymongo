@@ -1,4 +1,6 @@
 .. _pymongo-authentication-mechanisms:
+.. _pymongo-auth:
+.. _pymongo-enterprise-auth:
 
 =========================
 Authentication Mechanisms
@@ -37,7 +39,7 @@ the identity of a client to ensure security before connecting.
 
 .. tip:: Connecting to MongoDB
    
-   To learn how to establish a connection to your MongoDB deployment, see the
+   To learn how to establish a connection to your MongoDB deployment, see
    :ref:`pymongo-get-started`.
 
 MongoDB Edition Compatibility

@@ -36,11 +36,13 @@ Code Placeholders
 The code examples on this page use the following placeholders:
 
 - ``<hostname>``: The network address of your MongoDB Atlas deployment
-- ``<awsKeyId>``: Your AWS access key ID
-- ``<awsSecretKey>``: Your AWS secret access key
-- ``<awsSessionToken>``: Your AWS session token
+- ``<AWS IAM access key ID>``: Your AWS access key ID
+- ``<AWS IAM secret access key>``: Your AWS secret access key
+- ``<AWS session token>``: Your AWS session token
 
 To use the code examples on this page, replace these placeholders with your own values.
+
+.. include:: /includes/authentication/percent-encoding.rst
 
 Using AWS IAM Authentication in Your Application
 ------------------------------------------------
@@ -56,7 +58,7 @@ To use AWS IAM authentication, you must install {+driver-short+} with the
 tries to retrieve AWS credentials from the following sources, in the order listed:
 
 1. Named arguments passed to the ``MongoClient`` constructor or parameters in the
-   connection URI
+   connection string
 #. Environment variables
 #. Shared credentials file
 #. AWS config file
@@ -74,13 +76,13 @@ these sources and use them to authenticate your application.
 
 First, {+driver-short+} checks whether you passed AWS credentials
 to the ``MongoClient`` constructor, either as a named argument or as part of the
-connection URI. To pass your credentials to ``MongoClient``,
+connection string. To pass your credentials to ``MongoClient``,
 set the following connection options:
 
 - ``username``: The AWS IAM access key ID to authenticate. Percent-encode this value
-  before including it in a connection URI.
+  before including it in a connection string.
 - ``password``: The AWS IAM secret access key. Percent-encode this value before including
-  it in a connection URI.
+  it in a connection string.
 - ``authMechanism``: Set to ``"MONGODB-AWS"``.
 
 You can set these options in two ways: by passing arguments to the
@@ -93,7 +95,7 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://@<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       username="<AWS IAM access key ID>",
                                       password="<AWS IAM secret access key>",
                                       authMechanism="MONGODB-AWS")
@@ -103,9 +105,9 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<percent-encoded AWS IAM access key ID>:"
+         uri = ("mongodb+srv://<percent-encoded AWS IAM access key ID>:"
                 "<percent-encoded AWS IAM secret access key>"
-                "@<hostname>:<port>/?"
+                "@<hostname>/?"
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
 
@@ -148,7 +150,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       authMechanism="MONGODB-AWS")
 
    .. tab:: Connection String
@@ -156,7 +158,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         uri = "mongodb+srv://<hostname>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
 .. tip:: AWS Lambda
@@ -194,7 +196,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       authMechanism="MONGODB-AWS")
 
    .. tab:: Connection String
@@ -202,7 +204,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         uri = "mongodb+srv://<hostname>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
 .. tip::
@@ -244,7 +246,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       authMechanism="MONGODB-AWS")
 
    .. tab:: Connection String
@@ -252,7 +254,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         uri = "mongodb+srv://<hostname>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
 .. _pymongo-mongodb-aws-assume-role:
@@ -275,11 +277,11 @@ in the AWS documentation.
 After you create the config file, set the following connection options:
 
 - ``username``: The AWS IAM access key ID to authenticate returned by the ``AssumeRole``
-  request. Percent-encode this value before including it in a connection URI.
+  request. Percent-encode this value before including it in a connection string.
 - ``password``: The AWS IAM secret access key returned by the ``AssumeRole`` request.
-  Percent-encode this value before including it in a connection URI..
+  Percent-encode this value before including it in a connection string.
 - ``authMechanismProperties``: Set to ``AWS_SESSION_TOKEN:`` and the
-  AWS session token returned by the ``AssumeRole`` request. 
+  AWS session token returned by the ``AssumeRole`` request.
 - ``authMechanism``: Set to ``"MONGODB-AWS"``.
 
 You can set these options in two ways: by passing arguments to the
@@ -294,7 +296,7 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://@<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://@<hostname>",
                                       username="<AWS IAM access key ID>",
                                       password="<AWS IAM secret access key>",
                                       authMechanismProperties="AWS_SESSION_TOKEN:<AWS session token>",
@@ -305,9 +307,9 @@ You can set these options in two ways: by passing arguments to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<percent-encoded AWS IAM access key ID>:"
+         uri = ("mongodb+srv://<percent-encoded AWS IAM access key ID>:"
                 "<percent-encoded AWS IAM secret access key>"
-                "@<hostname>:<port>/?"
+                "@<hostname>/?"
                 "authMechanismProperties=AWS_SESSION_TOKEN:<AWS session token>"
                 "&authMechanism=MONGODB-AWS")
          client = pymongo.MongoClient(uri)
@@ -353,7 +355,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       authMechanism="MONGODB-AWS")
 
    .. tab:: Connection String
@@ -361,7 +363,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         uri = "mongodb+srv://<hostname>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
 For more information about using an ``AssumeRoleWithWebIdentity`` request to
@@ -391,7 +393,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
+         client = pymongo.MongoClient("mongodb+srv://<hostname>",
                                       authMechanism="MONGODB-AWS")
 
    .. tab:: Connection String
@@ -399,7 +401,7 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = "mongodb://<hostname>:<port>/?&authMechanism=MONGODB-AWS"
+         uri = "mongodb+srv://<hostname>/?&authMechanism=MONGODB-AWS"
          client = pymongo.MongoClient(uri)
 
 API Documentation

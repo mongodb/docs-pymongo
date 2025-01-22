@@ -38,6 +38,8 @@ The code examples on this page use the following placeholders:
 
 To use the code examples on this page, replace these placeholders with your own values.
 
+.. include:: /includes/authentication/percent-encoding.rst
+
 Using GSSAPI Authentication in Your Application
 -----------------------------------------------
 

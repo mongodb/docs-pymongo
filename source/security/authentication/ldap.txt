@@ -1,9 +1,9 @@
 .. _pymongo-ldap:
 .. _pymongo-sasl:
 
-====
-LDAP
-====
+=================
+LDAP (PLAIN SASL)
+=================
 
 .. contents:: On this page
    :local:
@@ -26,7 +26,8 @@ Protocol (LDAP) username and password to authenticate to MongoDB.
 LDAP authentication uses the PLAIN Simple Authentication and Security Layer
 (SASL) defined in `RFC-4616 <https://tools.ietf.org/html/rfc4616>`__.
 
-You can use this mechanism only when authenticating to MongoDB Enterprise Advanced.
+You can use this mechanism only when authenticating to MongoDB Atlas or MongoDB Enterprise
+Advanced.
 
 .. important::
 
@@ -40,6 +41,10 @@ Code Placeholders
 
 The code examples on this page use the following placeholders:
 
+- ``+srv``: Include this option in your connection string prefix only if you are connecting
+  to a MongoDB Atlas cluster. To learn more about the ``+srv`` option, see
+  :manual:`Connection String Formats </reference/connection-string/#connection-string-formats>`
+  in the {+mdb-server+} manual.
 - ``<username>``: Your LDAP username.
 - ``<password>``: Your LDAP password.
 - ``<hostname>``: The network address of your MongoDB deployment.
@@ -47,9 +52,11 @@ The code examples on this page use the following placeholders:
   the driver uses the default port number (``27017``). You don't need to specify a port
   when connecting to a MongoDB Atlas cluster.
 - ``<authenticationDb>``: The MongoDB database that contains the user's LDAP credentials.
-   If you omit this parameter, the driver uses the default database (``admin``).
+  If you omit this parameter, the driver uses the default database (``admin``).
 
 To use the code examples on this page, replace these placeholders with your own values.
+
+.. include:: /includes/authentication/percent-encoding.rst
 
 Using PLAIN Authentication in Your Application
 ----------------------------------------------
@@ -67,9 +74,10 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         client = pymongo.MongoClient("mongodb://<hostname>:<port>",
-                                      username="<db_username>",
-                                      password="<db_password>",
+         client = pymongo.MongoClient("mongodb[+srv]://<hostname>:<port>",
+                                      username="<username>",
+                                      password="<password>",
+                                      authSource="<authenticationDb>",
                                       authMechanism="PLAIN",
                                       tls=True)
 
@@ -78,7 +86,8 @@ You can set this option in two ways: by passing an argument to the
 
       .. code-block:: python
 
-         uri = ("mongodb://<db_username>:<db_password>@<hostname>:<port>/?"
+         uri = ("mongodb[+srv]://<username>:<password>@<hostname>:<port>/?"
+                "authSource=<authenticationDb>"
                 "&authMechanism=PLAIN"
                 "&tls=true")
          client = pymongo.MongoClient(uri)
