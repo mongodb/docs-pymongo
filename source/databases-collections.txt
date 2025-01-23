@@ -83,6 +83,25 @@ validation rules, by passing them in as keyword arguments. For a full list of
 optional parameters, see the `create_collection() API documentation
 <{+api-root+}pymongo/database.html#pymongo.database.Database.create_collection>`__.
 
+Collation
+~~~~~~~~~
+
+When you create a collection, you can specify a default **collation** for all operations
+you perform on the collection.
+
+.. include:: /includes/collation-description.rst
+
+The following example creates the same collection as the previous example,
+but with a default collation of ``fr_CA``: 
+
+.. code-block:: python
+   :emphasize-lines: 2
+
+   from pymongo.collation import Collation
+   
+   database = client["test_database"]
+   database.create_collection("example_collection", collation=Collation(locale='fr_CA'))
+
 Get a List of Collections
 -------------------------
 
