@@ -58,4 +58,9 @@ Configuring Truncation
 If you enable logging for the ``pymongo.command`` component, the resulting logs will
 be truncated after 1000 bytes by default. You can configure this truncation limit
 by setting the ``MONGODB_LOG_MAX_DOCUMENT_LENGTH`` environment variable to your
-desired length.
+desired length, as shown in the following example:
+
+.. code-block:: python
+
+   import os
+   os.environ('MONGODB_LOG_MAX_DOCUMENT_LENGTH') = 2000
