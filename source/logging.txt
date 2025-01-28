@@ -32,7 +32,7 @@ verbosity for the following components:
 
 In addition to configuring these options individually, you can configure the global
 logging level by setting the log level on ``pymongo``. To learn more about the native
-logging library, see the `Python documentation <https://docs.python.org/3/howto/logging.html>`__.
+logging library, see the `Python logging library documentation <https://docs.python.org/3/howto/logging.html>`__.
 
 Examples
 --------
