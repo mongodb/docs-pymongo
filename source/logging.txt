@@ -27,7 +27,7 @@ In this guide, you can learn how to configure logging options for different
 verbosity for the following components:
 
 - ``pymongo.command``, which logs command operations
-- ``pymongo.connection``, which logs cursor management operations
+- ``pymongo.connection``, which logs connection management operations
 - ``pymongo.serverSelection``, which logs server selection operations
 
 In addition to configuring these options individually, you can configure the global
