@@ -111,8 +111,14 @@ Version 4.11 Breaking Changes
 
 - {+mdb-server+} v3.6 is no longer supported. The minimum supported {+mdb-server+}
   version is now v4.0.
-
-- The minimum wire version is now 7. See :manual:`minWireVersion </reference/command/hello/#mongodb-data-hello.minWireVersion>`.
+- Python v3.8 is no longer supported. The minimum supported Python version is
+  now v3.9.
+- PyPy v3.9 is no longer supported. The minimum supported PyPy version is now
+  v3.10.
+- The minimum wire version is now 7. For more information, see
+  :manual:`minWireVersion
+  </reference/command/hello/#mongodb-data-hello.minWireVersion>` in the
+  {+mdb-server+} manual.
 
 .. _version-4.9-breaking-changes:
 
