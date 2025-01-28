@@ -1,5 +1,5 @@
 When you create an index, you can specify a default **collation** for all operations
-you perform on the index.
+you perform on fields that are included in the index.
 
 .. include:: /includes/collation-description.rst
 

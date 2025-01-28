@@ -95,7 +95,7 @@ The following example creates the same collection as the previous example,
 but with a default collation of ``fr_CA``: 
 
 .. code-block:: python
-   :emphasize-lines: 2
+   :emphasize-lines: 4
 
    from pymongo.collation import Collation
    
