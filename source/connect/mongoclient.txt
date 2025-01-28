@@ -141,7 +141,8 @@ constructor accepts. All parameters are optional.
        **Data type:** ``Type[_DocumentType]``
 
    * - ``tz_aware``
-     - Whether ``datetime`` values are aware (``True``) or naive (``False``).
+     - If this parameter is ``True``, the client treats ``datetime`` values as aware.
+       Otherwise, it treats them as naive.
 
        For more information about aware and naive ``datetime`` values, see
        `datetime <https://docs.python.org/3/library/datetime.html>`__ in the Python
@@ -150,8 +151,9 @@ constructor accepts. All parameters are optional.
        **Data type:** ``bool``
 
    * - ``connect``
-     - Whether the client immediately begins connecting to MongoDB in the background
-       (``True``) or connects on the first operation (``False``).
+     - If this parameter is ``True``, the client begins connecting to MongoDB
+       in the background immediately after you create it. If this parameter is ``False``,
+       the client connects to MongoDB when it performs the first database operation.
        
        If your application is running in a
        :wikipedia:`function-as-a-service (FaaS) <Function_as_a_service>`
