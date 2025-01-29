@@ -48,6 +48,12 @@ show in the following example:
 
    client = pymongo.MongoClient("mongodb://localhost/?compressors=snappy,zlib,zstd")
 
+.. note::
+
+    When you supply multiple compression algorithms to a connection string,
+    {+driver-short+} uses the first compression algorithm in the list that the
+    deployment supports.
+
 Specifying Compression to a MongoClient
 ---------------------------------------
 
