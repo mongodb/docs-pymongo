@@ -94,7 +94,7 @@ but uses a connection URI:
 Additional Information
 ----------------------
 
-To learn more about connection pools, see :manual:`Connection Pool Overview </manual/administration/connection-pool-overview/>`
+To learn more about connection pools, see :manual:`Connection Pool Overview </administration/connection-pool-overview/>`
 in the {+mdb-server+} manual.
 
 API Documentation
