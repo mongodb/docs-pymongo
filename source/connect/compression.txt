@@ -35,7 +35,7 @@ Specifying Compression By Using a Connection String
 ---------------------------------------------------
 
 You can specify the compression algorithm to use by including the ``compressors`` option
-in yoru connection string. The following example specifies the Snappy compression algorithm
+in your connection string. The following example specifies the Snappy compression algorithm
 
 .. code-block:: python
 
