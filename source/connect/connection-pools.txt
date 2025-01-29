@@ -56,15 +56,15 @@ your connection URI:
        | Defaults to ``None`` (no limit)
 
    * - ``maxPoolSize``
-     - | Sets the maximum number of concurrent connections that the pool will maintain.
-         If the maximum pool size is reached, further requests will wait until a connection
+     - | Sets the maximum number of concurrent connections that the pool maintains.
+         If the maximum pool size is reached, further requests wait until a connection
          becomes available.
        | Defaults to ``100``
 
    * - ``minPoolSize``
-     - | Sets the minimum number of concurrent connections that the pool will maintain. If
+     - | Sets the minimum number of concurrent connections that the pool maintains. If
          the number of open connections falls below this value due to network errors,
-         {+driver-short+} will attempt to create new connections to maintain this minimum.
+         {+driver-short+} attempts to create new connections to maintain this minimum.
        | Defaults to ``0``
 
    * - ``socketTimeoutMS``
@@ -73,11 +73,11 @@ your connection URI:
        | Defaults to ``None`` (no timeout)
 
    * - ``waitQueueTimeoutMS``
-     - | Sets how long a thread will wait for a connection to become available in the pool
+     - | Sets how long a thread waits for a connection to become available in the connection pool
          before timing out.
        | Defaults to ``None`` (no timeout)
 
-The following code creates a client with a connection pool size of 50 by using the
+The following code creates a client with a maximum connection pool size of ``50`` by using the
 ``maxPoolSize`` parameter:
 
 .. code-block:: python
