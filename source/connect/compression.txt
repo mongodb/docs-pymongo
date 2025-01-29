@@ -17,7 +17,7 @@ Compression
 Overview
 --------
 
-In this guide, you can learn how to use supported compression algorithms with
+In this guide, you can learn how to use compression algorithms with
 {+driver-short+}.
 
 You can use compression to reduce the size of messages sent between your application
@@ -51,15 +51,16 @@ show in the following example:
 Specifying Compression to a MongoClient
 ---------------------------------------
 
-You can also specify the compression algorithm to use when creating a ``MongoClient`` object,
-as shown in the following example:
+You can also specify the compression algorithm to use by passing the algorithms to use
+to the ``compressors`` parameter of the ``MongoClient`` constructor, as shown in the 
+following example:
 
 .. code-block:: python
 
    client = pymongo.MongoClient(compressors="snappy")
 
 You can also specify multiple compression algorithms by passing a list of algorithms to the
-``MongoClient`` constructors, as shown in the following example:
+``MongoClient`` constructor, as shown in the following example:
 
 .. code-block:: python
 
