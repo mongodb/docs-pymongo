@@ -77,11 +77,19 @@ your connection URI:
          before timing out.
        | Defaults to ``None`` (no timeout)
 
-The following code creates a client with a connection pool size of 50:
+The following code creates a client with a connection pool size of 50 by using the
+``maxPoolSize`` parameter:
 
 .. code-block:: python
 
    client = MongoClient(host, port, maxPoolSize=50)
+
+The following code creates a client with the same configuration as the preceding example,
+but uses a connection URI:
+
+.. code-block:: python
+
+   client = MongoClient("mongodb://<host>:<port>/?maxPoolSize=50")
 
 Additional Information
 ----------------------
