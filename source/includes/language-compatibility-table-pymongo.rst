@@ -193,10 +193,6 @@ Python 3
    :ref:`TLS <pymongo-troubleshoot-tls>` section of the Troubleshooting guide.
 .. [#three-six-compat] Pymongo 4.1 requires Python 3.6.2 or later.
 
-.. note::
-
-   PyPy3 is a Python 3.2-compatible alternative interpreter.
-
 Python 2
 ~~~~~~~~
 
