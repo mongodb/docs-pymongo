@@ -16,7 +16,7 @@ Overview
 --------
 
 In this guide, you can learn how to create BSON documents, read BSON from a file, 
-and write BSON to a file using {+driver-short+}.
+and write BSON to a file by using {+driver-short+}.
 
 **BSON**, or Binary JSON, is the data format that MongoDB uses to organize
 and store data. This data format includes all JSON data structure types and
@@ -43,7 +43,10 @@ Create a BSON Document
 ----------------------
 
 You can create a BSON document by using the same notation you use to create a
-dictionary in {+language+}. The following example creates a BSON document that
+dictionary in {+language+}. {+driver-short+} automatically converts {+language+} dictionaries
+into BSON documents when inserting them into a collection.
+
+The following example creates a BSON document that
 represents the preceding sample BSON document:
 
 .. code-block:: python
@@ -111,8 +114,8 @@ The following example reads the sample BSON document from ``file.bson``:
 
          with open('file.bson', 'rb') as file:
              data = file.read()
-             doc = BSON(data).decode()
-             print(doc)
+             document = BSON(data).decode()
+             print(document)
 
    .. output::
       :visible: false
