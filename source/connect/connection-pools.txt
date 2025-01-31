@@ -48,7 +48,9 @@ your connection URI:
        | Defaults to ``20000``
 
    * - ``maxConnecting``
-     - | Sets the maximum number of connections that each pool can have at once.
+     - | Sets the maximum number of connections that each pool can establish concurrently.
+         If this limit is reached, further requests wait until a connection is established
+         or another in-use connection is checked back into the pool.
        | Defaults to ``2``
 
    * - ``maxIdleTimeMS``
