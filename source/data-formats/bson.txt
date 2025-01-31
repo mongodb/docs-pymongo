@@ -81,7 +81,7 @@ BSON document:
 Write BSON to a File
 --------------------
 
-To write BSON data to a file, open a file stream to in write-binary mode on the output file.
+To write BSON data to a file, open a file stream in write-binary mode on the output file.
 Then, write each document to the output file. Ensure that documents are encoded in BSON
 format by using the ``BSON.encode()`` method.
 
