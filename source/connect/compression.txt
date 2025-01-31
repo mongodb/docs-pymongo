@@ -26,7 +26,9 @@ and a MongoDB deployment. {+driver-short+} supports the following compression al
 - `Snappy <https://google.github.io/snappy/>`__: You can use Snappy compression
   with MongoDB 3.4 and later by including the `python-snappy <https://pypi.org/project/python-snappy/>`__
   package in your application.
-- `Zlib <https://zlib.net/>`__: You can use Zlib compression with MongoDB 3.6 and later.
+- `Zlib <https://zlib.net/>`__: You can use Zlib compression with MongoDB 3.6 and later by
+   by including the `zlib <https://docs.python.org/3/library/zlib.html>`__ package
+   in your application.
 - `Zstandard <https://github.com/facebook/zstd/>`__: You can use Zstandard compression
   with MongoDB 4.2 and later by including the `zstandard <https://pypi.org/project/zstandard/>`__
   package in your application.
