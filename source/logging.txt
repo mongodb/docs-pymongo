@@ -42,7 +42,7 @@ The follwing example sets the global logging level to ``INFO``:
 .. code-block:: python
 
    import logging
-   logging.getLogger('pymongo').setLevel(logging.INFO)
+   logging.getLogger("pymongo").setLevel(logging.INFO)
 
 The following example sets the log level on the ``pymongo.command`` component to
 ``DEBUG``:
@@ -50,7 +50,7 @@ The following example sets the log level on the ``pymongo.command`` component to
 .. code-block:: python
 
    import logging
-   logging.getLogger('pymongo.command').setLevel(logging.DEBUG)
+   logging.getLogger("pymongo.command").setLevel(logging.DEBUG)
 
 Configuring Truncation
 ----------------------
@@ -63,4 +63,4 @@ desired length, as shown in the following example:
 .. code-block:: python
 
    import os
-   os.environ('MONGODB_LOG_MAX_DOCUMENT_LENGTH') = 2000
+   os.environ["MONGODB_LOG_MAX_DOCUMENT_LENGTH"] = "2000"
