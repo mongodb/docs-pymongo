@@ -83,6 +83,36 @@ validation rules, by passing them in as keyword arguments. For a full list of
 optional parameters, see the `create_collection() API documentation
 <{+api-root+}pymongo/database.html#pymongo.database.Database.create_collection>`__.
 
+Time Series Collections
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Time series collections efficiently store sequences of measurements over a period of time.
+The following example creates a time series collection called ``"example_ts_collection"``
+with a time field called ``"timestamp"``:
+
+.. code-block:: python
+
+   database = client["test_database"]
+   database.create_collection("example_ts_collection", timeseries={"timeField": "timestamp"})
+
+For more information about using time series data with {+driver-short+}, see the
+:ref:`time-series <pymongo-time-series>` guide.
+
+Capped Collection
+~~~~~~~~~~~~~~~~~
+
+Capped collections have a maximum size that prevent them from growing beyond a specified
+limit. The following example creates a capped collection called ``"example_capped_collection"``
+with a maximum size of 1000 bytes:
+
+.. code-block:: python
+
+   database = client["test_database"]
+   database.create_collection("example_capped_collection", capped=True, size=1000)
+
+To learn more about capped collections, see the :manual:`Capped Collections </core/capped-collections/>`
+guide in the {+mdb-server+} manual.
+
 Get a List of Collections
 -------------------------
 
