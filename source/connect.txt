@@ -31,6 +31,7 @@ Connect to MongoDB
    Stable API </connect/stable-api>
    Limit Server Execution Time </connect/csot>
    Connection Pools </connect/connection-pools>
+   Compression </connect/compression>
 
 Overview
 --------
