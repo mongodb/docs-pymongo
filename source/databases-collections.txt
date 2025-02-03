@@ -83,8 +83,8 @@ validation rules, by passing them in as keyword arguments. For a full list of
 optional parameters, see the `create_collection() API documentation
 <{+api-root+}pymongo/database.html#pymongo.database.Database.create_collection>`__.
 
-Time Series Collections
-~~~~~~~~~~~~~~~~~~~~~~~
+Time Series Collection
+~~~~~~~~~~~~~~~~~~~~~~
 
 Time series collections efficiently store sequences of measurements over a period of time.
 The following example creates a time series collection called ``"example_ts_collection"``
