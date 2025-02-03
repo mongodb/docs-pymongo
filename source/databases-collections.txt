@@ -96,7 +96,7 @@ with a time field called ``"timestamp"``:
    database.create_collection("example_ts_collection", timeseries={"timeField": "timestamp"})
 
 For more information about using time series data with {+driver-short+}, see the
-:ref:`time-series <pymongo-time-series>` guide.
+:ref:`<pymongo-time-series>` guide.
 
 Capped Collection
 ~~~~~~~~~~~~~~~~~
