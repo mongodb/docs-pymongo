@@ -103,12 +103,10 @@ hosts, including ``host1``:
    uri = "mongodb://host1:27017/?replicaSet=sampleRS"
    client = MongoClient(uri)
 
-{+driver-short+} evenly load balances operations across the specified deployments
-within the specified ``localThresholdMS`` of the lowest-latency deployment. The
-``localThresholdMS`` option defaults to ``15``.
-
-To learn more about how {+driver-short+} load balances operations across multiple
-MongoDB deployments, see the :ref:`pymongo-server-selection` guide.
+{+driver-short+} evenly load balances operations across deployments that fall within
+the client's ``localThresholdMS`` value. To learn more about how {+driver-short+} load
+balances operations across multiple MongoDB deployments, see the
+:ref:`pymongo-server-selection` guide.
 
 .. note::
 
