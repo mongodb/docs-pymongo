@@ -71,10 +71,10 @@ deployment:
 Multiple Deployments
 --------------------
 
-You can connect to multiple MongoDB deployments by specifying a list of MongoDB instances
+You can connect to multiple MongoDB deployments by specifying a list of deployments
 in your connection string.
 
-The following code shows how to use {+driver-short+} to connect to three instances:
+The following code shows how to use {+driver-short+} to connect to three deployments:
 
 .. code-block:: python
 
@@ -82,12 +82,12 @@ The following code shows how to use {+driver-short+} to connect to three instanc
    
    client = MongoClient("mongodb://host1:27017,host2:27017,host3:27017")
 
-{+driver-short+} evenly load balances operations across the specified instances
-within the specified ``localThresholdMS`` of the lowest-latency instance. The
+{+driver-short+} evenly load balances operations across the specified deployments
+within the specified ``localThresholdMS`` of the lowest-latency deployment. The
 ``localThresholdMS`` option defaults to ``15``.
 
 To learn more about how {+driver-short+} load balances operations across multiple
-MongoDB instances, see the :ref:`pymongo-server-selection` guide.
+MongoDB deployments, see the :ref:`pymongo-server-selection` guide.
 
 Replica Sets
 ------------
