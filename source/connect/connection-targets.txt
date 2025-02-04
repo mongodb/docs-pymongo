@@ -71,11 +71,10 @@ deployment:
 Multiple Deployments
 --------------------
 
-You can connect to multiple MongoDB deployments by specifying a list of ``mongos``
-servers in your connection string.
+You can connect to multiple MongoDB deployments by specifying a list of hosts
+in your connection string.
 
-The following code shows how to use {+driver-short+} to connect to three ``mongos``
-instances:
+The following code shows how to use {+driver-short+} to connect to three hosts:
 
 .. code-block:: python
 
