@@ -287,7 +287,7 @@ Retryable Reads and Writes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 {+driver-short+} automatically retries certain read and write operations a single time
-if they fail due to a network error or a server error.
+if they fail due to a network or server error.
 
 You can explicitly disable retryable reads or retryable writes by setting the ``retryReads`` or
 ``retryWrites`` option to ``False`` in the ``MongoClient()`` constructor. The following
