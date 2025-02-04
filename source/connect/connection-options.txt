@@ -264,22 +264,22 @@ Read and Write Operations
 
    * - **retryReads**
      - | Specifies whether the client should retry supported read operations. For more
-         information, see :manual:`</core/retryable-reads/>` in the {+mdb-server+}
+         information, see :manual:`Retryable Reads </core/retryable-reads/>` in the {+mdb-server+}
          manual.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``True``
        | **MongoClient Example**: ``retryReads=False``
-       | **Connection URI Example**: ``retryReads=False``
+       | **Connection URI Example**: ``retryReads=false``
 
    * - **retryWrites**
      - | Specifies whether the client should retry supported write operations. For more
-         information, see :manual:`</core/retryable-writes/>` in the {+mdb-server+}
+         information, see :manual:`Retryable Writes </core/retryable-writes/>` in the {+mdb-server+}
          manual.
        |
        | **Data Type**: {+bool-data-type+}
        | **Default**: ``True``
        | **MongoClient Example**: ``retryWrites=False``
-       | **Connection URI Example**: ``retryWrites=False``
+       | **Connection URI Example**: ``retryWrites=false``
 
 For more information about the connection options in this section, see :ref:`pymongo-databases-collections`. 
