@@ -68,32 +68,20 @@ deployment:
    uri = "mongodb://localhost:27017/"
    client = MongoClient(uri)
 
-Multiple Deployments
---------------------
+Replica Sets
+------------
 
-You can connect to multiple MongoDB deployments by specifying a list of deployments
-in your connection string.
+To connect to a replica set, specify the hostnames (or IP addresses) and 
+port numbers of the replica-set members in your connection string.
 
-The following code shows how to use {+driver-short+} to connect to three deployments:
+The following code shows how to use {+driver-short+} to connect to a replica set
+that contains three hosts:
 
 .. code-block:: python
 
    from pymongo import MongoClient
    
    client = MongoClient("mongodb://host1:27017,host2:27017,host3:27017")
-
-{+driver-short+} evenly load balances operations across the specified deployments
-within the specified ``localThresholdMS`` of the lowest-latency deployment. The
-``localThresholdMS`` option defaults to ``15``.
-
-To learn more about how {+driver-short+} load balances operations across multiple
-MongoDB deployments, see the :ref:`pymongo-server-selection` guide.
-
-Replica Sets
-------------
-
-To connect to a replica set, specify the hostnames (or IP addresses) and 
-port numbers of the replica-set members in your connection string.
 
 If you aren't able to provide a full list of hosts in the replica set, you can 
 specify one or more of the hosts in the replica set and instruct {+driver-short+} to 
@@ -114,6 +102,13 @@ hosts, including ``host1``:
 
    uri = "mongodb://host1:27017/?replicaSet=sampleRS"
    client = MongoClient(uri)
+
+{+driver-short+} evenly load balances operations across the specified deployments
+within the specified ``localThresholdMS`` of the lowest-latency deployment. The
+``localThresholdMS`` option defaults to ``15``.
+
+To learn more about how {+driver-short+} load balances operations across multiple
+MongoDB deployments, see the :ref:`pymongo-server-selection` guide.
 
 .. note::
 
