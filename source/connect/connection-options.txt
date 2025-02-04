@@ -263,7 +263,7 @@ Read and Write Operations
        | **Connection URI Example**: ``localThresholdMS=35``
 
    * - **retryReads**
-     - | Specifies whether the client should retry supported read operations. For more
+     - | Specifies whether the client retries supported read operations. For more
          information, see :manual:`Retryable Reads </core/retryable-reads/>` in the {+mdb-server+}
          manual.
        |
@@ -273,7 +273,7 @@ Read and Write Operations
        | **Connection URI Example**: ``retryReads=false``
 
    * - **retryWrites**
-     - | Specifies whether the client should retry supported write operations. For more
+     - | Specifies whether the client retries supported write operations. For more
          information, see :manual:`Retryable Writes </core/retryable-writes/>` in the {+mdb-server+}
          manual.
        |
