@@ -62,21 +62,21 @@ The following table describes the types of events that the driver emits:
    * - Connection Pool Events
      - Events related to the connection pool held by the driver.
 
-For a copmlete list of events the driver emits, see the
+For a complete list of events the driver emits, see the
 `pymongo.monitoring <{+api-root+}pymongo/monitoring.html>`__ API documentation.
 
 Listening for Events
 --------------------
 
 To monitor an event, you must pass an event listener to your application's ``MongoClient``.
-The following steps describe how to create monitor your application using an event listener:
+The following steps describe how to monitor your application using an event listener:
 
 1. Create a class that inherits from one of the event listener base classes
    provided by {+driver-short+}. The base class you choose depends on the type of event
    you want to monitor. For example, to monitor command events, create a class
    that inherits from ``CommandListener``.
 #. Implement the methods of the base class that correpond to the events you want to monitor.
-#. Pass an instance of your class to the ``MongoClient`` constructor.
+#. Pass an instance of your listener class to the ``MongoClient`` constructor.
 
 The following code implements a ``CommandListener`` to listen for command events, a
 ``ServerListener`` to listen for SDAM events, and a ``ConnectionPoolListener`` to listen for
