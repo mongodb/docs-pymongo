@@ -33,6 +33,12 @@ while connected to MongoDB.
 This guide shows you how to create a connection string and use a ``MongoClient`` object
 to connect to MongoDB.
 
+.. tip:: Type Hints
+
+   If your application uses Python 3.5 or later, you can add type hints to your
+   ``MongoClient`` objects. To learn how to add type hints, see
+   :ref:`Type Hints <pymongo-type-hints-client>`.
+
 .. _pymongo_connection_uri:
 
 Connection URI
@@ -132,11 +138,21 @@ constructor accepts. All parameters are optional.
 
    * - ``document_class``
      - The default class that the client uses to decode BSON documents returned by queries.
-       This parameter supports the ``bson.raw_bson.RawBSONDocument`` type, as well as
-       subclasses of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``.
+       This parameter supports the following types:
        
-       If you specify ``bson.son.SON`` as the document class, you must also specify types
-       for the key and value.
+       - ``bson.raw_bson.RawBSONDocument``.
+       - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
+         If you specify ``bson.son.SON`` as the document class, you must also specify types
+         for the key and value.
+       - A subclass of the ``TypedDict`` type. To pass a ``TypedDict`` subclass for this
+         parameter, you must also include the class in a type hint for your ``MongoClient``
+         object, as shown in the following example:
+
+         .. code-block:: python
+
+            client: MongoClient[MyTypedDict] = MongoClient() 
+
+         .. include:: /includes/type-hints/typeddict-availability.rst
 
        **Data type:** ``Type[_DocumentType]``
 
@@ -226,27 +242,30 @@ To use multiprocessing with {+driver-short+}, write code similar to the followin
    Do not copy an instance of the ``MongoClient`` class from the parent process to a child
    process.
 
-Type Hints
+.. _pymongo-type-hints-client:
+
+Type Hints 
 ----------
 
-If you're using Python v3.5 or later, you can add type hints to your Python code.
+.. include:: /includes/type-hints/intro.rst
 
-The following code example shows how to declare a type hint for a ``MongoClient``
-object:
+To use type hints in your {+driver-short+} application, you must add a type annotation to your
+``MongoClient`` object, as shown in the following example:
 
 .. code-block:: python
 
    client: MongoClient = MongoClient()
 
-In the previous example, the code doesn't specify a type for the documents that the
-``MongoClient`` object will work with. To specify a document type,
-include the ``Dict[str, Any]`` type when you
-create the ``MongoClient`` object, as shown in the following example:
+For more accurate type information, you can include the generic document type
+``Dict[str, Any]`` in your type annotation. This type matches all documents in MongoDB.
+The following example shows how to add this type hint:
 
 .. code-block:: python
 
    from typing import Any, Dict
    client: MongoClient[Dict[str, Any]] = MongoClient()
+
+.. include:: /includes/type-hints/tip-more-info.rst
 
 Troubleshooting
 ---------------
@@ -311,6 +330,10 @@ process.
    For more information about the problems caused by Python locks in
    multithreaded contexts with ``fork()``, see `Issue 6721 <http://bugs.python.org/issue6721>`__
    in the Python Issue Tracker.
+
+.. include:: /includes/type-hints/troubleshooting-client-type.rst
+
+.. include:: /includes/type-hints/troubleshooting-incompatible-type.rst
 
 API Documentation
 -----------------

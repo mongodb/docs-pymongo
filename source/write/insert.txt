@@ -140,6 +140,174 @@ document-level validation.
 
    sample_restaurants.restaurants.insert_many(document_list, bypass_document_validation = True)
 
+Type Hints
+----------
+
+.. include:: /includes/type-hints/intro.rst
+
+When you call the ``insert_one()`` or ``insert_many()`` method, you can pass one or more
+instances of a custom class that represents the documents in the collection.
+
+To create
+a custom type, define a class that inherits from the ``TypedDict`` class. In the class,
+add a property for each field in the document.
+
+After you define the class, you can insert instances of the class. The following example
+defines a ``Movie`` class to represent documents from the
+``sample_mflix.movies`` collection.
+Each ``Movie`` object contains two key-value pairs: ``name``, a string key with a string
+value, and ``year``, a string key with an integer value.
+The code then uses the ``insert_one()`` method to insert a ``Movie`` object.
+
+.. code-block:: python
+   :emphasize-lines: 10
+
+   from typing import TypedDict
+   
+   class Movie(TypedDict):
+       name: str
+       year: int
+
+   client: MongoClient = MongoClient()
+   database = client["test_database"]
+   collection: Collection[Movie] = database["test_collection"]
+   inserted = collection.insert_one(Movie(name="Jurassic Park", year=1993))
+
+.. include:: /includes/type-hints/tip-more-info.rst
+
+Troubleshooting
+---------------
+
+.. include:: /includes/type-hints/troubleshooting-client-type.rst
+
+.. include:: /includes/type-hints/troubleshooting-incompatible-type.rst
+
+You might see a similar error if you pass a list to the ``insert_one()`` method:
+
+.. code-block:: bash
+
+   error: Argument 1 to "insert_one" of "Collection" has
+   incompatible type "List[Dict[<nothing>, <nothing>]]";
+   expected "Mapping[str, Any]"
+
+This error occurs because the ``insert_one()`` method accepts a document, not a list.
+You can resolve this error by passing a document to the ``insert_one()`` method or by
+calling the ``insert_many()`` method instead.
+
+TypedDict Missing _id Key
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As discussed above, if you don't specify the ``_id`` field, {+driver-short+} automatically
+inserts it into the document.
+You can retrieve the value of the ``_id`` field at runtime, but if you use MyPy or another
+tool to perform static type-checking, it won't find the ``_id`` field in your class and
+will show an error similar to the following: 
+
+.. code-block:: bash
+
+   TypedDict has no key "_id"
+
+This is caused by code similar to the following:
+
+.. code-block:: python
+   :emphasize-lines: 13
+
+   from typing import TypedDict
+   from pymongo import MongoClient
+   from pymongo.collection import Collection
+   class Movie(TypedDict):
+       name: str
+       year: int
+   
+   client: MongoClient = MongoClient()
+   collection: Collection[Movie] = client.test.test
+   inserted = collection.insert_one(Movie(name="Jurassic Park", year=1993))
+   result = collection.find_one({"name": "Jurassic Park"})
+   # _id is present but was added by PyMongo; this will raise a type-checking error
+   assert result["_id"]
+
+One solution is to add a ``# type:ignore``
+comment to the end of the line that uses the ``_id`` field. This comment instructs the
+type-checking tool to ignore any errors that the line causes. The following example shows
+how to implement this solution;
+
+.. code-block:: python
+   :emphasize-lines: 15
+   
+   from typing import TypedDict
+   from pymongo import MongoClient
+   from pymongo.collection import Collection
+
+   class Movie(TypedDict):
+       name: str
+       year: int
+
+   collection: Collection[Movie] = client.test.test
+   inserted = collection.insert_one(
+       Movie(name="Jurassic Park", year=1993)
+   )
+   result = collection.find_one({"name": "Jurassic Park"})
+   assert result is not None
+   assert result["_id"] # type:ignore[typeddict-item]
+
+Instead of ignoring the type error, you can avoid it by including the ``_id`` field in
+your model class, and explicitly specifying a value for this field when you create the
+class instance. The following code shows how to implement this solution:
+
+.. code-block:: python
+   :emphasize-lines: 4,7,13
+
+   from typing import TypedDict
+   from pymongo import MongoClient
+   from pymongo.collection import Collection
+   from bson import ObjectId
+
+   class Movie(TypedDict):
+       _id: ObjectId
+       name: str
+       year: int
+
+   collection: Collection[ExplicitMovie] = client.test.test
+   inserted = collection.insert_one(
+       ExplicitMovie(_id=ObjectId(), name="Jurassic Park", year=1993)
+   )
+   result = collection.find_one({"name": "Jurassic Park"})
+   assert result is not None
+   assert result["_id"]
+
+One drawback to adding the ``_id`` field to your custom class is that you must include a
+value for the field for every instance of the class that you create.
+To avoid this, you can install the
+``typing.NotRequired`` package, which includes the ``NotRequired`` type hint. If you
+use this type hint for the ``_id`` field, you can access the value of the ``_id`` field
+at runtime without seeing any compile-time type errors.
+
+The following code example shows how to implement this solution:
+
+.. code-block:: python
+
+   from typing import TypedDict, NotRequired
+   from pymongo import MongoClient
+   from pymongo.collection import Collection
+   from bson import ObjectId
+   
+   class Movie(TypedDict):
+        _id: NotRequired[ObjectId]
+       name: str
+       year: int
+   
+   client: MongoClient = MongoClient() 
+   collection: Collection[Movie] = client.test.test
+   inserted = collection.insert_one(Movie(name="Jurassic Park", year=1993))
+   result = collection.find_one({"name": "Jurassic Park"})
+   assert result is not None
+   assert result["_id"]
+
+.. important:: NotRequired Requires Python 3.11+
+   
+   The ``NotRequired`` class is available only in Python 3.11 and later.
+   To use ``NotRequired`` in earlier versions of Python, install the ``typing_extensions``
+   package instead.
 Additional Information
 ----------------------
 
