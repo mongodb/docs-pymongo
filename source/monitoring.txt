@@ -1,0 +1,71 @@
+.. _pymongo-monitoring:
+
+==========
+Monitoring
+==========
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: event, subscribe, listener
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+Overview
+--------
+
+In this guide, you can learn how to configure **monitoring** in {+driver-short+}.
+Monitoring is the process of gathering information about your
+application's performance and resource usage as it runs.
+This can help you make informed decisions when designing and debugging your application.
+
+The driver provides information about your application by emitting events. You can
+listen for driver events to monitor your application.
+
+.. note:: Event Logging
+
+   This page explains how to monitor your application in code. To learn how to record
+   this information to an external log, see :ref:`Logging. <pymongo-logging>`
+
+Event Types
+-----------
+
+The type of event that the driver emits depends on the operation being performed.
+The following table describes the types of events that the driver emits:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Event Type
+     - Description
+   * - Command Events
+     - Events related to MongoDB database commands, such as ``find``, ``insert``,
+       ``delete``, and ``count``. To learn how to use the {+driver-short+} to run a
+       database command, see :ref:`<pymongo-run-command>`. For more information about
+       MongoDB database commands, see :manual:`Database Commands </reference/command/>`
+       in the {+mdb-server+} manual.
+
+       As a security measure, the driver redacts the contents of some
+       command events. This protects the sensitive information contained in these command
+       events.
+
+   * - Server Discovery and Monitoring (SDAM) Events
+     - Events related to changes in the state of the MongoDB deployment.
+
+   * - Connection Pool Events
+     - Events related to the connection pool held by the driver.
+
+For a copmlete list of events the driver emits, see the
+`pymongo.monitoring <{+api-root+}pymongo/monitoring.html>`__ API documentation.
+
+Listening for Events
+--------------------
+
+To monitor an event, you must 
