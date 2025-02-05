@@ -103,8 +103,8 @@ hosts, including ``host1``:
    uri = "mongodb://host1:27017/?replicaSet=sampleRS"
    client = MongoClient(uri)
 
-{+driver-short+} evenly load balances operations across deployments that fall within
-the client's ``localThresholdMS`` value. To learn more about how {+driver-short+} load
+{+driver-short+} evenly load balances operations across deployments that are reachable
+within the client's ``localThresholdMS`` value. To learn more about how {+driver-short+} load
 balances operations across multiple MongoDB deployments, see the
 :ref:`pymongo-server-selection` guide.
 
