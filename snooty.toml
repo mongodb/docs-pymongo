@@ -31,11 +31,21 @@ mdb-server = "MongoDB Server"
 mongo-community = "MongoDB Community Edition"
 mongo-enterprise = "MongoDB Enterprise Edition"
 docs-branch = "master"                                                       # always set this to the docs branch (i.e. master, 1.7, 1.8, etc.)
-version-number = "4.10"
-patch-version-number = "{+version-number+}.1"                                # always set this to the driver branch (i.e. 1.7.0, 1.8.0, etc.)
+version-number = "4.11"
+patch-version-number = "{+version-number+}"                                # always set this to the driver branch (i.e. 1.7.0, 1.8.0, etc.)
 version = "v{+version-number+}"
 stable-api = "Stable API"
 api-root = "https://pymongo.readthedocs.io/en/{+patch-version-number+}/api/"
 string-data-type = "``str``"
 int-data-type = "``int``"
 bool-data-type = "``bool``"
+django-odm = "Django MongoDB Backend"
+django-docs = "https://www.mongodb.com/docs/languages/python/django-mongodb/current"
+
+[[banners]]
+targets = ["index.txt"]
+variant = "tip"
+value = """
+    {+django-odm+} is now in Public Preview! \
+    To discover its features and learn more, see the `{+django-odm+} documentation <{+django-docs+}>`__.
+    """

@@ -22,6 +22,8 @@ MongoDB {+driver-short+} Documentation
    Aggregation </aggregation>
    Security </security>
    Data Formats </data-formats>
+   Logging </logging>
+   Monitoring </monitoring>
    Third-Party Tools </tools>
    FAQ </faq>
    Troubleshooting </troubleshooting>
