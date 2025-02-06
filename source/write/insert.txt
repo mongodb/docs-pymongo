@@ -64,7 +64,9 @@ You can also pass an instance of a custom class to the ``insert_one()`` method.
 This provides additional type safety if you're using a type-checking
 tool. The instance you pass must inherit from the ``TypedDict`` class.
 
-.. include:: /includes/type-hints/typeddict-availability.rst
+.. note:: TypedDict in Python 3.7 and Earlier
+
+   .. include:: /includes/type-hints/typeddict-availability.rst
 
 The following example passes an instance of the ``Restaurant`` class to the ``insert_one()``
 method for added type safety:
@@ -99,7 +101,9 @@ You can also pass a list of instances of a custom class to the ``insert_many()``
 This provides additional type safety if you're using a type-checking
 tool. The instances you pass must inherit from the ``TypedDict`` class.
 
-.. include:: /includes/type-hints/typeddict-availability.rst
+.. note:: TypedDict in Python 3.7 and Earlier
+
+   .. include:: /includes/type-hints/typeddict-availability.rst
 
 The following example calls the ``insert_many()`` method and passes a list that contains
 instances of the ``Restaurant`` class. This adds type safety to the insert operation. 

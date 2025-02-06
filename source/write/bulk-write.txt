@@ -99,7 +99,9 @@ You can also create an instance of ``InsertOne`` by passing an instance of a cus
 to the constructor. This provides additional type safety if you're using a type-checking
 tool. The instance you pass must inherit from the ``TypedDict`` class.
 
-.. include:: /includes/type-hints/typeddict-availability.rst
+.. note:: TypedDict in Python 3.7 and Earlier
+
+   .. include:: /includes/type-hints/typeddict-availability.rst
 
 The following example constructs an ``InsertOne`` instance by using a custom
 class for added type safety:
@@ -176,7 +178,9 @@ You can also create an instance of ``ReplaceOne`` by passing an instance of a cu
 to the constructor. This provides additional type safety if you're using a type-checking
 tool. The instance you pass must inherit from the ``TypedDict`` class.
 
-.. include:: /includes/type-hints/typeddict-availability.rst
+.. note:: TypedDict in Python 3.7 and Earlier
+
+   .. include:: /includes/type-hints/typeddict-availability.rst
 
 The following example constructs a ``ReplaceOne`` instance by using a custom
 class for added type safety:
