@@ -238,7 +238,9 @@ the class name. The class can be one of the following types:
   parameter, you must also include the class in a type hint for your ``CodecOptions``
   object.
 
-.. include:: /includes/type-hints/typeddict-availability.rst
+.. note:: TypedDict in Python 3.7 and Earlier
+
+   .. include:: /includes/type-hints/typeddict-availability.rst
 
 The following example decodes the BSON returned by the ``ping`` command to instances
 of the ``RawBSONDocument`` class:
