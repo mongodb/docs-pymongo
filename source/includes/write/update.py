@@ -31,7 +31,7 @@ update_operation = { '$set' :
 }
 
 result = restaurants.update_many(query_filter, update_operation,
-                                  collation=Collation(locale='fr_CA'))
+                                 collation=Collation(locale='fr_CA'))
 # end-update-many-collation
 
 # start-update-options
