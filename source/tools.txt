@@ -260,20 +260,6 @@ daemon in the global application group:
    and in the `Multiple Python Sub Interpreters <https://modwsgi.readthedocs.io/en/master/user-guides/application-issues.html#multiple-python-sub-interpreters>`__
    section of the mod_wsgi documentation.
 
-Alternative Python Drivers
---------------------------
-
-This section lists alternatives to {+driver-short+}.
-
-- `Motor <https://github.com/mongodb/motor>`__ is a full-featured, non-blocking
-  MongoDB driver for Python Tornado applications.
-
-- `TxMongo <https://github.com/twisted/txmongo>`__ is an asynchronous Twisted
-  Python driver for MongoDB.
-
-- `MongoMock <https://github.com/mongomock/mongomock>`__ is a small
-  library to help test Python code. It uses {+driver-short+} to interact with MongoDB.
-
 Type Checkers
 -------------
 
@@ -294,3 +280,17 @@ in the ``typing`` module documentation.
 
       [mypy-pymongo]
       follow_imports = False
+
+Alternative Python Drivers
+--------------------------
+
+This section lists alternatives to {+driver-short+}.
+
+- `Motor <https://github.com/mongodb/motor>`__ is a full-featured, non-blocking
+  MongoDB driver for Python Tornado applications.
+
+- `TxMongo <https://github.com/twisted/txmongo>`__ is an asynchronous Twisted
+  Python driver for MongoDB.
+
+- `MongoMock <https://github.com/mongomock/mongomock>`__ is a small
+  library to help test Python code. It uses {+driver-short+} to interact with MongoDB.

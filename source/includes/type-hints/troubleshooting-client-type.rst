@@ -2,7 +2,7 @@ Client Type Annotations
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 If you don't add a type annotation for your ``MongoClient`` object,
-you might see the following mypy error:
+your type checker might show an error similar to the following:
 
 .. code-block:: python
 

@@ -226,10 +226,9 @@ collections.
 Type Hints
 ----------
 
-When you use the ``Database.command()`` method to run a database command, you can instruct
-the method to decode the returned BSON to a specific document type. To do so,
-construct a ``CodecOptions`` object and pass the name of the class the documents should
-be decoded to. The class can be one of the following types:
+The ``Database.command()`` method can decode the returned BSON documents to instances
+of a specific class. To specify this class, construct a ``CodecOptions`` object and pass
+the class name. The class can be one of the following types:
 
 - ``bson.raw_bson.RawBSONDocument``.
 - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
@@ -239,11 +238,13 @@ be decoded to. The class can be one of the following types:
   parameter, you must also include the class in a type hint for your ``CodecOptions``
   object.
 
-The following example shows how to specify the document type for the result of the
-``ping`` command:
+.. include:: /includes/type-hints/typeddict-availability.rst
+
+The following example decodes the BSON returned by the ``ping`` command to instances
+of the ``RawBSONDocument`` class:
 
 .. code-block:: python
-   :emphasize-lines: 3, 5
+   :emphasize-lines: 3, 6-7
 
    from pymongo import MongoClient
    from bson.raw_bson import RawBSONDocument
@@ -253,9 +254,11 @@ The following example shows how to specify the document type for the result of t
    options = CodecOptions(RawBSONDocument)
    result = client.admin.command("ping", codec_options=options)
 
-To pass a ``TypedDict`` subclass, use the following syntax: 
+To decode BSON to a subclass of the ``TypedDict`` class, specify the class name in
+the ``CodecOptions`` type hint, as shown in the following example:
 
 .. code-block:: python
+   :emphasize-lines: 4, 6-8, 11
   
    from pymongo import MongoClient
    from bson.raw_bson import RawBSONDocument
@@ -269,8 +272,6 @@ To pass a ``TypedDict`` subclass, use the following syntax:
    client: MongoClient = MongoClient()
    options: CodecOptions[Movie] = CodecOptions(Movie)
    result = client.admin.command("ping", codec_options=options)
-
-.. include:: /includes/type-hints/tip-more-info.rst
 
 Troubleshooting
 ---------------
