@@ -95,6 +95,21 @@ The following example creates an instance of ``InsertOne``:
    :language: python
    :copyable:
 
+You can also create an instance of ``InsertOne`` by passing an instance of a custom class
+to the constructor. This provides additional type safety if you're using a type-checking
+tool. The instance you pass must inherit from the ``TypedDict`` class.
+
+.. include:: /includes/type-hints/typeddict-availability.rst
+
+The following example constructs an ``InsertOne`` instance by using a custom
+class for added type safety:
+
+.. literalinclude:: /includes/write/bulk-write.py
+   :start-after: start-bulk-insert-one-typed
+   :end-before: end-bulk-insert-one-typed
+   :language: python
+   :copyable:
+
 To insert multiple documents, create an instance of ``InsertOne`` for each document.
 
 .. include:: /includes/write/unique-id-note.rst
@@ -154,6 +169,21 @@ The following example creates an instance of ``ReplaceOne``:
 .. literalinclude:: /includes/write/bulk-write.py
    :start-after: start-bulk-replace-one
    :end-before: end-bulk-replace-one
+   :language: python
+   :copyable:
+
+You can also create an instance of ``ReplaceOne`` by passing an instance of a custom class
+to the constructor. This provides additional type safety if you're using a type-checking
+tool. The instance you pass must inherit from the ``TypedDict`` class.
+
+.. include:: /includes/type-hints/typeddict-availability.rst
+
+The following example constructs a ``ReplaceOne`` instance by using a custom
+class for added type safety:
+
+.. literalinclude:: /includes/write/bulk-write.py
+   :start-after: start-bulk-replace-one-typed
+   :end-before: end-bulk-replace-one-typed
    :language: python
    :copyable:
 

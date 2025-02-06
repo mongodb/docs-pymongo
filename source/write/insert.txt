@@ -60,6 +60,23 @@ The following example inserts a document into the ``restaurants`` collection:
 
    sample_restaurants.restaurants.insert_one({"name" : "Mongo's Burgers"})
 
+You can also pass an instance of a custom class to the ``insert_one()`` method.
+This provides additional type safety if you're using a type-checking
+tool. The instance you pass must inherit from the ``TypedDict`` class.
+
+.. include:: /includes/type-hints/typeddict-availability.rst
+
+The following example passes an instance of the ``Restaurant`` class to the ``insert_one()``
+method for added type safety:
+
+.. code-block:: python
+   :copyable: true
+
+   class Restaurant(TypedDict):
+       name: str
+   
+   sample_restaurants.restaurants.insert_one(Movie(name="Mongo's Burgers")
+
 Insert Multiple Documents
 -------------------------
 
@@ -74,6 +91,28 @@ The following example inserts a list of documents into the ``restaurants`` colle
    document_list = [
       { "name" : "Mongo's Burgers" },
       { "name" : "Mongo's Pizza" }
+   ]
+
+   sample_restaurants.restaurants.insert_many(document_list)
+
+You can also pass a list of instances of a custom class to the ``insert_many()`` method.
+This provides additional type safety if you're using a type-checking
+tool. The instances you pass must inherit from the ``TypedDict`` class.
+
+.. include:: /includes/type-hints/typeddict-availability.rst
+
+The following example calls the ``insert_many()`` method and passes a list that contains
+instances of the ``Restaurant`` class. This adds type safety to the insert operation. 
+
+.. code-block:: python
+   :copyable: true
+
+   class Restaurant(TypedDict):
+       name: str
+   
+   document_list = [
+      Restaurant(name="Mongo's Burgers"),
+      Restaurant(name="Mongo's Pizza")
    ]
 
    sample_restaurants.restaurants.insert_many(document_list)
@@ -139,41 +178,6 @@ document-level validation.
    ]
 
    sample_restaurants.restaurants.insert_many(document_list, bypass_document_validation = True)
-
-Type Hints
-----------
-
-.. include:: /includes/type-hints/intro.rst
-
-When you call the ``insert_one()`` or ``insert_many()`` method, you can pass one or more
-instances of a custom class that represents the documents in the collection.
-
-To create
-a custom type, define a class that inherits from the ``TypedDict`` class. In the class,
-add a property for each field in the document.
-
-After you define the class, you can insert instances of the class. The following example
-defines a ``Movie`` class to represent documents from the
-``sample_mflix.movies`` collection.
-Each ``Movie`` object contains two key-value pairs: ``name``, a string key with a string
-value, and ``year``, a string key with an integer value.
-The code then uses the ``insert_one()`` method to insert a ``Movie`` object.
-
-.. code-block:: python
-   :emphasize-lines: 10
-
-   from typing import TypedDict
-   
-   class Movie(TypedDict):
-       name: str
-       year: int
-
-   client: MongoClient = MongoClient()
-   database = client["test_database"]
-   collection: Collection[Movie] = database["test_collection"]
-   inserted = collection.insert_one(Movie(name="Jurassic Park", year=1993))
-
-.. include:: /includes/type-hints/tip-more-info.rst
 
 Troubleshooting
 ---------------
@@ -308,6 +312,7 @@ The following code example shows how to implement this solution:
    The ``NotRequired`` class is available only in Python 3.11 and later.
    To use ``NotRequired`` in earlier versions of Python, install the ``typing_extensions``
    package instead.
+
 Additional Information
 ----------------------
 

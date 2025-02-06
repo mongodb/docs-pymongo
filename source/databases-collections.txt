@@ -328,9 +328,7 @@ Type Hints
 
 .. include:: /includes/type-hints/intro.rst
 
-.. include:: /includes/type-hints/tip-more-info.rst
-
-.. note:: TypedDict Requires Python 3.8+
+.. note:: TypedDict in Python 3.7 and Earlier
    
    .. include:: /includes/type-hints/typeddict-availability.rst
 

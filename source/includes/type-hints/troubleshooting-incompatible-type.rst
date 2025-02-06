@@ -1,8 +1,8 @@
 Incompatible Type
 ~~~~~~~~~~~~~~~~~
 
-If you use the generic form of the ``MongoClient`` class, you
-might see the following mypy error:
+If you use the generic form of the ``MongoClient`` class, your type checker might
+show an error similar to the following:
 
 .. code-block:: python
 

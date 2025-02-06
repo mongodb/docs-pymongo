@@ -33,12 +33,6 @@ while connected to MongoDB.
 This guide shows you how to create a connection string and use a ``MongoClient`` object
 to connect to MongoDB.
 
-.. tip:: Type Hints
-
-   If your application uses Python 3.5 or later, you can add type hints to your
-   ``MongoClient`` objects. To learn how to add type hints, see
-   :ref:`Type Hints <pymongo-type-hints-client>`.
-
 .. _pymongo_connection_uri:
 
 Connection URI
@@ -125,7 +119,7 @@ constructor accepts. All parameters are optional.
        :wikipedia:`round-robin DNS <Round-robin_DNS>` addresses.
 
        **Data type:** ``Union[str, Sequence[str]]``
-       **Default value:** ``"localhost"``
+       | **Default value:** ``"localhost"``
 
    * - ``port``
      - The port number {+mdb-server+} is running on.
@@ -134,7 +128,7 @@ constructor accepts. All parameters are optional.
        instead of using this parameter.
 
        **Data type:** ``int``
-       **Default value:** ``27017``
+       | **Default value:** ``27017``
 
    * - ``document_class``
      - The default class that the client uses to decode BSON documents returned by queries.
@@ -257,15 +251,13 @@ To use type hints in your {+driver-short+} application, you must add a type anno
    client: MongoClient = MongoClient()
 
 For more accurate type information, you can include the generic document type
-``Dict[str, Any]`` in your type annotation. This type matches all documents in MongoDB.
-The following example shows how to add this type hint:
+``Dict[str, Any]`` in your type annotation. This data type matches all documents in MongoDB.
+The following example shows how to include this data type in your type annotation:
 
 .. code-block:: python
 
    from typing import Any, Dict
    client: MongoClient[Dict[str, Any]] = MongoClient()
-
-.. include:: /includes/type-hints/tip-more-info.rst
 
 Troubleshooting
 ---------------
@@ -341,4 +333,4 @@ API Documentation
 To learn more about creating a ``MongoClient`` object in {+driver-short+},
 see the following API documentation:
 
-- `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__ 
+- `MongoClient <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient>`__
