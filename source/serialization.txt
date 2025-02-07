@@ -103,7 +103,7 @@ are in identical order.
 To preserve the order of keys when serializing and deserializing BSON,
 use the `SON <{+api-root+}bson/son.html>`__ class. You must also configure your collection
 to use SON for serialization and deserialization by specifying ``document_class=SON``
-to the ``with_options`` method of a collection.
+to the ``with_options()`` method of a collection.
 
 The following example retrieves a document
 that has a ``location`` field value of ``{"street": "Cafe St", "zipcode": "10003"}`` from
