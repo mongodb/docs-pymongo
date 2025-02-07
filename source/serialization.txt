@@ -20,12 +20,12 @@ Serialization
 Overview
 --------
 
-In this guide, you can learn how to use {+driver-long+} to perform
+In this guide, you can learn how to use {+driver-short+} to perform
 serialization.
 
 Serialization is the process of mapping a {+language+} object to a BSON
 document for storage in MongoDB. {+driver-short+} automatically converts basic {+language+}
-types into BSON when you insert them into a collection. Similarly, when you retrieve a
+types into BSON when you insert a document into a collection. Similarly, when you retrieve a
 document from a collection, {+driver-short+} automatically converts the returned BSON
 back into the corresponding {+language+} types.
 
