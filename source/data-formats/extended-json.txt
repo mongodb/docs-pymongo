@@ -63,7 +63,7 @@ list of dictionaries by using the ``loads()`` method:
       :language: none
       :visible: false
 
-      data = [
+      [
          {'foo': [1, 2]},
          {'bar': {'hello': 'world'}},
          {'code': Code('function x() { return 1; }', {})},
@@ -167,7 +167,7 @@ More Information
 
 To learn more about JSON, BSON, and Extended JSON, see
 `our article about JSON and BSON <https://www.mongodb.com/resources/basics/json-and-bson>`__
-and :manual:`</reference/mongodb-extended-json/>` in the {+mdb-server+} manual.
+and :manual:`Extended JSON </reference/mongodb-extended-json/>` in the {+mdb-server+} manual.
 
 For more information about the methods and types in ``bson.json_util``, see the following
 API documentation:
