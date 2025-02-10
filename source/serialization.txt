@@ -48,8 +48,7 @@ Custom Classes
 --------------
 
 To serialize and deserialize custom {+language+} classes, you must implement custom logic
-to handle the conversion. {+driver-short+} cannot serialize custom classes otherwise. The
-following sections show how to serialize and deserialize
+to handle the conversion. The following sections show how to serialize and deserialize
 custom classes.
 
 Serializing Custom Classes
