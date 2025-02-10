@@ -29,8 +29,8 @@ types into BSON when you insert a document into a collection. Similarly, when yo
 document from a collection, {+driver-short+} automatically converts the returned BSON
 back into the corresponding {+language+} types.
 
-The following list shows some {+language+} types that {+driver-short+} can serialize
-and deserialize:
+You can use {+driver-short+} to serialize and deserialize the following {+language+}
+types:
 
 - ``str``
 - ``int``
@@ -55,7 +55,7 @@ Serializing Custom Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To serialize a custom class, you must convert the class to a dictionary. The following
-example serializes a custom class by using the ``vars()`` method, then inserts the
+example serializes a custom class by using the ``vars()`` method, and then inserts the
 serialized object into a collection:
 
 .. code-block:: python
@@ -77,7 +77,7 @@ Deserializing Custom Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To deserialize a custom class, you must convert the dictionary back into an instance of
-the class. The following example retrieves a document from a collection, then converts
+the class. The following example retrieves a document from a collection, and then converts
 it back into a ``Restaurant`` object from the preceding example:
 
 .. code-block:: python
@@ -95,9 +95,9 @@ Serializing Ordered Documents
 -----------------------------
 
 Because the key-value pairs in {+language+} dictionaries are unordered, the order of
-fields in serialized BSON documents can differ from the order of fields in the original
+fields in serialized BSON documents can differ from the original
 dictionary. This behavior can cause issues when {+driver-short+} compares subdocuments
-to each other, since {+driver-short+} only considers subdocuments to be equal if their fields
+to each other, because {+driver-short+} only considers subdocuments to be equal if their fields
 are in identical order.
 
 To preserve the order of keys when serializing and deserializing BSON,
