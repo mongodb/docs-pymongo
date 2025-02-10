@@ -48,7 +48,8 @@ Custom Classes
 --------------
 
 To serialize and deserialize custom {+language+} classes, you must implement custom logic
-to handle the conversion. The following sections show how to serialize and deserialize
+to handle the conversion. {+driver-short+} cannot serialize custom classes otherwise. The
+following sections show how to serialize and deserialize
 custom classes.
 
 Serializing Custom Classes
@@ -90,34 +91,3 @@ it back into a ``Restaurant`` object from the preceding example:
 
 To learn more about retrieving documents from a collection, see the :ref:`pymongo-retrieve`
 guide.
-
-Serializing Ordered Documents
------------------------------
-
-Because the key-value pairs in {+language+} dictionaries are unordered, the order of
-fields in serialized BSON documents can differ from the original
-dictionary. This behavior can cause issues when {+driver-short+} compares subdocuments
-to each other, because {+driver-short+} only considers subdocuments to be equal if their fields
-are in identical order.
-
-To preserve the order of keys when serializing and deserializing BSON,
-use the `SON <{+api-root+}bson/son.html>`__ class. You must also configure your collection
-to use SON for serialization and deserialization by specifying ``document_class=SON``
-to the ``with_options()`` method of a collection.
-
-The following example retrieves a document
-that has a ``location`` field value of ``{"street": "Cafe St", "zipcode": "10003"}`` from
-the ``restaurants`` collection:
-
-.. code-block:: python
-
-   from bson import CodecOptions, SON
-
-   opts = CodecOptions(document_class=SON)
-   collection = db.get_collection("restaurants")
-   son_collection = collection.with_options(codec_options=opts)
-   doc = son_collection.find_one({"location": SON([("street", "Cafe St"), ("zipcode", "10003")])})
-
-For more information about subdocument matching, see the
-:manual:`Query on Embedded/Nested Documents </tutorial/query-embedded-documents/>`
-guide in the {+mdb-server+} documentation.
