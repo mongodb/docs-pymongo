@@ -33,7 +33,7 @@ You can read an Extended JSON string into a Python object by calling
 the ``bson.json_util.loads()`` method. This method parses an Extended
 JSON string and returns a Python list containing the data.
 
-The following example shows how you can read an example Extended JSON string into a
+The following example shows how you can read an Extended JSON string into a
 list of dictionaries by using the ``loads()`` method:
 
 .. io-code-block::
@@ -75,7 +75,7 @@ Write Extended JSON
 
 You can write an Extended JSON string from a list of dictionaries
 by calling the ``bson.json_util.dumps()`` method. 
-In this example, we output the Extended JSON in the Relaxed mode format.
+The following example outputs an Extended JSON string in the Relaxed format:
 
 .. io-code-block::
 
@@ -162,8 +162,8 @@ The following example shows how to output Extended JSON in the Canonical format:
          }}}
       ]'''
 
-More Information
-----------------
+Additional Information
+----------------------
 
 To learn more about JSON, BSON, and Extended JSON, see
 `our article about JSON and BSON <https://www.mongodb.com/resources/basics/json-and-bson>`__
