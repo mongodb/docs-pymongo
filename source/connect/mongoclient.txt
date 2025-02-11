@@ -137,7 +137,12 @@ constructor accepts. All parameters are optional.
        - ``bson.raw_bson.RawBSONDocument``.
        - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
          If you specify ``bson.son.SON`` as the document class, you must also specify types
-         for the key and value.
+         for the key and value, as shown in the following example:
+
+         .. code-block:: python
+
+            client = MongoClient(document_class=SON[str, int])
+       
        - A subclass of the ``TypedDict`` type. To pass a ``TypedDict`` subclass for this
          parameter, you must also include the class in a type hint for your ``MongoClient``
          object, as shown in the following example:
@@ -149,6 +154,7 @@ constructor accepts. All parameters are optional.
          .. include:: /includes/type-hints/typeddict-availability.rst
 
        **Data type:** ``Type[_DocumentType]``
+       **Default:** ``dict``
 
    * - ``tz_aware``
      - If this parameter is ``True``, the client treats ``datetime`` values as aware.

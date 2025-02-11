@@ -199,24 +199,6 @@ to the ``find()`` method:
 
 .. include:: /includes/collation-override-note.rst
 
-Troubleshooting
----------------
-
-Modifying Raw BSON
-~~~~~~~~~~~~~~~~~~
-
-Instances of the ``RawBSONDocument`` class are read-only. If you try to set a value on a
-``RawBSONDocument`` object, you will see an error similar to one of the following:
-
-.. code-block:: python
-
-   error: Unsupported target for indexed assignment
-   ("RawBSONDocument")  [index]
-
-.. code-block:: python
-
-   TypeError: 'RawBSONDocument' object does not support item assignment
-
 .. _pymongo-retrieve-additional-information:
 
 Additional Information
