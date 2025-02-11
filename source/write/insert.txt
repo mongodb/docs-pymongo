@@ -77,7 +77,9 @@ method for added type safety:
    class Restaurant(TypedDict):
        name: str
    
-   sample_restaurants.restaurants.insert_one(Movie(name="Mongo's Burgers")
+   sample_restaurants.restaurants.insert_one(Restaurant(name="Mongo's Burgers")
+
+.. include:: /includes/type-hints/tip-type-checkers.rst
 
 Insert Multiple Documents
 -------------------------
@@ -120,6 +122,8 @@ instances of the ``Restaurant`` class. This adds type safety to the insert opera
    ]
 
    sample_restaurants.restaurants.insert_many(document_list)
+
+.. include:: /includes/type-hints/tip-type-checkers.rst
 
 Modify Insert Behavior
 ----------------------
@@ -205,7 +209,7 @@ calling the ``insert_many()`` method instead.
 TypedDict Missing _id Key
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As discussed above, if you don't specify the ``_id`` field, {+driver-short+} automatically
+If you don't specify the ``_id`` field, {+driver-short+} automatically
 inserts it into the document.
 You can retrieve the value of the ``_id`` field at runtime, but if you use MyPy or another
 tool to perform static type-checking, it won't find the ``_id`` field in your class and
@@ -313,8 +317,10 @@ The following code example shows how to implement this solution:
 
 .. important:: NotRequired Requires Python 3.11+
    
-   The ``NotRequired`` class is available only in Python 3.11 and later.
-   To use ``NotRequired`` in earlier versions of Python, install the ``typing_extensions``
+   The `NotRequired <https://docs.python.org/3/library/typing.html#typing.NotRequired>`__
+   class is available only in Python 3.11 and later.
+   To use ``NotRequired`` in earlier versions of Python, install the
+   `typing_extensions <https://pypi.org/project/typing-extensions/>`__
    package instead.
 
 Additional Information

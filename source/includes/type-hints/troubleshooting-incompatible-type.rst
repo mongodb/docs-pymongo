@@ -1,8 +1,9 @@
 Incompatible Type
 ~~~~~~~~~~~~~~~~~
 
-If you use the generic form of the ``MongoClient`` class, your type checker might
-show an error similar to the following:
+If you specify ``MongoClient`` as a type hint but don't include data types for
+the document, keys, and values, your type checker might show an error similar to
+the following:
 
 .. code-block:: python
 

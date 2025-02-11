@@ -193,6 +193,8 @@ class for added type safety:
 
 To replace multiple documents, you must create an instance of ``ReplaceOne`` for each document.
 
+.. include:: /includes/type-hints/tip-type-checkers.rst
+
 Delete Operations
 ~~~~~~~~~~~~~~~~~
 
