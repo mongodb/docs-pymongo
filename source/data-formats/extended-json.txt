@@ -26,6 +26,10 @@ set of keys prefixed with "``$``" to represent field type information that
 directly corresponds to each type in BSON, the format that MongoDB uses to
 store data.
 
+To learn more about JSON, BSON, and Extended JSON, see
+`our article about JSON and BSON <https://www.mongodb.com/resources/basics/json-and-bson>`__
+and :manual:`Extended JSON </reference/mongodb-extended-json/>` in the {+mdb-server+} manual.
+
 Read Extended JSON
 ------------------
 
@@ -164,10 +168,6 @@ The following example shows how to output Extended JSON in the Canonical format:
 
 Additional Information
 ----------------------
-
-To learn more about JSON, BSON, and Extended JSON, see
-`our article about JSON and BSON <https://www.mongodb.com/resources/basics/json-and-bson>`__
-and :manual:`Extended JSON </reference/mongodb-extended-json/>` in the {+mdb-server+} manual.
 
 For more information about the methods and types in ``bson.json_util``, see the following
 API documentation:
