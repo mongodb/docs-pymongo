@@ -83,8 +83,6 @@ the ``"cuisine"`` field has the value ``"Bakery"``:
 
    To learn more about sorting, see the :ref:`sort guide <pymongo-sort>`.
 
-
-
 .. _pymongo-retrieve-find-multiple:
 
 Find Multiple Documents
