@@ -90,3 +90,45 @@ it back into a ``Restaurant`` object from the preceding example:
 
 To learn more about retrieving documents from a collection, see the :ref:`pymongo-retrieve`
 guide.
+
+Binary Fields
+-------------
+
+In all versions of Python, {+driver-short+} encodes instances of the
+`bytes <https://docs.python.org/3/library/stdtypes.html#bytes>`__ class
+as binary data with subtype 0, the default subtype for binary data. In Python 3,
+{+driver-short+} decodes these values to instances of the ``bytes`` class. In Python 2,
+however, the driver decodes them to instances of the
+`Binary <https://pymongo.readthedocs.io/en/4.11/api/bson/binary.html#bson.binary.Binary>`__
+class with subtype 0.
+
+The following code examples use {+driver-short+} to insert a ``bytes`` instance
+into MongoDB, and then find the instance.
+In Python 2, the byte string is decoded to ``Binary``.
+In Python 3, the byte string is decoded back to ``bytes``.
+
+.. tabs::
+
+   .. tab:: Python 2.7
+      :tabid: python-2
+
+      .. code-block:: python
+
+         >>> import pymongo
+         >>> c = pymongo.MongoClient()
+         >>> c.test.bintest.insert_one().inserted_id
+         ObjectId('4f9086b1fba5222021000000')
+         >>> c.test.bintest.find_one()
+         {u'binary': Binary('this is a byte string', 0), u'_id': ObjectId('4f9086b1fba5222021000000')}
+ 
+   .. tab:: Python 3.7
+      :tabid: python-3
+
+      .. code-block:: python
+
+         >>> import pymongo
+         >>> c = pymongo.MongoClient()
+         >>> c.test.bintest.insert_one({'binary': b'this is a byte string'}).inserted_id
+         ObjectId('4f9086b1fba5222021000000')
+         >>> c.test.bintest.find_one()
+         {'binary': b'this is a byte string', '_id': ObjectId('4f9086b1fba5222021000000')}
