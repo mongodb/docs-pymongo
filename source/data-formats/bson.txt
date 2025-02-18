@@ -125,7 +125,7 @@ some situations that might require using raw BSON documents:
 
 - Moving a document between databases or collections
 - Writing binary blobs to a disk
-- Bypassing the performance overhead of converting to and from {+language+} dictionaries.
+- Bypassing the performance overhead of converting to and from {+language+} dictionaries
 
 You can use the ``RawBSONDocument`` class to represent raw BSON documents. To use
 ``RawBSONDocument`` objects to represent documents in your collection, set the
