@@ -187,7 +187,7 @@ In Python 3, the driver decodes JSON binary values with subtype 0 to instances o
 ``bytes`` class. In Python 2, the driver decodes these values to instances of the ``Binary``
 class with subtype 0.
 
-The following code examples show how {+driver-short+} decodes JSON binary isntances with
+The following code examples show how {+driver-short+} decodes JSON binary instances with
 subtype 0. Select the :guilabel:`Python 2` or :guilabel:`Python 3` tab to view the
 corresponding code.
 

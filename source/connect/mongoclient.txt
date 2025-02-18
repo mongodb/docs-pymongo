@@ -188,7 +188,7 @@ database, most applications require only a single instance of
 Multiple Forks
 ~~~~~~~~~~~~~~~
 
-{+driver-short+} supports using the ``fork()`` method to create a new process. 
+{+driver-short+} supports calling the ``fork()`` method to create a new process. 
 However, if you fork a process, you must create a new ``MongoClient`` instance in the
 child process.
 
