@@ -120,15 +120,19 @@ The following example reads the sample BSON document from ``file.bson``:
 Work with Raw BSON Data
 -----------------------
 
-You might prefer to use raw BSON documents in certain cases, such as when you move a
-document between databases or collections, when you must write binary blobs to a
-disk, or when you want to bypass the performance overhead of converting to and from
-{+language+} dictionaries. You can use the ``RawBSONDocument`` class to represent raw BSON
-documents. To use ``RawBSONDocument`` objects with your collection, set the
+{+driver-short+} supports the usage of raw BSON documents. The following list contains
+some situations that might require using raw BSON documents:
+
+- Moving a document between databases or collections
+- Writing binary blobs to a disk
+- Bypassing the performance overhead of converting to and from {+language+} dictionaries.
+
+You can use the ``RawBSONDocument`` class to represent raw BSON documents. To use
+``RawBSONDocument`` objects to represent documents in your collection, set the
 ``document_class`` parameter of the ``MongoClient`` constructor to ``RawBSONDocument``.
 
-The following example fetches the sample BSON document from a collection and converts it
-to a ``RawBSONDocument``:
+The following example configures a ``MongoClient`` object to use ``RawBSONDocument``,
+then retrieves the sample document:
 
 .. code-block:: python
       
