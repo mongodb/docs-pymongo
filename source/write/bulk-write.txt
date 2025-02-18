@@ -202,10 +202,15 @@ pass a list of these instances to the ``bulk_write()`` method. Call the
 ``bulk_write()`` method on a ``Collection`` instance to write to a single
 collection or a ``MongoClient`` instance to write to multiple namespaces.
 
-If any of the write operations fail, {+driver-short+} raises a
+If any of the write operations called on a ``Collection`` fail, {+driver-short+} raises a
 ``BulkWriteError`` and does not perform any further operations.
 ``BulkWriteError`` provides a ``details`` attribute that includes the operation
 that failed, and details about the exception.
+
+If any of the write operations called on a ``MongoClient`` fail, {+driver-short+} raises a
+``ClientBulkWriteException`` and does not perform any further operations.
+``ClientBulkWriteException`` provides an ``error`` attribute that includes
+information about the exception.
 
 .. note::
 
@@ -225,6 +230,7 @@ The following example performs multiple write operations on the
 on a ``Collection`` instance:
 
 .. io-code-block::
+   :copyable:
 
    .. input:: /includes/write/bulk-write.py
       :start-after: start-bulk-write-mixed-collection
@@ -232,6 +238,7 @@ on a ``Collection`` instance:
       :language: python
 
    .. output::
+      :visible: false
       
       BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
       'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
@@ -248,6 +255,7 @@ namespaces by using the ``bulk_write()`` method on a ``MongoClient``
 instance:
 
 .. io-code-block::
+   :copyable:
 
    .. input:: /includes/write/bulk-write.py
       :start-after: start-bulk-write-mixed-client
@@ -255,6 +263,7 @@ instance:
       :language: python
 
    .. output::
+      :visible: false
       
       ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
       'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1,
@@ -533,3 +542,4 @@ guide, see the following API Documentation:
 - `BulkWriteResult <{+api-root+}pymongo/results.html#pymongo.results.BulkWriteResult>`__
 - `ClientBulkWriteResult <{+api-root+}pymongo/results.html#pymongo.results.ClientBulkWriteResult>`__
 - `BulkWriteError <{+api-root+}pymongo/errors.html#pymongo.errors.BulkWriteError>`__
+- `ClientBulkWriteException <{+api-root+}pymongo/errors.html#pymongo.errors.ClientBulkWriteException>`__
