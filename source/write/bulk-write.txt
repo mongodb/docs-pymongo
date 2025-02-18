@@ -20,19 +20,24 @@ Bulk Write Operations
 Overview
 --------
 
-Consider a scenario in which you want to insert a document into a collection,
-update multiple other documents, then delete a document. If you use
-individual methods, each operation requires its own database call. This guide
-shows you how to use bulk write operations to perform multiple write operations
-in a single database call.
+In this guide, you can learn how to use {+driver-short+} to
+perform **bulk operations**. Bulk operations reduce the number
+of calls to the server by performing multiple write operations
+in a single method.
+
+You can use bulk operations to perform multiple write operations on
+a collection. You can also call bulk operations on your client,
+which allows you to perform bulk writes across multiple namespaces.
+In MongoDB, a namespace consists of the database name and the collection
+name in the format ``<database>.<collection>``. 
 
 Sample Data
 ~~~~~~~~~~~
 
-The examples in this guide use the ``sample_restaurants.restaurants`` collection
-from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
-free MongoDB Atlas cluster and load the sample datasets, see the
-:ref:`<pymongo-get-started>` tutorial.
+The examples in this guide use the ``sample_restaurants.restaurants`` 
+and ``sample_mflix.movies`` collections from the :atlas:`Atlas sample datasets
+</sample-data>`. To learn how to create a free MongoDB Atlas cluster
+and load the sample datasets, see the :ref:`<pymongo-get-started>` tutorial.
 
 Define the Write Operations
 ---------------------------
@@ -49,13 +54,28 @@ the following operation classes:
 
 Then, pass a list of these instances to the ``bulk_write()`` method.
 
-The following sections show how to create and use instances of the preceding classes.
+.. important::
+
+   Ensure that you import the write operation instances into your application
+   file, as shown in the following code:
+
+   .. code-block:: python
+
+      from pymongo import InsertOne, UpdateOne, UpdateMany, ReplaceOne, DeleteOne, DeleteMany
+
+The following sections show how to create instances of the preceding classes,
+which you can use to perform collection and client bulk operations.
 
 Insert Operations
 ~~~~~~~~~~~~~~~~~
 
 To perform an insert operation, create an instance of ``InsertOne`` and specify
-the document you want to insert.
+the document you want to insert. Pass the following arguments to the 
+``InsertOne`` constructor:
+
+- Namespace in which to insert the document. This argument is optional if
+  you perform the bulk operation on a single collection.
+- Document to insert.
 
 The following example creates an instance of ``InsertOne``:
 
@@ -79,8 +99,10 @@ Update Operations
 To update a document, create an instance of ``UpdateOne`` and pass in
 the following arguments:
 
-- A **query filter** that specifies the criteria used to match documents in your collection
-- The update operation you want to perform. For more information about update
+- Namespace in which to perform the update. This argument is optional if
+  you perform the bulk operation on a single collection.
+- **Query filter** that specifies the criteria used to match documents in your collection.
+- Update operation you want to perform. For more information about update
   operations, see the :manual:`Field Update Operators
   </reference/operator/update-field/>` guide in the {+mdb-server+} manual.
 
@@ -111,8 +133,13 @@ Replace Operations
 
 A replace operation removes all fields and values of a specified document and
 replaces them with new ones. To perform a replace operation, create an instance
-of ``ReplaceOne`` and pass it a query filter and the fields and values you want
-to store in the matching document.
+of ``ReplaceOne`` and pass in the following arguments:
+
+- Namespace in which to perform the replace operation. This argument is optional if
+  you perform the bulk operation on a single collection.
+- **Query filter** that specifies the criteria used to match the document to replace.
+- Document that includes the new fields and values you want
+  to store in the matching document.
 
 The following example creates an instance of ``ReplaceOne``:
 
@@ -127,9 +154,14 @@ To replace multiple documents, you must create an instance of ``ReplaceOne`` for
 Delete Operations
 ~~~~~~~~~~~~~~~~~
 
-To delete a document, create an instance of ``DeleteOne`` and pass in a
-query filter specifying the document you want to delete. ``DeleteOne`` removes
-only *the first* document that matches your query filter.
+To delete a document, create an instance of ``DeleteOne`` and pass in
+the following arguments:
+
+- Namespace in which to delete the document. This argument is optional if
+  you perform the bulk operation on a single collection.
+- **Query filter** that specifies the criteria used to match the document to delete.
+
+``DeleteOne`` removes only *the first* document that matches your query filter.
 
 The following example creates an instance of ``DeleteOne``:
 
@@ -140,7 +172,7 @@ The following example creates an instance of ``DeleteOne``:
    :copyable:
 
 To delete multiple documents, create an instance of ``DeleteMany`` and pass in a
-query filter specifying the document you want to delete. ``DeleteMany`` removes
+namespace and query filter specifying the document you want to delete. ``DeleteMany`` removes
 *all* documents that match your query filter.
 
 The following example creates an instance of ``DeleteMany``:
@@ -151,27 +183,15 @@ The following example creates an instance of ``DeleteMany``:
    :language: python
    :copyable:
 
-Call the ``bulk_write()`` Method
---------------------------------
+.. _pymongo-bulk-write-call:
+
+Call the bulk_write() Method
+----------------------------
 
 After you define a class instance for each operation you want to perform,
-pass a list of these instances to the ``bulk_write()`` method.
-By default, the method runs the operations in the order
-they're defined in the list.
-
-The following example performs multiple write operations by using the
-``bulk_write()`` method:
-
-.. io-code-block::
-
-   .. input:: /includes/write/bulk-write.py
-      :start-after: start-bulk-write-mixed
-      :end-before: end-bulk-write-mixed
-      :language: python
-
-   .. output::
-      
-      BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2, 'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []}, acknowledged=True)
+pass a list of these instances to the ``bulk_write()`` method. Call the
+``bulk_write()`` method on a ``Collection`` instance to write to a single
+collection or a ``MongoClient`` instance to write to multiple namespaces.
 
 If any of the write operations fail, {+driver-short+} raises a
 ``BulkWriteError`` and does not perform any further operations.
@@ -184,6 +204,51 @@ that failed, and details about the exception.
    collection in which the operation is running. The driver reports all write
    concern errors after attempting all operations, regardless of execution order. 
 
+.. _pymongo-bulk-write-collection-ex:
+
+Collection Bulk Write Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example performs multiple write operations on the 
+``restaurants`` collection by using the ``bulk_write()`` method
+on a ``Collection`` instance:
+
+.. io-code-block::
+
+   .. input:: /includes/write/bulk-write.py
+      :start-after: start-bulk-write-mixed-collection
+      :end-before: end-bulk-write-mixed-collection
+      :language: python
+
+   .. output::
+      
+      BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
+      'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
+      acknowledged=True)
+
+.. _pymongo-bulk-write-client-ex:
+
+Client Bulk Write Example
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following example performs multiple write operations on the 
+``sample_restaurants.restaurants`` and ``sample_mflix.movies``
+namespaces by using the ``bulk_write()`` method on a ``MongoClient``
+instance:
+
+.. io-code-block::
+
+   .. input:: /includes/write/bulk-write.py
+      :start-after: start-bulk-write-mixed-collection
+      :end-before: end-bulk-write-mixed-collection
+      :language: python
+
+   .. output::
+      
+      ClientBulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
+      'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
+      acknowledged=True)
+
 Customize Bulk Write Operations
 -------------------------------
 
@@ -191,6 +256,12 @@ The ``bulk_write()`` method optionally accepts additional
 parameters, which represent options you can use to configure the bulk write
 operation. If you don't specify any additional options, the driver does not customize
 the bulk write operation.
+
+Collection Bulk Write Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following table describes the options you can pass
+to the ``Collection.bulk_write()`` method:
 
 .. list-table::
    :widths: 30 70
@@ -231,7 +302,8 @@ the bulk write operation.
          </reference/command/delete/#std-label-delete-let-syntax>` in the
          {+mdb-server+} manual.
 
-The following example calls the ``bulk_write()`` method from the preceding example, with the ``ordered`` option set
+The following example calls the ``bulk_write()`` method from the preceding
+:ref:`pymongo-bulk-write-collection-ex` but sets the ``ordered`` option
 to ``False``:
 
 .. literalinclude:: /includes/write/bulk-write.py
@@ -248,10 +320,86 @@ reports the errors only after attempting all operations.
    Unordered bulk operations do not guarantee order of execution. The order can
    differ from the way you list them to optimize the runtime.
 
-Return Value
-------------
+Client Bulk Write Options
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
+The following table describes the options you can pass
+to the ``MongoClient.bulk_write()`` method:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``session``
+     - | An instance of ``ClientSession``. For more information, see the `API
+         documentation <{+api-root+}pymongo/client_session.html#pymongo.client_session.ClientSession>`__.
+
+   * - ``ordered``
+     - | If ``True``, the driver performs the write operations in the order
+         provided. If an error occurs, the remaining operations are not
+         attempted. 
+       |
+       | If ``False``, the driver performs the operations in an
+         arbitrary order and attempts to perform all operations.
+       | Defaults to ``True``.
+
+   * - ``verbose_results``
+     - | Specifies whether the operation returns detailed results for each
+         successful operation.
+       | Defaults to ``False``.
+
+   * - ``bypass_document_validation``
+     - | Specifies whether the operation bypasses document-level validation. For more
+         information, see :manual:`Schema
+         Validation </core/schema-validation/#schema-validation>` in the MongoDB
+         Server manual.
+       | Defaults to ``False``.
+
+   * - ``comment``
+     - | A comment to attach to the operation. For more information, see the :manual:`delete command
+         fields </reference/command/delete/#command-fields>` guide in the
+         {+mdb-server+} manual.
+
+   * - ``let``
+     - | A map of parameter names and values. Values must be constant or closed
+         expressions that don't reference document fields. For more information,
+         see the :manual:`let statement
+         </reference/command/delete/#std-label-delete-let-syntax>` in the
+         {+mdb-server+} manual.
+      
+   * - ``write_concern``
+     - | Specifies the write concern to use for the bulk operation.
+         For more information, see :manual:`Write Concern </reference/write-concern/>`
+         in the {+mdb-server+} manual.
+
+The following example calls the ``bulk_write()`` method from the preceding
+:ref:`pymongo-bulk-write-client-ex` but sets the ``verbose_results`` option
+to ``True``:
+
+.. literalinclude:: /includes/write/bulk-write.py
+   :start-after: start-bulk-write-verbose
+   :end-before: end-bulk-write-verbose
+   :language: python
+   :copyable:
+
+Return Values
+-------------
+
+This section describes the return value of the following
+bulk operation methods:
+
+- :ref:`Collection.bulk_write() <pymongo-bulk-write-collection-return>`
+- :ref:`MongoClient.bulk_write() <pymongo-bulk-write-client-return>`
+
+.. _pymongo-bulk-write-collection-return:
+
+Collection Bulk Write Return Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Collection.bulk_write()`` method returns a ``BulkWriteResult`` object. The
 ``BulkWriteResult`` object contains the following properties:
 
 .. list-table::
@@ -286,6 +434,54 @@ The ``bulk_write()`` method returns a ``BulkWriteResult`` object. The
      - | A map of the operation's index to the ``_id`` of the upserted documents, if
          applicable.
 
+.. _pymongo-bulk-write-client-return:
+
+Client Bulk Write Return Value
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Client.bulk_write()`` method returns a ``ClientBulkWriteResult`` object. The
+``ClientBulkWriteResult`` object contains the following properties:
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Property
+     - Description
+
+   * - ``acknowledged``
+     - | Indicates if the server acknowledged the write operation.
+
+   * - ``bulk_api_result``
+     - | The raw bulk API result returned by the server.
+
+   * - ``delete_results``
+     - | A map of any successful delete operations and their results.
+
+   * - ``deleted_count``
+     - | The number of documents deleted, if any.
+
+   * - ``has_verbose_results``
+     - | Indicates whether the returned results are verbose.
+
+   * - ``insert_results``
+     - | A map of any successful insert operations and their results.
+
+   * - ``inserted_count``
+     - | The number of documents inserted, if any.
+
+   * - ``matched_count``
+     - | The number of documents matched for an update, if applicable.
+
+   * - ``modified_count``
+     - | The number of documents modified, if any.
+
+   * - ``update_results``
+     - | A map of any successful update operations and their results.
+
+   * - ``upserted_count``
+     - | The number of documents upserted, if any.
+
 Additional Information
 ----------------------
 
@@ -302,7 +498,8 @@ API Documentation
 To learn more about any of the methods or types discussed in this
 guide, see the following API Documentation:
 
-- `bulk_write() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.bulk_write>`__
+- `Collection.bulk_write() <{+api-root+}pymongo/collection.html#pymongo.collection.Collection.bulk_write>`__
+- `MongoClient.bulk_write() <{+api-root+}pymongo/mongo_client.html#pymongo.mongo_client.MongoClient.bulk_write>`__
 - `InsertOne <{+api-root+}pymongo/operations.html#pymongo.operations.InsertOne>`__
 - `UpdateOne <{+api-root+}pymongo/operations.html#pymongo.operations.UpdateOne>`__
 - `UpdateMany <{+api-root+}pymongo/operations.html#pymongo.operations.UpdateMany>`__
@@ -310,4 +507,5 @@ guide, see the following API Documentation:
 - `DeleteOne <{+api-root+}pymongo/operations.html#pymongo.operations.DeleteOne>`__
 - `DeleteMany <{+api-root+}pymongo/operations.html#pymongo.operations.DeleteMany>`__
 - `BulkWriteResult <{+api-root+}pymongo/results.html#pymongo.results.BulkWriteResult>`__
+- `ClientBulkWriteResult <{+api-root+}pymongo/results.html#pymongo.results.ClientBulkWriteResult>`__
 - `BulkWriteError <{+api-root+}pymongo/errors.html#pymongo.errors.BulkWriteError>`__
