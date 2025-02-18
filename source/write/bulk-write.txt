@@ -210,8 +210,10 @@ that failed, and details about the exception.
 .. note::
 
    When {+driver-short+} runs a bulk operation, it uses the ``write_concern`` of the
-   collection in which the operation is running. The driver reports all write
-   concern errors after attempting all operations, regardless of execution order. 
+   collection or client on which the operation is running. You can also set
+   a write concern for the operation when using the ``MongoClient.bulk_write()``
+   method. The driver reports all write concern errors after attempting all operations,
+   regardless of execution order. 
 
 .. _pymongo-bulk-write-collection-ex:
 
@@ -248,15 +250,16 @@ instance:
 .. io-code-block::
 
    .. input:: /includes/write/bulk-write.py
-      :start-after: start-bulk-write-mixed-collection
-      :end-before: end-bulk-write-mixed-collection
+      :start-after: start-bulk-write-mixed-client
+      :end-before: end-bulk-write-mixed-client
       :language: python
 
    .. output::
       
-      ClientBulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
-      'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
-      acknowledged=True)
+      ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+      'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1,
+      'nModified': 1, 'nDeleted': 344, 'insertResults': {}, 'updateResults': {},
+      'deleteResults': {}}, acknowledged=True, verbose=False)
 
 Customize Bulk Write Operations
 -------------------------------
@@ -388,11 +391,23 @@ The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-client-ex` but sets the ``verbose_results`` option
 to ``True``:
 
-.. literalinclude:: /includes/write/bulk-write.py
-   :start-after: start-bulk-write-verbose
-   :end-before: end-bulk-write-verbose
-   :language: python
+.. io-code-block::
    :copyable:
+
+   .. input:: /includes/write/bulk-write.py
+      :start-after: start-bulk-write-verbose
+      :end-before: end-bulk-write-verbose
+      :language: python
+
+   .. output::
+      :visible: false
+      
+      ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+      'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1, 'nModified': 1,
+      'nDeleted': 344, 'insertResults': {0: InsertOneResult(ObjectId('...'), 
+      acknowledged=True)}, 'updateResults': {1: UpdateResult({'ok': 1.0, 'idx': 1, 'n': 1,
+      'nModified': 1}, acknowledged=True)}, 'deleteResults': {2: DeleteResult({'ok': 1.0,
+      'idx': 2, 'n': 344}, acknowledged=True)}}, acknowledged=True, verbose=True)
 
 Return Values
 -------------
@@ -448,7 +463,7 @@ The ``Collection.bulk_write()`` method returns a ``BulkWriteResult`` object. The
 Client Bulk Write Return Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``Client.bulk_write()`` method returns a ``ClientBulkWriteResult`` object. The
+The ``MongoClient.bulk_write()`` method returns a ``ClientBulkWriteResult`` object. The
 ``ClientBulkWriteResult`` object contains the following properties:
 
 .. list-table::
