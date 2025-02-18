@@ -49,6 +49,3 @@ The following compatibility table specifies the recommended version of
 The first column lists the driver version.
 
 .. include:: /includes/language-compatibility-table-pymongo.rst
-
-For more information about how to read the compatibility tables, see
-:ref:`MongoDB Compatibility Tables. <about-driver-compatibility>`

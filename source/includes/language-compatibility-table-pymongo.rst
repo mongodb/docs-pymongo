@@ -193,6 +193,9 @@ Python 3
    :ref:`TLS <pymongo-troubleshoot-tls>` section of the Troubleshooting guide.
 .. [#three-six-compat] Pymongo 4.1 requires Python 3.6.2 or later.
 
+For more information about how to read the compatibility tables, see
+:ref:`MongoDB Compatibility Tables. <about-driver-compatibility>`
+
 Python 2
 ~~~~~~~~
 
