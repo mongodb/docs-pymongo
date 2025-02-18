@@ -117,6 +117,32 @@ The following example reads the sample BSON document from ``file.bson``:
       
       {"address": {"street": "Pizza St", "zipcode": "10003"}, "coord": [-73.982419, 41.579505], "cuisine": "Pizza", "name": "Mongo's Pizza"}
 
+RawBSONDocument
+---------------
+
+You might prefer to use raw BSON documents in certain cases, such as when you move a
+document between databases or collections, when you must write binary blobs to a
+disk, or when you want to bypass the performance overhead of converting to and from
+{+language+} dictionaries. You can use the ``RawBSONDocument`` class to represent raw BSON
+documents. To use ``RawBSONDocument`` objects with your collection, set the
+``document_class`` parameter of the ``MongoClient`` constructor to ``RawBSONDocument``.
+
+The following example fetches the sample BSON document from a collection and converts it
+to a ``RawBSONDocument``:
+
+.. code-block:: python
+      
+      from bson.raw_bson import RawBSONDocument
+
+      client = pymongo.MongoClient("<connection URI>", document_class=RawBSONDocument)
+      collection = client["<database name>"]["<collection name>"]
+      raw_doc = collection.find_one({"name": "Mongo's Pizza"})
+
+.. note::
+
+   ``RawBSONDocument`` objects are read-only. To modify a ``RawBSONDocument``, you must
+   first convert it to a {+language+} dictionary.
+
 API Documentation
 -----------------
 
