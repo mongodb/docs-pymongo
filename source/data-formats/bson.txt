@@ -132,6 +132,11 @@ access to the underlying raw BSON bytes. To use ``RawBSONDocument`` objects to r
 documents in your collection, set the ``document_class`` parameter of the ``MongoClient``
 constructor to ``RawBSONDocument``.
 
+.. note::
+
+   ``RawBSONDocument`` objects are read-only. To modify a ``RawBSONDocument``, you must
+   first convert it to a {+language+} dictionary.
+
 The following example configures a ``MongoClient`` object to use ``RawBSONDocument`` objects
 to model the collection, then retrieves the sample document from the preceding examples:
 
@@ -152,11 +157,6 @@ to model the collection, then retrieves the sample document from the preceding e
       :visible: false
 
       <class 'bson.raw_bson.RawBSONDocument'>
-
-.. note::
-
-   ``RawBSONDocument`` objects are read-only. To modify a ``RawBSONDocument``, you must
-   first convert it to a {+language+} dictionary.
 
 API Documentation
 -----------------
