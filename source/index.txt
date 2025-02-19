@@ -12,30 +12,31 @@ MongoDB {+driver-short+} Documentation
 
 .. toctree::
 
-   Get Started </get-started>
+   Getting Started </get-started>
    Connect </connect>
+   CRUD Operations
+   Data Formats </data-formats>
+   Indexes </indexes>
+   Run a Database Command </run-command>
+   Logging </logging> Monitoring </monitoring>
+   Security </security>
+   Versioning
+   API Documentation <{+api-root+}>
+   Issues & Help </issues-and-help>
+   
    Databases & Collections </databases-collections>
    Write Data </write-operations>
    Read Data </read>
-   Run a Database Command </run-command>
-   Indexes </indexes>
    Aggregation </aggregation>
-   Security </security>
-   Data Formats </data-formats>
-   Logging </logging>
-   Monitoring </monitoring>
    Serialization </serialization>
    Third-Party Tools </tools>
-   FAQ </faq>
    Troubleshooting </troubleshooting>
    What's New </whats-new>
    Upgrade </upgrade>
    Migrate from Motor </motor-async-migration>
    Switch to PyMongo Async </pymongo-to-async-guide>
    Previous Versions </previous-versions>
-   Issues & Help </issues-and-help>
    Compatibility </compatibility>
-   API Documentation <{+api-root+}>
 
 Overview
 --------
