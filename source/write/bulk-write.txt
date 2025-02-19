@@ -65,7 +65,7 @@ Then, pass a list of these instances to the ``bulk_write()`` method.
 
 .. important::
 
-   Ensure that you import the write operation instances into your application
+   Ensure that you import the write operation classes into your application
    file, as shown in the following code:
 
    .. code-block:: python
@@ -79,12 +79,12 @@ Insert Operations
 ~~~~~~~~~~~~~~~~~
 
 To perform an insert operation, create an instance of ``InsertOne`` and specify
-the document you want to insert. Pass the following arguments to the 
+the document you want to insert. Pass the following keyword arguments to the 
 ``InsertOne`` constructor:
 
-- Namespace in which to insert the document. This argument is optional if
-  you perform the bulk operation on a single collection.
-- Document to insert.
+- ``namespace``: The namespace in which to insert the document. This argument
+  is optional if you perform the bulk operation on a single collection.
+- ``document``: The document to insert.
 
 The following example creates an instance of ``InsertOne``:
 
@@ -108,10 +108,11 @@ Update Operations
 To update a document, create an instance of ``UpdateOne`` and pass in
 the following arguments:
 
-- Namespace in which to perform the update. This argument is optional if
+- ``namespace``: The namespace in which to perform the update. This argument is optional if
   you perform the bulk operation on a single collection.
-- **Query filter** that specifies the criteria used to match documents in your collection.
-- Update operation you want to perform. For more information about update
+- ``filter``: The **query filter** that specifies the criteria used to match documents in
+  your collection.
+- ``update``: The update you want to perform. For more information about update
   operations, see the :manual:`Field Update Operators
   </reference/operator/update-field/>` guide in the {+mdb-server+} manual.
 
@@ -144,10 +145,11 @@ A replace operation removes all fields and values of a specified document and
 replaces them with new ones. To perform a replace operation, create an instance
 of ``ReplaceOne`` and pass in the following arguments:
 
-- Namespace in which to perform the replace operation. This argument is optional if
-  you perform the bulk operation on a single collection.
-- **Query filter** that specifies the criteria used to match the document to replace.
-- Document that includes the new fields and values you want
+- ``namespace``: The namespace in which to perform the replace operation. This
+  argument is optional if you perform the bulk operation on a single collection.
+- ``filter``: The **query filter** that specifies the criteria used to match the
+  document to replace.
+- ``replacement``: The document that includes the new fields and values you want
   to store in the matching document.
 
 The following example creates an instance of ``ReplaceOne``:
@@ -166,9 +168,10 @@ Delete Operations
 To delete a document, create an instance of ``DeleteOne`` and pass in
 the following arguments:
 
-- Namespace in which to delete the document. This argument is optional if
-  you perform the bulk operation on a single collection.
-- **Query filter** that specifies the criteria used to match the document to delete.
+- ``namespace``: The namespace in which to delete the document. This argument is
+  optional if you perform the bulk operation on a single collection.
+- ``filter``: The **query filter** that specifies the criteria used to match the
+  document to delete.
 
 ``DeleteOne`` removes only *the first* document that matches your query filter.
 
@@ -219,6 +222,9 @@ information about the exception.
    a write concern for the operation when using the ``MongoClient.bulk_write()``
    method. The driver reports all write concern errors after attempting all operations,
    regardless of execution order. 
+
+   To learn more about write concerns, see :manual:`Write Concern </reference/write-concern/>`
+   in the {+mdb-server+} manual.
 
 .. _pymongo-bulk-write-collection-ex:
 
@@ -275,8 +281,7 @@ Customize Bulk Write Operations
 
 The ``bulk_write()`` method optionally accepts additional
 parameters, which represent options you can use to configure the bulk write
-operation. If you don't specify any additional options, the driver does not customize
-the bulk write operation.
+operation.
 
 Collection Bulk Write Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
