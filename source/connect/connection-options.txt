@@ -148,10 +148,10 @@ Connection Pools
 ~~~~~~~~~~~~~~~~
 
 A **connection pool** is a cache of open database connections maintained by {+driver-short+}.
-When your application requests a connection to MongoDB, {+driver-short+} seamlessly
+When your application requests a connection to MongoDB, {+driver-short+}
 gets a connection from the pool, performs operations, and returns the connection
 to the pool for reuse. Connection pools help reduce application latency and the number
-of times new connections are created by {+driver-short+}.
+of times that {+driver-short+} must create new connections.
 
 To learn more about connection pools, see
 :manual:`Connection Pool Overview </administration/connection-pool-overview/>`
