@@ -304,15 +304,13 @@ If your application runs on a Kubernetes cluster, you can authenticate to MongoD
 {+driver-short+}'s built-in Kubernetes support.
 
 You can configure OIDC for Kubernetes in two ways: by passing arguments to the
-``MongoClient`` constructor or through parameters in your connection string.
+``MongoClient`` constructor or through parameters in your connection string. Select from
+the following tabs to see how to enable Kubernetes authentication for your application.
 
 .. tabs::
 
    .. tab:: MongoClient
       :tabid: mongoclient
-
-      The following example shows how to configure your ``MongoClient`` to authenticate
-      to MongoDB by using Kubernetes:
 
       .. literalinclude:: /includes/authentication/kubernetes-mongoclient.py
          :language: python
@@ -322,9 +320,6 @@ You can configure OIDC for Kubernetes in two ways: by passing arguments to the
    
    .. tab:: Connection String
       :tabid: connectionstring
-
-      The following example shows how to configure your connection string to authenticate
-      to MongoDB by using Kubernetes:
 
       .. literalinclude:: /includes/authentication/kubernetes-connection-string.py
          :language: python
