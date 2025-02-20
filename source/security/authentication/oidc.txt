@@ -305,7 +305,7 @@ If your application runs on a Kubernetes cluster, you can authenticate to MongoD
 
 You can configure OIDC for Kubernetes in two ways: by passing arguments to the
 ``MongoClient`` constructor or through parameters in your connection string. Select from
-the following tabs to see how to enable Kubernetes authentication for your application.
+the following tabs to see how to enable Kubernetes authentication for your application:
 
 .. tabs::
 
