@@ -1,8 +1,8 @@
-.. _pymongo-text-search:
+.. _pymongo-text-index:
 
-===========
-Text Search
-===========
+============
+Text Indexes
+============
 
 .. contents:: On this page
    :local:
