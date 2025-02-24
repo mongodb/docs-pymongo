@@ -25,10 +25,11 @@ perform **bulk operations**. Bulk operations reduce the number
 of calls to the server by performing multiple write operations
 in a single method.
 
-You can use bulk operations to perform multiple write operations on
-a collection. You can also call bulk operations on your client,
-which allows you to perform bulk writes across multiple namespaces.
-In MongoDB, a namespace consists of the database name and the collection
+The ``Collection`` and ``MongoClient`` classes both provide a ``bulk_write()``
+method. When calling ``bulk_write()`` on a ``Collection`` instance, you can
+perform multiple write operations on a single collection. When calling
+``bulk_write()`` on a ``MongoClient`` instance, you can perform bulk writes across
+multiple namespaces. In MongoDB, a namespace consists of the database name and the collection
 name in the format ``<database>.<collection>``. 
 
 .. important::
