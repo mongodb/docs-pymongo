@@ -17,6 +17,18 @@ Specify a Query
 .. meta::
    :keywords: expressions, operations, read, write, filter
 
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   Find Documents </find>
+   Specify Documents to Return </specify-documents-to-return>
+   Specify Fields to Return </project>
+   Count Documents </read/count>
+   Distinct Field Values </read/distinct>
+   Access Data from a Cursor </read/cursors>
+   Monitor Data Changes </read/change-streams>
+
 Overview
 --------
 
