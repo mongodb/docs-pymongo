@@ -28,8 +28,8 @@ CRUD Operations
    Delete Documents </delete>
    Bulk Write Operations </write/bulk-write>
    Transactions </write/transactions>
- text search
- configure
+
+ configure CRUD
  retryable reads
  retryable writes
    Store Large Files </write/gridfs>
