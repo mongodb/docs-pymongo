@@ -23,6 +23,9 @@ Overview
 
 In this guide, you can learn how to configure read and write operations in {+driver-short+}.
 
+Read and Write Settings
+-----------------------
+
 You can control how the driver routes read operations by setting a **read preference**.
 You can also control options for how the driver waits for acknowledgment of
 read and write operations on a replica set by setting a **read concern** and a
@@ -86,7 +89,7 @@ MongoDB Server manual:
 - :manual:`Write Concern </reference/write-concern/>`
 
 Tag Sets
-~~~~~~~~
+--------
 
 In {+mdb-server+}, you can apply key-value :manual:`tags
 </core/read-preference-tags/>` to replica-set
@@ -110,7 +113,7 @@ center (``'dc': 'sf'``):
         'test', read_preference=Secondary([{'dc': 'ny'}, {'dc': 'sf'}]))
 
 Local Threshold
-~~~~~~~~~~~~~~~
+---------------
 
 If multiple replica-set members match the read preference and tag sets you specify,
 {+driver-short+} reads from the nearest replica-set members, chosen according to
@@ -140,7 +143,7 @@ within 35 milliseconds of the closest member's ping time.
    command-line option.
 
 Retryable Reads and Writes
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 {+driver-short+} automatically retries certain read and write operations a single time
 if they fail due to a network or server error.

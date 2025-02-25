@@ -26,14 +26,11 @@ CRUD Operations
    Query Documents </query>
    Update Documents </update>
    Delete Documents </delete>
-   Bulk Write Operations </write/bulk-write>
-   Transactions </write/transactions>
-
- configure CRUD
- retryable reads
- retryable writes
-   Store Large Files </write/gridfs>
-geospatial
+   Bulk Write Operations </bulk-write>
+   Transactions </transactions>
+   Configure CRUD Operations </configure>
+   Store Large Files </gridfs>
+   Geospatial Queries </geospatial>
 
 Overview
 --------

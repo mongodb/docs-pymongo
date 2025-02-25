@@ -18,15 +18,17 @@ MongoDB {+driver-short+} Documentation
    Data Formats </data-formats>
    Indexes </indexes>
    Run a Database Command </run-command>
-   Logging </logging> Monitoring </monitoring>
+   Atlas Search <https://www.mongodb.com/docs/atlas/atlas-search/>
+   Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/>
+   Time Series </time-series>
+   Change Streams </change-streams>
+   Logging and Monitoring </logging-and-monitoring>
    Security </security>
    Versioning
    API Documentation <{+api-root+}>
    Issues & Help </issues-and-help>
    
    Databases & Collections </databases-collections>
-   Write Data </write-operations>
-   Read Data </read>
    Aggregation </aggregation>
    Serialization </serialization>
    Third-Party Tools </tools>
