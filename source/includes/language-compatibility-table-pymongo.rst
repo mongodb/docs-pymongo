@@ -183,11 +183,6 @@ CPython
      - ✓
      - ✓
 
-.. [#ssl-4.0-issue] Versions of Python 3.10 and later are not compatible with
-   TLS/SSL for versions of MongoDB 4.0 and earlier. For more information, see the
-   :ref:`TLS <pymongo-troubleshoot-tls>` section of the Troubleshooting guide.
-.. [#three-six-compat] Pymongo 4.1 requires Python 3.6.2 or later.
-
 PyPy
 ````
 
@@ -294,6 +289,11 @@ PyPy
      - ✓
      - ✓
      - ✓
+
+.. [#ssl-4.0-issue] Versions of Python 3.10 and later are not compatible with
+   TLS/SSL for versions of MongoDB 4.0 and earlier. For more information, see the
+   :ref:`TLS <pymongo-troubleshoot-tls>` section of the Troubleshooting guide.
+.. [#three-six-compat] {+driver-short+} 4.1 requires Python 3.6.2 or later.
 
 Python 2
 ~~~~~~~~
