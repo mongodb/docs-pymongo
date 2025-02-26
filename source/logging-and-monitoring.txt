@@ -20,13 +20,12 @@ Monitoring and Logging
 Overview
 --------
 
-In this guide, you can learn how to configure **monitoring** in {+driver-short+}
-by using {+driver-short+}'s callback-based interface. Monitoring is the process of
+In this guide, you can learn how to configure **monitoring** and **logging** in {+driver-short+}
+by using its callback-based interface. Monitoring is the process of
 gathering information about your application's performance and resource usage as it runs.
-This can help you make informed decisions when designing and debugging your application.
-
-This guide also covers **logging**, which lets you record information obtained during
-monitoring to an external log.
+Logging is the process of recording this information to an external log.
+These mechanisms can help you make informed decisions when designing and debugging
+your application.
 
 Event Types
 -----------
