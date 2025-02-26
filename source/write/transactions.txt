@@ -93,8 +93,8 @@ consistent sessions provide:
 In a causally consistent session, MongoDB ensures a causal relationship between the
 following operations:
 
-- Read operations that have a ``MAJORITY`` read concern
-- Write operations that have a ``MAJORITY`` write concern
+- Read operations that have a ``majority`` read concern
+- Write operations that have a ``majority`` write concern
 
 .. tip::
 
