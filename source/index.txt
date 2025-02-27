@@ -14,31 +14,22 @@ MongoDB {+driver-short+} Documentation
 
    Getting Started </get-started>
    Connect </connect>
+   Databases & Collections </databases-collections>
    CRUD Operations
+   Aggregation </aggregation>
    Data Formats </data-formats>
    Indexes </indexes>
    Run a Database Command </run-command>
    Atlas Search <https://www.mongodb.com/docs/atlas/atlas-search/>
    Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/>
-   Time Series </time-series>
-   Change Streams </change-streams>
-   Logging and Monitoring </logging-and-monitoring>
+   Monitoring and Logging </monitoring-and-logging>
    Security </security>
-   Versioning
+   Versioning </versioning>
    API Documentation <{+api-root+}>
    Issues & Help </issues-and-help>
    
-   Databases & Collections </databases-collections>
-   Aggregation </aggregation>
-   Serialization </serialization>
    Third-Party Tools </tools>
    Troubleshooting </troubleshooting>
-   What's New </whats-new>
-   Upgrade </upgrade>
-   Migrate from Motor </motor-async-migration>
-   Switch to PyMongo Async </pymongo-to-async-guide>
-   Previous Versions </previous-versions>
-   Compatibility </compatibility>
 
 Overview
 --------

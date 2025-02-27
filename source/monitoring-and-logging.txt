@@ -1,0 +1,17 @@
+.. _pymongo-monitoring-logging:
+
+Monitoring and Logging
+======================
+
+.. facet::
+   :name: programming_language
+   :values: python
+
+.. meta::
+   :keywords: home
+
+.. toctree::
+
+   Monitoring </monitoring-and-logging/monitoring>
+   Logging </monitoring-and-logging/logging>
+   Change Streams </monitoring-and-logging/change-streams>

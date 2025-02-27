@@ -1,0 +1,14 @@
+.. _pymongo-versioning:
+
+==========
+Versioning
+==========
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   Release Notes </versioning/release-notes>
+   Compatibility </versioning/compatibility>
+   Upgrade Guides </versioning/upgrade-guides>
+   Previous Versions </versioning/previous-versions>
