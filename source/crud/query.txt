@@ -1,8 +1,8 @@
-.. _pymongo-read:
+.. _pymongo-query:
 
-======================
-Read Data from MongoDB
-======================
+=====
+Query
+=====
 
 .. contents:: On this page
    :local:
@@ -13,7 +13,7 @@ Read Data from MongoDB
 .. facet::
    :name: genre
    :values: reference
- 
+
 .. meta::
    :description: Learn how to use {+driver-short+} to read data from MongoDB.
    :keywords: usage examples, query, find, code example
@@ -22,20 +22,19 @@ Read Data from MongoDB
    :titlesonly:
    :maxdepth: 1
 
-   Query </read/specify-a-query>
-   Retrieve Data </read/retrieve>
-   Specify Fields to Return </read/project>
-   Specify Documents to Return </read/specify-documents-to-return>
-   Count Documents </read/count>
-   Distinct Field Values </read/distinct>
-   Access Data from a Cursor </read/cursors>
-   Monitor Data Changes </read/change-streams>
+   Specify a Query </crud/query/specify-query>
+   Find Documents </crud/query/find>
+   Specify Documents to Return </crud/query/specify-documents-to-return>
+   Specify Fields to Return </crud/query/project>
+   Count Documents </crud/query/count>
+   Distinct Field Values </crud/query/distinct>
+   Access Data from a Cursor </crud/query/cursors>
 
 Overview
 --------
 
 On this page, you can see copyable code examples that show common
-methods you can use to retrieve documents with {+driver-short+}.
+methods you can use to find documents with {+driver-short+}.
 
 .. tip::
 
@@ -43,11 +42,11 @@ methods you can use to retrieve documents with {+driver-short+}.
   provided in each section.
 
 To use an example from this page, copy the code example into the
-:ref:`sample application <pymongo-read-sample>` or your own application.
+:ref:`sample application <pymongo-query-sample>` or your own application.
 Be sure to replace all placeholders in the code examples, such as ``<connection string URI>``, with
 the relevant values for your MongoDB deployment.
 
-.. _pymongo-read-sample:
+.. _pymongo-query-sample:
 
 .. include:: /includes/usage-examples/sample-app-intro.rst
 
@@ -129,14 +128,3 @@ Retrieve Distinct Values
 To learn more about the ``distinct()`` method, see the
 :ref:`pymongo-distinct` guide.
 
-Monitor Data Changes
---------------------
-
-.. literalinclude:: /includes/usage-examples/retrieve-code-examples.py
-   :start-after: start-watch-for-changes
-   :end-before: end-watch-for-changes
-   :language: python
-   :copyable:
-
-To learn more about the ``watch()`` method, see the
-:ref:`pymongo-change-streams` guide.

@@ -1,8 +1,8 @@
 .. _pymongo-change-streams:
 
-====================
-Monitor Data Changes
-====================
+================================
+Monitor Data with Change Streams
+================================
 
 .. contents:: On this page
    :local:

@@ -1,8 +1,9 @@
+.. _pymongo-release-notes:
 .. _pymongo-whats-new:
 
-==========
-What's New
-==========
+=============
+Release Notes
+=============
 
 .. contents:: On this page
    :local:
