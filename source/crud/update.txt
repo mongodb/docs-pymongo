@@ -1,4 +1,5 @@
 .. _pymongo-write-update:
+.. _pymongo-update:
 
 ================
 Update Documents
@@ -21,7 +22,7 @@ Update Documents
    :titlesonly:
    :maxdepth: 1
 
-   Replace </replace>
+   Replace </crud/update/replace>
 
 Overview
 --------

@@ -24,7 +24,6 @@ MongoDB {+driver-short+} Documentation
    Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/>
    Monitoring and Logging </monitoring-and-logging>
    Security </security>
-   Third-Party Tools </tools>
    Reference </reference>
    API Documentation <{+api-root+}>
    Issues & Help </issues-and-help>
