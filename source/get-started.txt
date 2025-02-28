@@ -277,7 +277,9 @@ and retrieves a document that matches a query.
 
 Learn more about {+driver-short+} from the following resources:
 
-- Learn how to perform read operations in the :ref:`<pymongo-read>` section.
-- Learn how to perform write operations in the :ref:`<pymongo-write>` section.
+- Learn how to insert documents in the :ref:`<pymongo-insert>` section.
+- Learn how to find documents in the :ref:`<pymongo-query>` section.
+- Learn how to update documents in the :ref:`<pymongo-update>` section.
+- Learn how to delete documents in the :ref:`<pymongo-delete>` section.
 
 .. include:: /includes/get-started/quickstart-troubleshoot.rst

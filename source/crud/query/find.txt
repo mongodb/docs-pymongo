@@ -1,8 +1,9 @@
 .. _pymongo-retrieve:
+.. _pymongo-find:
 
-=============
-Retrieve Data
-=============
+==============
+Find Documents
+==============
 
 .. contents:: On this page
    :local:
@@ -39,8 +40,8 @@ free MongoDB Atlas cluster and load the sample datasets, see the :ref:`<pymongo-
 
 .. _pymongo-retrieve-find:
 
-Find Documents
---------------
+Finding Documents
+-----------------
 
 {+driver-short+} includes two methods for retrieving documents from a collection:
 ``find_one()`` and ``find()``.
@@ -214,7 +215,7 @@ To learn more about PyMongoArrow, see the
 To learn more about query filters, see :ref:`pymongo-specify-query`.
 
 For runnable code examples of retrieving documents with {+driver-short+}, see
-:ref:`pymongo-read`.
+:ref:`pymongo-query`.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

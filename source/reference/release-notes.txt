@@ -1,4 +1,5 @@
 .. _pymongo-release-notes:
+.. _pymongo-whats-new:
 
 =============
 Release Notes

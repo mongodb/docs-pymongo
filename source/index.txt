@@ -25,7 +25,7 @@ MongoDB {+driver-short+} Documentation
    Monitoring and Logging </monitoring-and-logging>
    Security </security>
    Third-Party Tools </tools>
-   Versioning </versioning>
+   Reference </reference>
    API Documentation <{+api-root+}>
    Issues & Help </issues-and-help>
 
@@ -54,15 +54,10 @@ Databases and Collections
 Learn how to use {+driver-short+} to work with MongoDB databases and collections
 in the :ref:`pymongo-databases-collections` section.
 
-Write Data to MongoDB
----------------------
+Read and Write Data
+-------------------
 
-Learn how you can write data to MongoDB in the :ref:`pymongo-write` section.
-
-Read Data from MongoDB
-----------------------
-
-Learn how you can retrieve data from MongoDB in the :ref:`pymongo-read` section.
+Learn how to find, update, and delete data in the :ref:`pymongo-crud` section.
 
 Run a Database Command
 ----------------------
@@ -87,21 +82,17 @@ Secure Your Data
 Learn about ways you can authenticate your application and encrypt your data in
 the :ref:`pymongo-security` section.
 
-Specialized Data Formats
-------------------------
+Data Formats
+------------
 
 Learn how to work with specialized data formats and custom types in the
 :ref:`pymongo-data-formats` section.
 
-Logging
--------
+Monitoring and Logging
+----------------------
 
-Learn how to configure logging in the :ref:`pymongo-logging` section.
-
-Monitoring
-----------
-
-Learn how to monitor changes to your application in the :ref:`pymongo-monitoring` section.
+Learn how to monitor changes to your application and write them to logs in the
+:ref:`pymongo-monitoring-logging` section.
 
 Serialization
 -------------
@@ -115,16 +106,10 @@ Third-Party Tools
 For a list of popular third-party Python libraries for working with
 MongoDB, see the :ref:`pymongo-tools` section.
 
-Troubleshooting
----------------
-
-For solutions to issues you might encounter when using the driver, see the
-:ref:`pymongo-troubleshooting` section.
-
 What's New
 ----------
 
-For a list of new features and changes in each version, see the :ref:`<pymongo-whats-new>`
+For a list of new features and changes in each version, see the :ref:`<pymongo-release-notes>`
 section.
 
 Upgrade {+driver-short+} Versions
