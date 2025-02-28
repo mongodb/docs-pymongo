@@ -1,4 +1,5 @@
 .. _pymongo-get-started-run-sample-query:
+.. _pymongo-get-started-connect-to-mongodb:
 
 ==================
 Run a Sample Query
