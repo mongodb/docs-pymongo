@@ -10,5 +10,5 @@ Versioning
 
    Release Notes </versioning/release-notes>
    Compatibility </versioning/compatibility>
-   Upgrade Guides </versioning/upgrade-guides>
+   Upgrade Guides </versioning/upgrade>
    Previous Versions </versioning/previous-versions>

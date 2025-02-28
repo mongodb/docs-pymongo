@@ -15,7 +15,7 @@ MongoDB {+driver-short+} Documentation
    Getting Started </get-started>
    Connect </connect>
    Databases & Collections </databases-collections>
-   CRUD Operations
+   CRUD Operations </crud>
    Aggregation </aggregation>
    Data Formats </data-formats>
    Indexes </indexes>
@@ -24,12 +24,10 @@ MongoDB {+driver-short+} Documentation
    Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/>
    Monitoring and Logging </monitoring-and-logging>
    Security </security>
+   Third-Party Tools </tools>
    Versioning </versioning>
    API Documentation <{+api-root+}>
    Issues & Help </issues-and-help>
-   
-   Third-Party Tools </tools>
-   Troubleshooting </troubleshooting>
 
 Overview
 --------
