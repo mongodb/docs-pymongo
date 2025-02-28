@@ -12,5 +12,5 @@ Reference
    Compatibility </reference/compatibility>
    Third-Party Tools </reference/third-party-tools>
    Upgrade Guides </reference/upgrade>
-   Migration Guides </reference/migrate>
+   Migration Guides </reference/migration>
    Previous Versions </reference/previous-versions>
