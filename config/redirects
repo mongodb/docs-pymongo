@@ -17,4 +17,4 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 [v4.7-*]: ${prefix}/${version}/get-started/connect-to-mongodb -> ${base}/${version}/get-started/run-sample-query/
 
 # temp redirect until DOP deletes unversioned URLs
-[*-master]: ${prefix}/compatibility/ -> ${base}/current/compatibility/
+[master]: ${prefix}/compatibility/ -> ${base}/current/compatibility/
