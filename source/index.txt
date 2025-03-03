@@ -12,7 +12,7 @@ MongoDB {+driver-short+} Documentation
 
 .. toctree::
 
-   Getting Started </get-started>
+   Get Started </get-started>
    Connect </connect>
    Databases & Collections </databases-collections>
    CRUD Operations </crud>
@@ -58,28 +58,11 @@ Read and Write Data
 
 Learn how to find, update, and delete data in the :ref:`pymongo-crud` section.
 
-Run a Database Command
-----------------------
-
-Learn how to run a database command in the :ref:`pymongo-run-command` section.
-
-Optimize Queries with Indexes
------------------------------
-
-Learn how to work with common types of indexes in the :ref:`pymongo-indexes`
-section.
-
 Transform Your Data with Aggregation
 ------------------------------------
 
 Learn how to use {+driver-short+} to perform aggregation operations in the
 :ref:`pymongo-aggregation` section.
-
-Secure Your Data
-----------------
-
-Learn about ways you can authenticate your application and encrypt your data in
-the :ref:`pymongo-security` section.
 
 Data Formats
 ------------
@@ -87,56 +70,40 @@ Data Formats
 Learn how to work with specialized data formats and custom types in the
 :ref:`pymongo-data-formats` section.
 
+Optimize Queries with Indexes
+-----------------------------
+
+Learn how to work with common types of indexes in the :ref:`pymongo-indexes`
+section.
+
+Run a Database Command
+----------------------
+
+Learn how to run a database command in the :ref:`pymongo-run-command` section.
+
+Atlas Search
+------------
+
+Learn how to use Atlas Search to build full-text search capabilities in the
+:ref:`pymongo-atlas-search` section.
+
+Secure Your Data
+----------------
+
+Learn about ways you can authenticate your application and encrypt your data in
+the :ref:`pymongo-security` section.
+
 Monitoring and Logging
 ----------------------
 
 Learn how to monitor changes to your application and write them to logs in the
 :ref:`pymongo-monitoring-logging` section.
 
-Serialization
--------------
-
-Learn how {+driver-short+} serializes and deserializes data in the
-:ref:`pymongo-serialization` section.
-
-Third-Party Tools
+API Documentation
 -----------------
 
-For a list of popular third-party Python libraries for working with
-MongoDB, see the :ref:`pymongo-tools` section.
-
-What's New
-----------
-
-For a list of new features and changes in each version, see the :ref:`<pymongo-release-notes>`
-section.
-
-Upgrade {+driver-short+} Versions
-------------------------
-
-Learn what changes you might need to make to your application to upgrade driver versions
-in the :ref:`pymongo-upgrade` section.
-
-Migrate from Motor to {+driver-async+}
--------------------------------------
-
-In September 2024, MongoDB released the experimental {+driver-async+} driver as a replacement
-for `Motor <https://www.mongodb.com/docs/drivers/motor/>`__, the previous asynchronous
-MongoDB driver for Python. Learn how to migrate from Motor
-to the {+driver-async+} driver in the :ref:`pymongo-async-motor-migration`
-section.
-
-Switch from {+driver-short+} to {+driver-async+}
-----------------------------------------------
-
-Learn what changes you need to make to switch from {+driver-short+} to
-the experimental {+driver-async+} driver in the :ref:`pymongo-to-async-guide` section.
-
-Previous Versions
------------------
-
-For documentation on versions of the driver v4.6.x and earlier, see the
-:ref:`pymongo-previous-versions` section.
+For detailed information about types and methods in {+driver-short+}, see
+the `{+driver-short+} API documentation <{+api-root+}>`__.
 
 Issues & Help
 -------------
@@ -144,15 +111,4 @@ Issues & Help
 Learn how to report bugs, contribute to the driver, and find help in the
 :ref:`<pymongo-issues-help>` section.
 
-Compatibility
--------------
 
-For compatibility tables that show the recommended {+driver-short+}
-version to use for specific Python and {+mdb-server+} versions, see the
-:ref:`pymongo-compatibility` section.
-
-API Documentation
------------------
-
-For detailed information about types and methods in {+driver-short+}, see
-the `{+driver-short+} API documentation <{+api-root+}>`__.
