@@ -111,7 +111,7 @@ Reference
 ---------
 
 Find more information about {+driver-short+} versions, compatibility, and third-party tools
-in the the :ref:`pymongo-reference` section.
+in the :ref:`pymongo-reference` section.
 
 API Documentation
 -----------------

@@ -14,7 +14,8 @@ toc_landing_pages = [
     "/connect/connection-options",
     "crud",
     "/crud/query",
-    "/crud/update"
+    "/crud/update",
+    "monitoring-and-logging"
 ]
 
 intersphinx = [
