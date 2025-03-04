@@ -85,7 +85,7 @@ Atlas Search
 ------------
 
 Learn how to use Atlas Search to build full-text search capabilities in the
-:ref:`pymongo-atlas-search` section.
+`Atlas Search tutorial <https://www.mongodb.com/docs/atlas/atlas-search/tutorial/>`__.
 
 Secure Your Data
 ----------------

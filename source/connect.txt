@@ -25,7 +25,6 @@ Connect to MongoDB
    Create a MongoClient </connect/mongoclient>
    Choose a Connection Target </connect/connection-targets>
    Specify Connection Options </connect/connection-options>
-   Limit Server Execution Time </connect/csot>
 
 Overview
 --------
