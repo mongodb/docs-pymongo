@@ -11,7 +11,10 @@ toc_landing_pages = [
     "/security/authentication",
     "/aggregation-tutorials",
     "/data-formats",
-    "/connect/connection-options"
+    "/connect/connection-options",
+    "crud",
+    "/crud/query",
+    "/crud/update"
 ]
 
 intersphinx = [

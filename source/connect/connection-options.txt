@@ -113,6 +113,50 @@ Network Compression
        | **MongoClient Example**: ``zlibCompressionLevel = 3``
        | **Connection URI Example**: ``zlibCompressionLevel=3``
 
+For more information about network compression in {+driver-short+}, see
+:ref:`<pymongo-network-compression>`.
+
+Server Selection
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Connection Option
+     - Description
+
+   * - ``server_selector``
+     - | A user-defined Python function called by {+driver-short+} to choose the server
+       | to run an operation against. For more information, see
+       | :ref:`<pymongo-server-selection>`.
+       |
+       | **Data Type**: ``callable``
+       | **Default**: ``None``
+       | **MongoClient Example**: ``server_selector = your_function``
+       | **Connection URI Example**: N/A
+
+Stable API
+~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Connection Option
+     - Description
+
+   * - ``server_api``
+     - | A ``ServerApi`` object that specifies the Stable API version and other Stable API
+       | options.
+       |
+       | **Data Type**: ``ServerApi``
+       | **Default**: ``None``
+       | **MongoClient Example**: ``server_api = ServerApi("1")``
+       | **Connection URI Example**: N/A
+
+For more information about the Stable API, see :ref:`<pymongo-stable-api>`.
+
 Timeouts
 ~~~~~~~~
 
@@ -133,25 +177,8 @@ Timeouts
        | **MongoClient Example**: ``timeoutMS = 10000``
        | **Connection URI Example**: ``timeoutMs=10000``
        
-Server Selection
-~~~~~~~~~~~~~~~~
-
-.. list-table::
-   :header-rows: 1
-   :widths: 30 70
-
-   * - Connection Option
-     - Description
-
-   * - ``server_selector``
-     - | A user-defined Python function called by {+driver-short+} to choose the server
-       | to run an operation against. For more information, see
-       | :ref:`<pymongo-server-selection>`.
-       |
-       | **Data Type**: ``callable``
-       | **Default**: ``None``
-       | **MongoClient Example**: ``server_selector = your_function``
-       | **Connection URI Example**: N/A
+For more information about using timeouts to limit server execution time, see
+:ref:`<pymongo-csot>`.
 
 Connection Pools
 ~~~~~~~~~~~~~~~~
@@ -293,7 +320,7 @@ Authentication
        | **MongoClient Example**: ``password = "strong password"``
        | **Connection URI Example**: ``password=strong+password``
 
-For more information about the connection option in this section, see :ref:`pymongo-auth`. 
+For more information about the connection options in this section, see :ref:`pymongo-auth`. 
 
 Read and Write Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -376,4 +403,5 @@ Read and Write Operations
        | **MongoClient Example**: ``retryWrites=False``
        | **Connection URI Example**: ``retryWrites=false``
 
-For more information about the connection options in this section, see :ref:`pymongo-databases-collections`. 
+For more information about the connection options in this section, see
+:ref:`pymongo-configure-crud`. 

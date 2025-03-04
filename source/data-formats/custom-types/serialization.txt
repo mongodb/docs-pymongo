@@ -20,26 +20,13 @@ Serialization
 Overview
 --------
 
-In this guide, you can learn how to use {+driver-short+} to perform
-serialization.
+In this guide, you can learn how to use {+driver-short+} to serialize your custom types.
 
 Serialization is the process of mapping a {+language+} object to a BSON
 document for storage in MongoDB. {+driver-short+} automatically converts basic {+language+}
 types into BSON when you insert a document into a collection. Similarly, when you retrieve a
 document from a collection, {+driver-short+} automatically converts the returned BSON
 back into the corresponding {+language+} types.
-
-You can use {+driver-short+} to serialize and deserialize the following {+language+}
-types:
-
-- ``str``
-- ``int``
-- ``float``
-- ``bool``
-- ``datetime.datetime``
-- ``list``
-- ``dict``
-- ``None``
 
 For a complete list of {+language+}-to-BSON mappings, see the `bson <{+api-root+}bson/index.html>`__
 API documentation.

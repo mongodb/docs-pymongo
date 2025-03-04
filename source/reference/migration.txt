@@ -72,12 +72,12 @@ The following Motor method signatures behave differently in the {+driver-async+}
 
 .. _pymongo-to-async-guide:
 
-Switch from {+driver-short+}
-----------------------------
+Migrate from {+driver-short+}
+-----------------------------
 
 The {+driver-async+} driver behaves similarly to {+driver-short+}, but
 all methods that perform network operations are coroutines and must be awaited.
-To switch from {+driver-short+} to {+driver-async+}, you must update your code
+To migrate from {+driver-short+} to {+driver-async+}, you must update your code
 in the following ways:
 
 - Replace all uses of ``MongoClient`` with ``AsyncMongoClient``.
