@@ -230,7 +230,8 @@ The ``Database.command()`` method can decode the returned BSON documents to inst
 of a specific class. To specify this class, construct a ``CodecOptions`` object and pass
 the class name. The class can be one of the following types:
 
-- ``bson.raw_bson.RawBSONDocument``.
+- ``bson.raw_bson.RawBSONDocument``. To learn more about the ``RawBSONDocument`` class,
+  see :ref:`pymongo-bson-raw`.
 - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
   If you specify ``bson.son.SON`` as the document class, you must also specify types
   for the key and value.
