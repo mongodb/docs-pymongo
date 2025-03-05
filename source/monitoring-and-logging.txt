@@ -8,7 +8,7 @@ Monitoring and Logging
    :values: python
 
 .. meta::
-   :keywords: home
+   :keywords: event
 
 .. toctree::
 
@@ -26,9 +26,6 @@ methods you can use to monitor and log events with {+driver-short+}.
 
   To learn more about any of the methods shown on this page, see the link
   provided in each section.
-
-.. start here
-
 
 To use an example from this page, copy the code example into the
 :ref:`sample application <pymongo-monitoring-sample>` or your own application.
