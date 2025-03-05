@@ -132,11 +132,13 @@ constructor accepts. All parameters are optional.
 
    * - ``document_class``
      - The default class that the client uses to decode BSON documents returned by queries.
-       This parameter supports the following types:
+       This parameter accepts the following types:
        
-       - ``bson.raw_bson.RawBSONDocument``.
+       - ``bson.raw_bson.RawBSONDocument``. To learn more about the ``RawBSONDocument`` class,
+         see :ref:`pymongo-bson-raw`.
+
        - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
-         If you specify ``bson.son.SON`` as the document class, you must also specify types
+         If you specify ``bson.son.SON`` as the document class, you may also specify types
          for the key and value, as shown in the following example:
 
          .. code-block:: python
@@ -264,6 +266,17 @@ The following example shows how to include this data type in your type annotatio
 
    from typing import Any, Dict
    client: MongoClient[Dict[str, Any]] = MongoClient()
+
+If all the documents that you are working with correspond to a single custom type, you
+can specify the custom type as a type hint for your ``MongoClient`` object. This
+provides more accurate type information than the generic ``Dict[str, Any]`` type.
+
+The following example shows how to specify the ``Movie`` type as a type hint for a
+``MongoClient`` object:
+
+.. code-block:: python
+
+   client: MongoClient[Movie] = MongoClient()
 
 Troubleshooting
 ---------------
