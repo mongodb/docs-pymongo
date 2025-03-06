@@ -26,8 +26,6 @@ MongoDB {+driver-short+} Documentation
    Monitoring </monitoring>
    Serialization </serialization>
    Third-Party Tools </tools>
-   FAQ </faq>
-   Troubleshooting </troubleshooting>
    What's New </whats-new>
    Upgrade </upgrade>
    Migrate from Motor </motor-async-migration>
