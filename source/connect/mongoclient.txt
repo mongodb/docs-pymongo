@@ -137,13 +137,13 @@ constructor accepts. All parameters are optional.
        - ``bson.raw_bson.RawBSONDocument``. To learn more about the ``RawBSONDocument`` class,
          see :ref:`pymongo-bson-raw`.
 
-       - A subclass of the ``collections.abc.Mapping`` type, such as ``bson.son.SON``. 
-         If you specify ``bson.son.SON`` as the document class, you may also specify types
-         for the key and value, as shown in the following example:
+       - A subclass of the ``collections.abc.Mapping`` type, such as ``OrderedDict``.
+         Depending on the strictness of your type-checking rules, you might also need to
+         specify types for the key and value, as shown in the following example:
 
          .. code-block:: python
 
-            client = MongoClient(document_class=SON[str, int])
+            client = MongoClient(document_class=OrderedDict[str, int])
        
        - A subclass of the ``TypedDict`` type. To pass a ``TypedDict`` subclass for this
          parameter, you must also include the class in a type hint for your ``MongoClient``
