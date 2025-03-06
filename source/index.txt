@@ -123,12 +123,6 @@ Third-Party Tools
 For a list of popular third-party Python libraries for working with
 MongoDB, see the :ref:`pymongo-tools` section.
 
-Troubleshooting
----------------
-
-For solutions to issues you might encounter when using the driver, see the
-:ref:`pymongo-troubleshooting` section.
-
 What's New
 ----------
 
