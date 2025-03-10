@@ -276,6 +276,12 @@ The following example shows how to specify the ``Movie`` type as a type hint for
 
 .. code-block:: python
 
+   from typing import TypedDict
+
+   class Movie(TypedDict):
+       name: str
+       year: int
+   
    client: MongoClient[Movie] = MongoClient()
 
 Troubleshooting
