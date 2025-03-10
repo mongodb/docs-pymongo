@@ -141,8 +141,8 @@ named arguments to them. The following table describes the commonly used argumen
      - | Limits the number of documents to hold in a cursor at a given time.
 
    * - ``collation`` 
-     - | The collation options for the find operation. See :ref:`pymongo-retrieve-collation`
-         for more Information.
+     - | The collation options for the find operation. See the :ref:`pymongo-retrieve-collation`
+         guide for more information.
 
    * - ``comment`` 
      - | A string to attach to the query. This can help you trace and interpret the
