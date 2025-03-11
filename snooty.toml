@@ -3,8 +3,6 @@ title = "PyMongo"
 toc_landing_pages = [
     "/get-started",
     "/connect",
-    "/indexes",
-    "work-with-indexes",
     "/aggregation",
     "/aggregation/aggregation-tutorials",
     "/security",
