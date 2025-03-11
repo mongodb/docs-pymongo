@@ -306,24 +306,50 @@ The following code example shows this process:
    collection = db.get_collection("test", codec_options=codec_options)
 
 You can then use this reference to a collection to store instances of the ``Decimal``
-class:
+class. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
+corresponding code.
 
-.. io-code-block::
-   :copyable: true
+.. tabs::
+   
+   .. tab:: Synchronous
+      :tabid: sync
 
-   .. input::
-      :language: python
+      .. io-code-block::
+         :copyable: true
 
-      import pprint
+         .. input::
+            :language: python
 
-      collection.insert_one({"num": Decimal("45.321")})
-      my_doc = collection.find_one()
-      pprint.pprint(my_doc)
+            import pprint
 
-   .. output::
-      :language: shell
+            collection.insert_one({"num": Decimal("45.321")})
+            my_doc = collection.find_one()
+            pprint.pprint(my_doc)
 
-      {'_id': ObjectId('...'), 'num': Decimal128('45.321')}
+         .. output::
+            :language: shell
+
+            {'_id': ObjectId('...'), 'num': Decimal128('45.321')}
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. io-code-block::
+         :copyable: true
+
+         .. input::
+            :language: python
+
+            import pprint
+
+            await collection.insert_one({"num": Decimal("45.321")})
+            my_doc = await collection.find_one()
+            pprint.pprint(my_doc)
+
+         .. output::
+            :language: shell
+
+            {'_id': ObjectId('...'), 'num': Decimal128('45.321')}
 
 .. note::
 
@@ -383,36 +409,74 @@ back into Python objects:
           return value
 
 You can then add the ``PickledBinaryDecoder`` to the codec options for a collection
-and use it to encode and decode your custom types:
+and use it to encode and decode your custom types. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code.
 
-.. io-code-block::
-   :copyable: true
+.. tabs::
+   
+   .. tab:: Synchronous
+      :tabid: sync
 
-   .. input::
-      :language: python
+      .. io-code-block::
+         :copyable: true
 
-      from bson.codec_options import CodecOptions,TypeRegistry
+         .. input::
+            :language: python
 
-      codec_options = CodecOptions(
-          type_registry=TypeRegistry(
-              [PickledBinaryDecoder()], fallback_encoder=fallback_pickle_encoder
-        )
-      )
+            from bson.codec_options import CodecOptions,TypeRegistry
 
-      collection = db.get_collection("test", codec_options=codec_options)
-      collection.insert_one(
-          {"_id": 1, "str": MyStringType("hello world"), "num": MyNumberType(2)}
-      )
-      my_doc = collection.find_one()
+            codec_options = CodecOptions(
+               type_registry=TypeRegistry(
+                  [PickledBinaryDecoder()], fallback_encoder=fallback_pickle_encoder
+            )
+            )
 
-      print(isinstance(my_doc["str"], MyStringType))
-      print(isinstance(my_doc["num"], MyNumberType))
+            collection = db.get_collection("test", codec_options=codec_options)
+            collection.insert_one(
+               {"_id": 1, "str": MyStringType("hello world"), "num": MyNumberType(2)}
+            )
+            my_doc = collection.find_one()
 
-   .. output::
-      :language: shell
+            print(isinstance(my_doc["str"], MyStringType))
+            print(isinstance(my_doc["num"], MyNumberType))
 
-      True
-      True
+         .. output::
+            :language: shell
+
+            True
+            True
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. io-code-block::
+         :copyable: true
+
+         .. input::
+            :language: python
+
+            from bson.codec_options import CodecOptions,TypeRegistry
+
+            codec_options = CodecOptions(
+               type_registry=TypeRegistry(
+                  [PickledBinaryDecoder()], fallback_encoder=fallback_pickle_encoder
+            )
+            )
+
+            collection = db.get_collection("test", codec_options=codec_options)
+            await collection.insert_one(
+               {"_id": 1, "str": MyStringType("hello world"), "num": MyNumberType(2)}
+            )
+            my_doc = await collection.find_one()
+
+            print(isinstance(my_doc["str"], MyStringType))
+            print(isinstance(my_doc["num"], MyNumberType))
+
+         .. output::
+            :language: shell
+
+            True
+            True
 
 Limitations
 -----------
