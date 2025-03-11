@@ -57,4 +57,7 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 [*-master]: ${prefix}/${version}/whats-new/ -> ${base}/${version}/reference/release-notes/
 [*-master]: ${prefix}/${version}/tools/ -> ${base}/${version}/reference/third-party-tools/
 [*-master]: ${prefix}/${version}/upgrade/ -> ${base}/${version}/reference/upgrade/
-[*-master]: ${prefix}/${version}/write-operations/ -> ${base}/${version}/crud/
+[*-master]: ${prefix}/${version}/write-operations/ -> ${base}/${version}/crud/[v4.7-*]: ${prefix}/${version}/get-started/connect-to-mongodb -> ${base}/${version}/get-started/run-sample-query/
+
+# temp redirect until DOP deletes unversioned URLs
+[master]: ${prefix}/compatibility/ -> ${base}/current/compatibility/
