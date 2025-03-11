@@ -99,9 +99,7 @@ To read BSON documents from a file, open a file stream in read-binary mode on th
 file. Then, decode the documents from BSON format as you read them by using the ``bson.decode()``
 method.
 
-The following example reads the sample BSON document from ``file.bson``. Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
-code.
+The following example reads the sample BSON document from ``file.bson``:
 
 .. io-code-block::
    :copyable: true
@@ -140,7 +138,9 @@ constructor to ``RawBSONDocument``.
    first convert it to a {+language+} dictionary.
 
 The following example configures a ``MongoClient`` object to use ``RawBSONDocument`` objects
-to model the collection, then retrieves the sample document from the preceding examples:
+to model the collection, then retrieves the sample document from the preceding examples.
+Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
+code.
 
 .. tabs::
    
