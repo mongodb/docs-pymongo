@@ -116,7 +116,8 @@ or :guilabel:`Asynchronous` tab to see the corresponding code.
 
 
 To check if you successfully created the collection, you can get a list of all
-collections in your database and filter by collection name:
+collections in your database and filter by collection name. Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
 
 .. tabs::
    
@@ -202,6 +203,9 @@ document contains the following fields:
 - ``temperature``, which stores temperature measurements in degrees Fahrenheit
 - ``location``, which stores location metadata
 - ``timestamp``, which stores the measurement timestamp
+
+Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
 
 .. tabs::
 
