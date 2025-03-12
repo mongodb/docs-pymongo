@@ -70,7 +70,7 @@ serialized object into a collection:
 
    collection.insert_one(restaurant_dict)
 
-The above example serializes the ``Restaurant`` object into the following dictionary:
+The preceding example serializes the ``Restaurant`` object into the following dictionary:
 
 .. code-block:: none
 
