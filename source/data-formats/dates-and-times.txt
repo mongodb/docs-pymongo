@@ -125,7 +125,7 @@ By default, {+driver-short+} retrieves UTC ``datetime`` values with no supplemen
 information. The following code example retrieves the sample document
 and prints the ``datetime`` value. The printed value is identical to
 the one in the sample document. Select the :guilabel:`Synchronous` or
-:guilabel:`Asynchronous` tab to see the corresponding code.
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -184,7 +184,7 @@ Then, pass the ``CodecOptions`` object to the ``get_collection()`` method.
 
 The following code example retrieves the ``datetime`` value from the sample document as
 an aware ``datetime``. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab
-to see the corresponding code.
+to see the corresponding code:
 
 .. tabs::
    
@@ -258,7 +258,7 @@ Then, create a ``CodecOptions`` object and pass the following arguments to the c
 The following code example retrieves the sample document,
 but uses the ``tz_aware`` and ``tzinfo`` arguments to automatically localize
 the ``datetime`` value to the ``"US/Pacific"`` time zone. Select the :guilabel:`Synchronous`
-or :guilabel:`Asynchronous` tab to see the corresponding code.
+or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -343,7 +343,7 @@ The following code example inserts a document containing a ``datetime`` value lo
 to the ``"US/Pacific"`` time zone. {+driver-short+} uses the attached time zone to convert
 the local time to UTC. When the document is retrieved from MongoDB, the ``datetime`` value
 is in UTC. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
-corresponding code.
+corresponding code:
 
 .. tabs::
    
@@ -601,7 +601,7 @@ attempt to decode the value as a ``datetime.datetime``, allowing
 this behavior to instead return ``~bson.datetime_ms.DatetimeMS`` when
 representations are out-of-range, while returning ``~datetime.datetime``
 objects as before. Select the :guilabel:`Synchronous`
-or :guilabel:`Asynchronous` tab to see the corresponding code.
+or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -664,7 +664,7 @@ class.
 Another option that does not involve setting ``datetime_conversion`` is to
 filter out document values outside of the range supported by
 ``~datetime.datetime``. Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -687,7 +687,7 @@ filter out document values outside of the range supported by
          cur = await coll.find({'dt': {'$gte': datetime.min, '$lte': datetime.max}})
 
 If you don't need the value of ``datetime``, you can filter out just that field. Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    

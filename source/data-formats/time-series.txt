@@ -84,7 +84,7 @@ Example
 
 The following example creates a time series collection named ``october2024`` with the
 ``timeField`` option set to ``"timestamp"``. Select the :guilabel:`Synchronous`
-or :guilabel:`Asynchronous` tab to see the corresponding code.
+or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -117,7 +117,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code.
 
 To check if you successfully created the collection, you can get a list of all
 collections in your database and filter by collection name. Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
    
@@ -205,7 +205,7 @@ document contains the following fields:
 - ``timestamp``, which stores the measurement timestamp
 
 Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code.
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
 
