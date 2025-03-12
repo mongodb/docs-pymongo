@@ -395,7 +395,7 @@ of the custom type. Select the
             collection = db.get_collection("test", codec_options=codec_options)
             await collection.insert_one({"num": DecimalInt("45.321")})
       
-            my_doc = collection.find_one()
+            my_doc = await collection.find_one()
             pprint.pprint(my_doc)
 
          .. output::
