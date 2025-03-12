@@ -164,7 +164,7 @@ the one in the sample document. Select the :guilabel:`Synchronous` or
             from datetime import datetime
 
             collection = database["sample_collection"]
-            find_result = await (collection.find_one())["date"]
+            find_result = (await collection.find_one())["date"]
             print(f"datetime: {find_result}")
             print(f"datetime.tzinfo: {find_result.tzinfo}")
 
@@ -230,7 +230,7 @@ to see the corresponding code:
 
             options = CodecOptions(tz_aware = True)
             collection = database.get_collection("sample_collection", options)
-            find_result = await (collection.find_one())["date"]
+            find_result = (await collection.find_one())["date"]
             
             print(f"datetime: {find_result}")
             print(f"datetime.tzinfo: {find_result.tzinfo}")
@@ -311,7 +311,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             options = CodecOptions(tz_aware = True, tzinfo = pacific)
             collection = database.get_collection("sample_collection", options)
             
-            find_result = await (collection.find_one())["date"]
+            find_result = (await collection.find_one())["date"]
             print(f"datetime: {find_result}")
             print(f"datetime.tzinfo: {find_result.tzinfo}")
          
@@ -395,7 +395,7 @@ corresponding code:
 
             print(f"datetime before storage: {local_datetime}")
             await collection.insert_one({"date": local_datetime}) 
-            find_result = await (collection.find_one())["date"]
+            find_result = (await collection.find_one())["date"]
             print(f"datetime after storage: {find_result}")
 
          .. output::
@@ -684,7 +684,7 @@ filter out document values outside of the range supported by
 
          from datetime import datetime
          coll = client.test.dates
-         cur = await coll.find({'dt': {'$gte': datetime.min, '$lte': datetime.max}})
+         cur = coll.find({'dt': {'$gte': datetime.min, '$lte': datetime.max}})
 
 If you don't need the value of ``datetime``, you can filter out just that field. Select the
 :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
@@ -703,7 +703,7 @@ If you don't need the value of ``datetime``, you can filter out just that field.
 
       .. code-block:: python
 
-         cur = await coll.find({}, projection={'dt': False})
+         cur = coll.find({}, projection={'dt': False})
 
 API Documentation
 -----------------
