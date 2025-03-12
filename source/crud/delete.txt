@@ -1,4 +1,5 @@
 .. _pymongo-write-delete:
+.. _pymongo-delete:
 
 ================
 Delete Documents

@@ -1,4 +1,5 @@
 .. _pymongo-write-insert:
+.. _pymongo-insert:
 
 ================
 Insert Documents
@@ -327,7 +328,7 @@ Additional Information
 ----------------------
 
 For runnable code examples of inserting documents with {+driver-short+}, see
-:ref:`pymongo-write`.
+:ref:`pymongo-crud`.
 
 API Documentation
 ~~~~~~~~~~~~~~~~~

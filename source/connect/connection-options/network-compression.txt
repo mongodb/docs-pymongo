@@ -20,10 +20,16 @@ Compress Network Traffic
 Overview
 --------
 
-{+driver-short+} provides a connection option to compress messages, which reduces the amount
+{+driver-short+} provides connection options to compress messages, which reduce the amount
 of data passed over the network between MongoDB and your application.
 
-{+driver-short+} supports the following compression algorithms.
+.. _pymongo-enable-compression:
+.. _pymongo-compression-algorithms:
+
+Specify Compression Algorithms
+------------------------------
+
+{+driver-short+} supports the following compression algorithms:
 
 1. `Snappy <https://google.github.io/snappy/>`__: Available in MongoDB 3.6 and later. This
    option requires the `python-snappy <https://pypi.org/project/python-snappy/>`__ package.
@@ -34,18 +40,9 @@ of data passed over the network between MongoDB and your application.
 3. `Zstandard <https://github.com/facebook/zstd/>`__: Available in MongoDB 4.2 and later.
    This option requires the `zstandard <https://pypi.org/project/zstandard/>`__ package.
 
-If you don't specify a compression algorithm, {+driver-short+} doesn't compress your
-network traffic. If you specify multiple compression algorithms, the driver selects the
-first one in the list supported by your MongoDB instance.
-
-.. _pymongo-enable-compression:
-
-Specify Compression Algorithms
-------------------------------
-
 To enable compression for the connection to your MongoDB instance, use the
 ``compressors`` connection option and specify the compression algorithms you want to use.
-You can do this in two ways: 
+You can do this in two ways:
 
 - Pass the algorithms as an argument to the ``MongoClient`` constructor.
 - Specify the algorithms in your connection string.
@@ -54,8 +51,12 @@ The following code example shows both options:
 
 .. include:: /includes/connect/compression-tabs.rst
 
-Set the zlib Compression Level
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you don't specify a compression algorithm, {+driver-short+} doesn't compress your
+network traffic. If you specify multiple compression algorithms, the driver selects the
+first one in the list supported by your MongoDB instance.
+
+Specify the zlib Compression Level
+----------------------------------
 
 If you specify ``zlib`` as one of your compression algorithms, you can also use the
 ``zlibCompressionLevel`` option to specify a compression level. This option accepts
