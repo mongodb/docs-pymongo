@@ -57,7 +57,7 @@ message, as shown by this example ``INFO`` message:
 
 .. code-block:: none
 
-   INFO:pymongo.mongo_client:MongoClient opened default port on mongodb://localhost:27017/
+   INFO:pymongo.command:Command insert on namespace test.test_collection
 
 Configuring Truncation
 ----------------------
