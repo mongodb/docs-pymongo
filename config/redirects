@@ -58,6 +58,17 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 [*-master]: ${prefix}/${version}/tools/ -> ${base}/${version}/reference/third-party-tools/
 [*-master]: ${prefix}/${version}/upgrade/ -> ${base}/${version}/reference/upgrade/
 [*-master]: ${prefix}/${version}/write-operations/ -> ${base}/${version}/crud/[v4.7-*]: ${prefix}/${version}/get-started/connect-to-mongodb -> ${base}/${version}/get-started/run-sample-query/
+[*-master]: ${prefix}/${version}/work-with-indexes/ -> ${base}/${version}/indexes/
+
+[*-master]: ${prefix}/${version}/indexes/single-field-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/compound-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/multikey-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/atlas-search-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/text-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/geospatial-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/unique-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/wildcard-index/ -> ${base}/${version}/indexes/
+[*-master]: ${prefix}/${version}/indexes/clustered-index/ -> ${base}/${version}/indexes/
 
 # temp redirect until DOP deletes unversioned URLs
 [master]: ${prefix}/compatibility/ -> ${base}/current/compatibility/
