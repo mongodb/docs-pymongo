@@ -77,7 +77,7 @@ The query also includes a:
                   "path": "title",
                   "query": "new york"
                }
-               }
+              }
             },
             { $limit: 10 },
             {
@@ -85,10 +85,10 @@ The query also includes a:
                   "_id": 0,
                   "title": 1,
                    score: { $meta: "searchScore" }
-               }
-            }
-            ])
-            
+                }
+             }
+      ])
+
       for i in result:
          print(i)
 
