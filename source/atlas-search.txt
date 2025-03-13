@@ -26,6 +26,7 @@ To learn more about the ``$search`` pipeline stage, see :manual:`$search
 </reference/operator/aggregation/search/>`.
 
 .. note:: Only Available on Atlas for MongoDB v4.2 and Later
+
    The ``$search`` aggregation-pipeline operator is available only for collections hosted
    on :atlas:`MongoDB Atlas </>` clusters running MongoDB v4.2 or later that are
    covered by an :atlas:`Atlas search index </reference/atlas-search/index-definitions/>`.
