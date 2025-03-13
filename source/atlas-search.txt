@@ -79,12 +79,12 @@ The query also includes a:
                  }
                 }
                },
-               { $limit: 10 },
+               { "$limit": 10 },
                {
-                 $project: {
+                 "$project": {
                  "_id": 0,
                  "title": 1,
-                 score: { $meta: "searchScore" }
+                 "score": { "$meta": "searchScore" }
                  }
                 }
               ])
@@ -96,18 +96,16 @@ The query also includes a:
       :language: none
       :visible: false
 
-      [
-        { title: 'New York, New York', score: 6.786321640014648 }
-        { title: 'New York', score: 6.258549213409424 }
-        { title: 'New York Stories', score: 5.3813982009887695 }
-        { title: 'New York Minute', score: 5.3813982009887695 }
-        { title: 'Synecdoche, New York', score: 5.3813982009887695 }
-        { title: 'New York Doll', score: 5.3813982009887695 }
-        { title: 'Little New York', score: 5.3813982009887695 }
-        { title: 'Escape from New York', score: 4.719893455505371 }
-        { title: 'Naked in New York', score: 4.719893455505371 }
-        { title: 'Autumn in New York', score: 4.719893455505371 }
-      ]
+      { title: 'New York, New York', score: 6.786321640014648 }
+      { title: 'New York', score: 6.258549213409424 }
+      { title: 'New York Stories', score: 5.3813982009887695 }
+      { title: 'New York Minute', score: 5.3813982009887695 }
+      { title: 'Synecdoche, New York', score: 5.3813982009887695 }
+      { title: 'New York Doll', score: 5.3813982009887695 }
+      { title: 'Little New York', score: 5.3813982009887695 }
+      { title: 'Escape from New York', score: 4.719893455505371 }
+      { title: 'Naked in New York', score: 4.719893455505371 }
+      { title: 'Autumn in New York', score: 4.719893455505371 }
 
 Next Steps 
 ----------
