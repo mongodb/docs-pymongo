@@ -1,0 +1,114 @@
+.. _pymongo-atlas-search:
+
+============
+Atlas Search
+============
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: reference
+
+.. meta::
+   :keywords: search, atlas, read
+
+Overview
+--------
+
+In this guide, you can learn how to query an Atlas Search index and use advanced search functionality for your applications. To query the seach index, use a ``$search`` aggregation pipeline stage with {+driver-short+}. 
+
+To learn more about the ``$search`` pipeline stage, see :manual:`$search
+</reference/operator/aggregation/search/>`.
+
+.. note:: Only Available on Atlas for MongoDB v4.2 and Later
+   The ``$search`` aggregation-pipeline operator is available only for collections hosted
+   on :atlas:`MongoDB Atlas </>` clusters running MongoDB v4.2 or later that are
+   covered by an :atlas:`Atlas search index </reference/atlas-search/index-definitions/>`.
+   To learn more about the required setup and the functionality of this operator,
+   see the :ref:`Atlas Search <fts-top-ref>` documentation.
+
+Sample Data
+~~~~~~~~~~~
+
+The examples in this guide use the ``sample_mflix.movies`` collection
+from the :atlas:`Atlas sample datasets </sample-data>`. To learn how to create a
+free MongoDB Atlas cluster and load the sample datasets, see
+:ref:`<pymongo-get-started>`.
+
+Create an Atlas Search Index
+----------------------------
+
+Before you can perform a search on an Atlas collection, you must first create an **Atlas
+Search index** on the collection. An Atlas Search index is a data structure that
+categorizes data in a searchable format. To learn how to create an Atlas Search Index 
+see the :ref:`pymongo-atlas-search-index` documentation.
+
+Search Your Data
+----------------
+
+To use the ``$search`` aggregation pipeline stage, you must select an Atlas Search query operator that specifies the type of query you run. You can also optionally select a collector that groups results by values or ranges. To see a table of all the operators and collectors available in Atlas Search, see :atlas:`Use Operators and Collectors in Atlas Search Queries </atlas-search/operators-and-collectors>`. 
+
+The following example uses the ``phrase`` operator, which performs search for documents containing an ordered sequence of terms. To learn more about the ``phrase`` operator, see :atlas:`Phrase </atlas-search/phrase>` in the Atlas guide. 
+
+The example performs a basic search of the ``title`` field for the query string ``new york``. There is no
+The query also includes a:
+
+- :pipeline:`$limit` stage to limit the output to 10 results.
+- :pipeline:`$project` stage to exclude all fields except
+  ``title`` and add a field named ``score``.
+
+.. code-block:: python
+   :copyable: true
+   client = pymongo.MongoClient('<connection-string>')
+   result = client['sample_mflix']['movies'].aggregate([
+               {
+                  "$search": {
+                  "phrase": {
+                     "path": "title",
+                     "query": "new york"
+                  }
+                  }
+               },
+               { $limit: 10 },
+               {
+                  $project: {
+                  "_id": 0,
+                  "title": 1,
+                  score: { $meta: "searchScore" }
+                  }
+               }
+               ])
+   for i in result:
+    print(i)
+
+.. output:: 
+   :language: shell
+   :linenos:
+   :visible: false
+
+   [
+   { title: 'New York, New York', score: 6.786321640014648 }
+   { title: 'New York', score: 6.258549213409424 }
+   { title: 'New York Stories', score: 5.3813982009887695 }
+   { title: 'New York Minute', score: 5.3813982009887695 }
+   { title: 'Synecdoche, New York', score: 5.3813982009887695 }
+   { title: 'New York Doll', score: 5.3813982009887695 }
+   { title: 'Little New York', score: 5.3813982009887695 }
+   { title: 'Escape from New York', score: 4.719893455505371 }
+   { title: 'Naked in New York', score: 4.719893455505371 }
+   { title: 'Autumn in New York', score: 4.719893455505371 }
+   ]
+
+Next Steps 
+----------
+
+Now that you've run a query using Atlas Search, review the Atlas Search :atlas:`documentation 
+</atlas-search>` to learn more about the different :atlas:`operators 
+</atlas-search/operators-and-collectors>` and other queries you can run. More query examples using
+MongoDB Query Language (MQL) are available througout the Atlas :atlas:`documentation 
+</atlas-search>`.

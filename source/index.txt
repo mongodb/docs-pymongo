@@ -18,6 +18,7 @@ MongoDB {+driver-short+} Documentation
    Write Data </write-operations>
    Read Data </read>
    Run a Database Command </run-command>
+   Atlas Search </atlas-search>
    Indexes </indexes>
    Aggregation </aggregation>
    Security </security>
