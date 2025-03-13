@@ -53,11 +53,11 @@ The following example sets the log level on the ``pymongo.command`` component to
    logging.getLogger("pymongo.command").setLevel(logging.DEBUG)
 
 Messages that the driver outputs will have the log level specified at the beginning of the
-message, as shown by this example ``INFO`` message:
+message, as shown by this example ``DEBUG`` message:
 
 .. code-block:: none
 
-   INFO:pymongo.command:Command insert on namespace test.test_collection
+   DEBUG:pymongo.command:{"clientId": {"$oid": "..."}, "message": "Command started", "command": "{\"insert\": \"test\", \"ordered\": true, \"lsid\": {\"id\": {\"$binary\": {\"base64\": \"GI7ubVhPSsWd7+OwHEFx6Q==\", \"subType\": \"04\"}}}, \"$db\": \"db\", \"documents\": [{\"x\": 1, \"_id\": {\"$oid\": \"...\"}}]}", "commandName": "insert", "databaseName": "db", "requestId": ..., "operationId": ..., "driverConnectionId": 1, "serverConnectionId": 3554, "serverHost": "localhost", "serverPort": 27017}
 
 Configuring Truncation
 ----------------------
