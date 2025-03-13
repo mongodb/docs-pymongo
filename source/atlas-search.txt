@@ -84,7 +84,7 @@ The query also includes a:
                }
                ])
    for i in result:
-    print(i)
+      print(i)
 
 .. output:: 
    :language: shell
