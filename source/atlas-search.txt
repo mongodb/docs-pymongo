@@ -66,36 +66,37 @@ The query also includes a:
 .. io-code-block::
    :copyable: true
 
-  .. input:: python
-   
-     client = pymongo.MongoClient('<connection-string>')
-     result = client['sample_mflix']['movies'].aggregate([
-                 {
-                    "$search": {
-                    "phrase": {
-                     "path": "title",
-                     "query": "new york"
-                  }
-                  }
-               },
-               { $limit: 10 },
+   .. input::
+      :language: python
+
+      client = pymongo.MongoClient('<connection-string>')
+      result = client['sample_mflix']['movies'].aggregate([
                {
-                    $project: {
-                    "_id": 0,
-                    "title": 1,
-                    score: { $meta: "searchScore" }
-                  }
+                  "$search": {
+                  "phrase": {
+                  "path": "title",
+                  "query": "new york"
                }
-               ])
-     for i in result:
-        print(i)
+               }
+            },
+            { $limit: 10 },
+            {
+                  $project: {
+                  "_id": 0,
+                  "title": 1,
+                   score: { $meta: "searchScore" }
+               }
+            }
+            ])
+            
+      for i in result:
+         print(i)
 
-  .. output:: 
-     :language: shell
-     :linenos:
-     :visible: false
+   .. output::
+      :language: none
+      :visible: false
 
-     [
+      [
         { title: 'New York, New York', score: 6.786321640014648 }
         { title: 'New York', score: 6.258549213409424 }
         { title: 'New York Stories', score: 5.3813982009887695 }
@@ -106,7 +107,7 @@ The query also includes a:
         { title: 'Escape from New York', score: 4.719893455505371 }
         { title: 'Naked in New York', score: 4.719893455505371 }
         { title: 'Autumn in New York', score: 4.719893455505371 }
-     ]
+      ]
 
 Next Steps 
 ----------
