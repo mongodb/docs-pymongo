@@ -185,8 +185,8 @@ in the {+mdb-server+} manual.
 
    * - ``maxIdleTimeMS``
      - | The maximum time that a connection can remain idle in the pool. When a connection
-         exceeds this limit, {+driver-short+} closes the connection and checks it back
-         into the pool.
+         exceeds this limit, {+driver-short+} closes the connection and removes it from
+         the pool.
        |
        | **Data Type**: ``int``
        | **Default**: ``None`` (no limit)
