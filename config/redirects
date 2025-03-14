@@ -70,5 +70,12 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 [*-master]: ${prefix}/${version}/indexes/wildcard-index/ -> ${base}/${version}/indexes/
 [*-master]: ${prefix}/${version}/indexes/clustered-index/ -> ${base}/${version}/indexes/
 
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/ -> ${base}/${version}/aggregation/
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/filtered-subset/ -> ${base}/${version}/aggregation/filtered-subset/
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/group-total/ -> ${base}/${version}/aggregation/group-total/
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/multi-field-join/ -> ${base}/${version}/aggregation/multi-field-join/
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/one-to-one-join/ -> ${base}/${version}/aggregation/one-to-one-join/
+[*-master]: ${prefix}/${version}/aggregation/aggregation-tutorials/unpack-arrays/ -> ${base}/${version}/aggregation/unpack-arrays/
+
 # temp redirect until DOP deletes unversioned URLs
 [master]: ${prefix}/compatibility/ -> ${base}/current/compatibility/

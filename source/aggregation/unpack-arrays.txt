@@ -46,9 +46,7 @@ into individual product order documents.
 Before You Get Started
 ----------------------
 
-Before you start this tutorial, complete the
-:ref:`pymongo-agg-tutorial-template-app` instructions to set up a working
-Python application.
+.. include:: /includes/aggregation-tutorial-intro.rst
 
 After you set up the app, access the ``orders`` collection by adding the
 following code to the application:
