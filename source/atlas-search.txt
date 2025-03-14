@@ -20,10 +20,12 @@ Atlas Search
 Overview
 --------
 
-In this guide, you can learn how to query an Atlas Search index and use advanced search functionality for your applications. To query the seach index, use a ``$search`` aggregation pipeline stage with {+driver-short+}. 
+In this guide, you can learn how to query an Atlas Search index and use advanced search 
+functionality for your {+driver-short+} applications. You can query a search index by 
+using a ``$search`` aggregation pipeline stage.
 
-To learn more about the ``$search`` pipeline stage, see :manual:`$search
-</reference/operator/aggregation/search/>`.
+To learn more about the ``$search`` pipeline stage, see the :manual:`$search
+</reference/operator/aggregation/search/>` guide in the {+mdb-server+} manual.
 
 .. note:: Only Available on Atlas for MongoDB v4.2 and Later
 
@@ -47,20 +49,26 @@ Create an Atlas Search Index
 Before you can perform a search on an Atlas collection, you must first create an **Atlas
 Search index** on the collection. An Atlas Search index is a data structure that
 categorizes data in a searchable format. To learn how to create an Atlas Search Index 
-see the :ref:`pymongo-atlas-search-index` documentation.
+see :ref:`pymongo-atlas-search-index`.
 
 Search Your Data
 ----------------
 
-To use the ``$search`` aggregation pipeline stage, you must select an Atlas Search query operator that specifies the type of query you run. You can also optionally select a collector that groups results by values or ranges. To see a table of all the operators and collectors available in Atlas Search, see :atlas:`Use Operators and Collectors in Atlas Search Queries </atlas-search/operators-and-collectors>`. 
+To use the ``$search`` aggregation pipeline stage, you must specify an Atlas Search query
+operator that indicates the type of query you want to run. You can also optionally specify
+a collector that groups results by values or ranges. To view a table of all the operators
+and collectors available with Atlas Search, see :atlas:`Use Operators and Collectors in 
+Atlas Search Queries </atlas-search/operators-and-collectors>`. 
 
-The following example uses the ``phrase`` operator, which performs search for documents containing an ordered sequence of terms. To learn more about the ``phrase`` operator, see :atlas:`Phrase </atlas-search/phrase>` in the Atlas guide. 
+The following example uses the ``phrase`` operator, which performs a search for documents
+that contain an ordered sequence of terms. To learn more about the ``phrase`` operator, see
+:atlas:`Phrase </atlas-search/phrase>` in the Atlas guide. 
 
-The example performs a basic search of the ``title`` field for the query string ``new york``.
-The query also includes a:
+The example performs a basic search of the ``title`` field for the query string ``"new york"``.
+The query also includes the following stages:
 
-- :pipeline:`$limit` stage to limit the output to 10 results.
-- :pipeline:`$project` stage to exclude all fields except
+- :pipeline:`$limit`, to limit the output to 10 results.
+- :pipeline:`$project`, to exclude all fields except
   ``title`` and add a field named ``score``.
 
 .. io-code-block::
@@ -108,11 +116,12 @@ The query also includes a:
       { title: 'Naked in New York', score: 4.719893455505371 }
       { title: 'Autumn in New York', score: 4.719893455505371 }
 
-Next Steps 
-----------
+Additional Information
+----------------------
 
-Now that you've run a query using Atlas Search, review the Atlas Search :atlas:`documentation 
-</atlas-search>` to learn more about the different :atlas:`operators 
-</atlas-search/operators-and-collectors>` and other queries you can run. More query examples using
-MongoDB Query Language (MQL) are available througout the Atlas :atlas:`documentation 
+To learn more about the different Atlas Search :atlas:`operators 
+</atlas-search/operators-and-collectors>` and other queries you can run, see the
+Atlas Search :atlas:`documentation </atlas-search>`. 
+
+You can view more query examples througout the Atlas :atlas:`documentation 
 </atlas-search>`.
