@@ -59,8 +59,7 @@ reads reflect the dependent relationship.
 
 .. note::
    
-   A client session guarantees causal consistency even if it is not used within a 
-   transaction.
+   A client session enables causal consistency even if it does not perform a transaction.
 
 The following table describes the guarantees that causally
 consistent sessions provide:
@@ -95,7 +94,7 @@ consistent sessions provide:
        ``delete_one()`` to delete the retrieved document, the driver runs the find
        operation first.
 
-In a causally consistent session, MongoDB only guarantees causal consistency between the
+In a causally consistent session, MongoDB guarantees causal consistency between only the
 following operations:
 
 - Read operations that have a ``majority`` read concern
