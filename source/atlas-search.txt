@@ -144,7 +144,7 @@ Additional Information
 To learn more about the available Atlas Search operators, see the :atlas:`Operators and
 Collectors </atlas-search/operators-and-collectors>` guide in the MongoDB Atlas
 documentation.
-ß
+
 For more information about Atlas Search, and to view more query examples, see the
 :atlas:`Atlas Search documentation </atlas-search>`. 
 
