@@ -331,19 +331,6 @@ all documents with a ``name`` field value that has at least two consecutive
 ``"p"`` characters. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab
 to see the corresponding code:
 
-.. io-code-block::
-   :copyable:
-
-   .. input:: /includes/specify-query/specify-queries.py
-      :start-after: start-find-evaluation
-      :end-before: end-find-evaluation
-      :language: python
-
-   .. output::
-
-      {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
-      {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
-
 .. tabs::
 
    .. tab:: Synchronous

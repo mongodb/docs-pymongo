@@ -54,6 +54,7 @@ see the corresponding code:
       .. literalinclude:: /includes/cursors/cursors.py
          :start-after: start-cursor-iterate
          :end-before: end-cursor-iterate
+         :language: python
 
    .. tab:: Asynchronous
       :tabid: async
@@ -61,6 +62,7 @@ see the corresponding code:
       .. literalinclude:: /includes/cursors/cursors-async.py
          :start-after: start-cursor-iterate
          :end-before: end-cursor-iterate
+         :language: python
 
 Retrieve Documents Individually
 -------------------------------
@@ -127,6 +129,7 @@ tab to see the corresponding code:
          :end-before: end-cursor-list
          :copyable:
          :emphasize-lines: 3
+         :language: python
 
    .. tab:: Asynchronous
       :tabid: async
@@ -135,6 +138,7 @@ tab to see the corresponding code:
          :start-after: start-cursor-list
          :end-before: end-cursor-list
          :emphasize-lines: 3
+         :language: python
 
 Close a Cursor
 --------------
