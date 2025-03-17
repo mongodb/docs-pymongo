@@ -60,10 +60,15 @@ a collector that groups results by values or ranges. To view a table of all the 
 and collectors available with Atlas Search, see :atlas:`Use Operators and Collectors in 
 Atlas Search Queries </atlas-search/operators-and-collectors>`. 
 
-The following example uses the ``phrase`` operator, which performs a search for documents
-that contain an ordered sequence of terms. To learn more about the ``phrase`` operator, see the :atlas:`Phrase </atlas-search/phrase>` guide in the MongoDB Atlas documentation. 
+The following example uses the ``compound`` operator to combine several operators into a
+single query. To learn more about the `compound`` operator, see the :atlas:`Compound
+</atlas-search/compound>` guide in the MongoDB Atlas documentation. 
 
-The example performs a basic search of the ``title`` field for the query string ``"new york"``.
+The query has the following search criteria:
+
+- The genres field must not contain Comedy.
+- The title field must contain the string ``"new york"``.
+
 The query also includes the following stages:
 
 - :pipeline:`$limit`, to limit the output to 10 results.
