@@ -88,6 +88,7 @@ see the corresponding code:
             :language: python
          
          .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'address': { ... }, 'borough': 'Bronx', 'cuisine': 'Donuts', 'grades': [...], 'name': "Dunkin' Donuts", 'restaurant_id': '40379573'}
 
@@ -103,6 +104,7 @@ see the corresponding code:
             :language: python
          
          .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'address': { ... }, 'borough': 'Bronx', 'cuisine': 'Donuts', 'grades': [...], 'name': "Dunkin' Donuts", 'restaurant_id': '40379573'}
 

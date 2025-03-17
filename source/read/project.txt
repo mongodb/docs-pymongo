@@ -68,7 +68,8 @@ corresponding code:
             :language: python
             :emphasize-lines: 1
          
-         .. output:: 
+         .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
             {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
@@ -85,6 +86,7 @@ corresponding code:
             :emphasize-lines: 1
 
          .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
             {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
@@ -119,7 +121,8 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
             :emphasize-lines: 1
          
-         .. output:: 
+         .. output::
+            :visible: false
 
             {'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
             {'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
@@ -136,6 +139,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :emphasize-lines: 1
 
          .. output::
+            :visible: false
 
             {'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub'}
             {'borough': 'Queens', 'cuisine': 'American', 'name': 'Emerald Pub'}
@@ -168,6 +172,7 @@ exclude the ``grades`` and ``address`` fields from the returned documents. Selec
             :emphasize-lines: 1
 
          .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40367329'}
             {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American',
@@ -185,6 +190,7 @@ exclude the ``grades`` and ``address`` fields from the returned documents. Selec
             :emphasize-lines: 1
          
          .. output::
+            :visible: false
 
             {'_id': ObjectId('...'), 'borough': 'Manhattan', 'cuisine': 'American', 'name': 'Emerald Pub', 'restaurant_id': '40367329'}
             {'_id': ObjectId('...'), 'borough': 'Queens', 'cuisine': 'American',

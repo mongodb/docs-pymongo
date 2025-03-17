@@ -57,6 +57,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Isle Of Capri Resturant Italian
             Arturo'S Italian
@@ -75,6 +76,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
             
             Isle Of Capri Resturant Italian
             Arturo'S Italian
@@ -99,6 +101,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Isle Of Capri Resturant Italian
             Arturo'S Italian
@@ -117,6 +120,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Isle Of Capri Resturant Italian
             Arturo'S Italian
@@ -159,6 +163,7 @@ The following example returns all documents with the ``cuisine`` value of
             :language: python
 
          .. output::
+            :visible: false
 
             (Lewis Drug Store) Locanda Vini E Olii
             101 Restaurant And Bar
@@ -179,6 +184,7 @@ The following example returns all documents with the ``cuisine`` value of
             :language: python
             
          .. output::
+            :visible: false
 
             (Lewis Drug Store) Locanda Vini E Olii
             101 Restaurant And Bar
@@ -206,6 +212,7 @@ results in the same order as the preceding example. Select the :guilabel:`Synchr
             :language: python
          
          .. output::
+            :visible: false
 
             (Lewis Drug Store) Locanda Vini E Olii
             101 Restaurant And Bar
@@ -226,6 +233,7 @@ results in the same order as the preceding example. Select the :guilabel:`Synchr
             :language: python
 
          .. output::
+            :visible: false
 
             (Lewis Drug Store) Locanda Vini E Olii
             101 Restaurant And Bar
@@ -260,6 +268,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Dorrian'S Red Hand Restaurant
             The Princeton Club
@@ -279,6 +288,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
             :language: python
          
          .. output::
+            :visible: false
             
             Dorrian'S Red Hand Restaurant
             The Princeton Club
@@ -305,6 +315,7 @@ same skip as the preceding example. Select the :guilabel:`Synchronous` or
             :language: python
          
          .. output::
+            :visible: false
             
             Dorrian'S Red Hand Restaurant
             The Princeton Club
@@ -324,6 +335,7 @@ same skip as the preceding example. Select the :guilabel:`Synchronous` or
             :language: python
 
          .. output::
+            :visible: false
             
             Dorrian'S Red Hand Restaurant
             The Princeton Club
@@ -357,6 +369,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Acqua
             Acqua Restaurant
@@ -375,6 +388,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             Acqua
             Acqua Restaurant
@@ -406,6 +420,7 @@ same query as the preceding example. Select the :guilabel:`Synchronous` or
             :language: python
 
          .. output::
+            :visible: false
 
             Acqua
             Acqua Restaurant
@@ -424,6 +439,7 @@ same query as the preceding example. Select the :guilabel:`Synchronous` or
             :language: python
 
          .. output::
+            :visible: false
 
             Acqua
             Acqua Restaurant

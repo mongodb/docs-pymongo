@@ -83,6 +83,7 @@ method. The code returns all documents with a ``color`` field value of ``"yellow
       :language: python
 
    .. output::
+      :visible: false
       
       {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
       {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
@@ -130,6 +131,7 @@ parameter to the ``find()`` method. The code returns all documents with a
             :language: python
          
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -147,6 +149,7 @@ parameter to the ``find()`` method. The code returns all documents with a
             :language: python
          
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -186,6 +189,7 @@ to see the corresponding code:
             :language: python
          
          .. output::
+            :visible: false
 
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
             {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -203,6 +207,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
             {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -240,6 +245,7 @@ parameter to the ``find()`` method. The code returns all documents with a
             :language: python
    
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -256,6 +262,7 @@ parameter to the ``find()`` method. The code returns all documents with a
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 3, 'name': 'oranges', 'qty': 6, 'rating': 2, 'type': ['naval', 'mandarin']}
@@ -287,6 +294,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -304,6 +312,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 2, 'name': 'bananas', 'qty': 7, 'rating': 4, 'color': 'yellow', 'type': ['cavendish']}
@@ -345,6 +354,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}
@@ -361,6 +371,7 @@ to see the corresponding code:
             :language: python
 
          .. output::
+            :visible: false
 
             {'_id': 1, 'name': 'apples', 'qty': 5, 'rating': 3, 'color': 'red', 'type': ['fuji', 'honeycrisp']}
             {'_id': 4, 'name': 'pineapple', 'qty': 3, 'rating': 5, 'color': 'yellow'}

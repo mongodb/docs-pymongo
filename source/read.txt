@@ -52,7 +52,7 @@ the relevant values for your MongoDB deployment.
 .. include:: /includes/usage-examples/sample-app-intro.rst
 
 Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
-code.
+code:
 
 .. tabs::
 
