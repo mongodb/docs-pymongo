@@ -67,7 +67,7 @@ single query. To learn more about the ``compound`` operator, see the :atlas:`Com
 The query has the following search criteria:
 
 - The ``genres`` field must not contain ``Comedy``.
-- The ``title`` field must contain the string ``new york``.
+- The ``title`` field must contain the string ``New York``.
 
 The query also includes the following stages:
 
@@ -101,7 +101,7 @@ The query also includes the following stages:
                         {
                             "text": {
                                 "query": [
-                                    "new york"
+                                    "New York"
                                 ],
                                 "path": "title"
                               }     
