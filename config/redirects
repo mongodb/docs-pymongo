@@ -55,7 +55,7 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 [*-master]: ${prefix}/${version}/pymongo-to-async-guide/ -> ${base}/${version}/reference/migration/
 [*-master]: ${prefix}/${version}/previous-versions/ -> ${base}/${version}/reference/previous-versions/
 [*-master]: ${prefix}/${version}/whats-new/ -> ${base}/${version}/reference/release-notes/
-[*-master]: ${prefix}/${version}/tools/ -> ${base}/${version}/reference/third-party-tools/
+[*-master]: ${prefix}/${version}/tools/ -> ${base}/${version}/integrations/
 [*-master]: ${prefix}/${version}/upgrade/ -> ${base}/${version}/reference/upgrade/
 [*-master]: ${prefix}/${version}/write-operations/ -> ${base}/${version}/crud/[v4.7-*]: ${prefix}/${version}/get-started/connect-to-mongodb -> ${base}/${version}/get-started/run-sample-query/
 [*-master]: ${prefix}/${version}/work-with-indexes/ -> ${base}/${version}/indexes/

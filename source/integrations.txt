@@ -1,8 +1,9 @@
 .. _pymongo-tools:
+.. _pymongo-integrations:
 
-=================
-Third-Party Tools
-=================
+==================================
+Third-Party Integrations and Tools
+==================================
 
 .. contents:: On this page
    :local:

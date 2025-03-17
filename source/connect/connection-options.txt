@@ -82,6 +82,11 @@ sections:
 - :ref:`Connection Pools <pymongo-connection-pools>`
 - :ref:`Configure CRUD Operations <pymongo-configure-crud>`
 
+.. tip:: Authentication and Encryption
+
+   To learn how to enable TLS encryption and authentication in {+driver-short+},
+   see :ref:`pymongo-tls` and :ref:`pymongo-auth` in the Security section.
+
 API Documentation
 -----------------
 
