@@ -66,8 +66,8 @@ single query. To learn more about the `compound`` operator, see the :atlas:`Comp
 
 The query has the following search criteria:
 
-- The genres field must not contain Comedy.
-- The title field must contain the string ``"new york"``.
+- The ``genres`` field must not contain ``Comedy``.
+- The ``title`` field must contain the string ``new york``.
 
 The query also includes the following stages:
 
