@@ -62,7 +62,7 @@ Atlas Search Queries </atlas-search/operators-and-collectors>`.
 
 The following example uses the ``compound`` operator to combine several operators into a
 single query. To learn more about the ``compound`` operator, see the :atlas:`Compound
-</atlas-search/compound>` guide in the MongoDB Atlas documentation. 
+</atlas-search/compound>` operator guide in the MongoDB Atlas documentation. 
 
 The query has the following search criteria:
 
