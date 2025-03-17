@@ -151,38 +151,42 @@ The following example returns all documents with the ``cuisine`` value of
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-sort-method
-         :end-before: end-sort-method
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-sort-method
+            :end-before: end-sort-method
+            :language: python
 
-         (Lewis Drug Store) Locanda Vini E Olii
-         101 Restaurant And Bar
-         44 Sw Ristorante & Bar
-         900 Park
-         A Voce
-         ...
-         Zucchero E Pomodori
+         .. output::
+
+            (Lewis Drug Store) Locanda Vini E Olii
+            101 Restaurant And Bar
+            44 Sw Ristorante & Bar
+            900 Park
+            A Voce
+            ...
+            Zucchero E Pomodori
 
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-sort-method
-         :end-before: end-sort-method
-         :language: python
-         
-      .. output::
+      .. io-code-block::
 
-         (Lewis Drug Store) Locanda Vini E Olii
-         101 Restaurant And Bar
-         44 Sw Ristorante & Bar
-         900 Park
-         A Voce
-         ...
-         Zucchero E Pomodori
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-sort-method
+            :end-before: end-sort-method
+            :language: python
+            
+         .. output::
+
+            (Lewis Drug Store) Locanda Vini E Olii
+            101 Restaurant And Bar
+            44 Sw Ristorante & Bar
+            900 Park
+            A Voce
+            ...
+            Zucchero E Pomodori
 
 You can also sort documents by specifying the ``sort`` parameter in your ``find()``
 method. The following example specifies the ``sort`` parameter to return the
@@ -194,38 +198,42 @@ results in the same order as the preceding example. Select the :guilabel:`Synchr
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-sort-option
-         :end-before: end-sort-option
-         :language: python
-      
-      .. output::
+      .. io-code-block::
 
-         (Lewis Drug Store) Locanda Vini E Olii
-         101 Restaurant And Bar
-         44 Sw Ristorante & Bar
-         900 Park
-         A Voce
-         ...
-         Zucchero E Pomodori
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-sort-option
+            :end-before: end-sort-option
+            :language: python
+         
+         .. output::
+
+            (Lewis Drug Store) Locanda Vini E Olii
+            101 Restaurant And Bar
+            44 Sw Ristorante & Bar
+            900 Park
+            A Voce
+            ...
+            Zucchero E Pomodori
    
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-sort-option
-         :end-before: end-sort-option
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-sort-option
+            :end-before: end-sort-option
+            :language: python
 
-         (Lewis Drug Store) Locanda Vini E Olii
-         101 Restaurant And Bar
-         44 Sw Ristorante & Bar
-         900 Park
-         A Voce
-         ...
-         Zucchero E Pomodori
+         .. output::
+
+            (Lewis Drug Store) Locanda Vini E Olii
+            101 Restaurant And Bar
+            44 Sw Ristorante & Bar
+            900 Park
+            A Voce
+            ...
+            Zucchero E Pomodori
 
 Skip
 ----
@@ -244,36 +252,40 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-skip-option
-         :end-before: end-skip-option
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-skip-option
+            :end-before: end-skip-option
+            :language: python
 
-         Dorrian'S Red Hand Restaurant
-         The Princeton Club
-         Moran'S Chelsea
-         La Parisienne Diner
-         Jimmy'S Corner
-         ...
+         .. output::
+
+            Dorrian'S Red Hand Restaurant
+            The Princeton Club
+            Moran'S Chelsea
+            La Parisienne Diner
+            Jimmy'S Corner
+            ...
    
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-skip-option
-         :end-before: end-skip-option
-         :language: python
-      
-      .. output::
+      .. io-code-block::
+
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-skip-option
+            :end-before: end-skip-option
+            :language: python
          
-         Dorrian'S Red Hand Restaurant
-         The Princeton Club
-         Moran'S Chelsea
-         La Parisienne Diner
-         Jimmy'S Corner
-         ...
+         .. output::
+            
+            Dorrian'S Red Hand Restaurant
+            The Princeton Club
+            Moran'S Chelsea
+            La Parisienne Diner
+            Jimmy'S Corner
+            ...
 
 You can also skip returned documents by using the ``skip``
 parameter of the ``find()`` method. The following example specifies the
@@ -285,36 +297,40 @@ same skip as the preceding example. Select the :guilabel:`Synchronous` or
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-skip-option
-         :end-before: end-skip-option
-         :language: python
-      
-      .. output::
+      .. io-code-block::
+
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-skip-option
+            :end-before: end-skip-option
+            :language: python
          
-         Dorrian'S Red Hand Restaurant
-         The Princeton Club
-         Moran'S Chelsea
-         La Parisienne Diner
-         Jimmy'S Corner
-         ...
+         .. output::
+            
+            Dorrian'S Red Hand Restaurant
+            The Princeton Club
+            Moran'S Chelsea
+            La Parisienne Diner
+            Jimmy'S Corner
+            ...
 
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-skip-option
-         :end-before: end-skip-option
-         :language: python
+      .. io-code-block::
 
-      .. output::
-         
-         Dorrian'S Red Hand Restaurant
-         The Princeton Club
-         Moran'S Chelsea
-         La Parisienne Diner
-         Jimmy'S Corner
-         ...
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-skip-option
+            :end-before: end-skip-option
+            :language: python
+
+         .. output::
+            
+            Dorrian'S Red Hand Restaurant
+            The Princeton Club
+            Moran'S Chelsea
+            La Parisienne Diner
+            Jimmy'S Corner
+            ...
 
 Combine Limit, Sort, and Skip
 -----------------------------
@@ -333,34 +349,38 @@ to see the corresponding code:
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-limit-sort-skip
-         :end-before: end-limit-sort-skip
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-limit-sort-skip
+            :end-before: end-limit-sort-skip
+            :language: python
 
-         Acqua
-         Acqua Restaurant
-         Acqua Santa
-         Acquista Trattoria
-         Acquolina Catering
+         .. output::
+
+            Acqua
+            Acqua Restaurant
+            Acqua Santa
+            Acquista Trattoria
+            Acquolina Catering
 
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-limit-sort-skip
-         :end-before: end-limit-sort-skip
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-limit-sort-skip
+            :end-before: end-limit-sort-skip
+            :language: python
 
-         Acqua
-         Acqua Restaurant
-         Acqua Santa
-         Acquista Trattoria
-         Acquolina Catering
+         .. output::
+
+            Acqua
+            Acqua Restaurant
+            Acqua Santa
+            Acquista Trattoria
+            Acquolina Catering
 
 .. note::
 
@@ -378,34 +398,38 @@ same query as the preceding example. Select the :guilabel:`Synchronous` or
    .. tab:: Synchronous
       :tabid: sync
 
-      .. input:: /includes/read/specify-documents-to-return.py
-         :start-after: start-limit-sort-skip-option
-         :end-before: end-limit-sort-skip-option
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return.py
+            :start-after: start-limit-sort-skip-option
+            :end-before: end-limit-sort-skip-option
+            :language: python
 
-         Acqua
-         Acqua Restaurant
-         Acqua Santa
-         Acquista Trattoria
-         Acquolina Catering
+         .. output::
+
+            Acqua
+            Acqua Restaurant
+            Acqua Santa
+            Acquista Trattoria
+            Acquolina Catering
 
    .. tab:: Asynchronous
       :tabid: async
 
-      .. input:: /includes/read/specify-documents-to-return-async.py
-         :start-after: start-limit-sort-skip-option
-         :end-before: end-limit-sort-skip-option
-         :language: python
+      .. io-code-block::
 
-      .. output::
+         .. input:: /includes/read/specify-documents-to-return-async.py
+            :start-after: start-limit-sort-skip-option
+            :end-before: end-limit-sort-skip-option
+            :language: python
 
-         Acqua
-         Acqua Restaurant
-         Acqua Santa
-         Acquista Trattoria
-         Acquolina Catering
+         .. output::
+
+            Acqua
+            Acqua Restaurant
+            Acqua Santa
+            Acquista Trattoria
+            Acquolina Catering
 
 Additional Information
 ----------------------
