@@ -21,7 +21,7 @@ Specify Connection Options
    :titlesonly:
    :maxdepth: 1
 
-   Enable TLS </security/tls>
+   Authentication and Encryption </connect/connection-options/authentication-encryption>
    Compress Network Traffic </connect/connection-options/network-compression>
    Customize Server Selection </connect/connection-options/server-selection>
    Stable API </connect/connection-options/stable-api>
