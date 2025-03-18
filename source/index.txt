@@ -24,6 +24,7 @@ MongoDB {+driver-short+} Documentation
    Data Formats </data-formats>
    Logging </logging>
    Monitoring </monitoring>
+   Search Geospatially </geo>
    Serialization </serialization>
    Third-Party Tools </tools>
    What's New </whats-new>
