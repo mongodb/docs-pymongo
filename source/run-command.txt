@@ -238,7 +238,7 @@ To learn about the response format of the command, see :manual:`Database Command
    the command's read preference defaults to ``PRIMARY``.
    
    You can set a read preference for command execution by using the ``read_preference``
-   parameter, as shown in the following code:
+   parameter. For example:
    
    .. literalinclude:: /includes/run-command.py
       :language: python
