@@ -39,10 +39,10 @@ Geospatial Data Formats
 All geospatial data in MongoDB is stored in one of the following formats:
 
 - GeoJSON, a format that represents geospatial data on an earth-like
-  sphere.
+  sphere
 
 - Legacy coordinate pairs, a format that represents geospatial data
-  on a Euclidean plane.
+  on a Euclidean plane
 
 GeoJSON
 ~~~~~~~
@@ -88,8 +88,8 @@ Here are some common GeoJSON types and how you can specify them with positions:
   .. code-block:: python
 
      {
-      "type": "Point",
-      "coordinates": [-73.856077, 40.848447] 
+         "type": "Point",
+         "coordinates": [-73.856077, 40.848447] 
      }
 
 - ``LineString``: an array of two or more positions that forms a series of line
@@ -100,12 +100,12 @@ Here are some common GeoJSON types and how you can specify them with positions:
   .. code-block:: python
 
      {
-      "type": "LineString",
-      "coordinates": 
-      [[116.572, 40.430],
-      [116.570, 40.434],
-      [116.567, 40.436],
-      [116.566, 40.441]]
+         "type": "LineString",
+         "coordinates": 
+         [[116.572, 40.430],
+         [116.570, 40.434],
+         [116.567, 40.436],
+         [116.566, 40.441]]
      }
 
 - ``Polygon``: an array of positions in which the first and last
@@ -115,13 +115,13 @@ Here are some common GeoJSON types and how you can specify them with positions:
   .. code-block:: python
 
      {
-      "type": "Polygon",
-      "coordinates": 
-      [[[12.446086, 41.901977],
-      [12.457952, 41.901559],
-      [12.455375, 41.907351],
-      [12.449863, 41.905186],
-      [12.446086, 41.901977]]]
+         "type": "Polygon",
+         "coordinates": 
+         [[[12.446086, 41.901977],
+         [12.457952, 41.901559],
+         [12.455375, 41.907351],
+         [12.449863, 41.905186],
+         [12.446086, 41.901977]]]
      }
 
 To learn more about the GeoJSON types you can use in MongoDB, see the
@@ -136,7 +136,7 @@ Legacy Coordinate Pairs
 Use legacy coordinate pairs to store data that represents geospatial information
 on a two-dimensional plane.
 
-Legacy coordinate pairs are represented by an array of two values, in which the first
+Legacy coordinate pairs are represented by an array of two values, in which the first value
 represents the ``x`` axis value and the second represents the ``y`` axis value.
 
 For more information on legacy coordinate pairs, see the
@@ -200,36 +200,39 @@ The following example queries for documents with a ``location.geo`` field value
 within 1000 meters of the MongoDB Headquarters in New York City, NY. It returns documents
 from nearest to farthest.
 
-.. code-block:: python
+.. io-code-block::
+   :copyable: true
 
-   # set query with point at MongoDB headquarters and a maxDistance of 1000 meters
-   query = {
-      "location.geo": {
-         "$near": {
-               "$geometry": {
-                  "type": "Point",
-                  "coordinates": [-73.986805, 40.7620853]  # Search around this location
-               },
-               "$maxDistance": 1000 # Distance in meters (1 km)
-         }
-      }
-   }
+  .. input::
+     :language: python
 
-   # fetches the _id and theaterId fields 
-   projection = { "theaterId": 1 }
+     # set query with point at MongoDB headquarters and a maxDistance of 1000 meters
+     query = {
+        "location.geo": {
+           "$near": {
+                 "$geometry": {
+                                 "type": "Point",
+                                 "coordinates": [-73.986805, 40.7620853]  # Search around this location
+                              },
+                 "$maxDistance": 1000 # Distance in meters (1 km)
+                     }          
+               }
+            }
 
-   nearby_places = location.find(query, projection)
+     # fetches the _id and theaterId fields 
+     projection = { "theaterId": 1 }
 
-   for i in nearby_places:
-       print(i)
+     nearby_places = location.find(query, projection)
 
-The results of the preceding example contain the following documents:
+     for i in nearby_places:
+         print(i) 
 
-.. code-block:: json
-   :copyable: False
+  .. output::
+     :language: json
+     :visible: false
 
-   { "_id" : ObjectId("59a47287cfa9a3a73e51e8e2"), "theaterId" : 1908 }
-   { "_id" : ObjectId("59a47286cfa9a3a73e51e838"), "theaterId" : 1448 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51e8e2"), "theaterId" : 1908 }
+     { "_id" : ObjectId("59a47286cfa9a3a73e51e838"), "theaterId" : 1448 }
 
 Query by Polygon
 ~~~~~~~~~~~~~~~~
@@ -237,51 +240,54 @@ Query by Polygon
 The following example queries for documents with a ``location.geo`` field value that exists
 within the boundaries of Manhattan.
 
-.. code-block:: python
+.. io-code-block::
+   :copyable: true
 
-   # Polygon representation of Manhattan
-   query = {
-      "location.geo": {
-         "$geoWithin": {
-               "$geometry": {
-                  # Search around this location
-                  "type": "Polygon",
-                  "coordinates": 
-                  [[[-73.925492, 40.877410],
-                  [-73.910372, 40.872366],
-                  [-73.935127, 40.834020],
-                  [-73.929049, 40.798569],
-                  [-73.976485, 40.711432],
-                  [-74.015747, 40.701229],
-                  [-74.018859, 40.708367],
-                  [-74.008007, 40.754307],
-                  [-73.925492, 40.877410]]]
-               }
-            }
-         }
-      }
+  .. input::
+     :language: python
 
-   # fetches the _id and theaterId fields 
-   projection = { "theaterId": 1 }
+     # Polygon representation of Manhattan
+     query = {
+        "location.geo": {
+           "$geoWithin": {
+                 "$geometry": {
+                    # Search around this location
+                                 "type": "Polygon",
+                                 "coordinates": 
+                                 [[[-73.925492, 40.877410],
+                                 [-73.910372, 40.872366],
+                                 [-73.935127, 40.834020],
+                                 [-73.929049, 40.798569],
+                                 [-73.976485, 40.711432],
+                                 [-74.015747, 40.701229],
+                                 [-74.018859, 40.708367],
+                                 [-74.008007, 40.754307],
+                                 [-73.925492, 40.877410]]]
+                              }
+                           }
+                        }
+                     }
 
-   nearby_places = location.find(query, projection)
+     # fetches the _id and theaterId fields 
+     projection = { "theaterId": 1 }
 
-   for i in nearby_places:
-       print(i)
+     nearby_places = location.find(query, projection)
 
-The results of the preceding example contain the following documents:
+     for i in nearby_places:
+         print(i)
 
-.. code-block:: json
-   :copyable: False
+  .. output::
+     :language: json
+     :visible: false
 
-   { "_id" : ObjectId("59a47287cfa9a3a73e51e8e2"), "theaterId" : 1908 }
-   { "_id" : ObjectId("59a47287cfa9a3a73e51eccb"), "theaterId" : 835 }
-   { "_id" : ObjectId("59a47286cfa9a3a73e51e838"), "theaterId" : 1448 }
-   { "_id" : ObjectId("59a47286cfa9a3a73e51e744"), "theaterId" : 1028 }
-   { "_id" : ObjectId("59a47287cfa9a3a73e51ebe1"), "theaterId" : 609 }
-   { "_id" : ObjectId("59a47287cfa9a3a73e51e8ed"), "theaterId" : 1906 }
-   { "_id" : ObjectId("59a47287cfa9a3a73e51e87d"), "theaterId" : 1531 }
-   { "_id" : ObjectId("59a47287cfa9a3a73e51eb63"), "theaterId" : 482 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51e8e2"), "theaterId" : 1908 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51eccb"), "theaterId" : 835 }
+     { "_id" : ObjectId("59a47286cfa9a3a73e51e838"), "theaterId" : 1448 }
+     { "_id" : ObjectId("59a47286cfa9a3a73e51e744"), "theaterId" : 1028 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51ebe1"), "theaterId" : 609 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51e8ed"), "theaterId" : 1906 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51e87d"), "theaterId" : 1531 }
+     { "_id" : ObjectId("59a47287cfa9a3a73e51eb63"), "theaterId" : 482 }
 
 Additional Resources
 --------------------
