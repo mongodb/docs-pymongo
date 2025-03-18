@@ -154,6 +154,8 @@ Text Index
 To learn more about text indexes, see the :ref:`pymongo-text-index`
 guide.
 
+.. _geospatial-indexes:
+
 Geospatial Index
 ----------------
 
