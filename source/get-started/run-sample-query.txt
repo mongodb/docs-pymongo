@@ -10,11 +10,21 @@ Run a Sample Query
 
    .. step:: Create your {+driver-short+} Application
       
-      Copy and paste the following code into the ``quickstart.py`` file in your application:
+      Copy and paste the following code into the ``quickstart.py`` file in your application.
+      Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding
+      code:
       
-      .. literalinclude:: /includes/get-started/connect-and-query.py
-         :language: python
-         :copyable:
+      .. tabs::
+         
+         .. tab:: Synchronous
+            :tabid: sync
+
+            .. literalinclude:: /includes/get-started/connect-and-query.py
+         
+         .. tab:: Asynchronous
+            :tabid: async
+
+            .. literalinclude:: /includes/get-started/connect-and-query-async.py
 
    .. step:: Assign the Connection String
 
