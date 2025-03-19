@@ -26,7 +26,6 @@ Specify Connection Options
    Stable API </connect/connection-options/stable-api>
    Limit Server Execution Time </connect/connection-options/csot>
    Connection Pools </connect/connection-options/connection-pools>
-   Configure CRUD Operations </crud/configure>
 
 Overview
 --------
