@@ -100,7 +100,7 @@ Monitoring and Logging
 ----------------------
 
 Learn how to monitor changes to your application and write them to logs in the
-:ref:`pymongo-monitoring-logging` section.
+:ref:`pymongo-logging-monitoring` section.
 
 Secure Your Data
 ----------------

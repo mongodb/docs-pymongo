@@ -1,6 +1,6 @@
-.. _pymongo-monitoring-logging:
+.. _pymongo-logging-monitoring:
 
-Monitoring and Logging
+Logging and Monitoring 
 ======================
 
 .. facet::
