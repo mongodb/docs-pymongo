@@ -71,10 +71,6 @@ Once you install the driver, create a file called
 app template for the aggregation tutorials. Select the :guilabel:`Synchronous` or
 :guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. literalinclude:: /includes/aggregation/template-app.py
-   :language: python
-   :copyable: true
-
 .. tabs::
 
    .. tab:: Synchronous

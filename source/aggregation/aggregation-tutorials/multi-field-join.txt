@@ -99,7 +99,7 @@ or :guilabel:`Asynchronous` tab to see the corresponding code:
    .. tab:: Asynchronous
       :tabid: async
 
-      .. literalinclude:: /includes/aggregation/multi-field-join.py
+      .. literalinclude:: /includes/aggregation/multi-field-join-async.py
          :language: python
          :copyable: true
          :start-after: start-insert-products
@@ -124,7 +124,7 @@ the ``orders`` collection as shown in the following code:
    .. tab:: Asynchronous
       :tabid: async
 
-      .. literalinclude:: /includes/aggregation/multi-field-join.py
+      .. literalinclude:: /includes/aggregation/multi-field-join-async.py
          :language: python
          :copyable: true
          :start-after: start-insert-orders
@@ -241,7 +241,7 @@ Tutorial
          .. tab:: Asynchronous
             :tabid: async
 
-            .. literalinclude:: /includes/aggregation/multi-field-join.py
+            .. literalinclude:: /includes/aggregation/multi-field-join-async.py
                :language: python
                :copyable: true
                :start-after: start-run-agg
