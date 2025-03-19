@@ -68,11 +68,28 @@ pipeline in each tutorial.
 
 Once you install the driver, create a file called
 ``agg_tutorial.py``. Paste the following code in this file to create an
-app template for the aggregation tutorials:
+app template for the aggregation tutorials. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. literalinclude:: /includes/aggregation/template-app.py
    :language: python
    :copyable: true
+
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/aggregation/template-app.py
+         :language: python
+         :copyable: true
+      
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/aggregation/aggregation-template-async.py
+         :language: python
+         :copyable: true
 
 .. important::
 
