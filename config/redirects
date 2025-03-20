@@ -46,11 +46,6 @@ raw: ${prefix}/monitoring/ -> ${base}/current/monitoring-and-logging/monitoring/
 raw: ${prefix}/data-formats/custom-types/ -> ${base}/current/data-formats/custom-types/type-codecs/
 raw: ${prefix}/serialization/#binary-data -> ${base}/current/reference/compatibility/
 raw: ${prefix}/compatibility/ -> ${base}/current/reference/compatibility/
-raw: ${prefix}/get-started/connect-to-mongodb/ -> ${base}/current/get-started/
-raw: ${prefix}/get-started/create-a-connection-string/ -> ${base}/current/get-started/
-raw: ${prefix}/get-started/create-a-deployment/ -> ${base}/current/get-started/
-raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
-raw: ${prefix}/get-started/next-steps/ -> ${base}/current/get-started/
 raw: ${prefix}/motor-async-migration/ -> ${base}/current/reference/migration/
 raw: ${prefix}/pymongo-to-async-guide/ -> ${base}/current/reference/migration/
 raw: ${prefix}/previous-versions/ -> ${base}/current/reference/previous-versions/
@@ -114,11 +109,6 @@ raw: ${prefix}/aggregation/aggregation-tutorials/unpack-arrays/ -> ${base}/curre
 [*-master]: ${prefix}/${version}/data-formats/custom-types/ -> ${base}/${version}/data-formats/custom-types/type-codecs/
 [*-master]: ${prefix}/${version}/serialization/#binary-data -> ${base}/${version}/reference/compatibility/
 [*-master]: ${prefix}/${version}/compatibility/ -> ${base}/${version}/reference/compatibility/
-[*-master]: ${prefix}/${version}/get-started/connect-to-mongodb/ -> ${base}/${version}/get-started/
-[*-master]: ${prefix}/${version}/get-started/create-a-connection-string/ -> ${base}/${version}/get-started/
-[*-master]: ${prefix}/${version}/get-started/create-a-deployment/ -> ${base}/${version}/get-started/
-[*-master]: ${prefix}/${version}/get-started/download-and-install/ -> ${base}/${version}/get-started/
-[*-master]: ${prefix}/${version}/get-started/next-steps/ -> ${base}/${version}/get-started/
 [*-master]: ${prefix}/${version}/motor-async-migration/ -> ${base}/${version}/reference/migration/
 [*-master]: ${prefix}/${version}/pymongo-to-async-guide/ -> ${base}/${version}/reference/migration/
 [*-master]: ${prefix}/${version}/previous-versions/ -> ${base}/${version}/reference/previous-versions/
