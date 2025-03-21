@@ -82,7 +82,8 @@ Local Deployment
 
       .. code-block:: python
 
-         client = MongoClient("mongodb://localhost:27017/")
+         uri = "mongodb://localhost:27017/"
+         client = MongoClient(uri)
 
    .. tab:: Asynchronous
       :tabid: async
