@@ -1,3 +1,5 @@
+The following tabs demonstrate how to specify all available compressors while connecting to MongoDB:
+
 .. tabs::
 
    .. tab:: MongoClient
