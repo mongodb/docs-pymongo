@@ -97,7 +97,7 @@ instance on port ``27017`` of ``localhost``:
    uri = "mongodb://localhost:27017/"
    client = MongoClient(uri)
 
-If you need to use an asynchronous version of the ``MongoClient`` class, use the
+If you must use an asynchronous version of the ``MongoClient`` class, use the
 ``AsyncMongoClient`` class. The following example shows how to create an
 ``AsyncMongoClient`` object:
 
