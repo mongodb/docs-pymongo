@@ -222,7 +222,7 @@ the cursor to print the results. Select the :guilabel:`Synchronous` or
          database = client["test_database"]
          collection_list = await database.list_collections()
 
-         async for c in collection_list:
+         for c in collection_list:
              print(c)
 
 To query for only the names of the collections in the database, call the
@@ -510,7 +510,7 @@ generic type for a ``Database`` type hint. Select the :guilabel:`Synchronous` or
 
          from typing import TypedDict
          from pymongo import AsyncMongoClient
-         from pymongo.database import Database
+         from pymongo.asynchronous.database import Database
 
          class Movie(TypedDict):
              name: str
@@ -539,7 +539,7 @@ documents in the collection. Then, include the class name as the generic type fo
 
          from typing import TypedDict
          from pymongo import MongoClient
-         from pymongo.collection import Collection
+         from pymongo.asynchronous.collection import Collection
 
          class Movie(TypedDict):
              name: str
