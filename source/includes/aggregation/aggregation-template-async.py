@@ -30,7 +30,7 @@ async def main():
         # ... aggregation_result = ...
 
         # Print the aggregation results.
-        for document in aggregation_result:
+        async for document in aggregation_result:
             print(document)
 
     finally:
