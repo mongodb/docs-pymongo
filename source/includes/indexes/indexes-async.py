@@ -162,7 +162,7 @@ await collection.create_search_indexes(models=indexes)
 # end-create-search-indexes
 
 # start-list-search-indexes
-results = await collection.list_search_indexes().to_list()
+results = await (await collection.list_search_indexes()).to_list()
 
 async for index in results:
     print(index)
