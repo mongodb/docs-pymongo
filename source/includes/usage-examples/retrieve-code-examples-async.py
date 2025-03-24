@@ -26,9 +26,9 @@ count = await collection.estimated_document_count()
 print(count)
 # end-estimated-count
 # start-distinct
-results = collection.distinct("<field name>")
+results = await collection.distinct("<field name>")
 
-async for document in results:
+for document in results:
     print(document)
 # end-distinct
 

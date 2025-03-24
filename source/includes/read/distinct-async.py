@@ -1,7 +1,7 @@
 # start-distinct
 results = await restaurants.distinct("borough")
 
-async for restaurant in results:
+for restaurant in results:
     print(restaurant)
 # end-distinct
 
@@ -10,7 +10,7 @@ results = await restaurants.distinct("borough", {
     "cuisine": "Italian"
 })
 
-async for restaurant in results:
+for restaurant in results:
     print(restaurant)
 # end-distinct-with-query
 
