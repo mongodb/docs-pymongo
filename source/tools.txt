@@ -159,32 +159,15 @@ on `greenlets <https://pypi.org/project/greenlet/>`__ instead of threads.
 
 To use gevent with {+driver-short+}, call gevent's
 ``monkey.patch_all()`` method *before* loading any other modules, as shown in the following
-example. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
-corresponding code:
+example:
 
-.. tabs::
+.. code-block:: python
 
-   .. tab:: Synchronous
-      :tabid: sync
-
-      .. code-block:: python
-
-         # You must call patch_all() *before* importing any other modules
-         from gevent import monkey
-         _ = monkey.patch_all()
-         from pymongo import MongoClient
-         client = MongoClient()
-
-   .. tab:: Asynchronous
-      :tabid: async
-
-      .. code-block:: python
-
-         # You must call patch_all() *before* importing any other modules
-         from gevent import monkey
-         _ = monkey.patch_all()
-         from pymongo import AsyncMongoClient
-         client = AsyncMongoClient()  
+   # You must call patch_all() *before* importing any other modules
+   from gevent import monkey
+   _ = monkey.patch_all()
+   from pymongo import MongoClient
+   client = MongoClient()
 
 .. important:: Close MongoClient to Avoid Blocking
 
