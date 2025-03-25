@@ -36,7 +36,7 @@
 
       .. code-block:: python
 
-         uri = ("mongodb://<db_username>:<db_password
+         uri = ("mongodb://<db_username>:<db_password"
                 "@<hostname>:<port>/?"
                 "tls=true"
                 "&tlsCertificateKeyFile=path/to/client.pem"
