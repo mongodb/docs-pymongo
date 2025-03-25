@@ -158,7 +158,7 @@ section of the Indexes guide.
 Query Operators
 ~~~~~~~~~~~~~~~
 
-To query geospatial data, use one of the following query operators:
+To query geospatial data using the ``find`` operator, use one of the following query operators:
 
 - ``$near``
 - ``$geoWithin``
@@ -176,6 +176,8 @@ When using the ``$geoWithin`` operator, you can specify the following shape oper
 - ``$polygon``
 - ``$center``
 - ``$centerSphere``
+
+To query geospatial data using the ``aggregate`` operator, you must use the ``$geoNear`` pipeline stage.
 
 For more information on geospatial query operators, see
 :manual:`Geospatial Query Operators </geospatial-queries/#geospatial-query-operators>` in
