@@ -222,22 +222,51 @@ implement a ``fetch()`` method, which returns the OIDC token in the form of an
 
 The following example shows how to define a callback class named ``MyCallback``. This class
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
-service-account token-file location.
+service-account token-file location. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
-   :language: python
-   :copyable: true
-   :start-after: # define callback, properties, and MongoClient
-   :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
+         :language: python
+         :copyable: true
+         :start-after: # define callback, properties, and MongoClient
+         :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :start-after: # define callback, properties, and MongoClient
+         :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
 ``"OIDC_CALLBACK"``, whose value is an instance of your custom callback class:
 
-.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
-   :language: python
-   :copyable: true
-   :start-after: return OIDCCallbackResult(access_token=token)
-   :end-before: client = MongoClient(
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
+         :language: python
+         :copyable: true
+         :start-after: return OIDCCallbackResult(access_token=token)
+         :end-before: client = MongoClient(
+   
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :start-after: return OIDCCallbackResult(access_token=token)
+         :end-before: client = AsyncMongoClient(
 
 Finally, set the following connection options by passing arguments to the ``MongoClient``
 constructor:
@@ -246,10 +275,23 @@ constructor:
 - ``authMechanismProperties``: Set to the ``properties`` dictionary that you created in the
   previous step.
 
-.. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
-      :language: python
-      :copyable: true
-      :emphasize-lines: 14-18
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient.py
+         :language: python
+         :copyable: true
+         :emphasize-lines: 14-18
+   
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/azure-envs-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :emphasize-lines: 14-18
 
 .. _pymongo-mongodb-oidc-gcp-gke:
 
@@ -266,22 +308,51 @@ implement a ``fetch()`` method, which returns the OIDC token in the form of an
 
 The following example shows how to define a callback class named ``MyCallback``. This class
 includes a ``fetch()`` method that retrieves an OIDC token from a file in the standard
-service-account token-file location.
+service-account token-file location. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
-   :language: python
-   :copyable: true
-   :start-after: # define callback, properties, and MongoClient
-   :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
+         :language: python
+         :copyable: true
+         :start-after: # define callback, properties, and MongoClient
+         :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :start-after: # define callback, properties, and MongoClient
+         :end-before: properties = {"OIDC_CALLBACK": MyCallback()}
 
 After you define your callback class, create a Python dictionary that contains one key,
 ``"OIDC_CALLBACK"``, whose value is an instance of your custom callback class:
 
-.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
-   :language: python
-   :copyable: true
-   :start-after: return OIDCCallbackResult(access_token=token)
-   :end-before: client = MongoClient(
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
+         :language: python
+         :copyable: true
+         :start-after: return OIDCCallbackResult(access_token=token)
+         :end-before: client = MongoClient(
+   
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :start-after: return OIDCCallbackResult(access_token=token)
+         :end-before: client = AsyncMongoClient(
 
 Finally, set the following connection options by passing arguments to the ``MongoClient``
 constructor:
@@ -290,10 +361,23 @@ constructor:
 - ``authMechanismProperties``: Set to the ``properties`` dictionary that you created
   in the previous step.
 
-.. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
-      :language: python
-      :copyable: true
-      :emphasize-lines: 11-15
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
+         :language: python
+         :copyable: true
+         :emphasize-lines: 11-15
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/authentication/gcp-gke-mongoclient-async.py
+         :language: python
+         :copyable: true
+         :emphasize-lines: 11-15
 
 .. _pymongo-mongodb-oidc-kubernetes:
 
@@ -326,3 +410,21 @@ the following tabs to see how to enable Kubernetes authentication for your appli
          :copyable: true
          :start-after: start-kubernetes-connection-string
          :end-before: end-kubernetes-connection-string
+
+   .. tab:: MongoClient (Asynchronous)
+      :tabid: mongoclient-async
+
+      .. literalinclude:: /includes/authentication/kubernetes-mongoclient.py
+         :language: python
+         :copyable: true
+         :start-after: start-kubernetes-mongoclient-async
+         :end-before: end-kubernetes-mongoclient-async
+   
+   .. tab:: Connection String (Asynchronous)
+      :tabid: connectionstring-async
+
+      .. literalinclude:: /includes/authentication/kubernetes-connection-string.py
+         :language: python
+         :copyable: true
+         :start-after: start-kubernetes-connection-string-async
+         :end-before: end-kubernetes-connection-string-async
