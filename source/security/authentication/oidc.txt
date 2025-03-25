@@ -317,7 +317,7 @@ code:
       .. literalinclude:: /includes/authentication/gcp-gke-mongoclient.py
          :language: python
          :copyable: true
-         :emphasize-lines: 11-15
+         :start-after: properties = {"OIDC_CALLBACK": MyCallback()}
 
    .. tab:: Asynchronous
       :tabid: async
@@ -325,7 +325,7 @@ code:
       .. literalinclude:: /includes/authentication/gcp-gke-mongoclient-async.py
          :language: python
          :copyable: true
-         :emphasize-lines: 11-15
+         :start-after: properties = {"OIDC_CALLBACK": MyCallback()}
 
 .. _pymongo-mongodb-oidc-kubernetes:
 
