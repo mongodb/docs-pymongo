@@ -22,7 +22,7 @@ MongoDB {+driver-short+} Documentation
    Run a Database Command </run-command>
    Atlas Search <https://www.mongodb.com/docs/atlas/atlas-search/>
    Atlas Vector Search <https://www.mongodb.com/docs/atlas/atlas-vector-search/vector-search-overview/>
-   Monitoring and Logging </logging-and-monitoring>
+   Monitoring and Logging </monitoring-and-logging>
    Security </security>
    Third-Party Integrations </integrations>
    Reference </reference>

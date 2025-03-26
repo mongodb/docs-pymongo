@@ -65,9 +65,9 @@ raw: ${prefix}/read/retrieve/ -> ${base}/current/crud/query/find/
 raw: ${prefix}/read/project/ -> ${base}/current/crud/query/project/
 raw: ${prefix}/read/specify-documents-to-return/ -> ${base}/current/crud/query/specify-documents-to-return/
 raw: ${prefix}/read/specify-a-query/ -> ${base}/current/crud/query/specify-query/
-raw: ${prefix}/read/change-streams/ -> ${base}/current/logging-and-monitoring/change-streams/
-raw: ${prefix}/logging/ -> ${base}/current/logging-and-monitoring/logging/
-raw: ${prefix}/monitoring/ -> ${base}/current/logging-and-monitoring/monitoring/
+raw: ${prefix}/read/change-streams/ -> ${base}/current/monitoring-and-logging/change-streams/
+raw: ${prefix}/logging/ -> ${base}/current/monitoring-and-logging/logging/
+raw: ${prefix}/monitoring/ -> ${base}/current/monitoring-and-logging/monitoring/
 raw: ${prefix}/data-formats/custom-types/ -> ${base}/current/data-formats/custom-types/type-codecs/
 raw: ${prefix}/data-formats/custom-types/serialization/ -> ${base}/current/data-formats/custom-types/serialization/
 raw: ${prefix}/data-formats/custom-types/type-codecs/ -> ${base}/current/data-formats/custom-types/type-codecs/
@@ -143,9 +143,9 @@ raw: ${prefix}/security/authentication/kerberos/ -> ${base}/current/security/aut
 [*-master]: ${prefix}/${version}/read/project/ -> ${base}/${version}/crud/query/project/
 [*-master]: ${prefix}/${version}/read/specify-documents-to-return/ -> ${base}/${version}/crud/query/specify-documents-to-return/
 [*-master]: ${prefix}/${version}/read/specify-a-query/ -> ${base}/${version}/crud/query/specify-query/
-[*-master]: ${prefix}/${version}/read/change-streams/ -> ${base}/${version}/logging-and-monitoring/change-streams/
-[*-master]: ${prefix}/${version}/logging/ -> ${base}/${version}/logging-and-monitoring/logging/
-[*-master]: ${prefix}/${version}/monitoring/ -> ${base}/${version}/logging-and-monitoring/monitoring/
+[*-master]: ${prefix}/${version}/read/change-streams/ -> ${base}/${version}/monitoring-and-logging/change-streams/
+[*-master]: ${prefix}/${version}/logging/ -> ${base}/${version}/monitoring-and-logging/logging/
+[*-master]: ${prefix}/${version}/monitoring/ -> ${base}/${version}/monitoring-and-logging/monitoring/
 [*-master]: ${prefix}/${version}/data-formats/custom-types/ -> ${base}/${version}/data-formats/custom-types/type-codecs/
 [*-master]: ${prefix}/${version}/serialization/#binary-data -> ${base}/${version}/reference/compatibility/
 [*-master]: ${prefix}/${version}/compatibility/ -> ${base}/${version}/reference/compatibility/

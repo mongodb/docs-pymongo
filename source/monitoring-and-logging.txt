@@ -12,9 +12,9 @@ Logging and Monitoring
 
 .. toctree::
 
-   Monitoring </logging-and-monitoring/monitoring>
-   Logging </logging-and-monitoring/logging>
-   Change Streams </loggging-and-monitoring/change-streams>
+   Monitoring </monitoring-and-logging/monitoring>
+   Logging </monitoring-and-logging/logging>
+   Change Streams </monitoring-and-logging/change-streams>
 
 Overview
 --------
