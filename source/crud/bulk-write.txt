@@ -266,7 +266,8 @@ Collection Bulk Write Example
 
 The following example performs multiple write operations on the 
 ``restaurants`` collection by using the ``bulk_write()`` method
-on a ``Collection`` instance:
+on a ``Collection`` instance.  Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. io-code-block::
    :copyable:
@@ -291,7 +292,8 @@ Client Bulk Write Example
 The following example performs multiple write operations on the 
 ``sample_restaurants.restaurants`` and ``sample_mflix.movies``
 namespaces by using the ``bulk_write()`` method on a ``MongoClient``
-instance:
+instance.  Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. io-code-block::
    :copyable:
@@ -363,14 +365,29 @@ to the ``Collection.bulk_write()`` method:
 
 The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-collection-ex` but sets the ``ordered`` option
-to ``False``:
+to ``False``.  Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. literalinclude:: /includes/write/bulk-write.py
-   :start-after: start-bulk-write-unordered
-   :end-before: end-bulk-write-unordered
-   :language: python
-   :copyable:
+.. tabs::
 
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. literalinclude:: /includes/write/bulk-write.py
+         :start-after: start-bulk-write-unordered
+         :end-before: end-bulk-write-unordered
+         :language: python
+         :copyable:
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. literalinclude:: /includes/write/bulk-write-async.py
+         :start-after: start-bulk-write-unordered
+         :end-before: end-bulk-write-unordered
+         :language: python
+         :copyable:
+  
 If any of the write operations in an unordered bulk write fail, {+driver-short+}
 reports the errors only after attempting all operations.
 
@@ -436,7 +453,8 @@ to the ``MongoClient.bulk_write()`` method:
 
 The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-client-ex` but sets the ``verbose_results`` option
-to ``True``:
+to ``True``.  Select the
+:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. io-code-block::
    :copyable:
@@ -455,6 +473,51 @@ to ``True``:
       acknowledged=True)}, 'updateResults': {1: UpdateResult({'ok': 1.0, 'idx': 1, 'n': 1,
       'nModified': 1}, acknowledged=True)}, 'deleteResults': {2: DeleteResult({'ok': 1.0,
       'idx': 2, 'n': 344}, acknowledged=True)}}, acknowledged=True, verbose=True)
+
+.. tabs::
+
+   .. tab:: Synchronous
+      :tabid: sync
+
+      .. io-code-block::
+         :copyable:
+
+         .. input:: /includes/write/bulk-write.py
+            :start-after: start-bulk-write-verbose
+            :end-before: end-bulk-write-verbose
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+            'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1, 'nModified': 1,
+            'nDeleted': 344, 'insertResults': {0: InsertOneResult(ObjectId('...'), 
+            acknowledged=True)}, 'updateResults': {1: UpdateResult({'ok': 1.0, 'idx': 1, 'n': 1,
+            'nModified': 1}, acknowledged=True)}, 'deleteResults': {2: DeleteResult({'ok': 1.0,
+            'idx': 2, 'n': 344}, acknowledged=True)}}, acknowledged=True, verbose=True)
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. io-code-block::
+         :copyable:
+
+         .. input:: /includes/write/bulk-write-async.py
+            :start-after: start-bulk-write-verbose
+            :end-before: end-bulk-write-verbose
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+            'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1, 'nModified': 1,
+            'nDeleted': 344, 'insertResults': {0: InsertOneResult(ObjectId('...'), 
+            acknowledged=True)}, 'updateResults': {1: UpdateResult({'ok': 1.0, 'idx': 1, 'n': 1,
+            'nModified': 1}, acknowledged=True)}, 'deleteResults': {2: DeleteResult({'ok': 1.0,
+            'idx': 2, 'n': 344}, acknowledged=True)}}, acknowledged=True, verbose=True)
+
 
 Return Values
 -------------
