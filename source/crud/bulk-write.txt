@@ -266,8 +266,8 @@ Collection Bulk Write Example
 
 The following example performs multiple write operations on the 
 ``restaurants`` collection by using the ``bulk_write()`` method
-on a ``Collection`` instance.  Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
+on a ``Collection`` instance. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous`
+tab to see the corresponding code:
 
 .. tabs::
 
@@ -315,8 +315,8 @@ Client Bulk Write Example
 The following example performs multiple write operations on the 
 ``sample_restaurants.restaurants`` and ``sample_mflix.movies``
 namespaces by using the ``bulk_write()`` method on a ``MongoClient``
-instance.  Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
+instance. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the
+corresponding code:
 
 .. tabs::
    
@@ -412,8 +412,8 @@ to the ``Collection.bulk_write()`` method:
 
 The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-collection-ex` but sets the ``ordered`` option
-to ``False``.  Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
+to ``False``. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see
+the corresponding code:
 
 .. tabs::
 
@@ -500,8 +500,8 @@ to the ``MongoClient.bulk_write()`` method:
 
 The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-client-ex` but sets the ``verbose_results`` option
-to ``True``.  Select the
-:guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
+to ``True``. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see
+the corresponding code:
 
 .. tabs::
 

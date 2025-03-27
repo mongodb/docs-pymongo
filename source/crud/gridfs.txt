@@ -109,8 +109,8 @@ code:
 
 To create or reference a bucket with a custom name other than the default name
 ``fs``, pass your bucket name as the second parameter to the ``GridFSBucket()``
-constructor, as shown below. Select the :guilabel:`Synchronous` or :guilabel:`Asynchronous`
-tab to see the corresponding code:
+constructor, as shown in the following example. Select the :guilabel:`Synchronous` or
+:guilabel:`Asynchronous` tab to see the corresponding code:
 
 .. tabs::
 
