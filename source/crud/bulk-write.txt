@@ -277,6 +277,24 @@ on a ``Collection`` instance.  Select the
       .. io-code-block::
          :copyable:
 
+         .. input:: /includes/write/bulk-write.py
+            :start-after: start-bulk-write-mixed-collection
+            :end-before: end-bulk-write-mixed-collection
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
+            'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
+            acknowledged=True)
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. io-code-block::
+         :copyable:
+
          .. input:: /includes/write/bulk-write-async.py
             :start-after: start-bulk-write-mixed-collection
             :end-before: end-bulk-write-mixed-collection
