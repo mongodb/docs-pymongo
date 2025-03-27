@@ -269,20 +269,25 @@ The following example performs multiple write operations on the
 on a ``Collection`` instance.  Select the
 :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. io-code-block::
-   :copyable:
+.. tabs::
 
-   .. input:: /includes/write/bulk-write.py
-      :start-after: start-bulk-write-mixed-collection
-      :end-before: end-bulk-write-mixed-collection
-      :language: python
+   .. tab:: Synchronous
+      :tabid: sync
 
-   .. output::
-      :visible: false
-      
-      BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
-      'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
-      acknowledged=True)
+      .. io-code-block::
+         :copyable:
+
+         .. input:: /includes/write/bulk-write-async.py
+            :start-after: start-bulk-write-mixed-collection
+            :end-before: end-bulk-write-mixed-collection
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            BulkWriteResult({'writeErrors': [], 'writeConcernErrors': [], 'nInserted': 2,
+            'nUpserted': 0, 'nMatched': 2, 'nModified': 2, 'nRemoved': 1, 'upserted': []},
+            acknowledged=True)
 
 .. _pymongo-bulk-write-client-ex:
 
@@ -295,21 +300,45 @@ namespaces by using the ``bulk_write()`` method on a ``MongoClient``
 instance.  Select the
 :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
 
-.. io-code-block::
-   :copyable:
+.. tabs::
+   
+   .. tab:: Synchronous
+      :tabid: sync
 
-   .. input:: /includes/write/bulk-write.py
-      :start-after: start-bulk-write-mixed-client
-      :end-before: end-bulk-write-mixed-client
-      :language: python
+      .. io-code-block::
+         :copyable:
 
-   .. output::
-      :visible: false
-      
-      ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
-      'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1,
-      'nModified': 1, 'nDeleted': 344, 'insertResults': {}, 'updateResults': {},
-      'deleteResults': {}}, acknowledged=True, verbose=False)
+         .. input:: /includes/write/bulk-write.py
+            :start-after: start-bulk-write-mixed-client
+            :end-before: end-bulk-write-mixed-client
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+            'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1,
+            'nModified': 1, 'nDeleted': 344, 'insertResults': {}, 'updateResults': {},
+            'deleteResults': {}}, acknowledged=True, verbose=False)
+
+   .. tab:: Asynchronous
+      :tabid: async
+
+      .. io-code-block::
+         :copyable:
+
+         .. input:: /includes/write/bulk-write-async.py
+            :start-after: start-bulk-write-mixed-client
+            :end-before: end-bulk-write-mixed-client
+            :language: python
+
+         .. output::
+            :visible: false
+            
+            ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
+            'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1,
+            'nModified': 1, 'nDeleted': 344, 'insertResults': {}, 'updateResults': {},
+            'deleteResults': {}}, acknowledged=True, verbose=False)
 
 Customize Bulk Write Operations
 -------------------------------
@@ -455,24 +484,6 @@ The following example calls the ``bulk_write()`` method from the preceding
 :ref:`pymongo-bulk-write-client-ex` but sets the ``verbose_results`` option
 to ``True``.  Select the
 :guilabel:`Synchronous` or :guilabel:`Asynchronous` tab to see the corresponding code:
-
-.. io-code-block::
-   :copyable:
-
-   .. input:: /includes/write/bulk-write.py
-      :start-after: start-bulk-write-verbose
-      :end-before: end-bulk-write-verbose
-      :language: python
-
-   .. output::
-      :visible: false
-      
-      ClientBulkWriteResult({'anySuccessful': True, 'error': None, 'writeErrors': [],
-      'writeConcernErrors': [], 'nInserted': 1, 'nUpserted': 0, 'nMatched': 1, 'nModified': 1,
-      'nDeleted': 344, 'insertResults': {0: InsertOneResult(ObjectId('...'), 
-      acknowledged=True)}, 'updateResults': {1: UpdateResult({'ok': 1.0, 'idx': 1, 'n': 1,
-      'nModified': 1}, acknowledged=True)}, 'deleteResults': {2: DeleteResult({'ok': 1.0,
-      'idx': 2, 'n': 344}, acknowledged=True)}}, acknowledged=True, verbose=True)
 
 .. tabs::
 
