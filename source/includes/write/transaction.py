@@ -22,7 +22,7 @@ def insert_documents(session):
     )
 
 # Starts a client session
-with client.start_session() as session:
+async with client.start_session() as session:
     try:
         # Uses the with_transaction method to start a transaction, execute the callback, and commit (or abort on error).
         session.with_transaction(insert_documents)
