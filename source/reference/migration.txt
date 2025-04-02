@@ -84,7 +84,8 @@ read and write operations in Motor compared to {+driver-async+}:
 
 To see a list of the asynchronous methods available in the {+driver-async+}
 driver, see the :ref:`pymongo-async-methods` section in the {+driver-short+} to
-{+driver-async+} guide.
+{+driver-async+} guide. To learn about the versions of Motor that correspond to {+driver-short+},
+see the :ref:`_pymongo-motor-compatibility` section of the Compatibility guide.
 
 The following section shows the method signature changes that you must implement
 in your application when migrating from Motor to the {+driver-async+} driver.

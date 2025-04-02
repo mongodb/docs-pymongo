@@ -50,6 +50,8 @@ The first column lists the driver version.
 
 .. include:: /includes/language-compatibility-table-pymongo.rst
 
+.. _pymongo-motor-compatibility:
+
 Motor Compatibility
 -------------------
 
