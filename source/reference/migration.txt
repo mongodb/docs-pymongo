@@ -137,7 +137,7 @@ to the {+driver-async+} driver:
 - To convert an ``AsyncCursor`` to a list, you must use the asynchronous ``cursor.to_list()``
   method.
 - The ``AsyncCollection.find()`` method in the {+driver-async+} driver is synchronous, but
-  returns an ``AsyncCursor``. To iterate through the cursor, you must use ``async for``
+  returns an ``AsyncCursor``. To iterate through the cursor, you must use an ``async for``
   loop.
 - The ``AsyncMongoClient`` object does not support the ``connect`` keyword argument.
 - You cannot share ``AsyncMongoClient`` objects across threads or event loops.
@@ -158,7 +158,7 @@ see the `API documentation <{+api-root+}pymongo/asynchronous/index.html>`__.
 
 .. note::
 
-   Any methods not listed in the preceding API documentation link are still synchronous.
+   Any methods not listed in the preceding API documentation are synchronous.
 
 Additional Information
 ----------------------
