@@ -112,8 +112,8 @@ The following Motor method signatures behave differently in the {+driver-async+}
 .. warning::
 
    Motor users may experience a degradation of performance when switching to the
-   {+driver-async+} driver. This is due to the {+driver-async+} driver using the native
-   ``asyncio`` library instead of thread-based executors. Thread-based executors
+   {+driver-async+} driver. This is due to the {+driver-async+} driver using native
+   ``asyncio`` tasks instead of thread-based executors. Thread-based executors
    have similar performance characteristics to the synchronous driver, but slower.
    This means they perform better for workloads that do not fit the preceding criteria
    for the {+driver-async+} driver.
