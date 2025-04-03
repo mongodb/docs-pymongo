@@ -40,7 +40,7 @@ application or use case:
 - Your application is simple in execution, or you prefer to avoid using asynchronous calls
   in your code
   
-- Your application relies on non-concurrent workloads or workloads with very fast
+- Your application relies on serial workloads or workloads with very fast
   response times
 
 - You prefer the simplicity of synchronous logic when debugging your application
@@ -113,10 +113,15 @@ The following Motor method signatures behave differently in the {+driver-async+}
 
    Motor users may experience a degradation of performance when switching to the
    {+driver-async+} driver. This is due to the {+driver-async+} driver using the native
-   ``asyncio`` library instead of thread-based executors.
+   ``asyncio`` library instead of thread-based executors. Thread-based executors
+   have similar performance characteristics to the synchronous driver, but slower.
+   This means they perform better for workloads that do not fit the preceding criteria
+   for the {+driver-async+} driver.
 
-   Users experiencing performance slowdown should consider using synchronous {+driver-short+}
-   with ``async.loop.run_in_executor()`` for asynchronous compatibility. To learn more, see
+   If you are experiencing performance slowdown, identify whether the {+driver-async+} driver
+   is necessary for your usecase. If you determine your use case is better served by
+   synchronous {+driver-short+}, consider using synchronous {+driver-short+}
+   with ``asyncio.loop.run_in_executor()`` for asynchronous compatibility. To learn more, see
    the `Event Loop API documentation <https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor>`__.
 
 .. _pymongo-to-async-guide:
