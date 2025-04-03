@@ -28,11 +28,6 @@ library <https://www.mongodb.com/docs/drivers/motor/>`__. In this guide, you can
 identify the changes you must make to migrate an application from {+driver-short+} or
 Motor to the {+driver-async+} driver.
 
-.. note::
-
-   The {+driver-async+} driver is currently in beta. To learn how to provide feedback
-   or report issues, see :ref:`pymongo-issues-help`.
-
 Synchronous Versus Asynchronous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -40,7 +35,7 @@ To determine whether to migrate to the {+driver-async+} driver or to continue us
 Synchronous {+driver-short+}, consider the information in this section.
 
 Synchronous {+driver-short+} is preferable if the following criteria applies to your
-application or usecase:
+application or use case:
 
 - Your application is simple in execution, or you prefer to avoid using asynchronous calls
   in your code
@@ -51,7 +46,7 @@ application or usecase:
 - You prefer the simplicity of synchronous logic when debugging your application
 
 Consider migrating to the {+driver-async+} driver if the following criteria applies
-to your application or usecase:
+to your application or use case:
 
 - Your application implements large, highly concurrent workloads (on the order of
   thousands of concurrent operations)
@@ -63,6 +58,12 @@ to your application or usecase:
 
 Migrate From Motor
 ------------------
+
+.. warning:: Motor deprecation
+
+   Motor will be deprecated one year after the production release of the {+driver-async+}
+   driver. We strongly recomend that Motor users migrate to the {+driver-async+} driver while
+   Motor is still supported.
 
 The {+driver-async+} driver functions similarly to the Motor library, but allows
 for improved latency and throughput due to directly using Python Asyncio instead
@@ -83,9 +84,9 @@ read and write operations in Motor compared to {+driver-async+}:
    from pymongo import AsyncMongoClient
 
 To see a list of the asynchronous methods available in the {+driver-async+}
-driver, see the :ref:`pymongo-async-methods` section in the {+driver-short+} to
-{+driver-async+} guide. To learn about the versions of Motor that correspond to {+driver-short+},
-see the :ref:`_pymongo-motor-compatibility` section of the Compatibility guide.
+driver, see the :ref:`pymongo-async-methods` section. To learn about the versions of Motor
+that correspond to {+driver-short+}, see the :ref:`pymongo-motor-compatibility` section of
+the Compatibility guide.
 
 The following section shows the method signature changes that you must implement
 in your application when migrating from Motor to the {+driver-async+} driver.
