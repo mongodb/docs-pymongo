@@ -59,10 +59,10 @@ to your application or use case:
 Migrate From Motor
 ------------------
 
-.. warning:: Motor deprecation
+.. warning:: Motor Deprecation
 
    Motor will be deprecated one year after the production release of the {+driver-async+}
-   driver. We strongly recomend that Motor users migrate to the {+driver-async+} driver while
+   driver. We strongly recommend that Motor users migrate to the {+driver-async+} driver while
    Motor is still supported.
 
 The {+driver-async+} driver functions similarly to the Motor library, but allows
