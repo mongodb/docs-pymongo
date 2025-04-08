@@ -56,7 +56,7 @@ The {+driver-short+} v4.12 release includes the following new features:
   more performant deletion of files with multiple revisions.
 - ``AsyncMongoClient`` objects no longer perform DNS resolution for ``mongodb+srv://``
   connection strings on creation. To avoid blocking the ``asyncio`` loop, {+driver-short+}
-  now defers teh resolution until the client is first connected.
+  now defers the resolution until the client is first connected.
 - Adds index hinting support to the ``pymongo.asynchronous.collection.AsyncCollection.distinct()``
   and ``pymongo.collection.Collection.distinct()`` methods.
 - Deprecates the ``hedge`` parameter for the ``PrimaryPreferred``, ``Secondary``,
