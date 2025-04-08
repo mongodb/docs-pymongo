@@ -18,10 +18,6 @@ FastAPI Integration Tutorial
    :description: Learn how to create an app to connect to MongoDB deployment by using the PyMongo driver.
    :keywords: quick start, tutorial, basics
 
-.. toctree::
-
-   FastAPI Integration Tutorial </integrations/fastapi-integration>
-
 `FastAPI <https://fastapi.tiangolo.com/>`__ is a modern, high-performance, easy-to-learn, fast-to-code, production-ready, Python 3.6+ framework for building APIs based on standard Python type hints. While it might not be as established as some other Python frameworks such as Django, it is already in production at companies such as Uber, Netflix, and Microsoft.
 
 FastAPI is async, and as its name implies, it is super fast; so, MongoDB is the perfect accompaniment. In this quick start, we will create a CRUD (Create, Read, Update, Delete) app showing how you can integrate MongoDB with your FastAPI projects.
