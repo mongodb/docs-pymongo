@@ -1,8 +1,8 @@
 .. _pymongo-fastapi:
 
-========================================
-Getting Started With MongoDB and FastAPI
-========================================
+============================
+FastAPI Integration Tutorial
+============================
 
 .. contents:: On this page
    :local:
@@ -18,6 +18,10 @@ Getting Started With MongoDB and FastAPI
    :description: Learn how to create an app to connect to MongoDB deployment by using the PyMongo driver.
    :keywords: quick start, tutorial, basics
 
+.. toctree::
+
+   FastAPI Integration Tutorial </integrations/fastapi-integration>
+
 `FastAPI <https://fastapi.tiangolo.com/>`__ is a modern, high-performance, easy-to-learn, fast-to-code, production-ready, Python 3.6+ framework for building APIs based on standard Python type hints. While it might not be as established as some other Python frameworks such as Django, it is already in production at companies such as Uber, Netflix, and Microsoft.
 
 FastAPI is async, and as its name implies, it is super fast; so, MongoDB is the perfect accompaniment. In this quick start, we will create a CRUD (Create, Read, Update, Delete) app showing how you can integrate MongoDB with your FastAPI projects.
@@ -29,7 +33,7 @@ Prerequisites
 -   A MongoDB Atlas cluster. Follow the "`Get Started with Atlas <https://docs.atlas.mongodb.com/getting-started/>`__" guide to create your account and MongoDB cluster. Keep a note of your username, password, and `connection string <https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/#connect-to-your-atlas-cluster>`__` as you will need those later.
 
 Running the Example
-___________________
+-------------------
 
 To begin, you should `clone the example code from GitHub <https://github.com/mongodb-developer/mongodb-with-fastapi>`__.
 
@@ -63,7 +67,7 @@ The final step is to start your FastAPI server.
 .. image:: /includes/integrations/fastapi-terminal.png
    :alt: Screenshot of terminal running FastAPI
 
-Once the application has started, you can view it in your browser at <http://127.0.0.1:8000/docs>.
+Once the application has started, you can view it in your browser at http://127.0.0.1:8000/docs.
 
 .. image:: /includes/integrations/fastapi-browser.png
    :alt: Screenshot of browser and swagger UI
@@ -73,7 +77,7 @@ Once you have had a chance to try the example, come back and we will walk throug
 Creating the Application
 ------------------------
 
-All the code for the example application is within `app.py`. I'll break it down into sections and walk through what each is doing.
+All the code for the example application is within ``app.py``. I'll break it down into sections and walk through what each is doing.
 
 Connecting to MongoDB
 ~~~~~~~~~~~~~~~~~~~~~
@@ -86,7 +90,7 @@ One of the very first things we do is connect to our MongoDB database.
    db = client.get_database("college")
    student_collection = db.get_collection("students")
 
-We're using the async `motor driver <https://motor.readthedocs.io/en/stable/>`__ to create our MongoDB client, and then we specify our database name `college`.
+We're using the async `motor driver <https://motor.readthedocs.io/en/stable/>`__ to create our MongoDB client, and then we specify our database name ``college``.
 
 The _id Attribute and ObjectIds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -97,12 +101,12 @@ The _id Attribute and ObjectIds
    # It will be represented as a `str` on the model so that it can be serialized to JSON.
    PyObjectId = Annotated[str, BeforeValidator(str)]
 
-MongoDB stores data as `BSON <https://www.mongodb.com/json-and-bson>`__.  FastAPI encodes and decodes data as JSON strings. BSON has support for additional non-JSON-native data types, including `ObjectId` which can't be directly encoded as JSON. Because of this, we convert `ObjectId`s to strings before storing them as the `id` field.
+MongoDB stores data as `BSON <https://www.mongodb.com/json-and-bson>`__.  FastAPI encodes and decodes data as JSON strings. BSON has support for additional non-JSON-native data types, including ``ObjectId`` which can't be directly encoded as JSON. Because of this, we convert ``ObjectId``s to strings before storing them as the ``id`` field.
 
 Database Models
 ~~~~~~~~~~~~~~~
 
-Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has a flexible schema. That is to say that collections do not enforce document structure by default, so you have the flexibility to make whatever data-modelling choices best match your application and its performance requirements. So, it's not unusual to create models when working with a MongoDB database. Our application has three models, the `StudentModel`, the `UpdateStudentModel`, and the `StudentCollection`.
+Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has a flexible schema. That is to say that collections do not enforce document structure by default, so you have the flexibility to make whatever data-modelling choices best match your application and its performance requirements. So, it's not unusual to create models when working with a MongoDB database. Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
 .. code-block:: python
 
@@ -113,7 +117,7 @@ Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has 
 
     # The primary key for the StudentModel, stored as a `str` on the instance.
     # This will be aliased to `_id` when sent to MongoDB,
-    # but provided as `id` in the API requests and responses.
+    # but provided as ``id`` in the API requests and responses.
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
     email: EmailStr = Field(...)
@@ -134,9 +138,9 @@ Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has 
 
 This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
 
-I want to draw attention to the `id` field on this model. MongoDB uses `_id`, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field `id` but give it an alias of `_id`. You also need to set `populate_by_name` to `True` in the model's `model_config`
+I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of `_id`. You also need to set `populate_by_name` to `True` in the model's `model_config`
 
-We set this `id` value automatically to `None`, so you do not need to supply it when creating a new student.
+We set this ``id`` value automatically to `None`, so you do not need to supply it when creating a new student.
 
 .. code-block:: python
 
@@ -164,7 +168,7 @@ We set this `id` value automatically to `None`, so you do not need to supply it 
 
 The `UpdateStudentModel` has two key differences from the `StudentModel`:
 
--   It does not have an `id` attribute as this cannot be modified.
+-   It does not have an ``id`` attribute as this cannot be modified.
 -   All fields are optional, so you only need to supply the fields you wish to update.
 
 Finally, `StudentCollection` is defined to encapsulate a list of `StudentModel` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
@@ -207,7 +211,7 @@ Create Student Route
        """
        Insert a new student record. 
  
-       A unique `id` will be created and provided in the response.
+       A unique ``id`` will be created and provided in the response.
        """
        new_student = await student_collection.insert_one(
            student.model_dump(by_alias=True, exclude=["id"])
@@ -217,11 +221,11 @@ Create Student Route
        )
        return created_student
 
-The `create_student` route receives the new student data as a JSON string in a `POST` request. We have to decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
+The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We have to decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
 
-The `insert_one` method response includes the `_id` of the newly created student (provided as `id` because this endpoint specifies `response_model_by_alias=False` in the `post` decorator call. After we insert the student into our collection, we use the `inserted_id` to find the correct document and return this in our `JSONResponse`.
+The ``insert_one`` method response includes the ``_id`` of the newly created student (provided as ``id`` because this endpoint specifies ``response_model_by_alias=False`` in the ``post`` decorator call. After we insert the student into our collection, we use the ``inserted_id`` to find the correct document and return this in our ``JSONResponse``.
 
-FastAPI returns an HTTP `200` status code by default; but in this instance, a `201` created is more appropriate.
+FastAPI returns an HTTP ``200`` status code by default; but in this instance, a ``201`` created is more appropriate.
 
 Read Routes
 +++++++++++
@@ -244,7 +248,7 @@ The application has two read routes: one for viewing all students and the other 
        """
        return StudentCollection(students=await student_collection.find().to_list(1000))
 
-Motor's `to_list` method requires a max document count argument. For this example, I have hardcoded it to `1000`; but in a real application, you would use the `skip and limit parameters <https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find) in `find` to paginate your results.
+Motor's ``to_list`` method requires a max document count argument. For this example, I have hardcoded it to ``1000``; but in a real application, you would use the `skip and limit parameters <https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find>`__ in ``find`` to paginate your results.
 
 .. code-block:: python
 
@@ -265,9 +269,9 @@ Motor's `to_list` method requires a max document count argument. For this exampl
 
        raise HTTPException(status_code=404, detail="Student {id} not found")
 
-The student detail route has a path parameter of `id`, which FastAPI passes as an argument to the `show_student` function. We use the `id` to attempt to find the corresponding student in the database. The conditional in this section is using an `assignment expression <https://www.python.org/dev/peps/pep-0572/>`__, an addition to Python 3.8 and often referred to by the cute sobriquet "walrus operator."
+The student detail route has a path parameter of ``id``, which FastAPI passes as an argument to the ``show_student`` function. We use the ``id`` to attempt to find the corresponding student in the database. The conditional in this section is using an `assignment expression <https://www.python.org/dev/peps/pep-0572/>`__, an addition to Python 3.8 and often referred to by the cute sobriquet "walrus operator."
 
-If a document with the specified `_id` does not exist, we raise an `HTTPException` with a status of `404`.
+If a document with the specified ``_id`` does not exist, we raise an ``HTTPException`` with a status of ``404``.
 
 Update Route
 ++++++++++++
@@ -308,11 +312,11 @@ Update Route
 
        raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-The `update_student` route is like a combination of the `create_student` and the `show_student` routes. It receives the `id` of the document to update as well as the new data in the JSON body. We don't want to update any fields with empty values; so, first of all, we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
+The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update as well as the new data in the JSON body. We don't want to update any fields with empty values; so, first of all, we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
 
-If, after we remove the empty values, there are no fields left to update, we instead look for an existing record that matches the `id` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html#motor.motor_asyncio.AsyncIOMotorCollection.find_one_and_update) to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
+If, after we remove the empty values, there are no fields left to update, we instead look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html#motor.motor_asyncio.AsyncIOMotorCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
 
-If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a `404` error again.
+If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error again.
 
 Delete Route
 ++++++++++++
@@ -331,12 +335,12 @@ Delete Route
 
        raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-Our final route is `delete_student`. Again, because this is acting upon a single document, we have to supply an `id` in the URL. If we find a matching document and successfully delete it, then we return an HTTP status of `204` or "No Content." In this case, we do not return a document as we've already deleted it! However, if we cannot find a student with the specified `id`, then instead we return a `404`.
+Our final route is ``delete_student``. Again, because this is acting upon a single document, we have to supply an ``id`` in the URL. If we find a matching document and successfully delete it, then we return an HTTP status of ``204`` or "No Content." In this case, we do not return a document as we've already deleted it! However, if we cannot find a student with the specified ``id``, then instead we return a ``404``.
 
 Our New FastAPI App Generator
 -----------------------------
 
-If you're excited to build something more production-ready with FastAPI, React & MongoDB, head over to the `Github repository <https://github.com/mongodb-labs/full-stack-fastapi-mongodb) for our `new FastAPI app generator <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers) and start transforming your web development experience.
+If you're excited to build something more production-ready with FastAPI, React & MongoDB, head over to the `Github repository <https://github.com/mongodb-labs/full-stack-fastapi-mongodb>`__ for our `new FastAPI app generator <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__ and start transforming your web development experience.
 
 Wrapping Up
 -----------
@@ -344,4 +348,3 @@ Wrapping Up
 I hope you have found this introduction to FastAPI with MongoDB useful.  If you would like to learn more, check out my post `introducing the FARM stack (FastAPI, React and MongoDB) <https://developer.mongodb.com/how-to/FARM-Stack-FastAPI-React-MongoDB>`__ as well as the `FastAPI documentation <https://motor.readthedocs.io>`__ and this `awesome list <https://github.com/mjhea0/awesome-fastapi>`__.
 
 If you have questions, please head to our `developer community website <https://community.mongodb.com/>`__ where MongoDB engineers and the MongoDB community will help you build your next big idea with MongoDB.
-}
