@@ -9,7 +9,7 @@ raw: ${prefix}/stable -> ${base}/current/
 raw: ${prefix}/master -> ${base}/upcoming/
 
 # temp redirects until DOP deletes unversioned URLs
-raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/download-and-install/
+raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 raw: ${prefix}/compatibility/ -> ${base}/current/compatibility/
 raw: ${prefix}/security/enterprise-authentication/ -> ${base}/current/security/authentication/
 raw: ${prefix}/faq/ -> ${base}/current/
@@ -90,7 +90,6 @@ raw: ${prefix}/reference/previous-versions/ -> ${base}/current/reference/previou
 raw: ${prefix}/tools/ -> ${base}/current/integrations/
 raw: ${prefix}/upgrade/ -> ${base}/current/reference/upgrade/
 raw: ${prefix}/write-operations/ -> ${base}/current/crud/
-raw: ${prefix}/get-started/connect-to-mongodb -> ${base}/current/get-started/run-sample-query/
 raw: ${prefix}/work-with-indexes/ -> ${base}/current/indexes/
 raw: ${prefix}/indexes/single-field-index/ -> ${base}/current/indexes/
 raw: ${prefix}/indexes/compound-index/ -> ${base}/current/indexes/
@@ -156,7 +155,6 @@ raw: ${prefix}/security/authentication/kerberos/ -> ${base}/current/security/aut
 [*-master]: ${prefix}/${version}/tools/ -> ${base}/${version}/integrations/
 [*-master]: ${prefix}/${version}/upgrade/ -> ${base}/${version}/reference/upgrade/
 [*-master]: ${prefix}/${version}/write-operations/ -> ${base}/${version}/crud/
-[*-master]: ${prefix}/${version}/get-started/connect-to-mongodb -> ${base}/${version}/get-started/run-sample-query/
 [*-master]: ${prefix}/${version}/work-with-indexes/ -> ${base}/${version}/indexes/
 
 [*-master]: ${prefix}/${version}/indexes/single-field-index/ -> ${base}/${version}/indexes/
