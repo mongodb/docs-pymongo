@@ -18,6 +18,7 @@ raw: ${prefix}/get-started/download-and-install/ -> ${base}/current/get-started/
 raw: ${prefix}/get-started/create-a-deployment/ -> ${base}/current/get-started/
 raw: ${prefix}/get-started/create-a-connection-string/ -> ${base}/current/get-started/
 raw: ${prefix}/get-started/connect-to-mongodb/ -> ${base}/current/get-started/
+raw: ${prefix}/get-started/run-sample-query/ -> ${base}/current/get-started/
 raw: ${prefix}/get-started/next-steps/ -> ${base}/current/get-started/
 raw: ${prefix}/connect/csot/ -> ${base}/current/connect/connection-options/csot/
 raw: ${prefix}/connect/network-compression/ -> ${base}/current/connect/connection-options/network-compression/
@@ -120,6 +121,7 @@ raw: ${prefix}/security/authentication/kerberos/ -> ${base}/current/security/aut
 [*-master]: ${prefix}/${version}/get-started/create-a-deployment/ -> ${base}/${version}/get-started/
 [*-master]: ${prefix}/${version}/get-started/create-a-connection-string/ -> ${base}/${version}/get-started/
 [*-master]: ${prefix}/${version}/get-started/connect-to-mongodb/ -> ${base}/${version}/get-started/
+[*-master]: ${prefix}/${version}/get-started/run-sample-query/ -> ${base}/${version}/get-started/
 [*-master]: ${prefix}/${version}/get-started/next-steps/ -> ${base}/${version}/get-started/
 [*-master]: ${prefix}/${version}/connect/csot/ -> ${base}/${version}/connect/connection-options/csot/
 [*-master]: ${prefix}/${version}/connect/network-compression/ -> ${base}/${version}/connect/connection-options/network-compression/
