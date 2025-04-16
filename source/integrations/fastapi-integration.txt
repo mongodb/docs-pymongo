@@ -1,8 +1,9 @@
 .. _pymongo-fastapi:
+.. original URL: https://www.mongodb.com/developer/languages/python/python-quickstart-fastapi/
 
-============================
-FastAPI Integration Tutorial
-============================
+================================
+FastAPI Integration and Tutorial
+================================
 
 .. contents:: On this page
    :local:
@@ -23,8 +24,31 @@ production-ready asynchronous Python framework for building APIs based on
 standard Python type hints. In this tutorial, we will create a CRUD application
 showing how you can integrate MongoDB with your FastAPI projects.
 
+Mapping
+-------
+
+The _id Attribute and ObjectIds
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+FastAPI encodes and decodes data as JSON strings, which do not support all of the
+data types that MongoDB's BSON data type can store. BSON has support for
+additional non-JSON-native data types, including ``ObjectId`` which is used for
+the default UUID attribute, ``_id``. Because of this, you must convert ``ObjectId``s to
+strings before storing them in the ``id`` field.
+
+For for information about how BSON compares to JSON, see this `JSON and BSON
+<https://www.mongodb.com/json-and-bson>`__ MongoDB article.
+
+Database Models
+~~~~~~~~~~~~~~~
+
+MongoDB collections do not enforce document structure by default, so you have the flexibility to make whatever data-modelling choices best match your application and its performance requirements. So, it's not unusual to create models when working with a MongoDB database. 
+
+Tutorial
+--------
+
 Prerequisites
--------------
+~~~~~~~~~~~~~
 
 -   Python v3.9.0 or later
 -   A MongoDB Atlas cluster 
@@ -33,7 +57,7 @@ Prerequisites
     account and MongoDB cluster. 
 
 Set-up
-------
+~~~~~~
 
 1. Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
 
@@ -84,7 +108,7 @@ Set-up
       :alt: Screenshot of browser and swagger UI
 
 Create Your Application
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 All the code for the example application is stored in ``app.py``.
 
@@ -107,12 +131,11 @@ The _id Attribute and ObjectIds
    # It will be represented as a `str` on the model so that it can be serialized to JSON.
    PyObjectId = Annotated[str, BeforeValidator(str)]
 
-MongoDB stores data as `BSON <https://www.mongodb.com/json-and-bson>`__.  FastAPI encodes and decodes data as JSON strings. BSON has support for additional non-JSON-native data types, including ``ObjectId`` which can't be directly encoded as JSON. Because of this, we convert ``ObjectId``s to strings before storing them as the ``id`` field.
+
 
 Database Models
 ~~~~~~~~~~~~~~~
-
-Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has a flexible schema. That is to say that collections do not enforce document structure by default, so you have the flexibility to make whatever data-modelling choices best match your application and its performance requirements. So, it's not unusual to create models when working with a MongoDB database. Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
+Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
 .. code-block:: python
 
@@ -122,7 +145,7 @@ Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has 
     """
 
     # The primary key for the StudentModel, stored as a `str` on the instance.
-    # This will be aliased to `_id` when sent to MongoDB,
+    # This will be aliased to ``_id`` when sent to MongoDB,
     # but provided as ``id`` in the API requests and responses.
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str = Field(...)
@@ -144,9 +167,9 @@ Many people think of MongoDB as being schema-less, which is wrong.  MongoDB has 
 
 This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
 
-I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of `_id`. You also need to set `populate_by_name` to `True` in the model's `model_config`
+I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
 
-We set this ``id`` value automatically to `None`, so you do not need to supply it when creating a new student.
+We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
 
 .. code-block:: python
 
@@ -172,12 +195,12 @@ We set this ``id`` value automatically to `None`, so you do not need to supply i
         },
     )
 
-The `UpdateStudentModel` has two key differences from the `StudentModel`:
+The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
 
 -   It does not have an ``id`` attribute as this cannot be modified.
 -   All fields are optional, so you only need to supply the fields you wish to update.
 
-Finally, `StudentCollection` is defined to encapsulate a list of `StudentModel` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
+Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
 
 .. code-block:: python
 
@@ -195,11 +218,28 @@ Application Routes
 
 Our application has five routes:
 
--   POST /students/ - creates a new student.
--   GET /students/ - view a list of all students.
--   GET /students/{id} - view a single student.
--   PUT /students/{id} - update a student.
--   DELETE /students/{id} - delete a student.
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :widths: 25,75
+
+   * - Route
+     - Description
+
+   * - ``POST /students/``
+     - Creates a new student
+
+   * - ``GET /students/``
+     - View a list of all students
+
+   * - ``GET /students/{id}``
+     - View a single student
+
+   * - ``PUT /students/{id}``
+     - Update a student
+
+   * - ``DELETE /students/{id}``
+     - Delete a student
 
 Create Student Route
 ````````````````````
@@ -236,7 +276,7 @@ FastAPI returns an HTTP ``200`` status code by default; but in this instance, a 
 Read Routes
 +++++++++++
 
-The application has two read routes: one for viewing all students and the other for viewing an individual student.
+The application has two read routes: one for viewing all students, and one for viewing an individual student.
 
 .. code-block:: python
 
@@ -266,7 +306,7 @@ Motor's ``to_list`` method requires a max document count argument. For this exam
    )
    async def show_student(id: str):
        """
-       Get the record for a specific student, looked up by `id`.
+       Get the record for a specific student, looked up by ``id``.
        """
        if (
            student := await student_collection.find_one({"_id": ObjectId(id)})
