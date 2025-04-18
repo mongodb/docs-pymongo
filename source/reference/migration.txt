@@ -61,8 +61,8 @@ Migrate From Motor
 
 .. warning:: Motor Deprecation
 
-   The {+driver-async+} driver is currently experimental. We do **not**
-   recommend using it in production environments.
+   The {+driver-async+} driver is experimental. We do **not** recommend using it
+   in production environments.
    
    Motor will be deprecated one year after the **production release** of the
    {+driver-async+} driver. We strongly recommend that Motor users migrate to
