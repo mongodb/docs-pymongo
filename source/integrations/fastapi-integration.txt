@@ -56,18 +56,19 @@ Prerequisites
     <https://docs.atlas.mongodb.com/getting-started/>`__ guide to create your
     account and MongoDB cluster. 
 
+1. Set-up
+~~~~~~~~~
+
 .. procedure::
    :style: connected
 
-   .. step:: Set-up
-      
-    .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
+   .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
 
-      .. code-block:: shell
+    .. code-block:: shell
 
-         git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
+        git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
 
-    .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
+   .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
 
       .. tip:: Use a Virtual environment
 
@@ -80,7 +81,7 @@ Prerequisites
 
       It may take a few moments to download and install your dependencies.
 
-    .. step:: Create an environment variable for your MongoDB connection string:
+   .. step:: Create an environment variable for your MongoDB connection string:
 
             .. code-block:: shell
 
@@ -92,7 +93,7 @@ Prerequisites
                 environment variable. You can use `direnv <https://direnv.net/>`__ to make
                 this process easier.
 
-    .. step:: Start your FastAPI server:
+   .. step:: Start your FastAPI server:
 
             .. code-block:: shell
 
@@ -106,75 +107,47 @@ Prerequisites
             .. image:: /includes/integrations/fastapi-browser.png
                 :alt: Screenshot of browser and swagger UI
 
-   .. step:: Create Your Application
+#. Create Your Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    All the code for the example application is stored in ``app.py``.
+All the code for the example application is stored in ``app.py``.
 
-    Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <https://www.mongodb.com/docs/languages/python/pymongo-driver/current>`__, then specify the database named ``college``:
+Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <https://www.mongodb.com/docs/languages/python/pymongo-driver/current>`__, then specify the database named ``college``:
 
-    .. code-block:: python
+.. code-block:: python
 
-        client = AsyncMongoClient(MONGODB_URL, server_api=pymongo.server_api.ServerApi(version="1", strict=True, deprecation_errors=True))
-        db = client.get_database("college")
-        student_collection = db.get_collection("students")
+    client = AsyncMongoClient(MONGODB_URL, server_api=pymongo.server_api.ServerApi(version="1", strict=True, deprecation_errors=True))
+    db = client.get_database("college")
+    student_collection = db.get_collection("students")
 
-    .. step:: Define Your Database Models
+#. Define Your Database Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
-    Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
+Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
-    .. code-block:: python
+.. code-block:: python
 
-        # Represents an ObjectId field in the database.
-        # It will be represented as a `str` on the model so that it can be
-        serialized to JSON.
-                PyObjectId = Annotated[str, BeforeValidator(str)]
+    # Represents an ObjectId field in the database.
+    # It will be represented as a `str` on the model so that it can be
+    serialized to JSON.
+            PyObjectId = Annotated[str, BeforeValidator(str)]
 
-            class StudentModel(BaseModel):
-                """
-                Container for a single student record.
-                """
-
-                # The primary key for the StudentModel, stored as a `str` on the instance.
-                # This will be aliased to ``_id`` when sent to MongoDB,
-                # but provided as ``id`` in the API requests and responses.
-                id: Optional[PyObjectId] = Field(alias="_id", default=None)
-                name: str = Field(...)
-                email: EmailStr = Field(...)
-                course: str = Field(...)
-                gpa: float = Field(..., le=4.0)
-                model_config = ConfigDict(
-                    populate_by_name=True,
-                    arbitrary_types_allowed=True,
-                    json_schema_extra={
-                        "example": {
-                            "name": "Jane Doe",
-                            "email": "jdoe@example.com",
-                            "course": "Experiments, Science, and Fashion in Nanophotonics",
-                            "gpa": 3.0,
-                        }
-                    },
-                )
-
-    This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
-
-    I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
-
-    We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
-
-    .. code-block:: python
-
-        class UpdateStudentModel(BaseModel):
+        class StudentModel(BaseModel):
             """
-            A set of optional updates to be made to a document in the database.
+            Container for a single student record.
             """
 
-            name: Optional[str] = None
-            email: Optional[EmailStr] = None
-            course: Optional[str] = None
-            gpa: Optional[float] = None
+            # The primary key for the StudentModel, stored as a `str` on the instance.
+            # This will be aliased to ``_id`` when sent to MongoDB,
+            # but provided as ``id`` in the API requests and responses.
+            id: Optional[PyObjectId] = Field(alias="_id", default=None)
+            name: str = Field(...)
+            email: EmailStr = Field(...)
+            course: str = Field(...)
+            gpa: float = Field(..., le=4.0)
             model_config = ConfigDict(
+                populate_by_name=True,
                 arbitrary_types_allowed=True,
-                json_encoders={ObjectId: str},
                 json_schema_extra={
                     "example": {
                         "name": "Jane Doe",
@@ -185,26 +158,56 @@ Prerequisites
                 },
             )
 
-    The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
-    
-    -   It does not have an ``id`` attribute as this cannot be modified.
-    -   All fields are optional, so you only need to supply the fields you wish to update.
-    
-    Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
+This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
 
-    .. code-block:: python
+I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
 
-        class StudentCollection(BaseModel):
-            """
-            A container holding a list of `StudentModel` instances.
+We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
 
-            This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
-            """
+.. code-block:: python
 
-            students: List[StudentModel]
+    class UpdateStudentModel(BaseModel):
+        """
+        A set of optional updates to be made to a document in the database.
+        """
 
-Application Routes
-~~~~~~~~~~~~~~~~~~
+        name: Optional[str] = None
+        email: Optional[EmailStr] = None
+        course: Optional[str] = None
+        gpa: Optional[float] = None
+        model_config = ConfigDict(
+            arbitrary_types_allowed=True,
+            json_encoders={ObjectId: str},
+            json_schema_extra={
+                "example": {
+                    "name": "Jane Doe",
+                    "email": "jdoe@example.com",
+                    "course": "Experiments, Science, and Fashion in Nanophotonics",
+                    "gpa": 3.0,
+                }
+            },
+        )
+
+The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
+
+-   It does not have an ``id`` attribute as this cannot be modified.
+-   All fields are optional, so you only need to supply the fields you wish to update.
+
+Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
+
+.. code-block:: python
+
+    class StudentCollection(BaseModel):
+        """
+        A container holding a list of `StudentModel` instances.
+
+        This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
+        """
+
+        students: List[StudentModel]
+
+#. Create Your Application Routes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our application has five routes:
 
@@ -231,128 +234,128 @@ Our application has five routes:
    * - ``DELETE /students/{id}``
      - Delete a student
 
-Create Student Route
-````````````````````
+.. procedure::
+   :style: connected
 
-.. code-block:: python
+   .. step:: Create Student Route
 
-   @app.post(
-      "/students/",
-      response_description="Add new student",
-      response_model=StudentModel,
-      status_code=status.HTTP_201_CREATED,
-      response_model_by_alias=False,
-   )
-   async def create_student(student: StudentModel = Body(...)):
-       """
-       Insert a new student record. 
- 
-       A unique ``id`` will be created and provided in the response.
-       """
-       new_student = await student_collection.insert_one(
-           student.model_dump(by_alias=True, exclude=["id"])
-       )
-       created_student = await student_collection.find_one(
-           {"_id": new_student.inserted_id}
-       )
-       return created_student
+    .. code-block:: python
 
-The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We have to decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
+        @app.post(
+            "/students/",
+            response_description="Add new student",
+            response_model=StudentModel,
+            status_code=status.HTTP_201_CREATED,
+            response_model_by_alias=False,
+        )
+        async def create_student(student: StudentModel = Body(...)):
+            """
+            Insert a new student record. 
+        
+            A unique ``id`` will be created and provided in the response.
+            """
+            new_student = await student_collection.insert_one(
+                student.model_dump(by_alias=True, exclude=["id"])
+            )
+            created_student = await student_collection.find_one(
+                {"_id": new_student.inserted_id}
+            )
+            return created_student
 
-The ``insert_one`` method response includes the ``_id`` of the newly created student (provided as ``id`` because this endpoint specifies ``response_model_by_alias=False`` in the ``post`` decorator call. After we insert the student into our collection, we use the ``inserted_id`` to find the correct document and return this in our ``JSONResponse``.
+    The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We have to decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
 
-FastAPI returns an HTTP ``200`` status code by default; but in this instance, a ``201`` created is more appropriate.
+    The ``insert_one`` method response includes the ``_id`` of the newly created student (provided as ``id`` because this endpoint specifies ``response_model_by_alias=False`` in the ``post`` decorator call. After we insert the student into our collection, we use the ``inserted_id`` to find the correct document and return this in our ``JSONResponse``.
 
-Read Routes
-+++++++++++
+    FastAPI returns an HTTP ``200`` status code by default; but in this instance, a ``201`` created is more appropriate.
 
-The application has two read routes: one for viewing all students, and one for viewing an individual student.
+   .. step:: Read Routes
 
-.. code-block:: python
+    The application has two read routes: one for viewing all students, and one for viewing an individual student.
 
-   @app.get(
-       "/students/",
-       response_description="List all students",
-       response_model=StudentCollection,
-       response_model_by_alias=False,
-   )
-   async def list_students():
-       """
-       List all of the student data in the database. 
+    .. code-block:: python
 
-       The response is unpaginated and limited to 1000 results.
-       """
-       return StudentCollection(students=await student_collection.find().to_list(1000))
+        @app.get(
+            "/students/",
+            response_description="List all students",
+            response_model=StudentCollection,
+            response_model_by_alias=False,
+        )
+        async def list_students():
+            """
+            List all of the student data in the database. 
 
-Motor's ``to_list`` method requires a max document count argument. For this example, I have hardcoded it to ``1000``; but in a real application, you would use the `skip and limit parameters <https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find>`__ in ``find`` to paginate your results.
+            The response is unpaginated and limited to 1000 results.
+            """
+            return StudentCollection(students=await student_collection.find().to_list(1000))
 
-.. code-block:: python
+    Motor's ``to_list`` method requires a max document count argument. For this example, I have hardcoded it to ``1000``; but in a real application, you would use the `skip and limit parameters <https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find>`__ in ``find`` to paginate your results.
 
-   @app.get(
-       "/students/{id}",
-       response_description="Get a single student",
-       response_model=StudentModel,
-       response_model_by_alias=False,
-   )
-   async def show_student(id: str):
-       """
-       Get the record for a specific student, looked up by ``id``.
-       """
-       if (
-           student := await student_collection.find_one({"_id": ObjectId(id)})
-       ) is not None:
-           return student
+    .. code-block:: python
 
-       raise HTTPException(status_code=404, detail="Student {id} not found")
+        @app.get(
+            "/students/{id}",
+            response_description="Get a single student",
+            response_model=StudentModel,
+            response_model_by_alias=False,
+        )
+        async def show_student(id: str):
+            """
+            Get the record for a specific student, looked up by ``id``.
+            """
+            if (
+                student := await student_collection.find_one({"_id": ObjectId(id)})
+            ) is not None:
+                return student
 
-The student detail route has a path parameter of ``id``, which FastAPI passes as an argument to the ``show_student`` function. We use the ``id`` to attempt to find the corresponding student in the database. The conditional in this section is using an `assignment expression <https://www.python.org/dev/peps/pep-0572/>`__, an addition to Python 3.8 and often referred to by the cute sobriquet "walrus operator."
+            raise HTTPException(status_code=404, detail="Student {id} not found")
 
-If a document with the specified ``_id`` does not exist, we raise an ``HTTPException`` with a status of ``404``.
+    The student detail route has a path parameter of ``id``, which FastAPI passes as an argument to the ``show_student`` function. We use the ``id`` to attempt to find the corresponding student in the database. The conditional in this section is using an `assignment expression <https://www.python.org/dev/peps/pep-0572/>`__, an addition to Python 3.8 and often referred to by the cute sobriquet "walrus operator."
 
-Update Route
-++++++++++++
+    If a document with the specified ``_id`` does not exist, we raise an ``HTTPException`` with a status of ``404``.
 
-.. code-block:: python
+   .. step:: Update Route
 
-   @app.put(
-       "/students/{id}",
-       response_description="Update a student",
-       response_model=StudentModel,
-       response_model_by_alias=False,
-   )
-   async def update_student(id: str, student: UpdateStudentModel = Body(...)):
-       """
-       Update individual fields of an existing student record.
+    .. code-block:: python
 
-       Only the provided fields will be updated.
-       Any missing or `null` fields will be ignored.
-       """
-       student = {
-           k: v for k, v in student.model_dump(by_alias=True).items() if v is not None
-       }
+        @app.put(
+            "/students/{id}",
+            response_description="Update a student",
+            response_model=StudentModel,
+            response_model_by_alias=False,
+        )
+        async def update_student(id: str, student: UpdateStudentModel = Body(...)):
+            """
+            Update individual fields of an existing student record.
 
-       if len(student) >= 1:
-           update_result = await student_collection.find_one_and_update(
-               {"_id": ObjectId(id)},
-               {"$set": student},
-               return_document=ReturnDocument.AFTER,
-           )
-           if update_result is not None:
-               return update_result
-           else:
-               raise HTTPException(status_code=404, detail=f"Student {id} not found")
+            Only the provided fields will be updated.
+            Any missing or `null` fields will be ignored.
+            """
+            student = {
+                k: v for k, v in student.model_dump(by_alias=True).items() if v is not None
+            }
 
-       # The update is empty, but we should still return the matching document:
-       if (existing_student := await student_collection.find_one({"_id": id})) is not None:
-           return existing_student
+            if len(student) >= 1:
+                update_result = await student_collection.find_one_and_update(
+                    {"_id": ObjectId(id)},
+                    {"$set": student},
+                    return_document=ReturnDocument.AFTER,
+                )
+                if update_result is not None:
+                    return update_result
+                else:
+                    raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-       raise HTTPException(status_code=404, detail=f"Student {id} not found")
+            # The update is empty, but we should still return the matching document:
+            if (existing_student := await student_collection.find_one({"_id": id})) is not None:
+                return existing_student
 
-The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update as well as the new data in the JSON body. We don't want to update any fields with empty values; so, first of all, we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
+            raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-If, after we remove the empty values, there are no fields left to update, we instead look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html#motor.motor_asyncio.AsyncIOMotorCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
+    The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update as well as the new data in the JSON body. We don't want to update any fields with empty values; so, first of all, we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
 
-If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error again.
+    If, after we remove the empty values, there are no fields left to update, we instead look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html#motor.motor_asyncio.AsyncIOMotorCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
+
+    If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error again.
 
 Delete Route
 ++++++++++++
