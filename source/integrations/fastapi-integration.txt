@@ -59,31 +59,28 @@ Prerequisites
 .. procedure::
    :style: connected
 
-    .. step:: Set-up
+   .. step:: Set-up
+      
+    .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
 
-        .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
+      .. code-block:: shell
 
-            .. code-block:: shell
+         git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
 
-                git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
+    .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
 
-        .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
+      .. tip:: Use a Virtual environment
 
-            .. tip:: Use a Virtual environment
+        Installing your Python dependencies in a `virtualenv <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions of the libraries to be install for individual projects. Before running pip, ensure your ``virtualenv`` is active. 
 
-                Installing your Python dependencies in a `virtualenv
-                <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions
-                of the libraries to be install for individual projects. Before running
-                pip, ensure your ``virtualenv`` is active. 
+      .. code-block:: shell
 
-            .. code-block:: shell
+         cd mongodb-with-fastapi
+         pip install -r requirements.txt
 
-                cd mongodb-with-fastapi
-                pip install -r requirements.txt
+      It may take a few moments to download and install your dependencies.
 
-            It may take a few moments to download and install your dependencies.
-
-        .. step:: Create an environment variable for your MongoDB connection string:
+    .. step:: Create an environment variable for your MongoDB connection string:
 
             .. code-block:: shell
 
@@ -95,7 +92,7 @@ Prerequisites
                 environment variable. You can use `direnv <https://direnv.net/>`__ to make
                 this process easier.
 
-        .. step:: Start your FastAPI server:
+    .. step:: Start your FastAPI server:
 
             .. code-block:: shell
 
@@ -109,7 +106,7 @@ Prerequisites
             .. image:: /includes/integrations/fastapi-browser.png
                 :alt: Screenshot of browser and swagger UI
 
-    .. step:: Create Your Application
+   .. step:: Create Your Application
 
     All the code for the example application is stored in ``app.py``.
 
