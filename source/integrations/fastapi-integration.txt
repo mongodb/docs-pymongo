@@ -56,65 +56,61 @@ Prerequisites
     <https://docs.atlas.mongodb.com/getting-started/>`__ guide to create your
     account and MongoDB cluster. 
 
-Set-up
-~~~~~~
+.. step:: Set-up
 
-1. Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
+   .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
 
-   .. code-block:: shell
+      .. code-block:: shell
 
-      git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
+         git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
 
-#. Install the required dependencies listed in the ``requirements.txt`` file:
+   .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
 
-   .. tip:: Use a Virtual environment
+      .. tip:: Use a Virtual environment
 
-      Installing your Python dependencies in a `virtualenv
-      <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions
-      of the libraries to be install for individual projects. Before running
-      pip, ensure your ``virtualenv`` is active. 
+         Installing your Python dependencies in a `virtualenv
+         <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions
+         of the libraries to be install for individual projects. Before running
+         pip, ensure your ``virtualenv`` is active. 
 
-   .. code-block:: shell
+      .. code-block:: shell
 
-      cd mongodb-with-fastapi
-      pip install -r requirements.txt
+         cd mongodb-with-fastapi
+         pip install -r requirements.txt
 
-   It may take a few moments to download and install your dependencies.
+      It may take a few moments to download and install your dependencies.
 
-#. Create an environment variable for your MongoDB connection string:
+   .. step:: Create an environment variable for your MongoDB connection string:
 
-   .. code-block:: shell
+      .. code-block:: shell
 
-      export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
+         export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
 
-   .. tip:: Reset Environment Variables
+      .. tip:: Reset Environment Variables
 
-      Anytime you start a new terminal session, you will need to reset this
-      environment variable. You can use `direnv <https://direnv.net/>`__ to make
-      this process easier.
+         Anytime you start a new terminal session, you will need to reset this
+         environment variable. You can use `direnv <https://direnv.net/>`__ to make
+         this process easier.
 
-#. Start your FastAPI server:
+   .. step:: Start your FastAPI server:
 
-   .. code-block:: shell
+      .. code-block:: shell
 
-      uvicorn app:app --reload
+         uvicorn app:app --reload
 
-   .. image:: /includes/integrations/fastapi-terminal.png
-      :alt: Screenshot of terminal running FastAPI
+      .. image:: /includes/integrations/fastapi-terminal.png
+         :alt: Screenshot of terminal running FastAPI
 
-      Once the application has started, you can view it in your browser at http://127.0.0.1:8000/docs.
+         Once the application has started, you can view it in your browser at http://127.0.0.1:8000/docs.
 
-   .. image:: /includes/integrations/fastapi-browser.png
-      :alt: Screenshot of browser and swagger UI
+      .. image:: /includes/integrations/fastapi-browser.png
+         :alt: Screenshot of browser and swagger UI
 
-Create Your Application
-~~~~~~~~~~~~~~~~~~~~~~~
+.. step:: Create Your Application
 
-All the code for the example application is stored in ``app.py``.
+   All the code for the example application is stored in ``app.py``.
 
-1. Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver
-   <https://www.mongodb.com/docs/languages/python/pymongo-driver/current>`__,
-   then specify the database named ``college``:
+   Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <https://www.mongodb.com/docs/languages/python/pymongo-driver/current>`__, then specify the database named ``college``:
 
    .. code-block:: python
 
@@ -122,96 +118,90 @@ All the code for the example application is stored in ``app.py``.
       db = client.get_database("college")
       student_collection = db.get_collection("students")
 
-The _id Attribute and ObjectIds
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. step:: Define Your Database Models
+    
+   Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
-.. code-block:: python
+   .. code-block:: python
 
-   # Represents an ObjectId field in the database.
-   # It will be represented as a `str` on the model so that it can be serialized to JSON.
-   PyObjectId = Annotated[str, BeforeValidator(str)]
+      # Represents an ObjectId field in the database.
+      # It will be represented as a `str` on the model so that it can be
+      serialized to JSON.
+              PyObjectId = Annotated[str, BeforeValidator(str)]
 
+        class StudentModel(BaseModel):
+            """
+            Container for a single student record.
+            """
 
+            # The primary key for the StudentModel, stored as a `str` on the instance.
+            # This will be aliased to ``_id`` when sent to MongoDB,
+            # but provided as ``id`` in the API requests and responses.
+            id: Optional[PyObjectId] = Field(alias="_id", default=None)
+            name: str = Field(...)
+            email: EmailStr = Field(...)
+            course: str = Field(...)
+            gpa: float = Field(..., le=4.0)
+            model_config = ConfigDict(
+                populate_by_name=True,
+                arbitrary_types_allowed=True,
+                json_schema_extra={
+                    "example": {
+                        "name": "Jane Doe",
+                        "email": "jdoe@example.com",
+                        "course": "Experiments, Science, and Fashion in Nanophotonics",
+                        "gpa": 3.0,
+                    }
+                },
+            )
 
-Database Models
-~~~~~~~~~~~~~~~
-Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
+   This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
 
-.. code-block:: python
+   I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
 
-   class StudentModel(BaseModel):
-    """
-    Container for a single student record.
-    """
+   We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
 
-    # The primary key for the StudentModel, stored as a `str` on the instance.
-    # This will be aliased to ``_id`` when sent to MongoDB,
-    # but provided as ``id`` in the API requests and responses.
-    id: Optional[PyObjectId] = Field(alias="_id", default=None)
-    name: str = Field(...)
-    email: EmailStr = Field(...)
-    course: str = Field(...)
-    gpa: float = Field(..., le=4.0)
-    model_config = ConfigDict(
-        populate_by_name=True,
-        arbitrary_types_allowed=True,
-        json_schema_extra={
-            "example": {
-                "name": "Jane Doe",
-                "email": "jdoe@example.com",
-                "course": "Experiments, Science, and Fashion in Nanophotonics",
-                "gpa": 3.0,
-            }
-        },
-    )
+   .. code-block:: python
 
-This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
+      class UpdateStudentModel(BaseModel):
+          """
+          A set of optional updates to be made to a document in the database.
+          """
 
-I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
+          name: Optional[str] = None
+          email: Optional[EmailStr] = None
+          course: Optional[str] = None
+          gpa: Optional[float] = None
+          model_config = ConfigDict(
+              arbitrary_types_allowed=True,
+              json_encoders={ObjectId: str},
+              json_schema_extra={
+                  "example": {
+                      "name": "Jane Doe",
+                      "email": "jdoe@example.com",
+                      "course": "Experiments, Science, and Fashion in Nanophotonics",
+                      "gpa": 3.0,
+                  }
+              },
+          )
 
-We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
+   The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
+   
+   -   It does not have an ``id`` attribute as this cannot be modified.
+   -   All fields are optional, so you only need to supply the fields you wish to update.
+  
+   Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
 
-.. code-block:: python
+   .. code-block:: python
 
-   class UpdateStudentModel(BaseModel):
-    """
-    A set of optional updates to be made to a document in the database.
-    """
+      class StudentCollection(BaseModel):
+         """
+         A container holding a list of `StudentModel` instances.
 
-    name: Optional[str] = None
-    email: Optional[EmailStr] = None
-    course: Optional[str] = None
-    gpa: Optional[float] = None
-    model_config = ConfigDict(
-        arbitrary_types_allowed=True,
-        json_encoders={ObjectId: str},
-        json_schema_extra={
-            "example": {
-                "name": "Jane Doe",
-                "email": "jdoe@example.com",
-                "course": "Experiments, Science, and Fashion in Nanophotonics",
-                "gpa": 3.0,
-            }
-        },
-    )
+         This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
+         """
 
-The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
-
--   It does not have an ``id`` attribute as this cannot be modified.
--   All fields are optional, so you only need to supply the fields you wish to update.
-
-Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
-
-.. code-block:: python
-
-   class StudentCollection(BaseModel):
-    """
-    A container holding a list of `StudentModel` instances.
-
-    This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
-    """
-
-    students: List[StudentModel]
+        students: List[StudentModel]
 
 Application Routes
 ~~~~~~~~~~~~~~~~~~
