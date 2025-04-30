@@ -56,8 +56,8 @@ Prerequisites
     <https://docs.atlas.mongodb.com/getting-started/>`__ guide to create your
     account and MongoDB cluster. 
 
-1. Set-up
-~~~~~~~~~
+Set-up
+~~~~~~
 
 .. procedure::
    :style: connected
@@ -107,8 +107,8 @@ Prerequisites
             .. image:: /includes/integrations/fastapi-browser.png
                 :alt: Screenshot of browser and swagger UI
 
-#. Create Your Application
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Create Your Application
+~~~~~~~~~~~~~~~~~~~~~~~
 
 All the code for the example application is stored in ``app.py``.
 
@@ -120,8 +120,8 @@ Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <ht
     db = client.get_database("college")
     student_collection = db.get_collection("students")
 
-#. Define Your Database Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Define Your Database Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
 Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
@@ -206,8 +206,8 @@ Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentMode
 
         students: List[StudentModel]
 
-#. Create Your Application Routes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Create Your Application Routes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our application has five routes:
 
@@ -268,7 +268,7 @@ Our application has five routes:
 
     FastAPI returns an HTTP ``200`` status code by default; but in this instance, a ``201`` created is more appropriate.
 
-   .. step:: Read Routes
+   .. step:: Create Read Routes
 
     The application has two read routes: one for viewing all students, and one for viewing an individual student.
 
@@ -313,7 +313,7 @@ Our application has five routes:
 
     If a document with the specified ``_id`` does not exist, we raise an ``HTTPException`` with a status of ``404``.
 
-   .. step:: Update Route
+   .. step:: Create Update Route
 
     .. code-block:: python
 
@@ -357,38 +357,33 @@ Our application has five routes:
 
     If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error again.
 
-Delete Route
-++++++++++++
+   .. step:: Create Delete Route
 
-.. code-block:: python
+    .. code-block:: python
 
-   @app.delete("/students/{id}", response_description="Delete a student")
-   async def delete_student(id: str):
-       """
-       Remove a single student record from the database.
-       """
-       delete_result = await student_collection.delete_one({"_id": ObjectId(id)})
+        @app.delete("/students/{id}", response_description="Delete a student")
+        async def delete_student(id: str):
+            """
+            Remove a single student record from the database.
+            """
+            delete_result = await student_collection.delete_one({"_id": ObjectId(id)})
 
-       if delete_result.deleted_count == 1:
-           return Response(status_code=status.HTTP_204_NO_CONTENT)
+            if delete_result.deleted_count == 1:
+                return Response(status_code=status.HTTP_204_NO_CONTENT)
 
-       raise HTTPException(status_code=404, detail=f"Student {id} not found")
+            raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-Our final route is ``delete_student``. Again, because this is acting upon a single document, we have to supply an ``id`` in the URL. If we find a matching document and successfully delete it, then we return an HTTP status of ``204`` or "No Content." In this case, we do not return a document as we've already deleted it! However, if we cannot find a student with the specified ``id``, then instead we return a ``404``.
+    Our final route is ``delete_student``. Again, because this is acting upon a single document, we have to supply an ``id`` in the URL. If we find a matching document and successfully delete it, then we return an HTTP status of ``204`` or "No Content." In this case, we do not return a document as we've already deleted it! However, if we cannot find a student with the specified ``id``, then instead we return a ``404``.
 
-Our New FastAPI App Generator
------------------------------
+More Resources
+--------------
 
-If you're excited to build something more production-ready with FastAPI, React &
-MongoDB, head over to the `full-stack-fastapi-mongodb Github repository
-<https://github.com/mongodb-labs/full-stack-fastapi-mongodb>`__ for our `new
-FastAPI app generator
-<https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__
-and start transforming your web development experience.
+For more information, see the following resources:
 
-Wrapping Up
------------
-
-I hope you have found this introduction to FastAPI with MongoDB useful.  If you would like to learn more, check out my post `introducing the FARM stack (FastAPI, React and MongoDB) <https://developer.mongodb.com/how-to/FARM-Stack-FastAPI-React-MongoDB>`__ as well as the `FastAPI documentation <https://motor.readthedocs.io>`__ and this `awesome list <https://github.com/mjhea0/awesome-fastapi>`__.
-
-If you have questions, please head to our `developer community website <https://community.mongodb.com/>`__ where MongoDB engineers and the MongoDB community will help you build your next big idea with MongoDB.
+ - Full Stack FastAPI App Generator
+    - `Blog post <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__
+    - `Github repository <https://github.com/mongodb-labs/full-stack-fastapi-mongodb>`__ 
+ - `Introducing the FARM stack (FastAPI, React and MongoDB) blog post <https://developer.mongodb.com/how-to/FARM-Stack-FastAPI-React-MongoDB>`__ 
+ - `FastAPI documentation <https://motor.readthedocs.io>`__ 
+ - `List of FastAPI Integration Options <https://github.com/mjhea0/awesome-fastapi>`__
+ - `MongoDB Developer Community <https://community.mongodb.com/>`__ 
