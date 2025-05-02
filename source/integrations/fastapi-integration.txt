@@ -1,9 +1,9 @@
 .. _pymongo-fastapi:
 .. original URL: https://www.mongodb.com/developer/languages/python/python-quickstart-fastapi/
 
-================================
-FastAPI Integration and Tutorial
-================================
+============================
+FastAPI Integration Tutorial
+============================
 
 .. contents:: On this page
    :local:
