@@ -19,33 +19,18 @@ FastAPI Integration and Tutorial
    :description: Learn how to create an app to connect to MongoDB deployment by using the PyMongo driver.
    :keywords: quick start, tutorial, basics
 
+Overview
+--------
+
 `FastAPI <https://fastapi.tiangolo.com/>`__ is a high-performance,
 production-ready asynchronous Python framework for building APIs based on
 standard Python type hints. In this tutorial, we will create a CRUD application
 showing how you can integrate MongoDB with your FastAPI projects.
 
-Mapping
--------
-
-The _id Attribute and ObjectIds
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-FastAPI encodes and decodes data as JSON strings, which do not support all of the
-data types that MongoDB's BSON data type can store. BSON has support for
-additional non-JSON-native data types, including ``ObjectId`` which is used for
-the default UUID attribute, ``_id``. Because of this, you must convert ``ObjectId``s to
-strings before storing them in the ``id`` field.
-
-For for information about how BSON compares to JSON, see this `JSON and BSON
-<https://www.mongodb.com/json-and-bson>`__ MongoDB article.
-
-Database Models
-~~~~~~~~~~~~~~~
-
-MongoDB collections do not enforce document structure by default, so you have the flexibility to make whatever data-modelling choices best match your application and its performance requirements. So, it's not unusual to create models when working with a MongoDB database. 
-
 Tutorial
 --------
+
+This tutorial walks through the `MongoDB with FastAPI sample project <https://github.com/mongodb-developer/mongodb-with-fastapi>`__.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -122,6 +107,17 @@ Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <ht
 
 Define Your Database Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: BSON to JSON Mapping
+
+    FastAPI encodes and decodes data as JSON strings, which do not support all of the
+    data types that MongoDB's BSON data type can store. BSON has support for
+    additional non-JSON-native data types, including ``ObjectId`` which is used for
+    the default UUID attribute, ``_id``. Because of this, you must convert
+    ``ObjectId`` objects to strings before storing them in the ``_id`` field.
+
+    For more information about how BSON compares to JSON, see this `JSON and BSON
+    <https://www.mongodb.com/json-and-bson>`__ MongoDB article.
         
 Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
 
@@ -380,10 +376,11 @@ More Resources
 
 For more information, see the following resources:
 
-- Full Stack FastAPI App Generator:
+- MongoDB's Full Stack FastAPI App Generator:
     - `Blog post: Introducing the Full Stack FastAPI App Generator for Python Developers <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__
     - `Github repository: full-stack-fastapi-mongodb <https://github.com/mongodb-labs/full-stack-fastapi-mongodb>`__ 
 - `Introducing the FARM stack (FastAPI, React and MongoDB) blog post <https://developer.mongodb.com/how-to/FARM-Stack-FastAPI-React-MongoDB>`__ 
-- `FastAPI documentation <https://motor.readthedocs.io>`__ 
+- `FastAPI documentation <https://fastapi.tiangolo.com/>`__ 
 - `Third-party FastAPI Integration Options <https://github.com/mjhea0/awesome-fastapi>`__
-- `MongoDB Developer Community <https://community.mongodb.com/>`__ 
+
+For support or to contribute to the MongoDB Community, see the `MongoDB Developer Community <https://community.mongodb.com/>`__.
