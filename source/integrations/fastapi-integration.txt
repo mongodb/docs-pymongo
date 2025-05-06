@@ -165,8 +165,8 @@ cannot assign it a value. To get around this, we name the field
 ``id`` but give it an alias of ``_id``. You must also set
 ``populate_by_name`` to ``True`` in the model's ``model_config``. 
 
-We set this ``id`` value automatically to ``None``, so that you don't need to
-specify it when creating a new student.
+We set this ``id`` value automatically to ``None``, so that can create a new
+student with out specifying it.
 
 .. code-block:: python
 
@@ -195,7 +195,7 @@ specify it when creating a new student.
 The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
 
 -   It does not have an ``id`` attribute as this cannot be modified.
--   All fields are optional, so you only need to supply the fields you want to update.
+-   All fields are optional, so can supply only the fields you want to update.
 
 Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
 
