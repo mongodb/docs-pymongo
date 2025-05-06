@@ -13,7 +13,7 @@ toc_landing_pages = [
     "/crud/update",
     "/monitoring-and-logging",
     "/reference",
-    "integrations"
+    "/integrations"
 ]
 
 intersphinx = [
