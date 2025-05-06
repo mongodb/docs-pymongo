@@ -1,9 +1,9 @@
 .. _pymongo-fastapi:
 .. original URL: https://www.mongodb.com/developer/languages/python/python-quickstart-fastapi/
 
-============================
-FastAPI Integration Tutorial
-============================
+=============================
+Tutorial: FastAPI Integration
+=============================
 
 .. contents:: On this page
    :local:
@@ -16,30 +16,30 @@ FastAPI Integration Tutorial
    :values: tutorial
  
 .. meta::
-   :description: Learn how to create an app to connect to MongoDB deployment by using the PyMongo driver.
+   :description: Build an application use FastAPI that integrates with a MongoDB deployment by using the PyMongo Async driver.
    :keywords: quick start, tutorial, basics
 
 Overview
 --------
 
 `FastAPI <https://fastapi.tiangolo.com/>`__ is a high-performance,
-production-ready asynchronous Python framework for building APIs based on
-standard Python type hints. In this tutorial, we will create a CRUD application
-showing how you can integrate MongoDB with your FastAPI projects.
+production-ready asynchronous {+language+} framework for building APIs based on
+standard {+language+} type hints. In this tutorial, you can learn how to create a CRUD application
+that integrates MongoDB with your FastAPI projects.
 
 Tutorial
 --------
 
-This tutorial walks through the `MongoDB with FastAPI sample project <https://github.com/mongodb-developer/mongodb-with-fastapi>`__.
+You can find the completed sample app for this tutorial in the :github:`MongoDB
+with FastAPI sample project
+repository</mongodb-developer/mongodb-with-fastapi>`__ on GitHub.
 
 Prerequisites
 ~~~~~~~~~~~~~
 
--   Python v3.9.0 or later
--   A MongoDB Atlas cluster 
-    See the `Get Started with Atlas
-    <https://docs.atlas.mongodb.com/getting-started/>`__ guide to create your
-    account and MongoDB cluster. 
+- Python v3.9.0 or later
+- A MongoDB Atlas cluster
+  See the :re:`Getting Started <pymongo-get-started>`__ guide for more information. 
 
 Set-up
 ~~~~~~
@@ -47,61 +47,74 @@ Set-up
 .. procedure::
    :style: connected
 
-   .. step:: Clone the example code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
+   .. step:: Clone the example code example
+    
+    Run the following command in your terminal to clone the code from the `mongodb-with-fastapi repository <https://github.com/mongodb-developer/mongodb-with-fastapi>`__:
 
     .. code-block:: shell
 
-        git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
+       git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
 
-   .. step:: Install the required dependencies listed in the ``requirements.txt`` file:
+   .. step:: Install the required dependencies. 
+    
+    .. tip:: Use a Virtual environment
 
-      .. tip:: Use a Virtual environment
+       Installing your Python dependencies in a `virtualenv <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions of the libraries to be install for individual projects. Before running pip, ensure your ``virtualenv`` is active. 
+    
+    Run the following command in your terminal to install the dependencies listed in the ``requirements.txt`` file:
 
-        Installing your Python dependencies in a `virtualenv <https://docs.python.org/3/tutorial/venv.html>`__ with allow for versions of the libraries to be install for individual projects. Before running pip, ensure your ``virtualenv`` is active. 
+    .. code-block:: shell
 
-      .. code-block:: shell
+       cd mongodb-with-fastapi
+       pip install -r requirements.txt
 
-         cd mongodb-with-fastapi
-         pip install -r requirements.txt
+    It may take a few moments to download and install your dependencies.
 
-      It may take a few moments to download and install your dependencies.
+   .. step:: Retrieve your connection string
+    
+    Follow the :manual:`Find Your MongoDB Atlas Connection String guide </reference/connection-string/#find-your-mongodb-atlas-connection-string>` to retrieve your connection string. 
+    
+    Run the following code in your terminal to create an environment variable to store your connection string:
 
-   .. step:: Create an environment variable for your MongoDB connection string:
+..
+ is this necessary? Are we connecting to MongoDB in this step?
 
-            .. code-block:: shell
+    .. code-block:: shell
 
-                export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
+        export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
+    
+    .. tip:: Reset Environment Variables
 
-            .. tip:: Reset Environment Variables
+        Anytime you start a new terminal session, you will must reset this
+        environment variable. You can use `direnv <https://direnv.net/>`__ to
+        make this process easier. 
 
-                Anytime you start a new terminal session, you will must reset this
-                environment variable. You can use `direnv <https://direnv.net/>`__ to make
-                this process easier.
+   .. step:: Start your FastAPI server
+    
+    Run the following code in your terminal to start your FastAPI server:
+    
+    .. code-block:: shell
 
-   .. step:: Start your FastAPI server:
+        uvicorn app:app --reload
+    
+    Once the application has started, you can view it in your browser at http://127.0.0.1:8000/docs.
+    
+    .. image:: /includes/integrations/fastapi-browser.png
+       :alt: Screenshot of browser and swagger UI
 
-            .. code-block:: shell
+Connect Your Application to Your Cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                uvicorn app:app --reload
+All the code for the example application is stored in the `app.py file in the mongodb-with-fastapi repository
+<https://github.com/mongodb-developer/mongodb-with-fastapi/blob/master/app.py>`__.
 
-            .. image:: /includes/integrations/fastapi-terminal.png
-                :alt: Screenshot of terminal running FastAPI
-
-                Once the application has started, you can view it in your browser at http://127.0.0.1:8000/docs.
-
-            .. image:: /includes/integrations/fastapi-browser.png
-                :alt: Screenshot of browser and swagger UI
-
-Create Your Application
-~~~~~~~~~~~~~~~~~~~~~~~
-
-All the code for the example application is stored in ``app.py``.
-
-Connect to your MongoDB Atlas cluster using the asynchronous `Pymongo Driver <https://www.mongodb.com/docs/languages/python/pymongo-driver/current>`__, then specify the database named ``college``:
+Use the following code to :ref:`connect to your MongoDB Atlas cluster
+<pymongo_connect_atlas>` by using the {+driver-async+} ``AsyncMongoClient()``
+method and the ``MONGODB_URL`` environment variable, then specify the database named ``college``: 
 
 .. code-block:: python
-
-    client = AsyncMongoClient(MONGODB_URL, server_api=pymongo.server_api.ServerApi(version="1", strict=True, deprecation_errors=True))
+    
+    client = AsyncMongoClient(os.environ["MONGODB_URL"],server_api=pymongo.server_api.ServerApi(version="1", strict=True,deprecation_errors=True))
     db = client.get_database("college")
     student_collection = db.get_collection("students")
 
@@ -119,7 +132,10 @@ Define Your Database Models
     For more information about how BSON compares to JSON, see this `JSON and BSON
     <https://www.mongodb.com/json-and-bson>`__ MongoDB article.
         
-Our application has three models, the ``StudentModel``, the ``UpdateStudentModel``, and the ``StudentCollection``.
+Our application has three models, the ``StudentModel``, the
+``UpdateStudentModel``, and the ``StudentCollection``.
+
+Define the ``StudentModel`` class using the following code:
 
 .. code-block:: python
 
@@ -154,7 +170,9 @@ Our application has three models, the ``StudentModel``, the ``UpdateStudentModel
                 },
             )
 
-This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
+This is the primary model we use as the `response model
+<https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of
+our endpoints. 
 
 I want to draw attention to the ``id`` field on this model. MongoDB uses
 ``_id``, but in Python, underscores at the start of attributes have special
@@ -167,6 +185,8 @@ cannot assign it a value. To get around this, we name the field
 
 We set this ``id`` value automatically to ``None``, so that can create a new
 student with out specifying it.
+
+Define the ``UpdateStudentModel`` class using the following code:
 
 .. code-block:: python
 
@@ -198,6 +218,8 @@ The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
 -   All fields are optional, so can supply only the fields you want to update.
 
 Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
+
+Define the ``StudentCollection`` class using the following code:
 
 .. code-block:: python
 
