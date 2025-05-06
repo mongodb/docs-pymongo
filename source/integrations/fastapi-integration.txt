@@ -76,9 +76,6 @@ Set-up
     
     Run the following code in your terminal to create an environment variable to store your connection string:
 
-..
- is this necessary? Are we connecting to MongoDB in this step?
-
     .. code-block:: shell
 
         export MONGODB_URL="mongodb+srv://<username>:<password>@<url>/<db>?retryWrites=true&w=majority"
