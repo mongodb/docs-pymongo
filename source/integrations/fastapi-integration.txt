@@ -74,7 +74,7 @@ Set-up
 
             .. tip:: Reset Environment Variables
 
-                Anytime you start a new terminal session, you will need to reset this
+                Anytime you start a new terminal session, you will must reset this
                 environment variable. You can use `direnv <https://direnv.net/>`__ to make
                 this process easier.
 
@@ -110,9 +110,9 @@ Define Your Database Models
 
 .. note:: BSON to JSON Mapping
 
-    FastAPI encodes and decodes data as JSON strings, which do not support all of the
+    FastAPI encodes and decodes data as JSON strings, which do not support all the
     data types that MongoDB's BSON data type can store. BSON has support for
-    additional non-JSON-native data types, including ``ObjectId`` which is used for
+    more non-JSON-native data types, including ``ObjectId`` which is used for
     the default UUID attribute, ``_id``. Because of this, you must convert
     ``ObjectId`` objects to strings before storing them in the ``_id`` field.
 
@@ -156,9 +156,17 @@ Our application has three models, the ``StudentModel``, the ``UpdateStudentModel
 
 This is the primary model we use as the `response model <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of our endpoints.
 
-I want to draw attention to the ``id`` field on this model. MongoDB uses ``_id``, but in Python, underscores at the start of attributes have special meaning. If you have an attribute on your model that starts with an underscore, `pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation framework used by FastAPI—will assume that it is a private variable, meaning you will not be able to assign it a value! To get around this, we name the field ``id`` but give it an alias of ``_id``. You also need to set ``populate_by_name`` to ``True`` in the model's ``model_config``
+I want to draw attention to the ``id`` field on this model. MongoDB uses
+``_id``, but in Python, underscores at the start of attributes have special
+meaning. If you have an attribute on your model that starts with an underscore,
+`pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation
+framework used by FastAPI—will assume that it is a private variable, meaning you
+cannot assign it a value. To get around this, we name the field
+``id`` but give it an alias of ``_id``. You must also set
+``populate_by_name`` to ``True`` in the model's ``model_config``. 
 
-We set this ``id`` value automatically to ``None``, so you do not need to supply it when creating a new student.
+We set this ``id`` value automatically to ``None``, so that you don't need to
+specify it when creating a new student.
 
 .. code-block:: python
 
@@ -187,7 +195,7 @@ We set this ``id`` value automatically to ``None``, so you do not need to supply
 The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
 
 -   It does not have an ``id`` attribute as this cannot be modified.
--   All fields are optional, so you only need to supply the fields you wish to update.
+-   All fields are optional, so you only need to supply the fields you want to update.
 
 Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
 
@@ -258,7 +266,7 @@ Our application has five routes:
             )
             return created_student
 
-    The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We have to decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
+    The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We must decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
 
     The ``insert_one`` method response includes the ``_id`` of the newly created student (provided as ``id`` because this endpoint specifies ``response_model_by_alias=False`` in the ``post`` decorator call. After we insert the student into our collection, we use the ``inserted_id`` to find the correct document and return this in our ``JSONResponse``.
 
@@ -278,13 +286,16 @@ Our application has five routes:
         )
         async def list_students():
             """
-            List all of the student data in the database. 
+            List all the student data in the database. 
 
             The response is unpaginated and limited to 1000 results.
             """
-            return StudentCollection(students=await student_collection.find().to_list(1000))
+            return StudentCollection(students=await student_collection.find().to_list())
 
-    Motor's ``to_list`` method requires a max document count argument. For this example, I have hardcoded it to ``1000``; but in a real application, you would use the `skip and limit parameters <https://pymongo.readthedocs.io/en/3.11.0/api/pymongo/collection.html#pymongo.collection.Collection.find>`__ in ``find`` to paginate your results.
+    This example uses the ``to_list()`` method; but in a real application, we
+    recommend using the `skip and limit parameters
+    <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find>`__
+    in ``find`` to paginate your results.
 
     .. code-block:: python
 
@@ -341,17 +352,17 @@ Our application has five routes:
                 else:
                     raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-            # The update is empty, but we should still return the matching document:
+            # The update is empty, so return the matching document:
             if (existing_student := await student_collection.find_one({"_id": id})) is not None:
                 return existing_student
 
             raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-    The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update as well as the new data in the JSON body. We don't want to update any fields with empty values; so, first of all, we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
+    The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update, and the new data in the JSON body. We don't want to update any fields with empty values, so we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
 
-    If, after we remove the empty values, there are no fields left to update, we instead look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://motor.readthedocs.io/en/stable/api-asyncio/asyncio_motor_collection.html#motor.motor_asyncio.AsyncIOMotorCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
+    If there are no fields left to update, we look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
 
-    If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error again.
+    If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error.
 
    .. step:: Create Your Delete Route
 
@@ -369,7 +380,12 @@ Our application has five routes:
 
             raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-    Our final route is ``delete_student``. Again, because this is acting upon a single document, we have to supply an ``id`` in the URL. If we find a matching document and successfully delete it, then we return an HTTP status of ``204`` or "No Content." In this case, we do not return a document as we've already deleted it! However, if we cannot find a student with the specified ``id``, then instead we return a ``404``.
+    Our final route is ``delete_student``. Because this is acting on a single
+    document, we must supply an ``id`` in the URL. If we find a matching
+    document and successfully delete it, then we return an HTTP status of
+    ``204`` or "No Content." In this case, we do not return a document since
+    we previously deleted it. However, if we cannot find a student with the specified ``id``, then
+    we return a ``404``.
 
 More Resources
 --------------
