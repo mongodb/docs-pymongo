@@ -117,6 +117,24 @@ method and the ``MONGODB_URL`` environment variable, then specify the database n
 
 Define Your Database Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+Our application has three models, the ``StudentModel``, the
+``UpdateStudentModel``, and the ``StudentCollection``.
+
+StudentModel Class
+``````````````````
+
+This is the primary model we use as the `response model
+<https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of
+our endpoints. 
+
+MongoDB uses ``_id`` as the default UUID on its documents. However, `pydantic
+<https://pydantic-docs.helpmanual.io/>`__, the data validation
+framework used by FastAPI, leading underscores indicate that a variable is private, meaning you
+cannot assign it a value. Therefore, we name the field ``id`` but give it an
+alias of ``_id`` and set ``populate_by_name`` to ``True`` in the model's
+``model_config``.  We also set this ``id`` value automatically to ``None``, so
+that can create a new student with out specifying it. 
 
 .. note:: BSON to JSON Mapping
 
@@ -128,9 +146,6 @@ Define Your Database Models
 
     For more information about how BSON compares to JSON, see this `JSON and BSON
     <https://www.mongodb.com/json-and-bson>`__ MongoDB article.
-        
-Our application has three models, the ``StudentModel``, the
-``UpdateStudentModel``, and the ``StudentCollection``.
 
 Define the ``StudentModel`` class using the following code:
 
@@ -167,21 +182,13 @@ Define the ``StudentModel`` class using the following code:
                 },
             )
 
-This is the primary model we use as the `response model
-<https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of
-our endpoints. 
+UpdateStudentModel Class
+````````````````````````
 
-I want to draw attention to the ``id`` field on this model. MongoDB uses
-``_id``, but in Python, underscores at the start of attributes have special
-meaning. If you have an attribute on your model that starts with an underscore,
-`pydantic <https://pydantic-docs.helpmanual.io/>`__—the data validation
-framework used by FastAPI—will assume that it is a private variable, meaning you
-cannot assign it a value. To get around this, we name the field
-``id`` but give it an alias of ``_id``. You must also set
-``populate_by_name`` to ``True`` in the model's ``model_config``. 
+The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
 
-We set this ``id`` value automatically to ``None``, so that can create a new
-student with out specifying it.
+-   It does not have an ``id`` attribute, as this cannot be modified
+-   All fields are optional, so you can supply only the fields you want to update
 
 Define the ``UpdateStudentModel`` class using the following code:
 
@@ -209,12 +216,13 @@ Define the ``UpdateStudentModel`` class using the following code:
             },
         )
 
-The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
+StudentCollection Class
+```````````````````````
 
--   It does not have an ``id`` attribute as this cannot be modified.
--   All fields are optional, so can supply only the fields you want to update.
-
-Finally, ``StudentCollection`` is defined to encapsulate a list of ``StudentModel`` instances. In theory, the endpoint could return a top-level list of StudentModels, but there are some vulnerabilities associated with returning JSON responses with top-level lists.
+The ``StudentCollection`` class is defined to encapsulate a list of
+``StudentModel`` instances. In theory, the endpoint could return a top-level
+list of ``StudentModel`` objects, but there are some vulnerabilities associated with
+returning JSON responses with top-level lists.
 
 Define the ``StudentCollection`` class using the following code:
 
@@ -232,7 +240,7 @@ Define the ``StudentCollection`` class using the following code:
 Create Your Application Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Our application has five routes:
+Our application has five routes, as shown in the `running application homepage <http://127.0.0.1:8000/docs>`__:
 
 .. list-table::
    :header-rows: 1
@@ -262,6 +270,21 @@ Our application has five routes:
 
    .. step:: Create Your Student Route
 
+    The ``create_student`` route receives the new student data as a JSON string
+    in a ``POST`` request. We must decode this JSON request body into a Python
+    dictionary before passing it to our MongoDB client. 
+
+    The ``insert_one`` method response includes the ``_id`` of the newly created
+    student (provided as ``id`` because this endpoint specifies
+    ``response_model_by_alias=False`` in the ``post`` decorator call. After we
+    insert the student into our collection, we use the ``inserted_id`` to find
+    the correct document and return this in our ``JSONResponse``.
+
+    FastAPI returns an HTTP ``200`` status code by default; but in this
+    instance, a ``201`` created is more appropriate.
+    
+    Define the ``create_student`` route using the following code:
+
     .. code-block:: python
 
         @app.post(
@@ -285,15 +308,12 @@ Our application has five routes:
             )
             return created_student
 
-    The ``create_student`` route receives the new student data as a JSON string in a ``POST`` request. We must decode this JSON request body into a Python dictionary before passing it to our MongoDB client.
-
-    The ``insert_one`` method response includes the ``_id`` of the newly created student (provided as ``id`` because this endpoint specifies ``response_model_by_alias=False`` in the ``post`` decorator call. After we insert the student into our collection, we use the ``inserted_id`` to find the correct document and return this in our ``JSONResponse``.
-
-    FastAPI returns an HTTP ``200`` status code by default; but in this instance, a ``201`` created is more appropriate.
-
    .. step:: Create Your Read Routes
 
-    The application has two read routes: one for viewing all students, and one for viewing an individual student.
+    The application has two read routes: one for viewing all students, and one
+    for viewing an individual student specified by their ``id``.
+    
+    Define the ``list_students`` route to view all students using the following code:
 
     .. code-block:: python
 
@@ -311,10 +331,21 @@ Our application has five routes:
             """
             return StudentCollection(students=await student_collection.find().to_list())
 
-    This example uses the ``to_list()`` method; but in a real application, we
-    recommend using the `skip and limit parameters
-    <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find>`__
-    in ``find`` to paginate your results.
+    .. note:: Results Pagination
+
+       This example uses the ``to_list()`` method; but in a real application, we
+       recommend using the `skip and limit parameters
+       <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find>`__
+       in ``find`` to paginate your results. 
+
+    The student detail route has a path parameter of ``id``, which FastAPI
+    passes as an argument to the ``show_student`` function. We use the ``id`` to
+    attempt to find the corresponding student in the database. 
+
+    If a document with the specified ``id`` does not exist, we raise an
+    ``HTTPException`` with a status of ``404``.
+    
+    Define the ``show_students`` route to view an individual using the following code:
 
     .. code-block:: python
 
@@ -335,11 +366,23 @@ Our application has five routes:
 
             raise HTTPException(status_code=404, detail="Student {id} not found")
 
-    The student detail route has a path parameter of ``id``, which FastAPI passes as an argument to the ``show_student`` function. We use the ``id`` to attempt to find the corresponding student in the database. The conditional in this section is using an `assignment expression <https://www.python.org/dev/peps/pep-0572/>`__, an addition to Python 3.8 and often referred to by the cute sobriquet "walrus operator."
-
-    If a document with the specified ``_id`` does not exist, we raise an ``HTTPException`` with a status of ``404``.
-
    .. step:: Create Your Update Route
+
+    The ``update_student`` route is like a combination of the ``create_student``
+    and the ``show_student`` routes. It receives the ``id`` of the student to
+    update, and the new data in the JSON body. 
+    
+    We don't want to update any fields with empty values, so we iterate over all the parameters in the received
+    data and only modify the defined parameters. We use `find_one_and_update
+    <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find_one_and_update>`__
+    to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__
+    the new values, and then return the updated document. 
+     
+    If there are no fields to update, then we return the original ``StudentModel`` document.
+
+    If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error.
+    
+    Define the ``update_student`` route to view an individual using the following code:
 
     .. code-block:: python
 
@@ -376,12 +419,6 @@ Our application has five routes:
                 return existing_student
 
             raise HTTPException(status_code=404, detail=f"Student {id} not found")
-
-    The ``update_student`` route is like a combination of the ``create_student`` and the ``show_student`` routes. It receives the ``id`` of the document to update, and the new data in the JSON body. We don't want to update any fields with empty values, so we iterate over all the items in the received dictionary and only add the items that have a value to our new document.
-
-    If there are no fields left to update, we look for an existing record that matches the ``id`` and return that unaltered. However, if there are values to update, we use `find_one_and_update <https://pymongo.readthedocs.io/en/stable/api/pymongo/asynchronous/collection.html#pymongo.asynchronous.collection.AsyncCollection.find_one_and_update>`__ to `$set <https://docs.mongodb.com/manual/reference/operator/update/set/>`__ the new values, and then return the updated document.
-
-    If we get to the end of the function and we have not been able to find a matching document to update or return, then we raise a ``404`` error.
 
    .. step:: Create Your Delete Route
 
