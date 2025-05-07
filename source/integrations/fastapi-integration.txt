@@ -8,7 +8,7 @@ Tutorial: FastAPI Integration
 .. contents:: On this page
    :local:
    :backlinks: none
-   :depth: 2
+   :depth: 3
    :class: singlecol
 
 .. facet::
@@ -105,9 +105,13 @@ Connect Your Application to Your Cluster
 All the code for the example application is stored in the `app.py file in the mongodb-with-fastapi repository
 <https://github.com/mongodb-developer/mongodb-with-fastapi/blob/master/app.py>`__.
 
-Use the following code to :ref:`connect to your MongoDB Atlas cluster
-<pymongo_connect_atlas>` by using the {+driver-async+} ``AsyncMongoClient()``
-method and the ``MONGODB_URL`` environment variable, then specify the database named ``college``: 
+Use the following code to:
+
+1. :ref:`Connect to your MongoDB Atlas cluster <pymongo_connect_atlas>` by using
+   the ``AsyncMongoClient()`` method with the ``MONGODB_URL`` environment
+   variable and specifying the database named ``college``. 
+#. Create a pointer to the ``"college"`` database.
+#. Create a pointer to the ``"students"`` collection
 
 .. code-block:: python
     
