@@ -428,11 +428,11 @@ Our application has five routes:
 
    .. step:: Delete Route
 
-    Because the ``delete_student`` is acting on a single document, we must
+    The ``delete_student`` is acting on a single document, so we must
     supply an ``id`` in the URL. If we find a matching document and successfully
-    delete it, then we return an HTTP status of ``204`` or "No Content." In
-    this case, we do not return a document. If we cannot find a student with the
-    specified ``id``, then we return a ``404`` error.
+    delete it, then we return an HTTP status of ``204``, or "No Content," and we
+    do not return a document. If we cannot find a student with the specified
+    ``id``, then we return a ``404`` error.
 
     .. code-block:: python
 
@@ -457,7 +457,7 @@ More Resources
 
 For more information about FastAPI integration, see the following resources:
 
-- MongoDB's Full Stack FastAPI App Generator:
+- MongoDB's Full Stack FastAPI App Generator
     - `Blog post: Introducing the Full Stack FastAPI App Generator for Python Developers <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__
     - `Github repository: full-stack-fastapi-mongodb <https://github.com/mongodb-labs/full-stack-fastapi-mongodb>`__ 
 - `Introducing the FARM stack (FastAPI, React and MongoDB) blog post <https://developer.mongodb.com/how-to/FARM-Stack-FastAPI-React-MongoDB>`__ 
