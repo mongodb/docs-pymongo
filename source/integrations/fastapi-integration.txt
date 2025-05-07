@@ -119,7 +119,7 @@ Use the following code to:
     db = client.get_database("college")
     student_collection = db.get_collection("students")
 
-Define Your Database Models
+Create Your Database Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
 Our application has three models, the ``StudentModel``, the
@@ -246,7 +246,7 @@ Our application has three models, the ``StudentModel``, the
 Create Your Application Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Our application has five routes, as shown in the `running application homepage <http://127.0.0.1:8000/docs>`__:
+Our application has five routes:
 
 .. list-table::
    :header-rows: 1
@@ -286,8 +286,8 @@ Our application has five routes, as shown in the `running application homepage <
     insert the student into our collection, we use the ``inserted_id`` to find
     the correct document and return this in our ``JSONResponse``.
 
-    FastAPI returns an HTTP ``200`` status code by default; but in this
-    instance, a ``201`` created is more appropriate.
+    FastAPI returns an HTTP ``200`` status code by default, but we will return a
+    ``201`` to explicitly that indicate the student has been created.
     
     Define the ``create_student`` route using the following code:
 
@@ -428,6 +428,12 @@ Our application has five routes, as shown in the `running application homepage <
 
    .. step:: Delete Route
 
+    Because the ``delete_student`` is acting on a single document, we must
+    supply an ``id`` in the URL. If we find a matching document and successfully
+    delete it, then we return an HTTP status of ``204`` or "No Content." In
+    this case, we do not return a document. If we cannot find a student with the
+    specified ``id``, then we return a ``404`` error.
+
     .. code-block:: python
 
         @app.delete("/students/{id}", response_description="Delete a student")
@@ -442,17 +448,14 @@ Our application has five routes, as shown in the `running application homepage <
 
             raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-    Our final route is ``delete_student``. Because this is acting on a single
-    document, we must supply an ``id`` in the URL. If we find a matching
-    document and successfully delete it, then we return an HTTP status of
-    ``204`` or "No Content." In this case, we do not return a document since
-    we previously deleted it. However, if we cannot find a student with the specified ``id``, then
-    we return a ``404``.
+After you complete these steps, you have a working application that
+uses FastAPI and the {+driver-async+} to connect to your MongoDB deployment, and
+manage student data.
 
 More Resources
 --------------
 
-For more information, see the following resources:
+For more information about FastAPI integration, see the following resources:
 
 - MongoDB's Full Stack FastAPI App Generator:
     - `Blog post: Introducing the Full Stack FastAPI App Generator for Python Developers <https://www.mongodb.com/blog/post/introducing-full-stack-fast-api-app-generator-for-python-developers>`__
