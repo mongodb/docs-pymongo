@@ -125,40 +125,44 @@ Define Your Database Models
 Our application has three models, the ``StudentModel``, the
 ``UpdateStudentModel``, and the ``StudentCollection``.
 
-StudentModel Class
-``````````````````
 
-This is the primary model we use as the `response model
-<https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority of
-our endpoints. 
 
-MongoDB uses ``_id`` as the default UUID on its documents. However, `pydantic
-<https://pydantic-docs.helpmanual.io/>`__, the data validation
-framework used by FastAPI, leading underscores indicate that a variable is private, meaning you
-cannot assign it a value. Therefore, we name the field ``id`` but give it an
-alias of ``_id`` and set ``populate_by_name`` to ``True`` in the model's
-``model_config``.  We also set this ``id`` value automatically to ``None``, so
-that can create a new student with out specifying it. 
+.. procedure::
+   :style: connected
 
-.. note:: BSON to JSON Mapping
+   .. step:: StudentModel Class
 
-    FastAPI encodes and decodes data as JSON strings, which do not support all the
-    data types that MongoDB's BSON data type can store. BSON has support for
-    more non-JSON-native data types, including ``ObjectId`` which is used for
-    the default UUID attribute, ``_id``. Because of this, you must convert
-    ``ObjectId`` objects to strings before storing them in the ``_id`` field.
+    This is the primary model we use as the `response model
+    <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the majority
+    of our endpoints. 
 
-    For more information about how BSON compares to JSON, see this `JSON and BSON
-    <https://www.mongodb.com/json-and-bson>`__ MongoDB article.
+    MongoDB uses ``_id`` as the default UUID on its documents. However,
+    `pydantic <https://pydantic-docs.helpmanual.io/>`__, the data validation
+    framework used by FastAPI, leading underscores indicate that a variable is
+    private, meaning you cannot assign it a value. Therefore, we name the field
+    ``id`` but give it an alias of ``_id`` and set ``populate_by_name`` to
+    ``True`` in the model's ``model_config``.  We also set this ``id`` value
+    automatically to ``None``, so that can create a new student with out specifying it. 
 
-Define the ``StudentModel`` class using the following code:
+    .. note:: BSON to JSON Mapping
 
-.. code-block:: python
+       FastAPI encodes and decodes data as JSON strings, which do not support
+       all the data types that MongoDB's BSON data type can store. BSON has
+       support for more non-JSON-native data types, including ``ObjectId`` which
+       is used for the default UUID attribute, ``_id``. Because of this, you
+       must convert ``ObjectId`` objects to strings before storing them in the
+       ``_id`` field.
+       
+       For more information about how BSON compares to JSON, see this `JSON and
+       BSON <https://www.mongodb.com/json-and-bson>`__ MongoDB article.
 
-    # Represents an ObjectId field in the database.
-    # It will be represented as a `str` on the model so that it can be
-    serialized to JSON.
-            PyObjectId = Annotated[str, BeforeValidator(str)]
+    Define the ``StudentModel`` class using the following code:
+
+    .. code-block:: python
+
+        # Represents an ObjectId field in the database.
+        # It will be represented as a `str` on the model so that it can be serialized to JSON.
+        PyObjectId = Annotated[str, BeforeValidator(str)]
 
         class StudentModel(BaseModel):
             """
@@ -186,60 +190,58 @@ Define the ``StudentModel`` class using the following code:
                 },
             )
 
-UpdateStudentModel Class
-````````````````````````
+   .. step:: UpdateStudentModel Class
 
-The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
+    The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
+    
+    -   It does not have an ``id`` attribute, as this cannot be modified
+    -   -   All fields are optional, so you can supply only the fields you want to update
+    
+    Define the ``UpdateStudentModel`` class using the following code:
+    
+    .. code-block:: python
 
--   It does not have an ``id`` attribute, as this cannot be modified
--   All fields are optional, so you can supply only the fields you want to update
+       class UpdateStudentModel(BaseModel):
+          """
+          A set of optional updates to be made to a document in the database.
+          """
 
-Define the ``UpdateStudentModel`` class using the following code:
-
-.. code-block:: python
-
-    class UpdateStudentModel(BaseModel):
-        """
-        A set of optional updates to be made to a document in the database.
-        """
-
-        name: Optional[str] = None
-        email: Optional[EmailStr] = None
-        course: Optional[str] = None
-        gpa: Optional[float] = None
-        model_config = ConfigDict(
-            arbitrary_types_allowed=True,
-            json_encoders={ObjectId: str},
-            json_schema_extra={
-                "example": {
+          name: Optional[str] = None
+          email: Optional[EmailStr] = None
+          course: Optional[str] = None
+          gpa: Optional[float] = None
+          model_config = ConfigDict(
+             arbitrary_types_allowed=True,
+             json_encoders={ObjectId: str},
+             json_schema_extra={
+                 "example": {
                     "name": "Jane Doe",
                     "email": "jdoe@example.com",
-                    "course": "Experiments, Science, and Fashion in Nanophotonics",
                     "gpa": 3.0,
-                }
-            },
-        )
+                 }
+             },
+         )
 
-StudentCollection Class
-```````````````````````
 
-The ``StudentCollection`` class is defined to encapsulate a list of
-``StudentModel`` instances. In theory, the endpoint could return a top-level
-list of ``StudentModel`` objects, but there are some vulnerabilities associated with
-returning JSON responses with top-level lists.
+   .. step:: StudentCollection Class
 
-Define the ``StudentCollection`` class using the following code:
+    The ``StudentCollection`` class is defined to encapsulate a list of
+    ``StudentModel`` instances. In theory, the endpoint could return a top-level
+    list of ``StudentModel`` objects, but there are some vulnerabilities
+    associated with returning JSON responses with top-level lists.
 
-.. code-block:: python
+    Define the ``StudentCollection`` class using the following code:
 
-    class StudentCollection(BaseModel):
-        """
-        A container holding a list of `StudentModel` instances.
+    .. code-block:: python
 
-        This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
-        """
+       class StudentCollection(BaseModel):
+           """
+           A container holding a list of `StudentModel` instances.
 
-        students: List[StudentModel]
+           This exists because providing a top-level array in a JSON response can be a `vulnerability <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
+           """
+
+           students: List[StudentModel]
 
 Create Your Application Routes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -272,7 +274,7 @@ Our application has five routes, as shown in the `running application homepage <
 .. procedure::
    :style: connected
 
-   .. step:: Create Your Student Route
+   .. step:: Student Routes
 
     The ``create_student`` route receives the new student data as a JSON string
     in a ``POST`` request. We must decode this JSON request body into a Python
@@ -312,7 +314,7 @@ Our application has five routes, as shown in the `running application homepage <
             )
             return created_student
 
-   .. step:: Create Your Read Routes
+   .. step:: Read Routes
 
     The application has two read routes: one for viewing all students, and one
     for viewing an individual student specified by their ``id``.
@@ -370,7 +372,7 @@ Our application has five routes, as shown in the `running application homepage <
 
             raise HTTPException(status_code=404, detail="Student {id} not found")
 
-   .. step:: Create Your Update Route
+   .. step:: Update Route
 
     The ``update_student`` route is like a combination of the ``create_student``
     and the ``show_student`` routes. It receives the ``id`` of the student to
@@ -424,7 +426,7 @@ Our application has five routes, as shown in the `running application homepage <
 
             raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-   .. step:: Create Your Delete Route
+   .. step:: Delete Route
 
     .. code-block:: python
 
