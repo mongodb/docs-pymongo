@@ -191,7 +191,7 @@ Migrate From Motor
    the {+driver-async+} API while Motor is still supported.
 
 The {+driver-async+} API functions similarly to the Motor library, but allows
-for improved latency and throughput due to directly using Python Asyncio instead
+for improved latency and throughput due to directly using Python asyncio instead
 of delegating work to a thread pool. In most cases, you can directly migrate
 existing Motor applications to {+driver-async+} by using ``AsyncMongoClient`` in
 place of ``MotorClient``, and changing the application's import statements to
@@ -291,5 +291,5 @@ see the `API documentation <{+api-root+}pymongo/asynchronous/index.html>`__.
 Additional Information
 ----------------------
 
-To learn more about asynchronous Python, see the `Python Asyncio documentation
+To learn more about asynchronous Python, see the `Python asyncio documentation
 <https://docs.python.org/3/library/asyncio.html>`__.
