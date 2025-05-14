@@ -70,7 +70,8 @@ Performance Benchmarks
 
 The following table shows the performance benchmarks for different tasks
 performed with the {+driver-async+} API and the Motor library. Each task was
-performed with 10 iterations of 1000 documents each.
+performed with 10 iterations of 1000 documents each. In most
+cases, the {+driver-async+} API results in improved performance over Motor.
 
 .. list-table::
    :header-rows: 1
@@ -82,7 +83,7 @@ performed with 10 iterations of 1000 documents each.
    
    * - ``TestFindManyAndEmptyCursor``
      - 74.074 MB/s
-     -  112.490 MB/s
+     - 112.490 MB/s
    
    * - ``TestFindManyAndEmptyCursor80Tasks``
      - 37.181 MB/s
@@ -215,17 +216,13 @@ the Compatibility guide.
 The following section shows the method signature changes that you must implement
 in your application when migrating from Motor to the {+driver-async+} API.
 
-.. warning::
-
-   The {+driver-async+} API does not support Tornado.
-
 Method Signature Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following Motor method signatures behave differently in the {+driver-async+} API:
 
 - ``AsyncMongoClient.__init__()`` does not accept an ``io_loop`` parameter.
-- ``AsyncCursor.each()`` does not exist in the {+driver-async+} api-root.
+- ``AsyncCursor.each()`` does not exist in the {+driver-async+} API.
 - ``MotorGridOut.stream_to_handler()`` does not exist in the {+driver-async+} API.
 - ``AsyncCursor.to_list(0)`` is not valid in the {+driver-async+} API. Use
   ``to_list(None)`` instead.
