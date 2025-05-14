@@ -1,0 +1,171 @@
+========================================================================
+Building a Scalable Newsletter Platform with Flask, MongoDB, and Celery
+========================================================================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+ 
+.. meta::
+   :keywords: flask, celery, integration, code example
+
+Overview
+--------
+
+In this tutorial, you can build a newsletter platform using Flask, MongoDB, and
+Celery. This application allows users to subscribe to newsletters, and
+administrators to manage and send batch emails asynchronously.
+
+Tutorial
+--------
+
+You can find the completed sample app for this tutorial in the :github:`Newsletter Platform with JavaScript, Flask, and MongoDB sample project </mercybassey/newsletter-javascript-flask-mongodb>` GitHub repository.
+
+Prerequisites
+~~~~~~~~~~~~~
+
+Ensure you have the following components installed and set up before you start
+this tutorial:
+
+- :ref:`MongoDB <pymongo-get-started-download-and-install>`: For data storage.
+- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__: As the message broker for Celery.
+- `Gmail <www.gmail.com>`__: For sending emails via SMTP.
+- `Python 3.8 or later <https://www.python.org/downloads/>`__
+
+Set-up
+~~~~~~
+
+
+.. procedure::
+   :style: connected
+
+   .. step:: Install the required Python packages.
+    
+      Run the following ``pip`` command in your terminal:
+
+      .. code-block:: bash
+
+         pip install Flask Flask-Mail pymongo celery
+
+   .. step:: Create directory structure.
+
+      We recommend structuring your application to separate concerns, which can
+      make the application modular and more maintainable.
+      
+      In your project directory, create the following directories and files:
+
+      .. code-block:: none
+
+         newsletter/
+         ├── app.py
+         ├── config.py
+         ├── routes.py
+         ├── tasks.py
+         ├── templates/
+         │   ├── admin.html
+         │   └── subscribe.html
+         ├── static/
+         └── styles.css
+
+Configure Your Application
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In ``config.py``, define the necessary configurations by adding the following code:
+
+.. code-block:: python
+
+   import os
+
+   class Config:
+       CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+       RESULT_BACKEND = 'mongodb://localhost:27017/celery_results'
+       MAIL_SERVER = 'smtp.gmail.com'
+       MAIL_PORT = 587
+       MAIL_USE_TLS = True
+       MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+       MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+       MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
+       ALLOWED_IPS = ['127.0.0.1']
+       MONGO_URI = 'mongodb://localhost:27017/newsletter'
+
+Ensure that your Gmail credentials (``MAIL_USERNAME`` and ``MAIL_PASSWORD``) and
+default sender email (``MAIL_DEFAULT_SENDER``) are set in your environment variables.
+
+Initialize Flask, MongoDB, and Celery
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In ``app.py``, initialize Flask, MongoDB, and Celery by adding the following code:
+
+.. code-block:: python
+
+   from flask import Flask
+   from flask_mail import Mail
+   from pymongo import MongoClient
+   from celery import Celery
+   from config import Config
+
+   app = Flask(__name__)
+   app.config.from_object(Config)
+
+   mail = Mail(app)
+   client = MongoClient(app.config['MONGO_URI'])
+   db = client.get_database()
+
+   celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+   celery.conf.update(app.config)
+
+   from routes import *
+   from tasks import *
+
+Define Your Routes
+~~~~~~~~~~~~~~~~~~
+
+In ``routes.py``, define the necessary routes by adding the following code:
+
+.. code-block:: python
+
+   from flask import render_template, request, jsonify, abort
+   from app import app, db
+   from tasks import send_emails
+
+   @app.before_request
+   def limit_remote_addr():
+       if 'X-Forwarded-For' in request.headers:
+           remote_addr = request.headers['X-Forwarded-For'].split(',')[0]
+       else:
+           remote_addr = request.remote_addr
+
+       if request.endpoint == 'admin' and remote_addr not in app.config['ALLOWED_IPS']:
+           abort(403)
+
+   @app.route('/')
+   def home():
+       return render_template('subscribe.html')
+
+   @app.route('/admin')
+   def admin():
+       return render_template('admin.html')
+
+   @app.route('/subscribe', methods=['POST'])
+   def subscribe():
+       email = request.form['email']
+       if db.users.find_one({'email': email}):
+
+After you complete these steps, you have a working application that
+uses MongoDB, Flask and Celery to manage a newsletter system.
+
+More Resources
+--------------
+
+For more information about Flask and Celery integration, see the following
+resources:
+
+- `Flask <https://flask.palletsprojects.com>`__
+- `Flask Mail <https://pypi.org/project/Flask-Mail/#files>`__
+- `Celery <https://docs.celeryq.dev/en/stable/>`__
