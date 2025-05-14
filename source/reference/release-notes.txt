@@ -47,7 +47,8 @@ What's New in 4.13
 The {+driver-short+} v4.13 release includes the following new features:
 
 - The {+driver-async+} API is generally available. To learn how to migrate
-  to the {+driver-async+} API, see the :ref:`pymongo-async-migration` guide.
+  to the {+driver-async+} API from the {+driver-short+} driver or the Motor
+  library, see the :ref:`pymongo-async-migration` guide.
 - Fixes a bug where ``WriteConcern()`` could not be evaluated when using ``w="majority"``.
 
 To see a full list of resolved issues in this release, see the `Jira release

@@ -30,12 +30,14 @@ Motivation
 ~~~~~~~~~~
 
 The {+driver-async+} API is designed to be a replacement for the Motor
-library. Motor was created to provide support for Tornado, with asyncio support
-added later. Because of this, Motor provides full asyncio and Tornado support,
+library. Motor was created to provide support for Tornado, with ``asyncio`` support
+added later. Because of this, Motor provides full ``asyncio`` and Tornado support,
 but still relies on a thread pool to perform network operations. In some cases,
 this might lead to performance degradation when using the Motor library. To
-address this issue, the {+driver-async+} API implements asyncio support directly
-into {+driver-short+}.
+address this issue, the {+driver-async+} API implements ``asyncio`` support directly
+into {+driver-short+}. In most cases, the {+driver-async+} API results in
+improved performance over Motor. To see performance benchmarks, see the
+:ref:`pymongo-async-benchmarks` section.
 
 Synchronous Versus Asynchronous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,6 +66,8 @@ to your application or use case:
   writing data
 
 - Your application relies on other asynchronous libraries or frameworks, such as FastAPI
+
+.. _pymongo-async-benchmarks:
 
 Performance Benchmarks
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -186,12 +190,11 @@ Migrate From Motor
 
 .. warning:: Motor Deprecation
    
-   Motor will be deprecated one year after the **production release** of the
-   {+driver-async+} API. We strongly recommend that Motor users migrate to
+   Motor will be deprecated on May 14th, 2026. We strongly recommend that Motor users migrate to
    the {+driver-async+} API while Motor is still supported.
 
 The {+driver-async+} API functions similarly to the Motor library, but allows
-for improved latency and throughput due to directly using Python asyncio instead
+for improved latency and throughput due to directly using Python ``asyncio`` instead
 of delegating work to a thread pool. In most cases, you can directly migrate
 existing Motor applications to {+driver-async+} by using ``AsyncMongoClient`` in
 place of ``MotorClient``, and changing the application's import statements to
