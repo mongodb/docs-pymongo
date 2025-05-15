@@ -255,6 +255,14 @@ To test your application, run the following ``flask`` command in the terminal:
 
          db.deliveries.find().pretty()
 
+Next Steps
+~~~~~~~~~~
+
+This application demonstrates how to handle asynchronous tasks efficiently,
+manage subscriber data, and send batch emails. You can further enhance this
+platform by integrating analytics, customizing email templates, and implementing
+automated responses.
+
 More Resources
 --------------
 
