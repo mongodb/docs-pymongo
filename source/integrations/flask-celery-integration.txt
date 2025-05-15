@@ -228,7 +228,7 @@ To test your application, run the following ``flask`` command in the terminal:
 
       Enter the newsletter details and click :guilabel:`Send`.
 
-      Your Celery worker log should display an ``Email sent`` log entry, as
+      Your Celery worker log will display an ``Email sent`` log entry, as
       shown in the following image:
 
       .. code-block:: bash
