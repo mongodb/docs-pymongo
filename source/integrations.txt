@@ -20,7 +20,7 @@ Third-Party Integrations and Tools
 
 .. toctree::
 
-   FastAPI Integration Tutorial </integrations/fastapi-integration>
+   Tutorial: Flask and Celery Integration </integrations/flask-celery-integration>
 
 Overview
 --------

@@ -1,6 +1,6 @@
-========================================================================
-Building a Scalable Newsletter Platform with Flask, MongoDB, and Celery
-========================================================================
+======================================
+Tutorial: Flask and Celery Integration
+======================================
 
 .. contents:: On this page
    :local:
@@ -33,21 +33,28 @@ Prerequisites
 Ensure you have the following components installed and set up before you start
 this tutorial:
 
-- :ref:`MongoDB <pymongo-get-started-download-and-install>`: For data storage.
-- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__: As the message broker for Celery.
-- `Gmail <www.gmail.com>`__: For sending emails via SMTP.
+- :ref:`MongoDB <pymongo-get-started-create-deployment>`
+- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__ (message broker for Celery)
+- `Gmail <www.gmail.com>`__ (to use as an SMTP)
 - `Python 3.8 or later <https://www.python.org/downloads/>`__
 
 Set-up
 ~~~~~~
 
-
 .. procedure::
    :style: connected
 
    .. step:: Install the required Python packages.
+
+      Your application depends on the following libraries:
+
+      - `Flask <https://flask.palletsprojects.com/en/stable/>`__ for handling the web server and routing
+      - `Flask Mail <https://pypi.org/project/Flask-Mail/>`__ for sending emails from your application
+      - :ref:`{+driver-long+} <pymongo-get-started-download-and-install>`
+      - `Celery <https://docs.celeryq.dev/en/stable/>`__ to manage tasks, such
+        as sending batch emails
     
-      Run the following ``pip`` command in your terminal:
+      Run the following ``pip`` command in your terminal to install the dependencies:
 
       .. code-block:: bash
 
@@ -58,7 +65,7 @@ Set-up
       We recommend structuring your application to separate concerns, which can
       make the application modular and more maintainable.
       
-      In your project directory, create the following directories and files:
+      In your project directory, create the following structure:
 
       .. code-block:: none
 
@@ -76,7 +83,8 @@ Set-up
 Configure Your Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In ``config.py``, define the necessary configurations by adding the following code:
+Define the necessary configurations by adding the following code to your
+``config.py`` file:
 
 .. code-block:: python
 
@@ -100,7 +108,8 @@ default sender email (``MAIL_DEFAULT_SENDER``) are set in your environment varia
 Initialize Flask, MongoDB, and Celery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In ``app.py``, initialize Flask, MongoDB, and Celery by adding the following code:
+Initialize Flask, MongoDB, and Celery by adding the following code to your
+``app.py`` file:
 
 .. code-block:: python
 
@@ -123,10 +132,17 @@ In ``app.py``, initialize Flask, MongoDB, and Celery by adding the following cod
    from routes import *
    from tasks import *
 
+Ensure that your connection string (``MONGOD_URI``) and broker url
+(``CELERY_BROKER_URL``) are set in your environment variables. For more in
+formation see the :ref:`Create a Connection String
+<pymongo-get-started-connection-string>` section of this guide and the `Broker Settings
+<https://docs.celeryq.dev/en/stable/userguide/configuration.html#broker-settings>`__
+section of the Celery documentation.
+
 Define Your Routes
 ~~~~~~~~~~~~~~~~~~
 
-In ``routes.py``, define the necessary routes by adding the following code:
+Define the necessary routes by adding the following code to your ``routes.py`` file:
 
 .. code-block:: python
 
@@ -157,15 +173,97 @@ In ``routes.py``, define the necessary routes by adding the following code:
        email = request.form['email']
        if db.users.find_one({'email': email}):
 
-After you complete these steps, you have a working application that
-uses MongoDB, Flask and Celery to manage a newsletter system.
+After you complete these steps, you will have a working application that
+uses MongoDB, Flask and Celery to manage a newsletter platform.
+
+Testing the Platform
+~~~~~~~~~~~~~~~~~~~~
+
+To test your application, run the following ``flask`` command in the terminal:
+
+.. procedure::
+   :style: connected
+
+   .. step::  Start Your Application
+
+      .. code-block:: bash
+
+         flask --app app run
+
+      In another terminal, start the celery worker:
+
+      .. code-block:: bash
+
+         celery -A app.celery worker --loglevel=info
+
+   .. step::  Create a Subscriber
+
+      Navigate to ``localhost:5000`` in your browser to open the
+      :guilabel:`Subscribe to our Newsletter` page. The following image shows
+      the subscriber webpage: 
+
+      .. image:: /includes/integrations/celery-subscriber-page.png
+         :alt: Screenshot of browser and subscriber page
+
+      Enter the subscriber information and click :guilabel:`Subscribe`.
+
+      To confirm that you created a new subscriber, run the following code in
+      your terminal to open a MongoDB Shell instance and view your collections:
+
+      .. code-block:: shell
+
+         mongosh
+         show dbs
+         use newsletter
+         show collections
+
+   .. step::  Dispatch a Newsletter
+
+      Navigate to ``localhost:5000/admin`` in your browser to open the
+      :guilabel:`Send Newsletter` page. The following image shows the admin
+      webpage:
+
+      .. image:: /includes/integrations/celery-admin-page.png
+         :alt: Screenshot of browser and admin
+
+      Enter the newsletter details and click :guilabel:`Send`.
+
+      Your Celery worker log should display an ``Email sent`` log entry, as
+      shown in the following image:
+
+      .. code-block:: bash
+
+         [2024-06-06 13:34:37,304: WARNING/ForkPoolWorker-4] Email sent
+         [2024-06-06 13:34:37,305: INFO/ForkPoolWorker-4] Task tasks.send_emails[b119bb9e-b2ef-4c85-b048-ca96e0e60ae1] succeeded in 17.155154566993588s: {'result': 'All emails sent'}
+
+      You can also see your newsletter deliverable by running the following
+      command in your MongoDB Shell to review your collections: 
+
+      .. code-block:: shell
+
+         newsletter> show collections
+         deliveries
+         subscribers
+         newsletter> 
+
+   .. step::  Review Your Sent Newsletter
+
+      Run the following commands in your MongoDB Shell to your previously sent
+      newsletters, also called ``deliveries``:
+
+      .. code-block:: shell
+
+         db.deliveries.find().pretty()
 
 More Resources
 --------------
 
-For more information about Flask and Celery integration, see the following
+For more information about to components used in this tutorial, see the following
 resources:
 
 - `Flask <https://flask.palletsprojects.com>`__
 - `Flask Mail <https://pypi.org/project/Flask-Mail/#files>`__
 - `Celery <https://docs.celeryq.dev/en/stable/>`__
+- :mdb-shell:`MongoDB Shell <>`
+
+For support or to contribute to the MongoDB Community, see the `MongoDB Developer Community <https://www.mongodb.com/community/>`__.
