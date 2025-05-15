@@ -1,0 +1,191 @@
+.. _pymongo-restful-api-flask:
+.. original URL: https://www.mongodb.com/developer/languages/python/flask-python-mongodb/
+
+================================
+Tutorial: Restful API with Flask
+================================
+
+.. contents:: On this page
+   :local:
+   :backlinks: none
+   :depth: 2
+   :class: singlecol
+
+.. facet::
+   :name: genre
+   :values: tutorial
+
+.. meta::
+   :keywords: flask, rest, restful, api, integration, code example
+
+Overview
+--------
+
+In this tutorial, you can create a RESTful API using Flask and the
+{+driver-short+} driver. This API will manage a collection of cocktail recipes,
+demonstrating key concepts such as data transformation, validation, pagination,
+and error handling.
+
+Prerequisites
+-------------
+
+Ensure you have the following components installed and set up before you start
+this tutorial:
+
+- :ref:`{+driver-short+} driver <pymongo-get-started-download-and-install>`
+- :ref:`MongoDB Atlas cluster <pymongo-get-started-create-deployment>`
+- `Python 3.8 or later <https://www.python.org/downloads/>`__
+
+Tutorial 
+--------
+
+You can find the completed sample app for this tutorial in the :github:`Rewrite
+it in Rust - Flask Cocktail API <https://github.com/mongodb-developer/rewrite-it-in-rust>` GitHub
+repository.
+
+Set-up
+~~~~~~
+
+Create a new directory for your project and set up a virtual environment:
+
+.. code-block:: bash
+
+   mkdir flask_mongo_api
+   cd flask_mongo_api
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+
+Install the necessary dependencies:
+
+.. code-block:: bash
+
+   pip install Flask pymongo pydantic
+
+Create a file named ``app.py`` and add the following code:
+
+.. code-block:: python
+
+   from flask import Flask, jsonify, request
+   from pymongo import MongoClient
+   from pydantic import BaseModel, ValidationError
+   from typing import List, Optional
+
+   app = Flask(__name__)
+
+   # MongoDB connection
+   client = MongoClient("your_connection_string")
+   db = client['cocktail_recipes']
+   collection = db['recipes']
+
+   class Recipe(BaseModel):
+       name: str
+       ingredients: List[str]
+       instructions: str
+       category: Optional[str] = None
+
+   @app.route('/recipes', methods=['GET'])
+   def get_recipes():
+       recipes = list(collection.find())
+       for recipe in recipes:
+           recipe['_id'] = str(recipe['_id'])
+       return jsonify(recipes)
+
+   @app.route('/recipes', methods=['POST'])
+   def add_recipe():
+       try:
+           recipe_data = Recipe.parse_obj(request.json)
+           collection.insert_one(recipe_data.dict())
+           return jsonify({"message": "Recipe added successfully"}), 201
+       except ValidationError as e:
+           return jsonify(e.errors()), 400
+
+   if __name__ == '__main__':
+       app.run(debug=True)
+
+Step 2: Run Your Application
+----------------------------
+
+Execute the following command to start your Flask application:
+
+.. code-block:: bash
+
+   python app.py
+
+Your API will be accessible at http://127.0.0.1:5000.
+
+Step 3: Testing the API
+-----------------------
+
+You can test your API using tools like Postman or curl.
+
+- **GET /recipes**: Fetch all recipes
+
+  .. code-block:: bash
+
+     curl http://127.0.0.1:5000/recipes
+
+- **POST /recipes**: Add a new recipe
+
+  .. code-block:: bash
+
+     curl -X POST -H "Content-Type: application/json" \
+       -d '{"name": "Mojito", "ingredients": ["Rum", "Mint", "Sugar", "Lime"], "instructions": "Muddle mint leaves, add rum, sugar, and lime juice. Serve over ice."}' \
+       http://127.0.0.1:5000/recipes
+
+Step 4: Implementing Pagination
+-------------------------------
+
+To handle large datasets efficiently, implement pagination in your GET endpoint:
+
+.. code-block:: python
+
+   @app.route('/recipes', methods=['GET'])
+   def get_recipes():
+       page = int(request.args.get('page', 1))
+       per_page = int(request.args.get('per_page', 10))
+       skip = (page - 1) * per_page
+       recipes = list(collection.find().skip(skip).limit(per_page))
+       for recipe in recipes:
+           recipe['_id'] = str(recipe['_id'])
+       return jsonify(recipes)
+
+Access paginated results by appending query parameters:
+
+.. code-block:: bash
+
+   curl "http://127.0.0.1:5000/recipes?page=2&per_page=5"
+
+Step 5: Error Handling
+----------------------
+
+Enhance your application with custom error handling:
+
+.. code-block:: python
+
+   @app.errorhandler(400)
+   def bad_request(error):
+       return jsonify({"error": "Bad Request", "message": error.description}), 400
+
+   @app.errorhandler(404)
+   def not_found(error):
+       return jsonify({"error": "Not Found", "message": error.description}), 404
+
+   @app.errorhandler(500)
+   def internal_error(error):
+       return jsonify({"error": "Internal Server Error", "message": error.description}), 500
+
+These handlers provide meaningful error messages and appropriate HTTP status codes.
+
+You've now built a RESTful API using Flask and MongoDB, incorporating essential features like data validation, pagination, and error handling. This foundation can be expanded with additional functionalities such as authentication, advanced querying, and deployment strategies.
+
+For further reading and advanced topics, explore the `MongoDB Developer Center <https://www.mongodb.com/developer>`_ and the `Flask Documentation <https://flask.palletsprojects.com/>`_.
+
+More resources
+--------------
+
+If you're new to these technologies, consider reviewing the following resources:
+
+- Think Python
+- Python & MongoDB Quickstart Series
+- Flask Tutorial
+- Pydantic Documentation
