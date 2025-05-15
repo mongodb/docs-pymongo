@@ -1,4 +1,4 @@
-.. _pymongo-fastapi:
+.. _pymongo-flask-celery:
 .. original URL: https://www.mongodb.com/developer/products/mongodb/python-flask-celery-newsletter/
 
 ======================================
