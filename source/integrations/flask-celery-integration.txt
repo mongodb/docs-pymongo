@@ -22,7 +22,7 @@ Overview
 --------
 
 In this tutorial, you can learn how to build a newsletter platform using
-MongoDB, Celery and Flask. This application allows users to subscribe to
+MongoDB, Celery, and Flask. This application allows users to subscribe to
 newsletters, and administrators to manage and send batch emails asynchronously.
 
 Celery
@@ -148,7 +148,7 @@ Define the necessary configurations by adding the following code to your
       MAIL_SERVER = 'smtp.gmail.com'
       MAIL_PORT = 587
       MAIL_USE_TLS = True
-      MAIL_USERNAME = '<username>' # Your email address without the domain, i.e. without '@gmail.com'
+      MAIL_USERNAME = '<username>' # Your email address without the domain, that is without '@gmail.com'
       MAIL_PASSWORD = '<app password>'
       ALLOWED_IPS = ['127.0.0.1']
       MONGO_URI = '<connection-string>'
@@ -206,7 +206,7 @@ and configures your Celery task queue.
 Define Your Routes
 ~~~~~~~~~~~~~~~~~~
 
-Define the root, admin, subscribe and send-newsletter routes by adding the following code to your ``routes.py`` file:
+Define the root, admin, subscribe, and send-newsletter routes by adding the following code to your ``routes.py`` file:
 
 .. code-block:: python
 
