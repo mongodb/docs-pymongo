@@ -2,7 +2,7 @@
 .. original URL: https://www.mongodb.com/developer/products/mongodb/python-flask-celery-newsletter/
 
 ======================================
-Tutorial: Flask and Celery Integration
+Tutorial: Celery and Flask Integration
 ======================================
 
 .. contents:: On this page
@@ -21,9 +21,25 @@ Tutorial: Flask and Celery Integration
 Overview
 --------
 
-In this tutorial, you can build a newsletter platform using Flask, MongoDB, and
-Celery. This application allows users to subscribe to newsletters, and
-administrators to manage and send batch emails asynchronously.
+In this tutorial, you can learn how to build a newsletter platform using
+MongoDB, Celery and Flask. This application allows users to subscribe to
+newsletters, and administrators to manage and send batch emails asynchronously.
+
+Celery
+~~~~~~
+
+Celery is an open-source distributed task queue that makes handling large
+volumes of messages efficiently. It supports asynchronous processing and task
+scheduling. For more information, see the `Celery webpage
+<https://docs.celeryq.dev/en/main/index.html>`__.
+
+Flask
+~~~~~
+
+Flask is a lightweight web application framework with built-in configuration and
+convention defaults that provide consistency to developers across projects. For
+more information, see the `Flask webpage
+<https://flask.palletsprojects.com/en/stable/>`__. 
 
 Tutorial
 --------
