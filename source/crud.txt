@@ -33,6 +33,10 @@ CRUD Operations
    Configure CRUD Operations </crud/configure>
    Geospatial Queries <crud/geo>
 
+.. dismissible-skills-card::
+   :skill: CRUD Operations
+   :url: https://learn.mongodb.com/courses/crud-operations-in-mongodb
+
 Overview
 --------
 
