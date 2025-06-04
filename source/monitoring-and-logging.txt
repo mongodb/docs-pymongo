@@ -3,6 +3,10 @@
 Logging and Monitoring 
 ======================
 
+.. dismissible-skills-card::
+   :skill: Monitoring and Logging
+   :url: https://learn.mongodb.com/courses/crud-operations-in-mongodb
+
 .. facet::
    :name: programming_language
    :values: python
