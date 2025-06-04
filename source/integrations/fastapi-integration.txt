@@ -139,7 +139,7 @@ Create Your Database Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
 Your application has three models, the ``StudentModel``, the
-``UpdateStudentModel``, and the ``StudentCollection``. All of these models are
+``UpdateStudentModel``, and the ``StudentCollection``. These models are
 defined in the ``app.py`` file.
 
 .. procedure::
