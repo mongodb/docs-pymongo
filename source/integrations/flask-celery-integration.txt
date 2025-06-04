@@ -16,19 +16,19 @@ Tutorial: Celery and Flask Integration
    :values: tutorial
  
 .. meta::
-   :keywords: flask, celery, integration, code example
+   :keywords: code example, batch, framework
 
 Overview
 --------
 
-In this tutorial, you can learn how to build a newsletter platform using
-MongoDB, Celery, and Flask. This application allows users to subscribe to
+In this tutorial, you can learn how to use MongoDB, Celery, and Flask
+to build a newsletter platform. This application allows users to subscribe to
 newsletters, and administrators to manage and send batch emails asynchronously.
 
 Celery
 ~~~~~~
 
-Celery is an open-source distributed task queue that makes handling large
+Celery is an open-source distributed task queue that handles large
 volumes of messages efficiently. It supports asynchronous processing and task
 scheduling. For more information, see the `Celery webpage
 <https://docs.celeryq.dev/en/main/index.html>`__.
@@ -51,40 +51,45 @@ This tutorial creates a modified version of the sample application in the
 Prerequisites
 ~~~~~~~~~~~~~
 
-Ensure you have the following components installed and set up before you start
+Ensure that you have the following components installed and set up before you start
 this tutorial:
 
-- A MongoDB Cluster. We recommend setting up a cluster using Atlas. See the
+- A MongoDB cluster. We recommend that you use Atlas. To learn how
+  to create an Atlas cluster, see the
   :atlas:`Get Started with Atlas </getting-started?tck=docs_driver_python>` page
   in the Atlas documentation.
-- A database in your cluster called ``newsletter``. For more information, see
+- A database names ``newsletter`` in your cluster. For more information, see
   the :atlas:`Create a Database </atlas-ui/databases/#create-a-database>` page
   in the Atlas guide.
-- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__ (message broker for Celery)
-- `Gmail <www.gmail.com>`__ (to use as an SMTP)
+- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__ to use as a message broker for Celery.
+- `Gmail <www.gmail.com>`__ to use as an SMTP server. For more information about
+  SMTP servers, see the `Simple Mail Transfer Protocol
+  <https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol>`__ wikipedia page.
 - `Python 3.8 or later <https://www.python.org/downloads/>`__
 
-Set-up
-~~~~~~
+Setup
+~~~~~
 
 .. procedure::
    :style: connected
 
-   .. step:: Create your project directory and structure.
+   .. step:: Create your project directory and structure
       
-      The ``newsletter`` directory your the project directory for this tutorial. You can open 
+      The name of your project directory is ``newsletter``. Create your directory and navigate to it by running the following commands in terminal:   
 
       .. code-block:: bash
 
          mkdir newsletter
          cd newsletter
+      
+      The following files will hold the code for your application:
 
-      - ``app.py``: The main entry point for your Flask application.
+      - ``app.py``: The main entry point for your Flask application
       - ``config.py``: Configuration settings for your application, including
         MongoDB connection details, mail server configuration, Celery broker
-        connection, and any other environment-specific variables.   
-      - ``tasks.py``: Defines background tasks to send emails asynchronously. 
-      - ``routes.py``: Define the routes (URLs) that your application responds to.
+        connection, and any other environment-specific variables
+      - ``tasks.py``: Defines background tasks to send emails asynchronously
+      - ``routes.py``: Defines the routes (URLs) that your application responds to
 
       We recommend structuring your application to separate concerns, which can
       make the application modular and more maintainable. 
@@ -104,7 +109,7 @@ Set-up
          └── static/
              └── styles.css
 
-   .. step:: Install the required Python packages.
+   .. step:: Install the required Python packages
 
       Your application depends on the following libraries:
 
@@ -114,12 +119,12 @@ Set-up
       - `Celery <https://docs.celeryq.dev/en/stable/>`__ to manage tasks, such
         as sending batch emails
 
-      .. tip:: Use a Virtual environment
+      .. tip:: Use a Virtual Environment
 
-         Installing your Python dependencies in a `virtualenv
-         <https://docs.python.org/3/tutorial/venv.html>`__ allows you to install
-         versions of your libraries for individual projects. Before running any
-         ``pip`` commands, ensure your ``virtualenv`` is active.  
+         Python `virtual environments
+         <https://docs.python.org/3/tutorial/venv.html>`__ allow you to install
+         different versions of libraries for different projects. Before running
+         any ``pip`` commands, ensure that your ``virtualenv`` is active. 
     
       Run the following ``pip`` command in your terminal to install the dependencies:
 
@@ -134,7 +139,7 @@ The ``config.py`` file contains the settings and credentials to perform the
 following actions:
 
 - Connect Celery to RabbitMQ as its message broker
-- Configure Flask-Mail to use Gmail as its SMPT server
+- Configure Flask-Mail to use Gmail as its SMTP server
 - Connect your application to your MongoDB server
 
 Define the necessary configurations by adding the following code to your
@@ -148,10 +153,10 @@ Define the necessary configurations by adding the following code to your
       MAIL_SERVER = 'smtp.gmail.com'
       MAIL_PORT = 587
       MAIL_USE_TLS = True
-      MAIL_USERNAME = '<username>' # Your email address without the domain, that is without '@gmail.com'
+      MAIL_USERNAME = '<username>' # Your email address without '@gmail.com'
       MAIL_PASSWORD = '<app password>'
       ALLOWED_IPS = ['127.0.0.1']
-      MONGO_URI = '<connection-string>'
+      MONGO_URI = '<mongodb connection string>'
       CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
       RESULT_BACKEND = MONGO_URI + '/celery_results'
 
@@ -161,12 +166,12 @@ you generate an app password to use, rather than using your primary password.
 For more information, see the `App Password settings
 <https://myaccount.google.com/apppasswords>`__ in your Google Account.
  
-You must also create a connection string (``MONGO_URI``) are set in your
-environment variables. For more information see the :ref:`Create a Connection
-String <pymongo-get-started-connection-string>` section of this guide
+You must also create a connection string to set into the ``MONGO_URI``
+environment variable. For more information see the :ref:`Create a Connection
+String <pymongo-get-started-connection-string>` section of this guide.
 
-The provided broker url (``CELERY_BROKER_URL``) using RabbitMQ as the broker,
-but you can customize this url to support other implementations. For more
+The provided Celery broker URL (``CELERY_BROKER_URL``) specifies RabbitMQ as its broker,
+but you can customize this URL to support other implementations. For more
 information, see the `Broker Settings
 <https://docs.celeryq.dev/en/stable/userguide/configuration.html#broker-settings>`__
 section of the Celery documentation.
@@ -200,13 +205,13 @@ Initialize Flask, MongoDB, and Celery by adding the following code to your
    if __name__ == '__main__':
       app.run(debug=True)
 
-This opens a connection to the ``newsletter`` database in your MongoDB cluster,
+This opens a connection to the ``newsletter`` database in your MongoDB cluster
 and configures your Celery task queue.
 
 Define Your Routes
 ~~~~~~~~~~~~~~~~~~
 
-Define the root, admin, subscribe, and send-newsletter routes by adding the following code to your ``routes.py`` file:
+Define the ``root``, ``admin``, ``subscribe``, and ``send-newsletter`` routes by adding the following code to your ``routes.py`` file:
 
 .. code-block:: python
 
@@ -270,9 +275,15 @@ application in this file.
 Create Your Pages 
 ~~~~~~~~~~~~~~~~~
 
-In the ``templates`` directory you can build your user interface.
+You can build your user interface in the ``templates`` directory.
 
-Copy the following code into your ``subscribe.html`` file:
+Because this application uses asynchronous messages, the scripts in the
+following files use `Fetch API calls
+<https://en.wikipedia.org/wiki/XMLHttpRequest#Fetch_alternative>`__. They also
+handle timeouts and errors.  
+
+Copy the following code into your ``subscribe.html`` file to create your
+:guilabel:`Subscribe to Newsletter` page.
 
 .. code-block:: html 
 
@@ -330,10 +341,11 @@ Copy the following code into your ``subscribe.html`` file:
    </body>
    </html>
 
-Because this application uses asynchronous messages, the script in this file
-uses Fetch API calls. This script also handles timeouts and errors.
+The script for the admin page displays an alert to the user which depends on the
+success of the ``send_newsletter`` call. 
 
-Copy the following code into your ``admin.html`` file:
+Copy the following code into your ``admin.html`` file to create your
+:guilabel:`Send Newsletter` page:
 
 .. code-block:: html 
 
@@ -384,10 +396,6 @@ Copy the following code into your ``admin.html`` file:
       </script>
    </body>
    </html>
-
-The script in this file also used Fetch for asynchronous calls. It also displays
-an alert to the user which depends on the success of the ``send_newsletter``
-call.
 
 Format Your Pages
 ~~~~~~~~~~~~~~~~~
@@ -480,22 +488,20 @@ Testing the Platform
 ~~~~~~~~~~~~~~~~~~~~
 
 After you complete the previous steps, you have a working application that
-uses MongoDB, Flask and Celery to manage a newsletter platform.
+uses MongoDB, Flask, and Celery to manage a newsletter platform.
 
 You can use the following steps to test your application:
 
 .. procedure::
    :style: connected
 
-   .. step::  Start your background services.
+   .. step::  Start your background services
 
-      Start your RabbitMQ node by running the following code:
+      Start your RabbitMQ node. For instructions, see the `RabbitMQ
+      documentation <https://www.rabbitmq.com/docs/platforms>`__ for your
+      operating system.
 
-      .. code-block:: bash
-
-         brew services start rabbitmq
-
-   .. step::  Start your application.
+   .. step::  Start your application
 
       Use the following code to start your application:
 
@@ -509,7 +515,7 @@ You can use the following steps to test your application:
 
          celery -A app.celery worker --loglevel=info
 
-   .. step::  Create a subscriber.
+   .. step::  Create a subscriber
 
       Navigate to ``localhost:5000`` in your browser to open the
       :guilabel:`Subscribe to our Newsletter` page.
@@ -520,14 +526,14 @@ You can use the following steps to test your application:
       <https://account.mongodb.com/account/login>`__ and navigate to the
       ``users`` collection in your ``newletter`` database. 
 
-   .. step::  Dispatch a newsletter.
+   .. step::  Dispatch a newsletter
 
       Navigate to ``localhost:5000/admin`` in your browser to open the
       :guilabel:`Send Newsletter` page. Enter the newsletter details and click
       :guilabel:`Send`. 
 
-      Your Celery worker log will display an ``Email sent`` log entry, as
-      shown in the following image:
+      Your Celery worker log will display an ``Email sent`` log entry similar to
+      the following image:
 
       .. code-block:: bash
 
@@ -536,13 +542,13 @@ You can use the following steps to test your application:
          [2025-05-27 10:04:52,046: WARNING/ForkPoolWorker-7] Sending email to <subscriber_email>
          [2025-05-27 10:04:53,474: WARNING/ForkPoolWorker-7] Email sent
 
-      You can also confirm that you sent an email navigating to the
-      ``deliveries`` collection in your ``newletter`` database. 
+      You can also confirm that you sent an email by navigating to the
+      ``deliveries`` collection in your ``newsletter`` database. 
 
 Next Steps
 ~~~~~~~~~~
 
-This application demonstrates how to integrate with the Celery tasks task queue to
+This application demonstrates how to integrate with the Celery task queue to
 manage subscriber data, and send batch emails. You can further enhance this
 platform by integrating analytics, customizing email templates, and implementing
 automated responses.
@@ -550,12 +556,12 @@ automated responses.
 More Resources
 --------------
 
-For more information about to components used in this tutorial, see the following
+For more information about the components used in this tutorial, see the following
 resources:
 
 - `Flask <https://flask.palletsprojects.com>`__
 - `Flask Mail <https://pypi.org/project/Flask-Mail/#files>`__
 - `Celery <https://docs.celeryq.dev/en/stable/>`__
-- :mdb-shell:`MongoDB Shell <>`
+- `RabbitMQ <https://www.rabbitmq.com/docs/download>`__
 
-For support or to contribute to the MongoDB Community, see the `MongoDB Developer Community <https://www.mongodb.com/community/>`__.
+To find support or to contribute to the MongoDB community, see the `MongoDB Developer Community <https://www.mongodb.com/community/>`__ page.
