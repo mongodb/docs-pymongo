@@ -67,8 +67,9 @@ authenticate to various platforms.
 
 .. note:: 
 
-   Python's Standard Library supports asynchronous HTTP requests.
-   All OIDC requests from {+driver-short+} are synchronous and will not block the ``asyncio`` loop.
+   Because Python's Standard Library doesn't support asynchronous HTTP requests,
+   all OIDC requests from {+driver-short+} are synchronous. As of {+driver-short+}
+   v4.14, synchronous OIDC requests do not block the ``asyncio`` loop.
 
 .. _pymongo-mongodb-oidc-azure-imds:
 
