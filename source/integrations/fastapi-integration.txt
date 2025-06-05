@@ -289,7 +289,7 @@ with your data:
    * - ``DELETE /students/{id}``
      - Delete a student
 
-All of these routes are defined in the ``app.py`` file.
+These routes are defined in the ``app.py`` file.
 
 .. procedure::
    :style: connected
