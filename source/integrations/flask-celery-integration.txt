@@ -58,13 +58,13 @@ this tutorial:
   to create an Atlas cluster, see the
   :atlas:`Get Started with Atlas </getting-started?tck=docs_driver_python>` page
   in the Atlas documentation.
-- A database names ``newsletter`` in your cluster. For more information, see
+- A database named ``newsletter`` in your cluster. For more information, see
   the :atlas:`Create a Database </atlas-ui/databases/#create-a-database>` page
   in the Atlas guide.
 - `RabbitMQ <https://www.rabbitmq.com/docs/download>`__ to use as a message broker for Celery.
 - `Gmail <www.gmail.com>`__ to use as an SMTP server. For more information about
-  SMTP servers, see the `Simple Mail Transfer Protocol
-  <https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol>`__ wikipedia page.
+  SMTP servers, see the :wikipedia:`Simple Mail Transfer Protocol
+  <Simple_Mail_Transfer_Protocol>` Wikipedia page. 
 - `Python 3.8 or later <https://www.python.org/downloads/>`__
 
 Setup
@@ -278,8 +278,7 @@ Create Your Pages
 You can build your user interface in the ``templates`` directory.
 
 Because this application uses asynchronous messages, the scripts in the
-following files use `Fetch API calls
-<https://en.wikipedia.org/wiki/XMLHttpRequest#Fetch_alternative>`__. They also
+following files use :wikipedia:`Fetch API calls <XMLHttpRequest#Fetch_alternative>`. They also
 handle timeouts and errors.  
 
 Copy the following code into your ``subscribe.html`` file to create your
@@ -341,7 +340,7 @@ Copy the following code into your ``subscribe.html`` file to create your
    </body>
    </html>
 
-The script for the admin page displays an alert to the user which depends on the
+The script for the admin page displays an alert to the user that depends on the
 success of the ``send_newsletter`` call. 
 
 Copy the following code into your ``admin.html`` file to create your
