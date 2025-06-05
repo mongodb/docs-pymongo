@@ -52,7 +52,7 @@ Install dependencies, connect to MongoDB and start your FastAPI server.
 .. procedure::
    :style: connected
 
-   .. step::  Clone the example code example.
+   .. step::  Clone the example code example
 
       Run the following command in your terminal to clone the code from the
       :github:`mongodb-with-fastapi </mongodb-developer/mongodb-with-fastapi>`
@@ -62,7 +62,7 @@ Install dependencies, connect to MongoDB and start your FastAPI server.
 
          git clone git@github.com:mongodb-developer/mongodb-with-fastapi.git 
 
-   .. step::  Install the required dependencies. 
+   .. step::  Install the required dependencies
 
       .. tip:: Use a Virtual environment
 
@@ -80,7 +80,7 @@ Install dependencies, connect to MongoDB and start your FastAPI server.
 
        It might take a few moments to download and install your dependencies.
 
-   .. step::  Retrieve your connection string.
+   .. step::  Retrieve your connection string
 
       Follow the :manual:`Find Your MongoDB Atlas Connection String guide
       </reference/connection-string/#find-your-mongodb-atlas-connection-string>`
@@ -99,7 +99,7 @@ Install dependencies, connect to MongoDB and start your FastAPI server.
          environment variable. You can use `direnv <https://direnv.net/>`__ to
          make this process easier.  
 
-   .. step::  Start your FastAPI server.
+   .. step::  Start your FastAPI server
     
       Run the following code in your terminal to start your FastAPI server:
     
@@ -145,7 +145,7 @@ defined in the ``app.py`` file.
 .. procedure::
    :style: connected
 
-   .. step::  Create the StudentModel Class.
+   .. step::  Create the StudentModel Class
 
       This is the primary model you can use as the `response model
       <https://fastapi.tiangolo.com/tutorial/response-model/>`__ for the
@@ -208,7 +208,7 @@ defined in the ``app.py`` file.
                  },
              )
 
-   .. step::  Create the UpdateStudentModel Class.
+   .. step::  Create the UpdateStudentModel Class
 
       The ``UpdateStudentModel`` has two key differences from the ``StudentModel``:
     
@@ -241,7 +241,7 @@ defined in the ``app.py`` file.
            )
 
 
-   .. step::  Create the StudentCollection Class.
+   .. step::  Create the StudentCollection Class
 
       The ``StudentCollection`` class is defined to encapsulate a list of
       ``StudentModel`` instances. In theory, the endpoint could return a
@@ -294,7 +294,7 @@ All of these routes are defined in the ``app.py`` file.
 .. procedure::
    :style: connected
 
-   .. step::  Create the Student routes.
+   .. step::  Create the Student routes
 
       The ``create_student`` route receives the new student data as a JSON
       string in a ``POST`` request. You must decode this JSON request body into a
@@ -334,7 +334,7 @@ All of these routes are defined in the ``app.py`` file.
             )
             return created_student
 
-   .. step::  Create the Read routes.
+   .. step::  Create the Read routes
 
       This application one route for viewing all students, and one
       for viewing an individual student, specified by their ``id``.
@@ -393,7 +393,7 @@ All of these routes are defined in the ``app.py`` file.
 
               raise HTTPException(status_code=404, detail="Student {id} not found")
 
-   .. step::  Create the Update route.
+   .. step::  Create the Update route
 
       The ``update_student`` route functions similar to a combination of the
       ``create_student`` and the ``show_student`` routes. It receives the ``id``
@@ -447,7 +447,7 @@ All of these routes are defined in the ``app.py`` file.
 
               raise HTTPException(status_code=404, detail=f"Student {id} not found")
 
-   .. step::  Create the Delete route.
+   .. step::  Create the Delete route
 
       The ``delete_student`` is acting on a single document, so you must supply
       an ``id`` in the URL. If you find a matching document and successfully
