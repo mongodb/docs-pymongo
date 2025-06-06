@@ -47,7 +47,7 @@ this tutorial:
 Set-up
 ~~~~~~
 
-Install dependencies, connect to MongoDB and start your FastAPI server.
+Install dependencies, connect to MongoDB and start your FastAPI server:
 
 .. procedure::
    :style: connected
@@ -274,7 +274,7 @@ with your data:
    * - ``DELETE /students/{id}``
      - Delete a student
 
-These routes are defined in the ``app.py`` file.
+These routes are defined in the ``app.py`` file:
 
 .. procedure::
    :style: connected
@@ -460,8 +460,8 @@ Test Your API
 
 After you complete the previous steps, you have a working API that uses
 FastAPI and the PyMongo Async driver to connect to your MongoDB deployment, and
-manage student data. You can use the following steps to send requests to your
-endpoints and see the results.
+manage student data. Use the following steps to send requests to your
+endpoints and see the results:
 
 .. procedure::
    :style: connected
@@ -482,7 +482,7 @@ endpoints and see the results.
       .. image:: /includes/integrations/fastapi-browser.png
          :alt: Screenshot of browser and swagger UI
     
-      Click on the endpoint you would like to send a request to, fill in any
+      Click on the endpoint you want to send a request to, fill in any
       necessary parameters, and click :guilabel:`Execute`.
 
    .. step::  See the results of your requests
