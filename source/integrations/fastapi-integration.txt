@@ -78,7 +78,7 @@ Install dependencies, connect to MongoDB and start your FastAPI server:
          cd mongodb-with-fastapi
          pip install -r requirements.txt
 
-       It might take a few moments to download and install your dependencies.
+      It might take a few moments to download and install your dependencies.
 
    .. step::  Retrieve your connection string
 
