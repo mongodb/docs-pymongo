@@ -140,7 +140,7 @@ This application has three models, the ``StudentModel``, the
 ``UpdateStudentModel``, and the ``StudentCollection``. These models are
 defined in the ``app.py`` file.
 
-All of the models in the application build on the `Pydantic <https://pydantic-docs.helpmanual.io/>`__ ``BaseModel``, which provides basic type validation, JSON parsing and serialization, and basic error handling.
+All the models in the application build on the `Pydantic <https://pydantic-docs.helpmanual.io/>`__ ``BaseModel``, which provides basic type validation, JSON parsing and serialization, and basic error handling.
 
 StudentModel Class
 ```````````````````
