@@ -312,26 +312,26 @@ You can see the ``create_student`` definition in the following code in the ``app
 
 .. code-block:: python
 
-@app.post(
-    "/students/",
-    response_description="Add new student",
-    response_model=StudentModel,
-    status_code=status.HTTP_201_CREATED,
-    response_model_by_alias=False,
-)
-async def create_student(student: StudentModel = Body(...)):
-    """
-    Insert a new student record. 
+   @app.post(
+       "/students/",
+       response_description="Add new student",
+       response_model=StudentModel,
+       status_code=status.HTTP_201_CREATED,
+       response_model_by_alias=False,
+   )
+   async def create_student(student: StudentModel = Body(...)):
+       """
+       Insert a new student record. 
 
-    A unique ``id`` will be created and provided in the response.
-    """
-    new_student = await student_collection.insert_one(
-        student.model_dump(by_alias=True, exclude=["id"])
-    )
-    created_student = await student_collection.find_one(
-        {"_id": new_student.inserted_id}
-    )
-    return created_student
+       A unique ``id`` will be created and provided in the response.
+       """
+       new_student = await student_collection.insert_one(
+          student.model_dump(by_alias=True, exclude=["id"])
+       )
+       created_student = await student_collection.find_one(
+          {"_id": new_student.inserted_id}
+       )
+       return created_student
 
 Read Routes
 ```````````
@@ -343,20 +343,20 @@ You can see the ``list_students`` definition in the following code in the ``app.
 
 .. code-block:: python
 
-    @app.get(
-        "/students/",
-        response_description="List all students",
-        response_model=StudentCollection,
-        response_model_by_alias=False,
-    )
-    async def list_students():
-        """
-        List all the student data in the database.  
+   @app.get(
+       "/students/",
+       response_description="List all students",
+       response_model=StudentCollection,
+       response_model_by_alias=False,
+   )
+   async def list_students():
+       """
+       List all the student data in the database.  
 
-        The response is unpaginated and limited to 1000 results.
-        """
+       The response is unpaginated and limited to 1000 results.
+       """
 
-    return StudentCollection(students=await student_collection.find().to_list(1000))
+   return StudentCollection(students=await student_collection.find().to_list(1000))
 
 .. note:: Results Pagination
 
@@ -376,22 +376,22 @@ You can see the ``show_students`` definition in the following code in the ``app.
 
 .. code-block:: python
 
-    @app.get(
-        "/students/{id}",
-        response_description="Get a single student",
-        response_model=StudentModel,
-        response_model_by_alias=False,
-    )
-    async def show_student(id: str):
-        """
-        Get the record for a specific student, looked up by ``id``.
-        """
-        if (
-            student := await student_collection.find_one({"_id": ObjectId(id)})
-        ) is not None:
-            return student
+   @app.get(
+       "/students/{id}",
+       response_description="Get a single student",
+       response_model=StudentModel,
+       response_model_by_alias=False,
+   )
+   async def show_student(id: str):
+       """
+       Get the record for a specific student, looked up by ``id``.
+       """
+       if (
+           student := await student_collection.find_one({"_id": ObjectId(id)})
+       ) is not None:
+           return student
 
-        raise HTTPException(status_code=404, detail="Student {id} not found")
+       raise HTTPException(status_code=404, detail="Student {id} not found")
 
 Update Route
 `````````````
@@ -523,7 +523,7 @@ Now that you have a basic understanding of how FastAPI integrates with MongoDB a
 - `Dependency injection <https://fastapi.tiangolo.com/tutorial/background-tasks/#dependency-injection>`__
 - `Testing with TestClient <https://fastapi.tiangolo.com/reference/testclient/>`__
 - `Error handling and custom responses <https://fastapi.tiangolo.com/tutorial/handling-errors/>`__
-- `Authentication and authorization <https://fastapi.tiangolo.com/tutorial/security/>`__`
+- `Authentication and authorization <https://fastapi.tiangolo.com/tutorial/security/>`__
 
 More Resources
 --------------
