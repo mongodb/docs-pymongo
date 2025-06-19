@@ -161,6 +161,7 @@ Define the necessary configurations by adding the following code to your
       MAIL_PASSWORD = '<app password>'
       MAIL_DEFAULT_SENDER = '<email address>'
       MONGO_URI = '<mongodb connection string>'
+      DATABASE_NAME = "newsletter"
       ALLOWED_IPS = ['127.0.0.1']
       MAIL_SERVER = 'smtp.gmail.com'
       MAIL_PORT = 587
@@ -208,7 +209,7 @@ Initialize Flask, MongoDB, and Celery by adding the following code to your
 
    from flask import Flask
    from flask_mail import Mail
-   from pymongo import MongoClient
+   from flask_pymongo import PyMongo
    from celery import Celery
 
    # Create a Flask application
@@ -219,8 +220,8 @@ Initialize Flask, MongoDB, and Celery by adding the following code to your
    mail = Mail(app)
 
    # Connect to MongoDB
-   client = MongoClient(app.config['MONGO_URI'])
-   db = client.get_database(name="newsletter")
+   client = PyMongo(app).cx
+   db = client[app.config['DATABASE_NAME']]
 
    # Create a Celery instance
    celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
