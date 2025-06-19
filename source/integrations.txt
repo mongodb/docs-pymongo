@@ -18,6 +18,10 @@ Third-Party Integrations and Tools
 .. meta::
    :keywords: pypi, package, web, module, pip 
 
+.. toctree::
+
+   Tutorial: Restful API with Flask </integrations/restful-flask-tutorial>
+
 Overview
 --------
 
