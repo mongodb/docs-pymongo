@@ -89,7 +89,7 @@ Setup
 
       - ``app.py``: The main entry point for your Flask application
       - ``config.py``: Configuration settings for your application, including
-        MongoDB connection details, mail server configuration, Celery broker
+        the MongoDB connection URI, mail server configuration, Celery broker
         connection, and any other environment-specific variables
       - ``tasks.py``: Defines background tasks to send emails asynchronously
       - ``routes.py``: Defines the routes (URLs) that your application responds
@@ -115,11 +115,11 @@ Setup
 
    .. step:: Install the required Python packages
 
-      Your application depends on the following libraries:
+      Your application uses the following libraries:
 
       - `Flask <https://flask.palletsprojects.com/en/stable/>`__ for handling
         the web server and routing 
-      - `Flask Mail <https://pypi.org/project/Flask-Mail/>`__ for sending emails
+      - `Flask-Mail <https://pypi.org/project/Flask-Mail/>`__ for sending emails
         from your application 
       - :ref:`{+driver-short+} <pymongo-get-started-download-and-install>`
       - `Celery <https://docs.celeryq.dev/en/stable/>`__ to manage tasks, such
@@ -142,12 +142,12 @@ Setup
 Configure Your Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``config.py`` file contains the settings and credentials to perform the
+The ``config.py`` file contains settings and credentials to perform the
 following actions: 
 
 - Connect Celery to RabbitMQ as its message broker
 - Configure Flask-Mail to use Gmail as its SMTP server
-- Connect your application to your MongoDB server
+- Connect your application to your MongoDB deployment
 
 Define the necessary configurations by adding the following code to your
 ``config.py`` file: 
@@ -175,8 +175,8 @@ password to use, rather than using your primary password. For more information,
 see the `App Password settings <https://myaccount.google.com/apppasswords>`__ in
 your Google Account. 
  
-You must also provide a connection string to set into the ``MONGO_URI``
-environment variable. For more information see the :ref:`Create a Connection
+You must also provide a connection string to set as the ``MONGO_URI``
+environment variable. For more information, see the :ref:`Create a Connection
 String <pymongo-get-started-connection-string>` section of this guide. 
 
 The provided Celery broker URL (``CELERY_BROKER_URL``) specifies RabbitMQ as its
@@ -192,7 +192,7 @@ components.
 Initialize Flask, MongoDB, and Celery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``app.py`` file initializes and configures the core components of the Flask
+The ``app.py`` file initializes and configures the core components of your
 application. It performs the following tasks: 
 
 - Creates a Flask application and loads configuration constants
@@ -251,15 +251,15 @@ app.app_context()`` block. This gives Flask access to other components like the
 Flask-Mail ``mail`` instance and the {+driver-short+} connection to your
 ``newsletter`` MongoDB database. 
 
-This method loops through the list of ``subscribers``, creates an email using
+This function loops through the list of ``subscribers``, creates an email using
 the Flask-Mail ``Message`` class, and then sends it to each user by using the
 ``mail`` object. After each email is sent, it logs the delivery by inserting a
 document into your MongoDB ``deliveries`` collection to record that the message
-was sent.  Each email operation is wrapped in a ``try`` block to ensure that in
+was sent.  Each email operation is wrapped in a ``try`` block to ensure that, in
 the case of an error, the failure is logged and the database is not updated with
 a false delivery record. 
 
-Define your ``send_emails()`` method by adding the following code to your
+Define your ``send_emails()`` function by adding the following code to your
 ``tasks.py`` file: 
 
 .. code-block:: python
@@ -297,10 +297,10 @@ Define Your Routes
 In Flask, the ``@app.route()`` decorator assigns a URL path to a specific
 function. In the following code, it is used to define the root (``/``),
 ``/admin``, ``/subscribe``, and ``/send-newsletters`` routes. The optional
-``methods`` parameter is used in some cases to define a list of allowable HTTP
-methods. 
+``methods`` parameter is used in some instances to define a list of allowable
+HTTP methods. 
 
-The ``@app.before_request()`` method sets a function to run before every
+The ``@app.before_request()`` decorator sets a function to run before every
 request. In this case, the function provides some basic security by limiting
 access to the ``admin`` page to IP addresses listed in the ``ALLOWED_IPS``
 parameter defined in the ``config.py`` file. Specifically, access is only
@@ -372,14 +372,14 @@ Define your routes by adding the following code to your ``routes.py`` file:
 You can add more security protections or customize user-facing alerts for your
 application in this file.
 
-Create Your Pages 
-~~~~~~~~~~~~~~~~~
+Create Your Page Templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The HTML files in the ``templates`` directory define the user interface, and are
-written using standard HTML. Since this application uses asynchronous HTTP
-requests, the scripts in these files use :wikipedia:`Fetch API calls
-<XMLHttpRequest#Fetch_alternative>`. These scripts also handle timeouts and
-errors.   
+written using standard HTML. Because this application uses asynchronous HTTP
+requests, the scripts in these files use `Fetch API calls
+<https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API>`__. These scripts
+also handle timeouts and errors.   
 
 Subscribe Page
 ```````````````
@@ -446,7 +446,7 @@ Copy the following code into your ``subscribe.html`` file to create your
 Admin Page
 ```````````
 
-The script for the admin page displays an alert to the user that depends on the
+The admin page script displays an alert to the user that indicates the
 success of the ``send_newsletter`` call. 
 
 Copy the following code into your ``admin.html`` file to create your
@@ -644,7 +644,7 @@ You can use the following steps to test your application:
 
       To confirm that you created a new subscriber, open `Atlas
       <https://account.mongodb.com/account/login>`__ and navigate to the
-      ``users`` collection in your ``newletter`` database. 
+      ``users`` collection in your ``newsletter`` database. 
 
    .. step::  Dispatch a newsletter
 
@@ -669,17 +669,23 @@ Next Steps
 ~~~~~~~~~~
 
 This application demonstrates how to integrate a Flask application with the
-Celery task queue to manage subscriber data, and send batch emails. You can
-further enhance this platform by integrating analytics, customizing email
-templates, and implementing automated responses. 
+Celery task queue to manage subscriber data and send batch emails. You can
+build on this application to experiment with Flask or Celery. Some possible
+improvements include the following changes:
+
+- Add `retries <https://docs.celeryq.dev/en/stable/userguide/calling
+  html#message-sending-retry>`__ to your ``send_emails`` function
+- `Format your newsletter <https://flask-mail.readthedocs.io/en/latest/#sending-messages>`__ 
+- Implement more rigorous `security features <https://docs.celeryq.dev/en/stable/userguide/security.html>`__
 
 More Resources
 --------------
 
-For more information about the components used in this tutorial, see the following resources:
+For more information about the components used in this tutorial, see the
+following resources: 
 
 - `Flask <https://flask.palletsprojects.com>`__
-- `Flask Mail <https://pypi.org/project/Flask-Mail/#files>`__
+- `Flask-Mail <https://pypi.org/project/Flask-Mail/#files>`__
 - `Celery <https://docs.celeryq.dev/en/stable/>`__
 - `RabbitMQ <https://www.rabbitmq.com/docs/download>`__
 
