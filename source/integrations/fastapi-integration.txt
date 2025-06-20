@@ -65,7 +65,7 @@ Prerequisites
 Ensure you have the following components installed and set up before you start
 this tutorial:
 
-- Python v3.9.0 or later.
+- Python v3.9 - 3.11
 - A MongoDB Atlas cluster.
   To learn how to set up a cluster, see
   the :ref:`Getting Started <pymongo-get-started>` guide for more information. 
