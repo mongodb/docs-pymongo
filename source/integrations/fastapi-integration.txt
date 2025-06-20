@@ -278,9 +278,11 @@ StudentCollection Class
 
 The ``StudentCollection`` class is defined to encapsulate a list of
 ``StudentModel`` instances. The purpose of this endpoint is to provide some
-protection from JSON Hijacking. For more information, you can read the `JSON
-Hijacking <https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__
-article on the Haacked website.
+protection from JSON Hijacking, where a malicious user attempts to access
+sensitive data by exploiting how browsers handle JSON arrays. For more
+information, you can read the `JSON Hijacking
+<https://haacked.com/archive/2009/06/25/json-hijacking.aspx/>`__ article on the
+Haacked website.
 
 You can see the ``StudentCollection`` definition in the following code in the
 ``app.py`` file: 
@@ -359,13 +361,11 @@ You can see the ``create_student`` definition in the following code in the
 
        A unique ``id`` will be created and provided in the response.
        """
-       new_student = await student_collection.insert_one(
-          student.model_dump(by_alias=True, exclude=["id"])
-       )
-       created_student = await student_collection.find_one(
-          {"_id": new_student.inserted_id}
-       )
-       return created_student
+       new_student = student.model_dump(by_alias=True, exclude=["id"])
+       result = await student_collection.insert_one(new_student)
+       new_student["_id"] = result.inserted_id
+
+       return new_student
 
 Read Routes
 ```````````
