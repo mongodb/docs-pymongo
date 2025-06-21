@@ -44,9 +44,9 @@ For more information, see the `Celery webpage
 Tutorial
 --------
 
-This tutorial creates a modified version of the sample application in the
-:github:`Newsletter Platform with JavaScript, Flask, and MongoDB sample project
-</mercybassey/newsletter-javascript-flask-mongodb>` GitHub repository. 
+This tutorial recreates the sample application in the :github:`Newsletter
+Platform with JavaScript, Flask, and MongoDB sample project
+</mongodb-developer/newsletter-javascript-flask-mongodb>` GitHub repository. 
 
 Prerequisites
 ~~~~~~~~~~~~~
