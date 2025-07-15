@@ -149,6 +149,11 @@ Use this code to perform the following actions:
    db = client.get_database("college")
    student_collection = db.get_collection("students")
 
+The ``AsyncMongoClient()`` call includes a ``server_api`` parameter to enable
+the Stable API feature on your connection. Make sure your deployment uses
+MongoDB servers with version 5.0 or later. For more information, see the :ref:`Stable
+API <pymongo-stable-api>` section of this guide.
+
 Review the Database Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
